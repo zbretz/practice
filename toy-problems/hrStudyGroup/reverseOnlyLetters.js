@@ -21,40 +21,10 @@
 // Input: s = "Test1ng-Leet=code-Q!"
 // Output: "Qedo1ct-eeLg=ntse-T!"
 
-// a = [a,b,c,d]
-// a.length = 4
-// a.first = 0 (or index)
-// a.last = length -1 - a.first (or index)
-
-//still constant time (2n) to remove special chars and then iterate
-
 var alphabet = 'abcdefghijklmnopqrstuvwxy'
 var upperAlphabet = alphabet.toUpperCase()
 alphabet = alphabet + upperAlphabet
 alphabet = alphabet.split('')
-// var leftSpecial = 0
-// var rightSpecial = 0
-
-// const reverse = (str) => {
-//   str = str.split('')
-//   for (let i = 0; i < str.length; i++){
-//     if (!alphabet.includes(str[i + leftSpecial])){
-//       leftSpecial++
-//     }
-//     if (!alphabet.includes(str[str.length - 1 - i])){
-//       rightSpecial++
-//     }
-//   }
-// }
-
-// even
-// abcd
-// stopping point is < (length-1)/2
-
-// odd
-// abcde
-// stopping point is < (length-1)/2
-
 
 //second approach
 const reverse = (str) => {
@@ -86,3 +56,27 @@ console.log(reverse('Test1ng-Leet=code-Q!'))
 //determining length and stopping point outside the loop saves calculations
 //destructuring to swap
 //0(3n) reduces to 0(n)
+
+//pointer approach
+const reversePointer = (str) => {
+  str = str.split('')
+  let leftpointer = 0;
+  let rightpointer = str.length - 1;
+  while (!(leftpointer === rightpointer || leftpointer > rightpointer)){
+    console.log(leftpointer, rightpointer)
+   if (!alphabet.includes(str[leftpointer])){
+     leftpointer++
+     continue
+   }
+   if (!alphabet.includes(str[rightpointer])){
+    rightpointer--
+    continue
+  }
+  [str[leftpointer], str[rightpointer]] = [str[rightpointer], str[leftpointer]]
+  leftpointer++
+  rightpointer--
+  }
+  return str.join('')
+}
+console.log(reversePointer('Test1ng-Leet=code-Q!'))
+
