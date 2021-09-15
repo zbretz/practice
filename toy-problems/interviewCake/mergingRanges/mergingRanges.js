@@ -39,10 +39,8 @@
           ){
             times[j].startTime = Math.min(times[i].startTime, times[j].startTime)
             times[j].endTime = Math.max(times[i].endTime, times[j].endTime)
-
         times.splice(i,1)
         console.log('restart at: ', i, j)
-
         i = 1
         j = 0
       }
