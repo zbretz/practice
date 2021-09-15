@@ -79,4 +79,3 @@ const reversePointer = (str) => {
   return str.join('')
 }
 console.log(reversePointer('Test1ng-Leet=code-Q!'))
-
