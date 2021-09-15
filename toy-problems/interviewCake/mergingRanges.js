@@ -37,8 +37,8 @@
           (times[i].startTime <= times[j].startTime && times[i].endTime >= times[j].startTime) ||
           (times[i].startTime <= times[j].endTime && times[i].endTime >= times[j].endTime)
           ){
-            times[j].startTime = times[i].startTime < times[j].startTime ? times[i].startTime : times[j].startTime
-        times[j].endTime = times[i].endTime > times[j].endTime ? times[i].endTime : times[j].endTime
+            times[j].startTime = Math.min(times[i].startTime, times[j].startTime)
+            times[j].endTime = Math.max(times[i].endTime, times[j].endTime)
 
         times.splice(i,1)
         console.log('restart at: ', i, j)
