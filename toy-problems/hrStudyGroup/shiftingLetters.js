@@ -19,3 +19,17 @@
 
 // Input: s = "aaa", shifts = [1,2,3]
 // Output: "gfd"
+
+// solution 1: create object for the total shift at each position then shift
+const shiftingLetters = (s, shifts) => {
+  const shiftByIndex = {}
+  let total = 0
+  shifts.forEach((item, index) => {
+    total += item
+    shiftByIndex[index] = total
+  })
+
+  console.log(shiftByIndex)
+}
+
+shiftingLetters('s', [1,2,3])
