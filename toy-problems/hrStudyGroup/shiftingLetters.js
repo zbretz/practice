@@ -22,14 +22,19 @@
 
 // solution 1: create object for the total shift at each position then shift
 const shiftingLetters = (s, shifts) => {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('')
   const shiftByIndex = {}
-  let total = 0
-  shifts.forEach((item, index) => {
-    total += item
-    shiftByIndex[index] = total
-  })
 
-  console.log(shiftByIndex)
+  shifts.forEach((item, index) => {
+    for (let i = 0; i < index + 1; i++){
+     shiftByIndex[i] !== undefined ? shiftByIndex[i] += item : shiftByIndex[i] = 1
+    }
+  })
+  s = s.split('')
+  s.forEach((item,index)=>{
+    s[index] = alphabet[s.indexOf(item) + shiftByIndex[index]]
+  })
+  return s
 }
 
-shiftingLetters('s', [1,2,3])
+console.log(shiftingLetters('aaa', [1,2,3]))
