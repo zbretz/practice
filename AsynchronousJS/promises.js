@@ -17,3 +17,6 @@ newPromise.then(msg => {
   console.log('fail', msg)
   }
   )
+
+// from MDN docs:
+// in actual practice, promise chains more typically start with an API function (written by someone else) that returns a promise.

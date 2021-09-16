@@ -18,7 +18,7 @@
 // Output: 5
 // Explanation: arr[1] > arr[2] < arr[3] > arr[4] < arr[5]
 
-// thoughts/strategy
+// thoughts/strategy 1
 // ======================
 // [9,4,2,10,7,8,8,1,9]
 // 9 4
@@ -59,5 +59,67 @@
 //       compare best with current and make best whichever is longer
 //       clear current
 
+// thoughts/strategy 2
+// ======================
+// realized we don't need to track the array, just the length
+// [9,4,2,10,7,8,8,1,9]
+
+// pseudo
+// init longest_length = 0
+// init current = 1
+// if length 1: 1
+// if length 2: if not same, 2
+// else:
+// staring at index 1 (ending where?):
+// if prev < current
+//   if next < current
+//     current = current < 3 ? 3 : increment current
+// if prev > current
+//   if next > current
+//     current = current < 3 ? 3 : increment current
+// if current > longest_length, longest_length = current
+//   current = 1
+
+const lts = (arr) => {
+  let longest_length = 0;
+  let current = 0;
+  const arr_length = arr.length
+  if (arr.length === 1) return 1
+  if (arr.length === 2) {
+    if (arr[0] !== arr[1]){
+      return 2
+    } else {
+      return 1
+    }
+  }
+  for (let i = 1; i<arr_length-1; i++){
+
+    let prev = arr[i - 1]
+    let curr = arr[i]
+    let next = arr[i + 1]
+
+    if (prev < curr){
+      if (next < curr){
+        current = current < 3 ? 3 : current + 1
+      }
+    }
+    else if (prev > curr){
+      if (next > curr){
+        current = current < 3 ? 3 : current + 1
+      }
+    }
+     else {
+      current = 1
+     }
+      if (current > longest_length){
+        longest_length = current
+      }
+    }
 
 
+
+  return longest_length
+}
+console.log(lts([9,4,2,10,7,8,8,1,9]))
+// console.log(lts([9,4,2,10,7,8,3,8,1,9]))
+// console.log(lts([9,4,2,10]))

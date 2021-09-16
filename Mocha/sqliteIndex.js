@@ -16,7 +16,7 @@ exports.createTable = function createTable(db) {
     })
 };
 
-exports.dropTable = function dropTable(db) {
+exports.dropTable = function dropTable(db) {8
     return new Promise((resolve, reject) => {
         db.run("DROP TABLE IF EXISTS user", (err)=> {
             if(err) {
