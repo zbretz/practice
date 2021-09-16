@@ -18,3 +18,46 @@
 // Output: 5
 // Explanation: arr[1] > arr[2] < arr[3] > arr[4] < arr[5]
 
+// thoughts/strategy
+// ======================
+// [9,4,2,10,7,8,8,1,9]
+// 9 4
+//   4 2 10 7 8
+//            8 1 9
+// ======================
+// info to track:
+//   should be greater or less
+//   longest so far and array
+//   previous char (for possible inclusion in next chain)
+// ======================
+// function for greater/less
+//    checkTurbulence (prev, current, next)
+//       if current > prev
+//         if current < next
+//           return true
+//       if current < prev
+//         if current > next
+//           return true
+//        else
+//           return false
+// ======================
+// pseudocode:
+
+// init best_container
+// init best_container_length
+// init current_container
+// init current_container_length
+// init previous_element
+
+// check first two elements
+//  if they're not equal then that's current longest subarray
+// at second element enter for loop
+//   checkTurbulence
+//     if true push next into container
+//       update container length
+//     if false
+//       compare best with current and make best whichever is longer
+//       clear current
+
+
+
