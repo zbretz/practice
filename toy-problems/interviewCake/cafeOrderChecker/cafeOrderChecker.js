@@ -19,7 +19,6 @@
 const checker = (take, dine, served) => {
 
   while(served.length){
-  // console.log(served.length)
   const last = served[served.length-1]
     if (last === take[take.length-1]){
       served.pop()
