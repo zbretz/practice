@@ -7,7 +7,7 @@
     "sqlite3": "^5.0.2"
   },
   "devDependencies": {
-    "chai": "*",
+    "chai": "^4.3.4",
     "mocha": "*"
   },
   "scripts": {
