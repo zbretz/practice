@@ -1,0 +1,18 @@
+{
+  "name": "Mocha",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sqliteIndex.js",
+  "dependencies": {
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "mocha": "^9.1.1"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
