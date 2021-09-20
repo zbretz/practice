@@ -1,3 +1,4 @@
+//recursion
 const printXTimes = (x) => {
   let count = 0
   const inner = (x) => {
@@ -9,4 +10,19 @@ const printXTimes = (x) => {
   inner(x)
 }
 
-printXTimes(2)
+// printXTimes(2)
+
+//closures
+const altPrintXTimes = (str, x) => {
+  count = 0
+  return function(){
+    count++
+    if (count <= x) console.log(str)
+  }
+}
+
+hello3 = altPrintXTimes('hello', 3)
+hello3()
+hello3()
+hello3()
+hello3()
