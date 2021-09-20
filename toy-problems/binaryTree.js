@@ -27,3 +27,12 @@ rightright = firstright.insertRight(12)
 //func(tree)
 //if tree.left !== null
 //func(tree.left)
+
+//function to print all nodes:
+const printNodes = (tree) => {
+  console.log(tree.value)
+  if (tree.left) printNodes(tree.left)
+  if (tree.right) printNodes(tree.right)
+}
+
+printNodes(myTree)

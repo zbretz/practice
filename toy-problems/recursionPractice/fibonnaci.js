@@ -15,7 +15,7 @@ const fib = (n) => {
 // console.log(fib(5))
 
 const fibSequence = (n) => {
-  if (n <= 1) return [0];
+  if (n === 1) return [0];
   if (n === 2) return [0, 1];
 
   return fibSequence(n-1).concat(fibSequence(n-2))
