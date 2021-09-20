@@ -28,11 +28,23 @@ rightright = firstright.insertRight(12)
 //if tree.left !== null
 //func(tree.left)
 
-//function to print all nodes:
-const printNodes = (tree) => {
-  console.log(tree.value)
-  if (tree.left) printNodes(tree.left)
-  if (tree.right) printNodes(tree.right)
-}
+// //function to print all nodes:
+// const printNodes = (tree) => {
+//   console.log(tree.value)
+//   if (tree.left) printNodes(tree.left)
+//   if (tree.right) printNodes(tree.right)
+// }
+// printNodes(myTree)
 
-printNodes(myTree)
+//function to find greatest depth and return array of its values
+
+//function to generate all arrays
+let arr = [];
+
+const printNodesArrays = (tree) => {
+  arr = arr.concat(tree.value)
+  if (tree.left) printNodesArrays(tree.left)
+  if (tree.right) printNodesArrays(tree.right)
+  console.log(arr)
+}
+printNodesArrays(myTree)
