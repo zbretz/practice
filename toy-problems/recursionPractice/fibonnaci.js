@@ -8,9 +8,21 @@ const fib = (n) => {
   return fib(n-1) + fib(n-2)
 }
 
-console.log(fib(1))
-console.log(fib(2))
-console.log(fib(3))
-console.log(fib(4))
-console.log(fib(5))
+// console.log(fib(1))
+// console.log(fib(2))
+// console.log(fib(3))
+// console.log(fib(4))
+// console.log(fib(5))
 
+const fibSequence = (n) => {
+  if (n <= 1) return [0];
+  if (n === 2) return [0, 1];
+
+  return fibSequence(n-1).concat(fibSequence(n-2))
+}
+
+console.log(fibSequence(1))
+console.log(fibSequence(2))
+console.log(fibSequence(3))
+console.log(fibSequence(4))
+console.log(fibSequence(5))
