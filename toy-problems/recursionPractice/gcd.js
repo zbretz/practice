@@ -1,3 +1,5 @@
+// Write a JavaScript program to find the greatest common divisor (gcd) of two positive numbers.
+
 const gcd = (a,b) => {
   if (a === 0 || b === 0) return null
   if (a === b) return a
