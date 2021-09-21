@@ -15,7 +15,7 @@
 // }
 // console.log(range(2,9))
 
-//second method
+//second method (array outside of function)
 // var arr = []
 // const range = (x,y) => {
 //   if (x === y) return
@@ -26,14 +26,11 @@
 // }
 // console.log(range(2,9))
 
-//third method?
+//third method? (arr inside of function)
 const range = (x,y) => {
-  var arr = []
-  if (x === y) return arr
-  x++;
-  arr.push(x)
-
-  range(x,y)
-  // return arr
+  if (x === y) return x
+  var arr = [x]
+  arr.concat(range(x++,y))
+  return arr
 }
-console.log(range(2,9))
+console.log(range(2,3))
