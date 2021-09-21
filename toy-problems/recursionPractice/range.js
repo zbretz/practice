@@ -30,7 +30,7 @@
 const range = (x,y) => {
   if (x === y) return x
   var arr = [x]
-  arr.concat(range(x++,y))
+  arr = arr.concat(range(x+1,y))
   return arr
 }
-console.log(range(2,3))
+console.log(range(2,4))
