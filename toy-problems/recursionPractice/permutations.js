@@ -11,16 +11,29 @@
 // bac
 // cab
 
-//test case
+// //test case
+// const perm = (str) => {
+//   if (!str.length) return
+//   console.log(str)
+//   perm(str.slice(1))
+// }
+
+// perm('abc')
+
+// https://medium.com/swlh/step-by-step-guide-to-solving-string-permutation-using-recursion-in-javascript-a11d098d5b83
+
 const perm = (str) => {
-
-  if (!str) return
-  console.log(str)
+  if (str.length === 1) return
+  for (let i=0;i<str.length;i++){
+    if (str.length === 2) [str[0],str[1]] = [str[1],str[0]]
+    console.log(str.slice(0,i)+ str.slice(i+1))
+    str = str.slice(0,i)+ str.slice(i+1)
+  }
   perm(str.slice(1))
-
 }
 
-console.log(perm('abc'))
+perm('abcd')
+
 
 
 // a
