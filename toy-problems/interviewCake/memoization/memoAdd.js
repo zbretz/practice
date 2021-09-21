@@ -1,22 +1,27 @@
 //I don't really know what I'm doing. Just toying around.
 
-const memoAdd = (x,y) => {
+const memoAdd = () => {
 
   const memo = {};
 
-  const add = (x,y) => {
+
+    return (x,y) => {
+
+    if (memo[[x,y]]){
+      console.log('memoed');
+      return memo[[x,y]]
+    } else {
+
     const solution = x + y
     memo[[x,y]] = solution
     console.log('added')
     return solution
+    }
+
   }
 
-  if (memo[[x,y]]){
-    console.log('memoed');
-    return memo[[x,y]]
-   } else {
-      return add(x,y)
-   }
 }
-
-console.log(memoAdd(2,3))
+// console.log(memoAdd(2,3))
+const memoFunc = memoAdd()
+console.log(memoFunc(2,3))
+console.log(memoFunc(2,3))
