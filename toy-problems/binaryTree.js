@@ -51,6 +51,7 @@ const printNodesArrays = (tree) => {
 
   container.push(arr)
 
-  console.log(container)
+  return container
 }
-printNodesArrays(myTree)
+
+console.log(printNodesArrays(myTree))
