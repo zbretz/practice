@@ -39,12 +39,18 @@ rightright = firstright.insertRight(12)
 //function to find greatest depth and return array of its values
 
 //function to generate all arrays
-let arr = [];
+let container =[];
 
 const printNodesArrays = (tree) => {
-  arr = arr.concat(tree.value)
-  if (tree.left) printNodesArrays(tree.left)
-  if (tree.right) printNodesArrays(tree.right)
-  console.log(arr)
+  let arr = [];
+
+  if (!(tree.left || tree.right)) return [tree.value]
+
+  if (tree.left) arr = arr.concat([tree.value].concat(printNodesArrays(tree.left)))
+  if (tree.right) arr = arr.concat([tree.value].concat(printNodesArrays(tree.right)))
+
+  container.push(arr)
+
+  console.log(container)
 }
 printNodesArrays(myTree)
