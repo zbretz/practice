@@ -20,12 +20,13 @@ const bp = (str) => {
   // let leftPointer = 0
   // let rightPointer = str.length - 1
   const odd = str.length % 2 === 1
-  const middle = (str.length - 1)/2
+  // const middle = (str.length - 1)/2
+  const middle = Math.floor(str.length/2)
 
   if (str.length < 2) return ""
 
   for (let i = 0; i < str.length; i++){
-    if (odd && i === middle) continue
+    if ( i === middle) continue
     if (str[i] !== 'a'){
       str = str.split('')
       str[i] = 'a'
@@ -34,15 +35,14 @@ const bp = (str) => {
     }
   }
 
-    for (let i = str.length-1; i >= 0; i--){
-      if (odd && i === middle) continue
-      if (str[i] !== 'b'){
-        str = str.split('')
-        str[i] = 'b'
-        str = str.join('')
-        return str
-      }
-    }
+  str = str.split('')
+  str[str.length-1] = 'b'
+  str = str.join('')
+   return str
+
   }
 
   console.log(bp('aa'))
+  console.log(bp('abccba'))
+  console.log(bp('a'))
+  console.log(bp('aba'))
