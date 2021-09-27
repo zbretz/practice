@@ -23,4 +23,19 @@ const rps = (rounds) => {
   return arr
 }
 
-console.log(rps(3))
+// console.log(rps(3))
+
+const rps2 = (rounds) => {
+  let myArr = []
+  if (rounds === 1){
+        return (['r','p','s'])
+  }
+  ['r','p','s'].forEach(i => (
+    rps2(rounds - 1).forEach(j => (
+      myArr.push(i + j)
+    ))
+  ))
+  return myArr
+}
+
+console.log(rps2(3))
