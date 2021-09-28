@@ -1,11 +1,15 @@
 //fibonacci with memoization
 
 const fibMem = (n) => {
-  // const memo = {}
+   const memo = {}
   if (n==0) return 0
   if (n==1) return 1
 
-  return (n-1) + (n-2)
+  if (memo[n]) {
+    return fibMem(n)
+  } else {
+    return fibMem(n-1) + fibMem(n-2)
+  }
 }
 
-console.log(fibMem(5))
+console.log(fibMem(6))
