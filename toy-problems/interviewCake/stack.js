@@ -25,13 +25,33 @@ let myStack = new Stack
 myStack.push(6)
 console.log(myStack.peek())
 
+
+
+
 class MaxStack extends Stack {
+  constructor(){
+    super()
+    this.maxItem = undefined;
+  }
+
+  // push(item){
+    push = (item) => {
+    // if (!this.max || item > this.max){
+    //   this.maxItem = item
+    // }
+    if (this.maxItem === undefined){
+      this.maxItem = item
+    }
+    else if (item > this.maxItem){
+      this.maxItem = item
+    }
+  }
+
   getMax(){
-    // let max = this.items[0]
-    let max = this.items.reduce((a,b) => {
-      return a > b ? a : b
-    })
-    return max
+    // let max = this.items.reduce((a,b) => {
+    //   return a > b ? a : b
+    // })
+    return this.maxItem
   }
 }
 
