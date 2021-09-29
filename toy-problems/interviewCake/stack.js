@@ -1,8 +1,26 @@
-class Person {
-  constructor(name){
-    this.name = name
+class Stack {
+  constructor(){
+    this.items = []
+  }
+
+  push = (item) => {
+
+    return this.items.push(item)
+  }
+
+  pop = () => {
+    if (!this.items.length) {
+      throw new Error('no items in stack');
+    }
+    return this.items.pop(item)
+  }
+
+  peek = () => {
+   return this.items[this.items.length-1]
   }
 }
 
-let coder = new Person('zach')
-console.log(coder.name)
+let myStack = new Stack
+myStack.pop()
+myStack.push(6)
+console.log(myStack.peek())
