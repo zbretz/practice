@@ -6,12 +6,18 @@ const convertPowers = (arr) => {
     // num = num === 1? num : num-1
     return binary += 10**(num-1)
   })
-  console.log(binary)
+  // console.log(binary)
+  return binary
 }
 
 // convertPowers(powers)
 
 const generateBinary = (num) => {
+  let odd = false;
+  if (num % 2 === 1) {
+    num = num - 1
+    odd = true
+  }
   let remainder = num;
   let divisor = 0;
   let powers =[];
@@ -32,9 +38,10 @@ const generateBinary = (num) => {
     inner(num-2**n)
   }
   inner(num)
-  console.log(powers)
-  convertPowers(powers)
+  // console.log(powers)
+  let binary = convertPowers(powers)
+  if (odd) binary += 1
+  return binary
 }
 
-generateBinary(60)
-
+console.log(generateBinary(1))
