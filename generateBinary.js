@@ -23,3 +23,15 @@ const generateBinary = (num) => {
 }
 
 generateBinary(38)
+
+let powers = [4,2]
+
+const convertPowers = (arr) => {
+  let binary = 0;
+  arr.forEach(num => {
+    return binary += 10**(num-1)
+  })
+  console.log(binary)
+}
+
+convertPowers(powers)
