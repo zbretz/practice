@@ -22,7 +22,7 @@ const generateBinary = (num) => {
 
     if (num < 2) return
 
-    while (remainder > 2**n){
+    while (remainder >= 2**n){
       // if (remainder % 2 !== 0) break
       n++
       remainder = num - 2**n
@@ -32,8 +32,9 @@ const generateBinary = (num) => {
     inner(num-2**n)
   }
   inner(num)
+  console.log(powers)
   convertPowers(powers)
 }
 
-generateBinary(38)
+generateBinary(60)
 
