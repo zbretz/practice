@@ -53,7 +53,8 @@ const numOfPaths = (m,n) => {
       }
     }
     console.log(matrix)
+    return matrix[m-1][n-1]
 
 }
 
-numOfPaths(4,6)
+console.log(numOfPaths(4,6))
