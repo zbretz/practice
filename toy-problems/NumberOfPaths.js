@@ -58,3 +58,36 @@ const numOfPaths = (m,n) => {
 }
 
 console.log(numOfPaths(4,6))
+
+const alphaMatrix = [
+  ['A','B','C','D','E'],
+  ['F','G','H','I','J'],
+  ['K','L','M','N','O']
+]
+
+// let str = '';
+let paths = []
+// let row = column = 0;
+
+const namesOfPaths = (str='', row = 0, column =0 ) => {
+  let char = alphaMatrix[row][column]
+  str += char
+
+  // if (char === 'O') console.log(str)
+  if (row === alphaMatrix.length-1 && column === alphaMatrix[0].length-1) console.log(str)
+
+  // if (alphaMatrix[row+1][column]) namesOfPaths(str, row+1,column)
+  // if (alphaMatrix[row][column + 1]) namesOfPaths(str, row,column + 1)
+
+  if (alphaMatrix[row+1] && alphaMatrix[row+1][column]) namesOfPaths(str, row+1,column)
+  if (alphaMatrix[row] && alphaMatrix[row][column + 1]) namesOfPaths(str, row,column + 1)
+
+
+  // try {namesOfPaths(str, row+1,column)}
+  //   catch{}
+  // try {namesOfPaths(str, row, column+1)}
+  //   catch{}
+
+}
+
+console.log(namesOfPaths())
