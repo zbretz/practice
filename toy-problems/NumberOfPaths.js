@@ -32,13 +32,28 @@ const buildMatrix = (m,n) => {
     row.push(0)
   }
   for(let i = 0; i < m; i++){
-    matrix.push(row)
+    matrix.push(row.slice())
   }
+  matrix[0][0] = 1
   return matrix
 }
 
 const numOfPaths = (m,n) => {
-  matrix = buildMatrix(m,n)
+  const matrix = buildMatrix(m,n)
+
+  for(let i = 0; i < m; i++){
+    for(let j = 0; j < n; j++){
+      try{
+      let above = matrix[i-1][j] === undefined ? 0 :  matrix[i-1][j]
+      let left = matrix[i][j-1] === undefined ? 0 : matrix[i][j-1]
+        matrix[i][j] = left + above
+      } catch {
+        matrix[i][j] = 1
+      }
+      }
+    }
+    console.log(matrix)
+
 }
 
-numOfPaths(3,5)
+numOfPaths(4,6)
