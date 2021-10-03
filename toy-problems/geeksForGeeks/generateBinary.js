@@ -44,4 +44,6 @@ const generateBinary = (num) => {
   return binary
 }
 
-console.log(generateBinary(1))
+console.log(generateBinary(2))
+
+

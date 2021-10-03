@@ -66,8 +66,6 @@ let container =[];
 const printNodesArrays = (tree, arr=[]) => {
   arr.push(tree.value)
 
-
-
   if (!(tree.left || tree.right)) console.log(arr)
 
   if (tree.left){
@@ -76,10 +74,8 @@ const printNodesArrays = (tree, arr=[]) => {
   if (tree.right){
     printNodesArrays(tree.right, arr.slice())
   }
-
-  // returnsole.log container
+  // return container
 }
-
 console.log(printNodesArrays(myTree))
 
 

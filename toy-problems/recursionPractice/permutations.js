@@ -7,10 +7,6 @@
 // Your function can have loops—it just needs to also be recursive.
 
 
-// abc -> bc -> c
-// bac
-// cab
-
 // //test case
 // const perm = (str) => {
 //   if (!str.length) return
@@ -32,41 +28,25 @@ const perm = (str) => {
   perm(str.slice(1))
 }
 
-perm('abcd')
+// perm('abcd')
 
+const perm2 = (str) => {
+  let newString = ''
+  if (str.length === 0) return '' // edge case
+  if (str.length === 1) return str
 
+  for (let i = 0; i <str.length; i++){
+    let char = str.slice(i,1)
+    str = str.slice(0,i)+ str.slice(i+1)
 
-// a
-//   bcd
+    newStr = char + perm2(str)
 
-// a
-//   b
-//     cd
+      // for(let j=0; j < str.length; j++){
+      //   newString += char + perm2(str)
+      // }
+      console.log(newString)
 
-// a
-//   b
-//     dc
+  }
+}
 
-// a
-//   c
-//     bd
-
-// a
-//   c
-//     db
-
-// a
-//   d
-//     bc
-
-// a
-//   d
-//     cb
-
-// b
-//   a
-//     cd
-
-// b
-//   a
-//     dc
+perm2('abc')
