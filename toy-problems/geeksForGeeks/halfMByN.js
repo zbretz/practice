@@ -13,3 +13,10 @@ const half = (m,n) => {
 }
 
 console.log(half(4,100))
+
+const halfRecursive = (m,n) => {
+  if (m === 1) return n
+  return half(m-1,Math.floor(n/2))
+}
+
+console.log(halfRecursive(4,100))
