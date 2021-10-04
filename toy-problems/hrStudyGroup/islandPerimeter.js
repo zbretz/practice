@@ -71,3 +71,38 @@ const findPerimeter = (grid) => {
 }
 
 console.log(findPerimeter(grid))
+
+
+
+const findPerimeter2 = (grid) => {
+
+  let count = 0;
+
+    // for each 1 in each row (i) (add 1)
+    for (let i = 0; i < grid.length; i++){
+
+      for (let j = 0; j < grid.length; j++){
+        if (grid[i][j] === 1){
+          // (if there is a 0  to left)
+          if (grid[i][j-1] === 0 || grid[i][j-1] === undefined) count ++
+          // right
+          if (grid[i][j+1] === 0 || grid[i][j+1] === undefined) count ++
+          // bottom
+          if (grid[i+1]){
+            if (grid[i+1][j] === 0 || grid[i+1][j] === undefined) count++
+          }
+          // top
+          if (grid[i-1]){
+            if (grid[i-1][j] === 0 || grid[i-1][j] === undefined) count++
+          }
+
+        }
+      }
+
+    }
+
+
+  return count
+}
+
+console.log(findPerimeter(grid))
