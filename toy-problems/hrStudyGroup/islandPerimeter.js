@@ -26,28 +26,48 @@ const findPerimeter = (grid) => {
 
   //to get perimeter/outside bounds
     //for top row
-      //for each '1' add one
+    grid[0].forEach(cell => {
+      if (cell === 1) count++
+    })
     //for bottom row
-      //for each '1' add one
+    grid[grid.length-1].forEach(cell => {
+      if (cell === 1) count++
+    })
+    // for left column (first item of each array item)
+    grid.forEach(row => {
+      if (row[0] === 1) count++
+    })
+    // for right column (first item of each array item)
+    grid.forEach(row => {
+      if (row[row.length-1] === 1) count++
+    })
 
-    // for left column (first item of each array item)
-      //for each each 1, add 1
-    // for left column (first item of each array item)
-      //for each each 1, add 1
 
     // for each 1 in each row (i) (add 1)
-      // (if there is a 0  to left)
-        if exists (j - 1), if grid[i][j-1] = 0
-          count++
-      // right
-        if exists (j + 1), if grid[i][j+1] = 0
-          count++
-      // top
-        if exists (i-1), if grid[i-1][j] = 0
-          count++
-      // bottom
-        if exists (i+1), if grid[i+1][j] = 0
-          count++
+    for (let i = 0; i < grid.length; i++){
+
+      for (let j = 0; j < grid.length; j++){
+        if (grid[i][j] === 1){
+          // (if there is a 0  to left)
+          if (grid[i][j-1] === 0) count ++
+          // right
+          if (grid[i][j+1] === 0) count ++
+          // bottom
+          if (grid[i+1]){
+            if (grid[i+1][j] === 0) count++
+          }
+          // top
+          if (grid[i-1]){
+            if (grid[i-1][j] === 0) count++
+          }
+
+        }
+      }
+
+    }
+
 
   return count
 }
+
+console.log(findPerimeter(grid))
