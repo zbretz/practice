@@ -6,19 +6,16 @@
 
 const parens = (str, index) => {
 
-  const left = []
-  const right = []
+  let count = 0;
 
-  for (let i = 0; i < str.length; i++){
-    if (str[i] === '(') left.push(i)
-    if (str[i] === ')') right.unshift(i)
+  for (let i = index; i < str.length; i++){
+    if (str[i] === '(') count++
+    if (str[i] === ')') count--
+
+    if (count === 0) return i
   }
 
-  const position = left.indexOf(index)
-
-  return right[position]
-
 }
-let my_string = "Sometimes (when I nest them (my parentheticals) too much (like this (and this))) they get confusing."
+
 console.log(parens(my_string, 10))
 console.log(parens(my_string, 28))
