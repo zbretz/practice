@@ -1,16 +1,11 @@
-
 const express = require('express')
 const app = express()
 const port = 3000
 const db = require('./db')
 
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
 app.get('/', (request, response) => {
-  response.json({ info: 'Node.js, Express, and Postgres API' })
+  response.send(db.user1.first)
 })
 
 app.listen(port, () => {
