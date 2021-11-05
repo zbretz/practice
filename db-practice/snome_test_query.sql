@@ -31,19 +31,14 @@ from '/Users/zach/Workspace/postHR/practice/db-practice/snome_dummy_table.csv'
 delimiter ','
 csv header;
 
--- create table answers (
--- id serial,
--- -- id int not null AUTOINCREMENT??
--- -- id serial,
--- question_id int not null,
--- body text,
--- date_written bigint,
--- answerer_name text,
--- answerer_email text,
--- reported int,
--- helpful int,
--- primary key(id)
--- );
+create table user (
+id serial,
+travel_start text not null,
+travel_end text not null,
+user_photo text not null,
+about text not null,
+primary key(id)
+);
 
 -- copy answers
 -- from '/users/zach/workspace/hackreactor/sdc/CSV/answers.csv'
