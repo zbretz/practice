@@ -27,23 +27,25 @@ create table snome (
 );
 
 copy snome(id, owner_id, location_id, header, time_to_mountain, mountain_access, availability_start, availability_end, street_address, bedrooms, bathrooms, number_of_beds, perks, snome_description)
-from '/Users/zach/Workspace/postHR/practice/db-practice/snome_dummy_table.csv'
+from '/Users/zach/Workspace/postHR/practice/db-practice/snome_dummy_data/snome.csv'
 delimiter ','
 csv header;
 
-create table user (
+create table snome_user (
 id serial,
+name text not null,
 travel_start text not null,
 travel_end text not null,
 user_photo text not null,
 about text not null,
+video_tour text,
 primary key(id)
 );
 
--- copy answers
--- from '/users/zach/workspace/hackreactor/sdc/CSV/answers.csv'
--- delimiter ','
--- csv header;
+copy snome_user
+from '/Users/zach/Workspace/postHR/practice/db-practice/snome_dummy_data/user.csv'
+delimiter ','
+csv header;
 
 -- -- on ubuntu -- --
 -- \copy answers
