@@ -18,7 +18,6 @@ const genParens = (n) =>{
   // let string = '';
 
   const inner = (string ='', left = 0, right = 0)=> {
-    let newString;
 
     // if (left === right && right === n){
     if (right === n){
@@ -26,14 +25,13 @@ const genParens = (n) =>{
     }
 
     if (left < n){
-      // ++left
-      inner(string + '(', left + 1, right)
-
+      ++left;
+      inner(string + '(', left, right)
     }
 
     if (right < left){
-      // ++right
-      inner(string + ')', left, right + 1)
+      ++right;
+      inner(string + ')', left, right)
     }
   }
 
@@ -43,6 +41,8 @@ const genParens = (n) =>{
 }
 
 genParens(3)
+
+
 
 
 

@@ -44,3 +44,9 @@ const decomposeInteger = (integer) => {
 
 decomposeInteger(399)
 
+// thoughts:
+
+// to be continued...
+
+
+

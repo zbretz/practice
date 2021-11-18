@@ -28,32 +28,104 @@
 // 111221
 
 const countAndSay = (n) => {
-  // if(n===1) return 1
 
+  function inner(num=''){
 
-}
+    if (n == 1) return 1
 
+    num = String(num)
 
-(function(){
-let num = 111221
-num = String(num)
+    let current_count = 0
+    let new_num = ''
+    for (let i = 0; i < num.length-1; i++){
+      current_count++
+      if (num[i]!==num[i+1]){
+        new_num += current_count + num[i]
+        current_count = 0
+      }
+    }
+    if (current_count) new_num += ++current_count + num[num.length-1]
+    if (num[num.length-1] !== num[num.length-2]) new_num += '1' + num[num.length - 1]
 
-let current_count = 0
-let new_num = ''
-for (let i = 0; i < num.length-1; i++){
-  current_count++
-  if (num[i]!==num[i+1]){
-    new_num += current_count + num[i]
-    current_count = 0
+    // return inner(inner(n-1))
+    return inner(n-1)
   }
+
+  return inner(n)
 }
-if (current_count) new_num += ++current_count + num[num.length-1]
-if (num[num.length-1] !== num[num.length-2]) new_num += '1' + num[num.length - 1]
 
-console.log(new_num)
-})()
+// console.log(countAndSay(3))
 
 
 
+function inner(num=''){
+
+  if (num == 1) return 1
+
+  num = String(num)
+
+  let current_count = 0
+  let new_num = ''
+  for (let i = 0; i < num.length-1; i++){
+    current_count++
+    if (num[i]!==num[i+1]){
+      new_num += current_count + num[i]
+      current_count = 0
+    }
+  }
+  if (current_count) new_num += ++current_count + num[num.length-1]
+  if (num[num.length-1] !== num[num.length-2]) new_num += '1' + num[num.length - 1]
+
+  return new_num
+}
+
+// console.log(inner(inner('31')))
 
 
+
+
+
+
+function inner2(n){
+
+  if (n == 1) return 1
+
+  let num = inner2(n-1)
+
+  let current_count = 0
+  let new_num = ''
+  for (let i = 0; i < num.length-1; i++){
+    current_count++
+    if (num[i]!==num[i+1]){
+      new_num += current_count + num[i]
+      current_count = 0
+    }
+  }
+  if (current_count) new_num += ++current_count + num[num.length-1]
+  if (num[num.length-1] !== num[num.length-2]) new_num += '1' + num[num.length - 1]
+
+  return new_num
+}
+
+console.log(inner2(3))
+
+//trying to create a more elegant inner function
+const elegant = (num) => {
+  num = String(num)
+  let current_count = 0
+  let new_num = ''
+  for (let i = 0; i < num.length; i++){
+    current_count++
+    if (num[i]!==num[i+1]){
+      new_num += current_count + num[i]
+      current_count = 0
+    }
+  }
+
+  //duh!!
+  return new_num
+}
+
+console.log(elegant(1112333))
+console.log(elegant(1112333))
+console.log(elegant(1112344))

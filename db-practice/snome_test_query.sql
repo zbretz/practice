@@ -21,7 +21,7 @@ create table snome (
   bedrooms numeric(3,1) not null,
   bathrooms numeric(3,1) not null,
   number_of_beds numeric(3,1) not null,
-  perks text ARRAY,
+  perks text,
   snome_description text not null,
   primary key(id)
 );
@@ -46,6 +46,27 @@ copy snome_user
 from '/Users/zach/Workspace/postHR/practice/db-practice/snome_dummy_data/user.csv'
 delimiter ','
 csv header;
+
+create table snome_like (
+id serial,
+snome_user_id int not null,
+snome_id int not null,
+has_been_read boolean DEFAULT false,
+primary key(id)
+);
+
+copy snome_like
+from '/Users/zach/Workspace/postHR/practice/db-practice/snome_dummy_data/like.csv'
+delimiter ','
+csv header;
+
+create table match (
+id serial,
+snome_user_id int not null,
+snome_id int not null,
+has_been_read boolean,
+primary key(id)
+);
 
 -- -- on ubuntu -- --
 -- \copy answers
