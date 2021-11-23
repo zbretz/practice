@@ -1,10 +1,44 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, FlatList, Text} from 'react-native';
 
 const FlexDirectionBasics = () => {
   const [flexDirection, setflexDirection] = useState("column");
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+
+  const getMovies = async () => {
+    try {
+     const response = await fetch('https://reactnative.dev/movies.json');
+     const json = await response.json();
+     setData(json.movies);
+   } catch (error) {
+     console.error(error);
+   } finally {
+     setLoading(false);
+   }
+ }
+
+ useEffect(() => {
+   getMovies();
+ }, []);
 
   return (
+
+<>
+    <View style={{ flex: 1, padding: 24 }}>
+    {isLoading ? <ActivityIndicator/> : (
+      <FlatList
+        data={data}
+        keyExtractor={({ id }, index) => id}
+        renderItem={({ item }) => (
+          <Text>{item.title}, {item.releaseYear}</Text>
+        )}
+      />
+    )}
+  </View>
+
+
     <PreviewLayout
       label="flexDirection"
       values={["column", "row", "row-reverse", "column-reverse"]}
@@ -21,6 +55,7 @@ const FlexDirectionBasics = () => {
         style={[styles.box, { backgroundColor: "steelblue" }]}
       />
     </PreviewLayout>
+    </>
   );
 };
 
