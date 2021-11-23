@@ -11,6 +11,7 @@ const FeaturedLocations = () => {
       values={["parkcity", "aspen", "crestedbutte", "alta"]}
       selectedValue={flexDirection}
       setSelectedValue={setflexDirection}
+      toggleOptions = {["ListView", "MapView"]}
     >
     </Grid>
   );
@@ -22,6 +23,7 @@ const Grid = ({
   values,
   selectedValue,
   setSelectedValue,
+  toggleOptions
 }) => (
   <View style={{ padding: 10, flex: 1 }}>
 
@@ -32,18 +34,42 @@ const Grid = ({
       <Text style={styles.SnomeLogo}>Snome Logo</Text>
     </View>
 
-  <View
-    // style={{maxWidth: '80%', alignItems: 'center'}}
-    style={{padding: 12, width: "80%", backgroundColor: "green", alignSelf: 'center'}}
-  >
-    <Text>Choose your destination</Text>
-    <TextInput
-      style={[styles.input, ]}
-      placeholder="useless placeholder"
-    />
-    <Text>Advanced search</Text>
+    {/* Search Box Container */}
+    <View
+      // style={{maxWidth: '80%', alignItems: 'center'}}
+      style={{padding: 12, width: "80%", backgroundColor: "", alignSelf: 'center'}}
+    >
+      <Text style={{marginLeft: 12, marginBottom: 4}}>Choose your destination</Text>
+      <TextInput
+        style={[styles.input, ]}
+        placeholder="useless placeholder"
+      />
+      <Text style={{marginLeft: 12, marginTop: 4}}>Advanced search</Text>
 
-  </View>
+    </View>
+
+    {/* Toggle For List Map View */}
+    <View style={styles.row}>
+      {toggleOptions.map((option) => (
+        <TouchableOpacity
+          key={option}
+          onPress={() => setSelectedValue(option)}
+          style={[
+            styles.toggle,
+          ]}
+        >
+          <Text
+            style={[
+              styles.buttonLabel,
+            ]}
+          >
+            {option}
+          </Text>
+        </TouchableOpacity>
+      ))}
+    </View>
+
+
 
   </View>
 
@@ -77,6 +103,11 @@ const Grid = ({
 );
 
 const styles = StyleSheet.create({
+  toggle: {
+    backgroundColor: "oldlace",
+    padding:18,
+    marginBottom: 20,
+  },
   input: {
     height: 40,
     // marginHorizontal: 12,
@@ -91,7 +122,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginLeft: 20,
     marginTop: 20,
-    marginBottom: 60,
+    marginBottom: 20,
   },
   topContainer: {
     // flex: 1,
@@ -114,13 +145,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   location: {
-    // paddingHorizontal: 8,
-    // paddingVertical: 6,
-    // flex: 1,
     borderRadius: 4,
     backgroundColor: "oldlace",
-    // alignSelf: "flex-start",
-    // marginHorizontal: "1%",
     marginBottom: 16,
     width: Dimensions.get('window').width * 0.4,
     height: Dimensions.get('window').width * 0.4,
