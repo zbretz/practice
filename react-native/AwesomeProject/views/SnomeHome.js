@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, TextInput } from "react-native";
 import {Dimensions} from 'react-native';
 
 const FeaturedLocations = () => {
@@ -31,6 +31,14 @@ const Grid = ({
     <View>
       <Text style={styles.SnomeLogo}>Snome Logo</Text>
     </View>
+
+  <View>
+    <TextInput
+      style={styles.input}
+      placeholder="useless placeholder"
+    />
+  </View>
+
   </View>
 
     <Text style={styles.label}>{label}</Text>
@@ -63,6 +71,13 @@ const Grid = ({
 );
 
 const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    backgroundColor: "white"
+  },
   SnomeLogo: {
     padding:18,
     backgroundColor: "powderblue",
