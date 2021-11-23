@@ -1,12 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, TextInput } from "react-native";
 import {Dimensions} from 'react-native';
+
+import { ActivityIndicator, FlatList} from 'react-native';
 
 const FeaturedLocations = () => {
   const [flexDirection, setflexDirection] = useState("column");
   const [toggleView, settoggleView] = useState("ListView");
 
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+
+  const getMovies = async () => {
+    try {
+     const response = await fetch('https://reactnative.dev/movies.json');
+     const json = await response.json();
+     setData(json.movies);
+   } catch (error) {
+     console.error(error);
+   } finally {
+     setLoading(false);
+   }
+ }
+
+ useEffect(() => {
+   getMovies();
+ }, []);
+
   return (
+    <>
+
+    <View style={{ flex: 1, padding: 24 }}>
+    {isLoading ? <ActivityIndicator/> : (
+      <FlatList
+        data={data}
+        keyExtractor={({ id }, index) => id}
+        renderItem={({ item }) => (
+          <Text>{item.title}, {item.releaseYear}</Text>
+        )}
+      />
+    )}
+  </View>
+
     <Grid
       label="flexDirection"
       values={["parkcity", "aspen", "crestedbutte", "alta"]}
@@ -18,6 +53,7 @@ const FeaturedLocations = () => {
       setView = {settoggleView}
     >
     </Grid>
+  </>
   );
 };
 
@@ -63,8 +99,11 @@ const MapView = ({
     <>
     <Text style={styles.label}>{label}</Text>
     <View style={styles.ListMapContainer}>
-      <View style={{backgroundColor: "oldlace", width: "100%", height: "100%"}}>
-
+      <View style={{
+        backgroundColor: "oldlace",
+        width: "100%",
+        height: "100%",
+        padding: 16}}>
       </View>
     </View>
     </>
