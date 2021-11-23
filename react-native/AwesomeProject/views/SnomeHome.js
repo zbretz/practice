@@ -4,7 +4,7 @@ import {Dimensions} from 'react-native';
 
 const FeaturedLocations = () => {
   const [flexDirection, setflexDirection] = useState("column");
-  const [toggleView, settoggleView] = useState("MapView");
+  const [toggleView, settoggleView] = useState("ListView");
 
   return (
     <Grid
@@ -20,6 +20,39 @@ const FeaturedLocations = () => {
     </Grid>
   );
 };
+
+const ListView = ({
+    label,
+    values,
+    selectedValue,
+    setSelectedValue,
+    toggleOptions}) => (
+  <>
+  <Text style={styles.label}>{label}</Text>
+    <View style={styles.row}>
+    {/* <View style={[styles.row, option === 'list' && {backgroundColor: "black"}]}> */}
+      {values.map((value) => (
+        <TouchableOpacity
+          key={value}
+          onPress={() => setSelectedValue(value)}
+          style={[
+            styles.location,
+            selectedValue === value && styles.selected,
+          ]}
+        >
+          <Text
+            style={[
+              styles.buttonLabel,
+              selectedValue === value && styles.selectedLabel,
+            ]}
+          >
+            {value}
+          </Text>
+        </TouchableOpacity>
+      ))}
+    </View>
+    </>
+    )
 
 const Grid = ({
   label,
@@ -76,6 +109,7 @@ const Grid = ({
       ))}
     </View>
 
+        {/* For testing purposes */}
         {view === 'MapView' &&
         <Text> {view} </Text>
           }
@@ -84,37 +118,15 @@ const Grid = ({
         <Text> {view} </Text>
           }
 
-
-
-
   </View>
 
-    {/* Location Grid */}
-    <Text style={styles.label}>{label}</Text>
-    {/* {view === 'list' && */}
-    <View style={styles.row}>
-    {/* <View style={[styles.row, option === 'list' && {backgroundColor: "black"}]}> */}
-      {values.map((value) => (
-        <TouchableOpacity
-          key={value}
-          onPress={() => setSelectedValue(value)}
-          style={[
-            styles.location,
-            selectedValue === value && styles.selected,
-          ]}
-        >
-          <Text
-            style={[
-              styles.buttonLabel,
-              selectedValue === value && styles.selectedLabel,
-            ]}
-          >
-            {value}
-          </Text>
-        </TouchableOpacity>
-      ))}
-    </View>
-{/* } */}
+  {view === 'ListView' && <ListView
+  label = {label}
+  values = {values}
+  selectedValue = {selectedValue}
+  setSelectedValue = {setSelectedValue}
+
+  ></ListView>}
 
     {/* Bottom Container */}
     <View style={[styles.container, { [label]: selectedValue }]}>
@@ -123,6 +135,7 @@ const Grid = ({
     </View>
   </View>
 );
+
 
 const styles = StyleSheet.create({
   toggle: {
