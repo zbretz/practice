@@ -24,6 +24,15 @@ const Grid = ({
   setSelectedValue,
 }) => (
   <View style={{ padding: 10, flex: 1 }}>
+
+  {/* Top Container */}
+  <View style={[styles.topContainer, { [label]: selectedValue }]}>
+  {children}
+    <View>
+      <Text style={styles.SnomeLogo}>Snome Logo</Text>
+    </View>
+  </View>
+
     <Text style={styles.label}>{label}</Text>
     <View style={styles.row}>
       {values.map((value) => (
@@ -48,11 +57,25 @@ const Grid = ({
     </View>
     <View style={[styles.container, { [label]: selectedValue }]}>
       {children}
+      <Text>Bottom Container</Text>
     </View>
   </View>
 );
 
 const styles = StyleSheet.create({
+  SnomeLogo: {
+    padding:18,
+    backgroundColor: "powderblue",
+    alignSelf: 'flex-start',
+    marginLeft: 20,
+    marginTop: 20,
+    marginBottom: 60,
+  },
+  topContainer: {
+    // flex: 1,
+    marginTop: 8,
+    backgroundColor: "aliceblue",
+  },
   container: {
     flex: 1,
     marginTop: 8,
@@ -63,6 +86,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   row: {
+    // flex:1,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-evenly",
