@@ -4,6 +4,7 @@ import {Dimensions} from 'react-native';
 
 const FeaturedLocations = () => {
   const [flexDirection, setflexDirection] = useState("column");
+  const [toggleView, settoggleView] = useState("MapView");
 
   return (
     <Grid
@@ -12,6 +13,9 @@ const FeaturedLocations = () => {
       selectedValue={flexDirection}
       setSelectedValue={setflexDirection}
       toggleOptions = {["ListView", "MapView"]}
+
+      view = {toggleView}
+      setView = {settoggleView}
     >
     </Grid>
   );
@@ -23,7 +27,10 @@ const Grid = ({
   values,
   selectedValue,
   setSelectedValue,
-  toggleOptions
+  toggleOptions,
+
+  view,
+  setView
 }) => (
   <View style={{ padding: 10, flex: 1 }}>
 
@@ -53,7 +60,7 @@ const Grid = ({
       {toggleOptions.map((option) => (
         <TouchableOpacity
           key={option}
-          onPress={() => setSelectedValue(option)}
+          onPress={() => setView(option)}
           style={[
             styles.toggle,
           ]}
@@ -69,12 +76,24 @@ const Grid = ({
       ))}
     </View>
 
+        {view === 'MapView' &&
+        <Text> {view} </Text>
+          }
+
+        {view === 'ListView' &&
+        <Text> {view} </Text>
+          }
+
+
 
 
   </View>
 
+    {/* Location Grid */}
     <Text style={styles.label}>{label}</Text>
+    {/* {view === 'list' && */}
     <View style={styles.row}>
+    {/* <View style={[styles.row, option === 'list' && {backgroundColor: "black"}]}> */}
       {values.map((value) => (
         <TouchableOpacity
           key={value}
@@ -95,6 +114,9 @@ const Grid = ({
         </TouchableOpacity>
       ))}
     </View>
+{/* } */}
+
+    {/* Bottom Container */}
     <View style={[styles.container, { [label]: selectedValue }]}>
       {children}
       <Text>Bottom Container</Text>
@@ -107,6 +129,7 @@ const styles = StyleSheet.create({
     backgroundColor: "oldlace",
     padding:18,
     marginBottom: 20,
+
   },
   input: {
     height: 40,
