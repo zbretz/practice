@@ -29,8 +29,7 @@ const ListView = ({
     toggleOptions}) => (
   <>
   <Text style={styles.label}>{label}</Text>
-    <View style={styles.row}>
-    {/* <View style={[styles.row, option === 'list' && {backgroundColor: "black"}]}> */}
+    <View style={[styles.row, styles.ListMapContainer]}>
       {values.map((value) => (
         <TouchableOpacity
           key={value}
@@ -52,7 +51,24 @@ const ListView = ({
       ))}
     </View>
     </>
-    )
+)
+
+const MapView = ({
+  label,
+  // values,
+  // selectedValue,
+  // setSelectedValue,
+  // toggleOptions
+  }) => (
+    <>
+    <Text style={styles.label}>{label}</Text>
+    <View style={styles.ListMapContainer}>
+      <View style={{backgroundColor: "oldlace", width: "100%", height: "100%"}}>
+
+      </View>
+    </View>
+    </>
+)
 
 const Grid = ({
   label,
@@ -120,13 +136,23 @@ const Grid = ({
 
   </View>
 
-  {view === 'ListView' && <ListView
-  label = {label}
-  values = {values}
-  selectedValue = {selectedValue}
-  setSelectedValue = {setSelectedValue}
+  {view === 'ListView' &&
+    <ListView
+      label = {label}
+      values = {values}
+      selectedValue = {selectedValue}
+      setSelectedValue = {setSelectedValue}
+    ></ListView>}
 
-  ></ListView>}
+{view === 'MapView' &&
+    <MapView
+      label = {label}
+      values = {values}
+      selectedValue = {selectedValue}
+      setSelectedValue = {setSelectedValue}
+    ></MapView>}
+
+
 
     {/* Bottom Container */}
     <View style={[styles.container, { [label]: selectedValue }]}>
@@ -138,6 +164,10 @@ const Grid = ({
 
 
 const styles = StyleSheet.create({
+  ListMapContainer: {
+    height: Dimensions.get('window').width * 0.8 + 32,
+    // backgroundColor: "red"
+  },
   toggle: {
     backgroundColor: "oldlace",
     padding:18,
@@ -179,6 +209,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-evenly",
+    // alignItems: 'center'
   },
   location: {
     borderRadius: 4,
