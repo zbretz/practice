@@ -32,11 +32,17 @@ const Grid = ({
       <Text style={styles.SnomeLogo}>Snome Logo</Text>
     </View>
 
-  <View>
+  <View
+    // style={{maxWidth: '80%', alignItems: 'center'}}
+    style={{padding: 12, width: "80%", backgroundColor: "green", alignSelf: 'center'}}
+  >
+    <Text>Choose your destination</Text>
     <TextInput
-      style={styles.input}
+      style={[styles.input, ]}
       placeholder="useless placeholder"
     />
+    <Text>Advanced search</Text>
+
   </View>
 
   </View>
@@ -73,10 +79,11 @@ const Grid = ({
 const styles = StyleSheet.create({
   input: {
     height: 40,
-    margin: 12,
+    // marginHorizontal: 12,
     borderWidth: 1,
     padding: 10,
-    backgroundColor: "white"
+    backgroundColor: "white",
+    // maxWidth: '80%'
   },
   SnomeLogo: {
     padding:18,
