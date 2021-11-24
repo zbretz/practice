@@ -27,9 +27,10 @@ const FeaturedLocations = () => {
    getMovies();
  }, []);
 
+ console.log({data})
+
   return (
     <>
-
     <View style={{ flex: 1, padding: 24 }}>
     {isLoading ? <ActivityIndicator/> : (
       <FlatList
@@ -44,7 +45,8 @@ const FeaturedLocations = () => {
 
     <Grid
       label="flexDirection"
-      values={["parkcity", "aspen", "crestedbutte", "alta"]}
+      // values={["parkcity", "aspen", "crestedbutte", "alta"]}
+      values = {data.map(movie => movie.title)}
       selectedValue={flexDirection}
       setSelectedValue={setflexDirection}
       toggleOptions = {["ListView", "MapView"]}
