@@ -4,6 +4,8 @@ import {Dimensions} from 'react-native';
 
 import { ActivityIndicator, FlatList} from 'react-native';
 
+var axios = require('axios');
+
 const FeaturedLocations = () => {
   const [flexDirection, setflexDirection] = useState("column");
   const [toggleView, settoggleView] = useState("ListView");
@@ -13,9 +15,12 @@ const FeaturedLocations = () => {
 
   const getMovies = async () => {
     try {
-     const response = await fetch('https://reactnative.dev/movies.json');
+     const response = await fetch('http://localhost:3000/location?featured=true',
+     {mode: 'cors'})
+     console.log(response)
      const json = await response.json();
-     setData(json.movies);
+     console.log(json)
+     setData(json);
    } catch (error) {
      console.error(error);
    } finally {
@@ -31,22 +36,10 @@ const FeaturedLocations = () => {
 
   return (
     <>
-    <View style={{ flex: 1, padding: 24 }}>
-    {isLoading ? <ActivityIndicator/> : (
-      <FlatList
-        data={data}
-        keyExtractor={({ id }, index) => id}
-        renderItem={({ item }) => (
-          <Text>{item.title}, {item.releaseYear}</Text>
-        )}
-      />
-    )}
-  </View>
-
     <Grid
       label="flexDirection"
       // values={["parkcity", "aspen", "crestedbutte", "alta"]}
-      values = {data.map(movie => movie.title)}
+      values = {data.map(location => location.name).slice(0,4)}
       selectedValue={flexDirection}
       setSelectedValue={setflexDirection}
       toggleOptions = {["ListView", "MapView"]}
