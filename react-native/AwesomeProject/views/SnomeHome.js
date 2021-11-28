@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, TextInput } from "react-native";
 import {Dimensions} from 'react-native';
+import { SearchBar } from 'react-native-elements';
 
 import { ActivityIndicator, FlatList} from 'react-native';
-
-var axios = require('axios');
 
 const FeaturedLocations = () => {
   const [flexDirection, setflexDirection] = useState("column");
@@ -12,6 +11,12 @@ const FeaturedLocations = () => {
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+
+  // const [searchData, setSearchData] = useState(['first', 'fish', 'fast', 'fail', 'fat', 'fashion', 'fort', 'forty', 'forlorn']);
+  // const [heroes, setHeroes] = useState(['first', 'fish', 'fast', 'fail', 'fat', 'fashion', 'fort', 'forty', 'forlorn']);
+  const [searchData, setSearchData] = useState([])
+  const [heroes, setHeroes] = useState([])
+  const [query, setQuery] = useState('');
 
   const getMovies = async () => {
     try {
@@ -21,6 +26,7 @@ const FeaturedLocations = () => {
      const json = await response.json();
      console.log(json)
      setData(json);
+     setHeroes(json.slice())
    } catch (error) {
      console.error(error);
    } finally {
@@ -30,12 +36,58 @@ const FeaturedLocations = () => {
 
  useEffect(() => {
    getMovies();
+  //  setHeroes(data.slice())
+  //  console.log(searchData)
+  //  console.log(heroes)
+
  }, []);
 
  console.log({data})
+ console.log(heroes)
+
+
+ const updateQuery = (input) => {
+  // setHeroes(data.slice())
+  setQuery(input);
+  console.log(query);
+  console.log(searchData)
+  setHeroes(data.slice())
+ }
+
+const filterNames = (location) => {
+  // 1.
+  let search = query.toLowerCase().replace(/ /g,"_");
+  //2.
+  if(location.name.toLowerCase().startsWith(search)){
+      //3.
+      console.log(heroes.length)
+      return location.name;
+  }else{
+      //4.
+      heroes.splice(heroes.indexOf(location), 1);
+      return null;
+  }
+}
 
   return (
     <>
+
+{/* Testing Autocomplete Search */}
+<View>
+<SearchBar
+ onChangeText={updateQuery}
+ value={query}
+ placeholder="Type Here..."/>
+
+<FlatList data={heroes}
+  extraData = {query}
+  renderItem = {({item}) =>
+    <Text style={styles.flatList}>{filterNames(item)}{heroes.length}
+    </Text>}
+/>
+</View>
+{/* Testing Autocomplete Search */}
+
     <Grid
       label="flexDirection"
       // values={["parkcity", "aspen", "crestedbutte", "alta"]}
@@ -198,6 +250,16 @@ const Grid = ({
 
 
 const styles = StyleSheet.create({
+
+  flatList:{
+    paddingLeft: 15,
+    marginTop:15,
+    paddingBottom:15,
+    fontSize: 20,
+    borderBottomColor: '#26a69a',
+    borderBottomWidth:1
+},
+
   ListMapContainer: {
     height: Dimensions.get('window').width * 0.8 + 32,
     // backgroundColor: "red"
@@ -271,5 +333,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 });
+
+
+
 
 export default FeaturedLocations
