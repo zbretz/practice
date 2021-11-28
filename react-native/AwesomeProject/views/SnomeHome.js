@@ -17,11 +17,9 @@ const NewSearch = () => {
   const filterNames = (location) => {
   let search = query.toLowerCase().replace(/ /g,"_");
   if(location.toLowerCase().startsWith(search)){
-      console.log(searchData.length)
       return location.name;
       // return <Text style={{height: 40}}>{location.name}</Text>
   }else{
-      searchData.splice(searchData.indexOf(location), 1);
       return null;
   }
 }
@@ -76,30 +74,16 @@ const FeaturedLocations = () => {
  }, []);
 
  console.log(data)
- console.log(searchData)
 
- const updateQuery = (input) => {
-  // setHeroes(data.slice())
-  setQuery(input);
-  console.log(query);
-  console.log(searchData)
-  if (input === ''){
-    setSearchData([])
-  } else {
-    setSearchData(data.slice())
-  }
- }
 
 
 
 const filterNames = (location) => {
   let search = query.toLowerCase().replace(/ /g,"_");
   if(location.name.toLowerCase().startsWith(search)){
-      console.log(searchData.length)
       // return location.name;
       return <Text style={{height: 40}}>{location.name}</Text>
   }else{
-      searchData.splice(searchData.indexOf(location), 1);
       return null;
   }
 }
@@ -107,9 +91,8 @@ const filterNames = (location) => {
   return (
     <>
     <Grid
-    updateQuery = {updateQuery}
-    query = {query}
-    searchData = {searchData}
+    // updateQuery = {updateQuery}
+    // query = {query}
 
       label="flexDirection"
       // values={["parkcity", "aspen", "crestedbutte", "alta"]}
@@ -123,7 +106,6 @@ const filterNames = (location) => {
       filterNames = {filterNames}
     >
     </Grid>
-  </View>
   </>
   );
 };
@@ -181,21 +163,20 @@ const MapView = ({
 )
 
 const CustomSearch = ({
-  updateQuery,
-  query,
-  searchData,
+  // updateQuery,
+  // query,
   filterNames
   }) => (
     <>
     <View style={{position: 'relative'}}>
   <SearchBar
   // inputContainerStyle={{backgroundColor:'yellow'}}
-  onChangeText={updateQuery}
-  value={query}
+  // onChangeText={updateQuery}
+  // value={query}
   placeholder="Type Here..."/>
 
-  <FlatList data={searchData} style={styles.flatList}
-    extraData = {query}
+  <FlatList  style={styles.flatList}
+    // extraData = {query}
     renderItem = {({item}) =>
       // <Text style={{}}>{filterNames(item)}</Text>}
       filterNames(item)}
@@ -214,9 +195,7 @@ const Grid = ({
 
   view,
   setView,
-  updateQuery,
-  query,
-  searchData,
+
   filterNames
 }) => (
   <View style={{ padding: 10, flex: 1 }}>
