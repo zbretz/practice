@@ -27,7 +27,7 @@ const FeaturedLocations = () => {
      const json = await response.json();
      console.log(json)
      setData(json);
-    //  setHeroes(json.slice())
+    //  setData([{name:'z'}, {name: 'b'}, {name: 'c'}, {name:'k'}, {name: 'l'}, {name: 'c'}])
    } catch (error) {
      console.error(error);
    } finally {
