@@ -14,19 +14,20 @@ const FeaturedLocations = () => {
 
   // const [searchData, setSearchData] = useState(['first', 'fish', 'fast', 'fail', 'fat', 'fashion', 'fort', 'forty', 'forlorn']);
   // const [heroes, setHeroes] = useState(['first', 'fish', 'fast', 'fail', 'fat', 'fashion', 'fort', 'forty', 'forlorn']);
+  // const [searchData, setSearchData] = useState([])
   const [searchData, setSearchData] = useState([])
-  const [heroes, setHeroes] = useState([])
   const [query, setQuery] = useState('');
 
   const getMovies = async () => {
     try {
-     const response = await fetch('http://localhost:3000/location?featured=true',
-     {mode: 'cors'})
+    //  const response = await fetch('http://localhost:3000/location?featured=true',
+    const response = await fetch('http://localhost:3000/location',
+    {mode: 'cors'})
      console.log(response)
      const json = await response.json();
      console.log(json)
      setData(json);
-     setHeroes(json.slice())
+    //  setHeroes(json.slice())
    } catch (error) {
      console.error(error);
    } finally {
@@ -42,29 +43,31 @@ const FeaturedLocations = () => {
 
  }, []);
 
- console.log({data})
- console.log(heroes)
-
+ console.log(data)
+ console.log(searchData)
 
  const updateQuery = (input) => {
   // setHeroes(data.slice())
   setQuery(input);
   console.log(query);
   console.log(searchData)
-  setHeroes(data.slice())
+  if (input === ''){
+    setSearchData([])
+  } else {
+    setSearchData(data.slice())
+  }
  }
 
+
+
 const filterNames = (location) => {
-  // 1.
   let search = query.toLowerCase().replace(/ /g,"_");
-  //2.
   if(location.name.toLowerCase().startsWith(search)){
-      //3.
-      console.log(heroes.length)
-      return location.name;
+      console.log(searchData.length)
+      // return location.name;
+      return <Text style={{height: 40}}>{location.name}</Text>
   }else{
-      //4.
-      heroes.splice(heroes.indexOf(location), 1);
+      searchData.splice(searchData.indexOf(location), 1);
       return null;
   }
 }
@@ -74,21 +77,26 @@ const filterNames = (location) => {
 
 {/* Testing Autocomplete Search */}
 <View>
-<SearchBar
+
+{/* <SearchBar
  onChangeText={updateQuery}
  value={query}
  placeholder="Type Here..."/>
 
-<FlatList data={heroes}
+<FlatList data={searchData} style={styles.flatList}
   extraData = {query}
   renderItem = {({item}) =>
-    <Text style={styles.flatList}>{filterNames(item)}{heroes.length}
+    <Text >{filterNames(item)}
     </Text>}
-/>
-</View>
+/> */}
+
 {/* Testing Autocomplete Search */}
 
     <Grid
+    updateQuery = {updateQuery}
+    query = {query}
+    searchData = {searchData}
+
       label="flexDirection"
       // values={["parkcity", "aspen", "crestedbutte", "alta"]}
       values = {data.map(location => location.name).slice(0,4)}
@@ -98,8 +106,10 @@ const filterNames = (location) => {
 
       view = {toggleView}
       setView = {settoggleView}
+      filterNames = {filterNames}
     >
     </Grid>
+  </View>
   </>
   );
 };
@@ -156,6 +166,30 @@ const MapView = ({
     </>
 )
 
+const CustomSearch = ({
+  updateQuery,
+  query,
+  searchData,
+  filterNames
+  }) => (
+    <>
+    <View style={{position: 'relative'}}>
+  <SearchBar
+  // inputContainerStyle={{backgroundColor:'yellow'}}
+  onChangeText={updateQuery}
+  value={query}
+  placeholder="Type Here..."/>
+
+  <FlatList data={searchData} style={styles.flatList}
+    extraData = {query}
+    renderItem = {({item}) =>
+      // <Text style={{}}>{filterNames(item)}</Text>}
+      filterNames(item)}
+  />
+  </View>
+  </>
+)
+
 const Grid = ({
   label,
   children,
@@ -165,7 +199,11 @@ const Grid = ({
   toggleOptions,
 
   view,
-  setView
+  setView,
+  updateQuery,
+  query,
+  searchData,
+  filterNames
 }) => (
   <View style={{ padding: 10, flex: 1 }}>
 
@@ -181,12 +219,21 @@ const Grid = ({
       // style={{maxWidth: '80%', alignItems: 'center'}}
       style={{padding: 12, width: "80%", backgroundColor: "", alignSelf: 'center'}}
     >
-      <Text style={{marginLeft: 12, marginBottom: 4}}>Choose your destination</Text>
+      {/* <Text style={{marginLeft: 12, marginBottom: 4}}>Choose your destination</Text>
       <TextInput
         style={[styles.input, ]}
         placeholder="useless placeholder"
       />
-      <Text style={{marginLeft: 12, marginTop: 4}}>Advanced search</Text>
+      <Text style={{marginLeft: 12, marginTop: 4}}>Advanced search</Text> */}
+
+      <Text style={{marginLeft: 12, marginBottom: 4}}>Choose your destination</Text>
+      <CustomSearch
+        updateQuery = {updateQuery}
+        query = {query}
+        searchData = {searchData}
+        filterNames = {filterNames}
+      >
+      </CustomSearch>
 
     </View>
 
@@ -252,12 +299,18 @@ const Grid = ({
 const styles = StyleSheet.create({
 
   flatList:{
-    paddingLeft: 15,
-    marginTop:15,
-    paddingBottom:15,
-    fontSize: 20,
+    position:'absolute',
+    top: 66,
+    zIndex: 999,
+    elevation: 999,
+    width: '100%',
+    // paddingLeft: 15,
+    // marginTop:15,
+    // paddingBottom:15,
+    // fontSize: 20,
     borderBottomColor: '#26a69a',
-    borderBottomWidth:1
+    borderBottomWidth: 1,
+    backgroundColor: 'white'
 },
 
   ListMapContainer: {
@@ -302,6 +355,8 @@ const styles = StyleSheet.create({
   },
   row: {
     // flex:1,
+    zIndex:-1,
+    elevation:-1,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-evenly",
