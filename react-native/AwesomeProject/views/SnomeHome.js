@@ -1,9 +1,55 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, TouchableOpacity, View, TextInput } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, FlatList, TextInput, SafeAreaView, ScrollView } from "react-native";
 import {Dimensions} from 'react-native';
-import { SearchBar } from 'react-native-elements';
+const DATA = ['first', 'fish', 'fast']//, 'fail', 'fat', 'fashion', 'fort', 'forty', 'forlorn'];
 
-import { ActivityIndicator, FlatList} from 'react-native';
+
+const Item = ({ title }) => (
+  <View style={styles.item}>
+    <Text style={styles.title}>{title}</Text>
+  </View>
+);
+
+const NewSearch = () => {
+
+  const [query, setQuery] = React.useState("");
+
+  const filterNames = (location) => {
+  let search = query.toLowerCase().replace(/ /g,"_");
+  if(location.toLowerCase().startsWith(search)){
+      console.log(searchData.length)
+      return location.name;
+      // return <Text style={{height: 40}}>{location.name}</Text>
+  }else{
+      searchData.splice(searchData.indexOf(location), 1);
+      return null;
+  }
+}
+
+  const renderItem = ({ item }) => {
+    let search = query.toLowerCase().replace(/ /g,"_");
+    if(item.toLowerCase().startsWith(search)){
+       return (<Item title={item} />)
+    }
+  };
+
+  return (
+    <View >
+
+      <TextInput
+        style={styles.input}
+        onChangeText={setQuery}
+        value={query}
+      />
+      <FlatList
+      style={{}}
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={item => item}
+      />
+    </View>
+  );
+}
 
 const FeaturedLocations = () => {
   const [flexDirection, setflexDirection] = useState("column");
@@ -12,22 +58,12 @@ const FeaturedLocations = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
-  // const [searchData, setSearchData] = useState(['first', 'fish', 'fast', 'fail', 'fat', 'fashion', 'fort', 'forty', 'forlorn']);
-  // const [heroes, setHeroes] = useState(['first', 'fish', 'fast', 'fail', 'fat', 'fashion', 'fort', 'forty', 'forlorn']);
-  // const [searchData, setSearchData] = useState([])
-  const [searchData, setSearchData] = useState([])
-  const [query, setQuery] = useState('');
 
-  const getMovies = async () => {
+  const getLocations = async () => {
     try {
-    //  const response = await fetch('http://localhost:3000/location?featured=true',
-    const response = await fetch('http://localhost:3000/location',
-    {mode: 'cors'})
-     console.log(response)
+     const response = await fetch('http://10.0.0.54:3000/location?featured=true');
      const json = await response.json();
-     console.log(json)
      setData(json);
-    //  setData([{name:'z'}, {name: 'b'}, {name: 'c'}, {name:'k'}, {name: 'l'}, {name: 'c'}])
    } catch (error) {
      console.error(error);
    } finally {
@@ -36,11 +72,7 @@ const FeaturedLocations = () => {
  }
 
  useEffect(() => {
-   getMovies();
-  //  setHeroes(data.slice())
-  //  console.log(searchData)
-  //  console.log(heroes)
-
+   getLocations();
  }, []);
 
  console.log(data)
@@ -74,24 +106,6 @@ const filterNames = (location) => {
 
   return (
     <>
-
-{/* Testing Autocomplete Search */}
-<View>
-
-{/* <SearchBar
- onChangeText={updateQuery}
- value={query}
- placeholder="Type Here..."/>
-
-<FlatList data={searchData} style={styles.flatList}
-  extraData = {query}
-  renderItem = {({item}) =>
-    <Text >{filterNames(item)}
-    </Text>}
-/> */}
-
-{/* Testing Autocomplete Search */}
-
     <Grid
     updateQuery = {updateQuery}
     query = {query}
@@ -99,7 +113,7 @@ const filterNames = (location) => {
 
       label="flexDirection"
       // values={["parkcity", "aspen", "crestedbutte", "alta"]}
-      values = {data.map(location => location.name).slice(0,4)}
+      values = {data.map(location => location.name)}
       selectedValue={flexDirection}
       setSelectedValue={setflexDirection}
       toggleOptions = {["ListView", "MapView"]}
@@ -219,21 +233,12 @@ const Grid = ({
       // style={{maxWidth: '80%', alignItems: 'center'}}
       style={{padding: 12, width: "80%", backgroundColor: "", alignSelf: 'center'}}
     >
-      {/* <Text style={{marginLeft: 12, marginBottom: 4}}>Choose your destination</Text>
-      <TextInput
-        style={[styles.input, ]}
-        placeholder="useless placeholder"
-      />
-      <Text style={{marginLeft: 12, marginTop: 4}}>Advanced search</Text> */}
-
       <Text style={{marginLeft: 12, marginBottom: 4}}>Choose your destination</Text>
-      <CustomSearch
-        updateQuery = {updateQuery}
-        query = {query}
-        searchData = {searchData}
-        filterNames = {filterNames}
-      >
-      </CustomSearch>
+
+      <NewSearch />
+
+
+      {/* <Text style={{marginLeft: 12, marginTop: 4}}>Advanced search</Text> */}
 
     </View>
 
@@ -298,20 +303,15 @@ const Grid = ({
 
 const styles = StyleSheet.create({
 
-  flatList:{
-    position:'absolute',
-    top: 66,
-    zIndex: 999,
-    elevation: 999,
-    width: '100%',
-    // paddingLeft: 15,
-    // marginTop:15,
-    // paddingBottom:15,
-    // fontSize: 20,
-    borderBottomColor: '#26a69a',
-    borderBottomWidth: 1,
-    backgroundColor: 'white'
-},
+  item: {
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
+  },
 
   ListMapContainer: {
     height: Dimensions.get('window').width * 0.8 + 32,
