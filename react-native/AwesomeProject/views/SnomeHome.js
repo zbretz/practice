@@ -1,8 +1,55 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, TouchableOpacity, View, TextInput } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, FlatList, TextInput, SafeAreaView, ScrollView } from "react-native";
 import {Dimensions} from 'react-native';
+const DATA = ['first', 'fish', 'fast']//, 'fail', 'fat', 'fashion', 'fort', 'forty', 'forlorn'];
 
-import { ActivityIndicator, FlatList} from 'react-native';
+
+const Item = ({ title }) => (
+  <View style={styles.item}>
+    <Text style={styles.title}>{title}</Text>
+  </View>
+);
+
+const NewSearch = () => {
+
+  const [query, setQuery] = React.useState("");
+
+  const filterNames = (location) => {
+  let search = query.toLowerCase().replace(/ /g,"_");
+  if(location.toLowerCase().startsWith(search)){
+      console.log(searchData.length)
+      return location.name;
+      // return <Text style={{height: 40}}>{location.name}</Text>
+  }else{
+      searchData.splice(searchData.indexOf(location), 1);
+      return null;
+  }
+}
+
+  const renderItem = ({ item }) => {
+    let search = query.toLowerCase().replace(/ /g,"_");
+    if(item.toLowerCase().startsWith(search)){
+       return (<Item title={item} />)
+    }
+  };
+
+  return (
+    <View >
+
+      <TextInput
+        style={styles.input}
+        onChangeText={setQuery}
+        value={query}
+      />
+      <FlatList
+      style={{}}
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={item => item}
+      />
+    </View>
+  );
+}
 
 const FeaturedLocations = () => {
   const [flexDirection, setflexDirection] = useState("column");
@@ -11,11 +58,12 @@ const FeaturedLocations = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
-  const getMovies = async () => {
+
+  const getLocations = async () => {
     try {
-     const response = await fetch('https://reactnative.dev/movies.json');
+     const response = await fetch('http://10.0.0.54:3000/location?featured=true');
      const json = await response.json();
-     setData(json.movies);
+     setData(json);
    } catch (error) {
      console.error(error);
    } finally {
@@ -24,29 +72,17 @@ const FeaturedLocations = () => {
  }
 
  useEffect(() => {
-   getMovies();
+   getLocations();
  }, []);
 
  console.log({data})
 
   return (
     <>
-    <View style={{ flex: 1, padding: 24 }}>
-    {isLoading ? <ActivityIndicator/> : (
-      <FlatList
-        data={data}
-        keyExtractor={({ id }, index) => id}
-        renderItem={({ item }) => (
-          <Text>{item.title}, {item.releaseYear}</Text>
-        )}
-      />
-    )}
-  </View>
-
     <Grid
       label="flexDirection"
       // values={["parkcity", "aspen", "crestedbutte", "alta"]}
-      values = {data.map(movie => movie.title)}
+      values = {data.map(location => location.name)}
       selectedValue={flexDirection}
       setSelectedValue={setflexDirection}
       toggleOptions = {["ListView", "MapView"]}
@@ -137,11 +173,11 @@ const Grid = ({
       style={{padding: 12, width: "80%", backgroundColor: "", alignSelf: 'center'}}
     >
       <Text style={{marginLeft: 12, marginBottom: 4}}>Choose your destination</Text>
-      <TextInput
-        style={[styles.input, ]}
-        placeholder="useless placeholder"
-      />
-      <Text style={{marginLeft: 12, marginTop: 4}}>Advanced search</Text>
+
+      <NewSearch />
+
+
+      {/* <Text style={{marginLeft: 12, marginTop: 4}}>Advanced search</Text> */}
 
     </View>
 
@@ -205,6 +241,17 @@ const Grid = ({
 
 
 const styles = StyleSheet.create({
+
+  item: {
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
+  },
+
   ListMapContainer: {
     height: Dimensions.get('window').width * 0.8 + 32,
     // backgroundColor: "red"
