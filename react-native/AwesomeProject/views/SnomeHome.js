@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, FlatList, TextInput, SafeAreaView, ScrollView } from "react-native";
 import {Dimensions} from 'react-native';
-const DATA = ['first', 'fish', 'fast']//, 'fail', 'fat', 'fashion', 'fort', 'forty', 'forlorn'];
+const DATA = ['first', 'fish', 'fast', 'fail', 'fat', 'fashion', 'fort', 'forty', 'forlorn'];
 
 
 const Item = ({ title }) => (
@@ -13,6 +13,9 @@ const Item = ({ title }) => (
 const NewSearch = () => {
 
   const [query, setQuery] = React.useState("");
+
+  const [showDropdown, setShowDropdown] = useState("hide")
+
 
   const filterNames = (location) => {
   let search = query.toLowerCase().replace(/ /g,"_");
@@ -31,20 +34,36 @@ const NewSearch = () => {
     }
   };
 
+
   return (
-    <View >
+    <View style={{width:'100%'}} >
+
+      <TouchableOpacity
+          // key={}
+          onPress={() => (showDropdown ==='hide' ? setShowDropdown('show') : setShowDropdown('hide'))}
+          style={[
+            styles.toggle,
+          ]}
+        ><Text>show/hide</Text>
+        </TouchableOpacity>
 
       <TextInput
         style={styles.input}
         onChangeText={setQuery}
         value={query}
       />
+      <Text>{showDropdown}</Text>
+
+{showDropdown === 'show' &&
+
       <FlatList
-      style={{}}
+      style={{position:'absolute',top:40, width:'100%'}}
         data={DATA}
         renderItem={renderItem}
         keyExtractor={item => item}
       />
+}
+
     </View>
   );
 }
@@ -55,6 +74,8 @@ const FeaturedLocations = () => {
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+
+
 
 
   const getLocations = async () => {
@@ -104,6 +125,7 @@ const filterNames = (location) => {
       view = {toggleView}
       setView = {settoggleView}
       filterNames = {filterNames}
+
     >
     </Grid>
   </>
@@ -162,29 +184,6 @@ const MapView = ({
     </>
 )
 
-const CustomSearch = ({
-  // updateQuery,
-  // query,
-  filterNames
-  }) => (
-    <>
-    <View style={{position: 'relative'}}>
-  <SearchBar
-  // inputContainerStyle={{backgroundColor:'yellow'}}
-  // onChangeText={updateQuery}
-  // value={query}
-  placeholder="Type Here..."/>
-
-  <FlatList  style={styles.flatList}
-    // extraData = {query}
-    renderItem = {({item}) =>
-      // <Text style={{}}>{filterNames(item)}</Text>}
-      filterNames(item)}
-  />
-  </View>
-  </>
-)
-
 const Grid = ({
   label,
   children,
@@ -196,9 +195,12 @@ const Grid = ({
   view,
   setView,
 
-  filterNames
-}) => (
-  <View style={{ padding: 10, flex: 1 }}>
+  filterNames,
+}) => {
+  // const [showDropdown, setShowDropdown] = useState("hide")
+
+return (
+<View style={{ padding: 10, flex: 1, position:'relative' }}>
 
   {/* Top Container */}
   <View style={[styles.topContainer, { [label]: selectedValue }]}>
@@ -210,19 +212,23 @@ const Grid = ({
     {/* Search Box Container */}
     <View
       // style={{maxWidth: '80%', alignItems: 'center'}}
-      style={{padding: 12, width: "80%", backgroundColor: "", alignSelf: 'center'}}
+      style={{padding: 12, width: "80%", backgroundColor: "", alignSelf: 'center', position:'relative', zIndex:99}}
     >
       <Text style={{marginLeft: 12, marginBottom: 4}}>Choose your destination</Text>
 
-      <NewSearch />
+      <NewSearch
+        // showDropdown = {showDropdown}
+      />
 
 
       {/* <Text style={{marginLeft: 12, marginTop: 4}}>Advanced search</Text> */}
 
     </View>
 
+    <View styles={{position:'absolute', zIndex:-1}}>
+
     {/* Toggle For List Map View */}
-    <View style={styles.row}>
+    <View style={[styles.row, {}]}>
       {toggleOptions.map((option) => (
         <TouchableOpacity
           key={option}
@@ -253,6 +259,8 @@ const Grid = ({
 
   </View>
 
+
+
   {view === 'ListView' &&
     <ListView
       label = {label}
@@ -269,7 +277,7 @@ const Grid = ({
       setSelectedValue = {setSelectedValue}
     ></MapView>}
 
-
+</View>
 
     {/* Bottom Container */}
     <View style={[styles.container, { [label]: selectedValue }]}>
@@ -277,19 +285,24 @@ const Grid = ({
       <Text>Bottom Container</Text>
     </View>
   </View>
-);
+)
+}
 
 
 const styles = StyleSheet.create({
 
   item: {
-    backgroundColor: '#f9c2ff',
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    backgroundColor: '#d3d3d3',
+    padding: 12,
+    borderBottomColor: 'black',
+    borderBottomWidth: 5
+    // marginVertical: 8,
+    // marginHorizontal: 16,
   },
   title: {
-    fontSize: 32,
+    fontSize: 22,
+    // alignSelf:'center'
+
   },
 
   ListMapContainer: {
