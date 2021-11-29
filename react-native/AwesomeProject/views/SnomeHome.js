@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, FlatList, TextInput, SafeAreaView, ScrollView, Dimensions } from "react-native";
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 
 
 const Item = ({ title, setQuery, showDropdown, setShowDropdown }) => (
@@ -181,7 +181,15 @@ const ShowMap = ({
         width: "100%",
         height: "100%",
         padding: 16}}>
-      <MapView style={styles.map} />
+      <MapView style={styles.map}>
+        <Marker
+          // key='3'
+          coordinate={{latitude: 39.641033, longitude: -106.3981}}
+          // title='title'
+          // description='description'
+        />
+      </MapView>
+
     </View>
 
       {/* <View style={{
