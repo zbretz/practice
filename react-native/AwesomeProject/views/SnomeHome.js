@@ -19,6 +19,8 @@ const NewSearch = () => {
 
   const filterNames = (location) => {
   let search = query.toLowerCase().replace(/ /g,"_");
+
+
   if(location.toLowerCase().startsWith(search)){
       return location.name;
       // return <Text style={{height: 40}}>{location.name}</Text>
@@ -29,25 +31,34 @@ const NewSearch = () => {
 
   const renderItem = ({ item }) => {
     let search = query.toLowerCase().replace(/ /g,"_");
+
+    if(query === '') {
+      return null
+    }
+
     if(item.toLowerCase().startsWith(search)){
        return (<Item title={item} />)
     }
+
+
   };
 
 
   return (
+    <>
+    <TouchableOpacity
+    // key={}
+    onPress={() => (showDropdown ==='hide' ? setShowDropdown('show') : setShowDropdown('hide'))}
+    style={[
+      styles.toggle,
+    ]}
+  ><Text>show/hide</Text>
+  </TouchableOpacity>
+
     <View style={{width:'100%'}} >
 
-      <TouchableOpacity
-          // key={}
-          onPress={() => (showDropdown ==='hide' ? setShowDropdown('show') : setShowDropdown('hide'))}
-          style={[
-            styles.toggle,
-          ]}
-        ><Text>show/hide</Text>
-        </TouchableOpacity>
-
       <TextInput
+      clearButtonMode='while-editing'
         style={styles.input}
         onChangeText={setQuery}
         value={query}
@@ -65,6 +76,7 @@ const NewSearch = () => {
 }
 
     </View>
+    </>
   );
 }
 
