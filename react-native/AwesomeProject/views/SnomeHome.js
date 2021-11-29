@@ -1,64 +1,51 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, TouchableOpacity, View, FlatList, TextInput, SafeAreaView, ScrollView } from "react-native";
-import {Dimensions} from 'react-native';
-const DATA = ['first', 'fish', 'fast', 'fail', 'fat', 'fashion', 'fort', 'forty', 'forlorn'];
+import { StyleSheet, Text, TouchableOpacity, View, FlatList, TextInput, SafeAreaView, ScrollView, Dimensions } from "react-native";
+// const DATA = ['first', 'fish', 'fast', 'fail', 'fat', 'fashion', 'fort', 'forty', 'forlorn'];
 
 
-const Item = ({ title }) => (
+const Item = ({ title, setQuery, showDropdown, setShowDropdown }) => (
   <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
+    <Text
+     onPress = {()=>(
+       showDropdown ==='hide' ? setShowDropdown('show') : setShowDropdown('hide'),
+       setQuery(title))}
+     style={styles.title}
+     >{title}</Text>
   </View>
 );
 
-const NewSearch = () => {
+const NewSearch = ({locationData}) => {
 
-  const [query, setQuery] = React.useState("");
-
-  const [showDropdown, setShowDropdown] = useState("hide")
-
-
-  const filterNames = (location) => {
-  let search = query.toLowerCase().replace(/ /g,"_");
-
-
-  if(location.toLowerCase().startsWith(search)){
-      return location.name;
-      // return <Text style={{height: 40}}>{location.name}</Text>
-  }else{
-      return null;
-  }
-}
+  const [query, setQuery] = useState("");
+  const [showDropdown, setShowDropdown] = useState("show")
 
   const renderItem = ({ item }) => {
     let search = query.toLowerCase().replace(/ /g,"_");
-
     if(query === '') {
       return null
     }
-
     if(item.toLowerCase().startsWith(search)){
-       return (<Item title={item} />)
+       return (<Item title={item} setQuery={setQuery} showDropdown={showDropdown} setShowDropdown = {setShowDropdown}/>)
     }
-
-
   };
 
 
   return (
     <>
-    <TouchableOpacity
+    {/* <TouchableOpacity
     // key={}
     onPress={() => (showDropdown ==='hide' ? setShowDropdown('show') : setShowDropdown('hide'))}
     style={[
       styles.toggle,
     ]}
   ><Text>show/hide</Text>
-  </TouchableOpacity>
+  </TouchableOpacity> */}
 
     <View style={{width:'100%'}} >
 
       <TextInput
       clearButtonMode='while-editing'
+      // returnKeyType='search'
         style={styles.input}
         onChangeText={setQuery}
         value={query}
@@ -69,9 +56,10 @@ const NewSearch = () => {
 
       <FlatList
       style={{position:'absolute',top:40, width:'100%'}}
-        data={DATA}
+        data={locationData.map(location => location.name)}
         renderItem={renderItem}
         keyExtractor={item => item}
+        scrollEnabled = 'false'
       />
 }
 
@@ -137,7 +125,7 @@ const filterNames = (location) => {
       view = {toggleView}
       setView = {settoggleView}
       filterNames = {filterNames}
-
+      locationData = {data}
     >
     </Grid>
   </>
@@ -208,6 +196,7 @@ const Grid = ({
   setView,
 
   filterNames,
+  locationData
 }) => {
   // const [showDropdown, setShowDropdown] = useState("hide")
 
@@ -230,6 +219,7 @@ return (
 
       <NewSearch
         // showDropdown = {showDropdown}
+        locationData = {locationData}
       />
 
 
@@ -304,15 +294,15 @@ return (
 const styles = StyleSheet.create({
 
   item: {
-    backgroundColor: '#d3d3d3',
+    backgroundColor: 'white',
     padding: 12,
     borderBottomColor: 'black',
-    borderBottomWidth: 5
+    borderBottomWidth: 1,
     // marginVertical: 8,
     // marginHorizontal: 16,
   },
   title: {
-    fontSize: 22,
+    // fontSize: 22,
     // alignSelf:'center'
 
   },
