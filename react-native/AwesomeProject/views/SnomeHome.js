@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, FlatList, TextInput, SafeAreaView, ScrollView, Dimensions } from "react-native";
-// const DATA = ['first', 'fish', 'fast', 'fail', 'fat', 'fashion', 'fort', 'forty', 'forlorn'];
+import MapView from 'react-native-maps';
 
 
 const Item = ({ title, setQuery, showDropdown, setShowDropdown }) => (
@@ -70,7 +70,7 @@ const NewSearch = ({locationData}) => {
 
 const FeaturedLocations = () => {
   const [flexDirection, setflexDirection] = useState("column");
-  const [toggleView, settoggleView] = useState("ListView");
+  const [toggleView, settoggleView] = useState("ShowList");
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -111,6 +111,7 @@ const filterNames = (location) => {
 
   return (
     <>
+
     <Grid
     // updateQuery = {updateQuery}
     // query = {query}
@@ -120,7 +121,7 @@ const filterNames = (location) => {
       values = {data.map(location => location.name)}
       selectedValue={flexDirection}
       setSelectedValue={setflexDirection}
-      toggleOptions = {["ListView", "MapView"]}
+      toggleOptions = {["ShowList", "ShowMap"]}
 
       view = {toggleView}
       setView = {settoggleView}
@@ -132,7 +133,7 @@ const filterNames = (location) => {
   );
 };
 
-const ListView = ({
+const ShowList = ({
     label,
     values,
     selectedValue,
@@ -164,7 +165,7 @@ const ListView = ({
     </>
 )
 
-const MapView = ({
+const ShowMap = ({
   label,
   // values,
   // selectedValue,
@@ -174,12 +175,21 @@ const MapView = ({
     <>
     <Text style={styles.label}>{label}</Text>
     <View style={styles.ListMapContainer}>
-      <View style={{
+
+    <View style={{
         backgroundColor: "oldlace",
         width: "100%",
         height: "100%",
         padding: 16}}>
-      </View>
+      <MapView style={styles.map} />
+    </View>
+
+      {/* <View style={{
+        backgroundColor: "oldlace",
+        width: "100%",
+        height: "100%",
+        padding: 16}}>
+      </View> */}
     </View>
     </>
 )
@@ -251,11 +261,11 @@ return (
     </View>
 
         {/* For testing purposes */}
-        {view === 'MapView' &&
+        {view === 'ShowMap' &&
         <Text> {view} </Text>
           }
 
-        {view === 'ListView' &&
+        {view === 'ShowList' &&
         <Text> {view} </Text>
           }
 
@@ -263,21 +273,21 @@ return (
 
 
 
-  {view === 'ListView' &&
-    <ListView
+  {view === 'ShowList' &&
+    <ShowList
       label = {label}
       values = {values}
       selectedValue = {selectedValue}
       setSelectedValue = {setSelectedValue}
-    ></ListView>}
+    ></ShowList>}
 
-{view === 'MapView' &&
-    <MapView
+{view === 'ShowMap' &&
+    <ShowMap
       label = {label}
       values = {values}
       selectedValue = {selectedValue}
       setSelectedValue = {setSelectedValue}
-    ></MapView>}
+    ></ShowMap>}
 
 </View>
 
@@ -292,6 +302,18 @@ return (
 
 
 const styles = StyleSheet.create({
+  // mapcontainer: {
+  //   flex: 1,
+  //   backgroundColor: '#fff',
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  // },
+  map: {
+    width:'100%',
+    height: '100%'
+    // width: Dimensions.get('window').width,
+    // height: Dimensions.get('window').height,
+  },
 
   item: {
     backgroundColor: 'white',
