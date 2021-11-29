@@ -167,11 +167,12 @@ const ShowList = ({
 
 const ShowMap = ({
   label,
+  locationData
   // values,
   // selectedValue,
   // setSelectedValue,
   // toggleOptions
-  }) => (
+  }) => { console.log(locationData); return (
     <>
     <Text style={styles.label}>{label}</Text>
     <View style={styles.ListMapContainer}>
@@ -182,12 +183,15 @@ const ShowMap = ({
         height: "100%",
         padding: 16}}>
       <MapView style={styles.map}>
+        {locationData.map((location, index) => (
         <Marker
-          // key='3'
-          coordinate={{latitude: 39.641033, longitude: -106.3981}}
+          key={index}
+          coordinate={{latitude: location.longitude, longitude: location.latitude
+          }}
           // title='title'
           // description='description'
         />
+        ))}
       </MapView>
 
     </View>
@@ -200,7 +204,7 @@ const ShowMap = ({
       </View> */}
     </View>
     </>
-)
+)}
 
 const Grid = ({
   label,
@@ -295,6 +299,7 @@ return (
       values = {values}
       selectedValue = {selectedValue}
       setSelectedValue = {setSelectedValue}
+      locationData = {locationData}
     ></ShowMap>}
 
 </View>
