@@ -68,7 +68,7 @@ const NewSearch = ({locationData}) => {
   );
 }
 
-const FeaturedLocations = () => {
+const SnomeHome = () => {
   const [flexDirection, setflexDirection] = useState("column");
   const [toggleView, settoggleView] = useState("ShowList");
 
@@ -80,7 +80,7 @@ const FeaturedLocations = () => {
 
   const getLocations = async () => {
     try {
-     const response = await fetch('http://10.0.0.54:3000/location?featured=true');
+     const response = await fetch('http://10.0.0.54:3000/location')
      const json = await response.json();
      setData(json);
    } catch (error) {
@@ -419,6 +419,4 @@ const styles = StyleSheet.create({
 });
 
 
-
-
-export default FeaturedLocations
+export default SnomeHome
