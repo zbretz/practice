@@ -148,9 +148,6 @@ const ShowList = ({
     setSelectedValue,
     toggleOptions}) => {
 
-
-      // console.log(props);
-      // const { navigate } = props.navigation;
 const navigation = useNavigation()
 
       return (
@@ -160,7 +157,7 @@ const navigation = useNavigation()
       {values.map((value) => (
         <TouchableOpacity
           key={value}
-          onPress={() => {setSelectedValue(value); navigation.navigate('Likes')}}
+          onPress={() => {setSelectedValue(value); navigation.navigate('Likes', {'value': value})}}
           style={[
             styles.location,
             selectedValue === value && styles.selected,

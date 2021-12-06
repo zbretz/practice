@@ -40,11 +40,11 @@ const styles = {
   //  },
 };
 
-const LikesScreen = () => {
+const LikesScreen = ({navigation, route}) => {
   return (
     <ScrollView>
       {/* <Image style={styles.tinyLogo} source={require('../pics/Snome.png')} /> */}
-      <Text> Snome Likes </Text>
+      <Text> {route.params.value} </Text>
 
     </ScrollView>
   );
