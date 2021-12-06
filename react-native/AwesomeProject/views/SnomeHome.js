@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, FlatList, TextInput, SafeAreaView, ScrollView, Dimensions } from "react-native";
 import MapView, { Marker } from 'react-native-maps';
+import { useNavigation } from '@react-navigation/native';
+
 
 
 const Item = ({ title, setQuery, showDropdown, setShowDropdown }) => (
@@ -68,7 +70,7 @@ const NewSearch = ({locationData}) => {
   );
 }
 
-const SnomeHome = () => {
+const SnomeHome = (props) => {
   const [flexDirection, setflexDirection] = useState("column");
   const [toggleView, settoggleView] = useState("ShowList");
 
@@ -80,7 +82,7 @@ const SnomeHome = () => {
 
   const getLocations = async () => {
     try {
-     const response = await fetch('http://10.0.0.54:3000/location')
+     const response = await fetch('http://10.0.0.53:3000/location')
      const json = await response.json();
      setData(json);
    } catch (error) {
@@ -95,6 +97,7 @@ const SnomeHome = () => {
  }, []);
 
  console.log(data)
+ console.log(props.navigation)
 
 
 
@@ -108,6 +111,11 @@ const filterNames = (location) => {
       return null;
   }
 }
+
+// const { navigate } = props.navigation;
+// console.log(navigate.navigation)
+
+
 
   return (
     <>
@@ -138,14 +146,21 @@ const ShowList = ({
     values,
     selectedValue,
     setSelectedValue,
-    toggleOptions}) => (
+    toggleOptions}) => {
+
+
+      // console.log(props);
+      // const { navigate } = props.navigation;
+const navigation = useNavigation()
+
+      return (
   <>
   <Text style={styles.label}>{label}</Text>
     <View style={[styles.row, styles.ListMapContainer]}>
       {values.map((value) => (
         <TouchableOpacity
           key={value}
-          onPress={() => setSelectedValue(value)}
+          onPress={() => {setSelectedValue(value); navigation.navigate('Likes')}}
           style={[
             styles.location,
             selectedValue === value && styles.selected,
@@ -163,7 +178,7 @@ const ShowList = ({
       ))}
     </View>
     </>
-)
+)}
 
 const ShowMap = ({
   label,
