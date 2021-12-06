@@ -46,30 +46,6 @@ const LikesScreen = () => {
       {/* <Image style={styles.tinyLogo} source={require('../pics/Snome.png')} /> */}
       <Text> Snome Likes </Text>
 
-      {card.map((card) => (
-        <View
-          className="container"
-          id="cards"
-          key={card.id}
-          style={styles.cards}
-        >
-          <Text>{card.name}</Text>
-          {/* <Image style={styles.pic} source={require('../pics/Snome.png')} /> */}
-          <Text> {card.description}</Text>
-
-          {/* <Button href={card.deployed} target="_blank">
-                  View Snome ETC.
-                      </Button> */}
-          <Button
-            //  onPress={() =>
-            //   navigation.navigate('Match')
-            // }
-            title="  View Snome ETC."
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-          />
-        </View>
-      ))}
     </ScrollView>
   );
 };
