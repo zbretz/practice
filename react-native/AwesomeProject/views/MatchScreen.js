@@ -7,7 +7,6 @@ const MatchScreen = () => {
 
   return (
     <Grid
-      label="flexDirection"
       values={["parkcity", "aspen", "crestedbutte", "alta"]}
       selectedValue={flexDirection}
       setSelectedValue={setflexDirection}
@@ -26,14 +25,13 @@ const Grid = ({
   <View style={{ padding: 10, flex: 1 }}>
 
   {/* Top Container */}
-  <View style={[styles.topContainer, { [label]: selectedValue }]}>
+  <View style={[styles.topContainer]}>
   {children}
     <View>
       <Text style={styles.SnomeLogo}>Snome Logo</Text>
     </View>
   </View>
 
-    <Text style={styles.label}>{label}</Text>
     <View style={styles.row}>
       {values.map((value) => (
         <TouchableOpacity
@@ -55,10 +53,7 @@ const Grid = ({
         </TouchableOpacity>
       ))}
     </View>
-    <View style={[styles.container, { [label]: selectedValue }]}>
-      {children}
-      <Text>Bottom Container</Text>
-    </View>
+
   </View>
 );
 
