@@ -6,7 +6,7 @@ import { StyleSheet } from 'react-native';
 import SnomeHome from '../views/SnomeHome';
 // import TownsScreen from '../screens/TownsScreen';
 import MatchScreen from '../views/MatchScreen';
-// import MatchScreen from '../screens/MatchScreen';
+import LikesScreen from '../views/LikesScreen';
 // import MessageScreen from '../screens/MessageScreen';
 // import ProfileScreen from '../screens/ProfileScreen';
 
@@ -39,9 +39,8 @@ export const AppNavigator = () => {
       >
         <Tab.Screen name="Home" component={SnomeHome}/>
         <Tab.Screen name="Match" component={MatchScreen}/>
-        {/* <Tab.Screen name="Towns" component={TownsScreen}/>
         <Tab.Screen name="Likes" component={LikesScreen}/>
-        <Tab.Screen name="Match" component={MatchScreen}/>
+        {/* <Tab.Screen name="Towns" component={TownsScreen}/>
         <Tab.Screen name="Message" component={MessageScreen}/>
         <Tab.Screen name="Profile" component={ProfileScreen}/> */}
       </Tab.Navigator>
