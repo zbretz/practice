@@ -2,19 +2,37 @@ import React, { useState } from "react";
 import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import {Dimensions} from 'react-native';
 
-const DATA = [{location: "parkcity"}, {location: "aspen"}, {location: "crestedbutte"}, {location: "alta"}]
+const DATA = [
+  {id: 1, resort: "parkcity", header: "Gorgeous Mountain Home w/ Indoor Hot Tub", perks: "ski-in", time_to_mountain: "8 minutes", description: "Conveniently located apartment with a southern view of town, mountain peaks and the ski area. From the parking lot, you are 20 steps away from river and downtown. Ski down 4 O'Clock run and you're across the street from Studio. There is a 3 night min during ski season."},
+  {id: 2, resort: "crestedbutte", header: "Gorgeous Mountain Home w/ Indoor Hot Tub", perks: "ski-in", time_to_mountain: "8 minutes", description: "Conveniently located apartment with a southern view of town, mountain peaks and the ski area. From the parking lot, you are 20 steps away from river and downtown. Ski down 4 O'Clock run and you're across the street from Studio. There is a 3 night min during ski season."},
+  {id: 3, resort: "aspen", header: "Gorgeous Mountain Home w/ Indoor Hot Tub", perks: "ski-in", time_to_mountain: "8 minutes", description: "Conveniently located apartment with a southern view of town, mountain peaks and the ski area. From the parking lot, you are 20 steps away from river and downtown. Ski down 4 O'Clock run and you're across the street from Studio. There is a 3 night min during ski season."},
+  {id: 4, resort: "alta", header: "Gorgeous Mountain Home w/ Indoor Hot Tub", perks: "ski-in", time_to_mountain: "8 minutes", description: "Conveniently located apartment with a southern view of town, mountain peaks and the ski area. From the parking lot, you are 20 steps away from river and downtown. Ski down 4 O'Clock run and you're across the street from Studio. There is a 3 night min during ski season."}
+]
 
-const Item = ({ location }) => (
+const Item = ({location}) => (
+  <>
   <View style={styles.item}>
-    {/* <Text style={styles.location}>{location}</Text> */}
-    <Image style={styles.img} source={require('../img/snome_location_img.jpg')} />
+    <View style={styles.img_with_description}>
+      <Image style={styles.img} source={require('../img/snome_location_img.jpg')} />
+      <View>
+        <Text style={styles.location_info}>{location.resort}</Text>
+        <Text style={[styles.location_info, {width:'50%'}]}>{location.header}</Text>
+        <Text style={styles.location_info}>{location.perks}</Text>
+        <Text style={styles.location_info}>{location.time_to_mountain}</Text>
+      </View>
+    </View>
+    <View>
+      <Text style={styles.location}>{location.description}</Text>
+    </View>
   </View>
+  </>
+
 );
 
 const MatchScreen = () => {
 
-  const renderItem = ({ item }) => (
-    <Item location={item.location} />
+  const renderItem = ({item}) => (
+    <Item location={item} />
   );
 
   return (
@@ -22,7 +40,7 @@ const MatchScreen = () => {
       <FlatList
         data={DATA}
         renderItem={renderItem}
-        keyExtractor={item => item.location}
+        keyExtractor={item => item.id}
       />
     </SafeAreaView>
   );
@@ -30,7 +48,9 @@ const MatchScreen = () => {
 
 
 const styles = StyleSheet.create({
-
+  location_info: {
+    margin: 6,
+  },
   topContainer: {
     marginTop: 8,
     backgroundColor: "aliceblue",
@@ -45,15 +65,14 @@ const styles = StyleSheet.create({
     backgroundColor: "oldlace",
     marginBottom: 16,
     // width: Dimensions.get('window').width * 0.4,
-    height: Dimensions.get('window').width * 0.4,
+    // height: Dimensions.get('window').height * 0.25,
     textAlign: "center",
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
   },
-  selected: {
-    backgroundColor: "coral",
-    borderWidth: 0,
+  img_with_description: {
+    flexDirection: "row"
   },
   img: {
     width: '50%',
