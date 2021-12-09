@@ -57,12 +57,12 @@ const MatchScreen = () => {
         <>
 
         {Object.keys(context.USER_DATA).map(data => (
-
           <Text>{data}</Text>
-
         ))}
 
-
+        <Text>{context.user_id}</Text>
+        {/* <Text>{context.match}</Text>
+        <Text>{context.snome_likes}</Text> */}
         <FlatList
           data={DATA}
           renderItem={renderItem}

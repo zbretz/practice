@@ -15,7 +15,7 @@ import React from 'react';
 //   // has_liked_me?? would be cool to see. 'who has liked me?'
 // }
 
-class MyProvider extends React.Component {
+class UserProvider extends React.Component {
     state = {
         USER_DATA: {
           user_id: 4,
@@ -34,6 +34,14 @@ class MyProvider extends React.Component {
             <MyContext.Provider
                 value={{
                     USER_DATA: this.state.USER_DATA,
+                    user_id: 4,
+                    match: {
+                        user_id: 6,
+                        snome_id: [5, 4]
+                      },
+                      snome_likes: {
+                        snome_id: 3
+                      },
                 }}
             >
                 {this.props.children}
@@ -42,4 +50,4 @@ class MyProvider extends React.Component {
     }
 }
 
-export default MyProvider
+export default UserProvider

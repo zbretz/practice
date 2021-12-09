@@ -21,7 +21,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
 import { Navigation } from './navigation';
-import MyProvider from './Context/MyProvider'
+import UserProvider from './Context/UserProvider'
 
 export default function App() {
 
@@ -31,12 +31,12 @@ export default function App() {
 
   return (
     <>
-      <MyProvider>
-      <ThemeProvider theme={theme}>
-        <Navigation />
-      </ThemeProvider>
-      <StatusBar style="auto" />
-      </MyProvider>
+      <UserProvider>
+        <ThemeProvider theme={theme}>
+          <Navigation />
+        </ThemeProvider>
+        <StatusBar style="auto" />
+      </UserProvider>
     </>
   );
 }
