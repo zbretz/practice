@@ -19,10 +19,9 @@ import { NavigationContainer } from '@react-navigation/native';
 // import HomeScreen from './src/screens/TownsScreen';
 // import CreateUser from './src/components/CreateUser';
 import { ThemeProvider } from 'styled-components/native';
-
 import { theme } from './theme';
-
 import { Navigation } from './navigation';
+import MyProvider from './Context/MyProvider'
 
 export default function App() {
 
@@ -32,10 +31,12 @@ export default function App() {
 
   return (
     <>
+      <MyProvider>
       <ThemeProvider theme={theme}>
         <Navigation />
       </ThemeProvider>
       <StatusBar style="auto" />
+      </MyProvider>
     </>
   );
 }
