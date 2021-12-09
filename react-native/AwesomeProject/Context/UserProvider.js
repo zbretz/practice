@@ -34,7 +34,7 @@ class UserProvider extends React.Component {
             <MyContext.Provider
                 value={{
                     USER_DATA: this.state.USER_DATA,
-                    user_id: 4,
+                    user_id: 6,
                     match: {
                         user_id: 6,
                         snome_id: [5, 4]

@@ -56,13 +56,13 @@ const MatchScreen = () => {
       {context => (
         <>
 
-        {Object.keys(context.USER_DATA).map(data => (
+        {/* {Object.keys(context.USER_DATA).map(data => (
           <Text>{data}</Text>
-        ))}
+        ))} */}
 
-        <Text>{context.user_id}</Text>
-        {/* <Text>{context.match}</Text>
-        <Text>{context.snome_likes}</Text> */}
+        <Text>'this' user id: {context.user_id}</Text>
+        <Text>snome_ids (of matches): {context.match.snome_id}</Text>
+        {/* <Text>{context.snome_likes.snome_id}</Text> */}
         <FlatList
           data={DATA}
           renderItem={renderItem}
