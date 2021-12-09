@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, ScrollView } from "react-native";
 import {Dimensions} from 'react-native';
 
 const LikesScreen = () => {
@@ -12,6 +12,21 @@ const LikesScreen = () => {
       setSelectedValue={setflexDirection}
     >
     </Grid>
+//     <>
+//     <ScrollView>
+//     <View style={{height:300, backgroundColor:'black', marginBottom:20}}>
+
+//     </View>
+//         <View style={{height:300, backgroundColor:'black', marginBottom:20}}>
+
+//         </View>
+
+//             </ScrollView>
+//             <View style={{height:300, backgroundColor:'black', marginBottom:20}}>
+
+// </View>
+//             </>
+
   );
 };
 
