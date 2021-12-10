@@ -29,23 +29,28 @@ const messages = [
   {id:10,recipient:1,sender:6,time:'1999-01-08 4:14:06',message_text:"see you soon!",has_been_read:false}
 ]
 
-const MessageCard = ({message, selectedUser, setSelectedUser}) => {
+const MessageCard = ({message, selectedUser, setSelectedUser, selectedRecipient, setSelectedRecipient}) => {
 
   // <View style={[styles.card, message.sender === 6 && styles.this_user, (message.sender !==6 && message.sender === selectedUser) && styles.selectedUser]}
   // >
 
   return (
     <>
-    <TouchableOpacity onPress={()=>setSelectedUser(message.sender)}>
+    <TouchableOpacity onPress={()=>  {return (
+      setSelectedUser(message.sender),
+      setSelectedRecipient(message.recipient))}
+      }>
       <View style={[
         styles.card,
         message.sender === 6 && styles.this_user,
-        (message.sender !==6 && message.sender === selectedUser) && styles.selectedUser,
-        (message.sender ===6 && message.recipient === selectedUser) && styles.selectedConvo,
+        (message.sender !== 6 && message.sender === selectedUser) && styles.selectedUser,
+        (message.sender === 6 && message.recipient === selectedUser) && styles.selectedConvo,
+        (selectedUser === 6 && message.sender === selectedRecipient) && styles.selectedUser,
+        (selectedUser === 6 && message.recipient === selectedRecipient) && styles.selectedConvo,
       ]}
       >
-        {/* <Text>{selectedUser}</Text> */}
-        <Text>username: {message.sender}</Text>
+        <Text>message_sender: {message.sender}</Text>
+        <Text>messgae_recipient: {message.recipient}</Text>
         <Text>{message.time}</Text>
         <Text>{message.message_text}</Text>
       </View>
@@ -76,11 +81,13 @@ const styles = {
 const MessageScreen = () => {
 
   const [selectedUser, setSelectedUser] = useState("");
+  const [selectedRecipient, setSelectedRecipient] = useState("");
+
   // const [showDropdown, setShowDropdown] = useState("show")
 
   const renderItem = ({item}) => {
     // console.log(item)
-    return <MessageCard message={item} selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
+    return <MessageCard message={item} selectedUser={selectedUser} setSelectedUser={setSelectedUser} selectedRecipient = {selectedRecipient} setSelectedRecipient={setSelectedRecipient}/>
   }
 
   return (
