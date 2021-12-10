@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text, TextInput, StyleSheet, SafeAreaView, SectionList, ScrollView, ListView, FlatList} from 'react-native';
+import React, { useState, useEffect } from "react";
+import {View, Text, TextInput, StyleSheet, SafeAreaView, SectionList, ScrollView, ListView, FlatList, TouchableOpacity} from 'react-native';
 
 //Plan:
 
@@ -29,13 +29,19 @@ const messages = [
   {id:10,recipient:1,sender:6,time:'1999-01-08 4:14:06',message_text:"see you soon!",has_been_read:false}
 ]
 
-const MessageCard = ({message}) => {
+const MessageCard = ({message, selectedUser, setSelectedUser}) => {
+
   return (
     <>
-    <View style={[styles.card, message.sender === 6 && styles.this_user]}>
-      <Text>{message.recipient}</Text>
-      <Text>{message.message_text}</Text>
-    </View>
+    <TouchableOpacity onPress={()=>setSelectedUser(message.sender)}>
+      <View style={[styles.card, message.sender === 6 && styles.this_user, message.sender === selectedUser && styles.selectedUser]}
+      >
+        {/* <Text>{selectedUser}</Text> */}
+        <Text>username: {message.sender}</Text>
+        <Text>{message.time}</Text>
+        <Text>{message.message_text}</Text>
+      </View>
+    </TouchableOpacity>
     </>
   )
 }
@@ -50,14 +56,20 @@ const styles = {
     margin:4,
     borderWidth: 2,
     borderColor: '#ff4500'
+  },
+  selectedUser: {
+    backgroundColor: '#ffbaa1'
   }
 };
 
 const MessageScreen = () => {
 
+  const [selectedUser, setSelectedUser] = useState("");
+  // const [showDropdown, setShowDropdown] = useState("show")
+
   const renderItem = ({item}) => {
     // console.log(item)
-    return <MessageCard message = {item}/>
+    return <MessageCard message={item} selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
   }
 
   return (
