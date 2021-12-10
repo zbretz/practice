@@ -31,10 +31,18 @@ const messages = [
 
 const MessageCard = ({message, selectedUser, setSelectedUser}) => {
 
+  // <View style={[styles.card, message.sender === 6 && styles.this_user, (message.sender !==6 && message.sender === selectedUser) && styles.selectedUser]}
+  // >
+
   return (
     <>
     <TouchableOpacity onPress={()=>setSelectedUser(message.sender)}>
-      <View style={[styles.card, message.sender === 6 && styles.this_user, message.sender === selectedUser && styles.selectedUser]}
+      <View style={[
+        styles.card,
+        message.sender === 6 && styles.this_user,
+        (message.sender !==6 && message.sender === selectedUser) && styles.selectedUser,
+        (message.sender ===6 && message.recipient === selectedUser) && styles.selectedConvo,
+      ]}
       >
         {/* <Text>{selectedUser}</Text> */}
         <Text>username: {message.sender}</Text>
@@ -59,6 +67,9 @@ const styles = {
   },
   selectedUser: {
     backgroundColor: '#ffbaa1'
+  },
+  selectedConvo: {
+    backgroundColor: '#96cbff'
   }
 };
 
