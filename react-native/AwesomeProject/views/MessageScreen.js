@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {View, Text, TextInput, StyleSheet, SafeAreaView, SectionList, ScrollView, ListView, FlatList, TouchableOpacity} from 'react-native';
+import {View, Text, TextInput, StyleSheet, SafeAreaView, SectionList, ScrollView, ListView, FlatList, TouchableOpacity, Keyboard} from 'react-native';
 
 //Plan:
 
@@ -17,21 +17,21 @@ import {View, Text, TextInput, StyleSheet, SafeAreaView, SectionList, ScrollView
 const messages = [
   {
     id:1,
-    recipient:1,
+    recipient:6,
     sender:4,
     time:'1999-01-08 4:05:06',
     message_text:"your place is so cool!",
     has_been_read: true
   },
   {id:2,recipient:6,sender:1,time:'1999-01-08 4:06:06',message_text:"you're gonna love it",has_been_read:true},
-  {id:3,recipient:1,sender:6,time:'1999-01-08 4:07:06',message_text:"when do you want to come?",has_been_read:true},
-  {id:4,recipient:6,sender:7,time:'1999-01-08 4:08:06',message_text:"i'll recommend some bars",has_been_read:true},
-  {id:5,recipient:7,sender:6,time:'1999-01-08 4:09:06',message_text:"can you recommend some restaurants?",has_been_read:true},
-  {id:6,recipient:6,sender:1,time:'1999-01-08 4:10:06',message_text:"are you really close to the mountain?",has_been_read:true},
-  {id:7,recipient:5,sender:6,time:'1999-01-08 4:11:06',message_text:"let's connect soon",has_been_read:true},
-  {id:8,recipient:6,sender:5,time:'1999-01-08 4:12:06',message_text:"can I extend my stay?",has_been_read:false},
-  {id:9,recipient:5,sender:6,time:'1999-01-08 4:13:06',message_text:"have you been in town before?",has_been_read:false},
-  {id:10,recipient:1,sender:6,time:'1999-01-08 4:14:06',message_text:"see you soon!",has_been_read:false}
+  // {id:3,recipient:1,sender:6,time:'1999-01-08 4:07:06',message_text:"when do you want to come?",has_been_read:true},
+  // {id:4,recipient:6,sender:7,time:'1999-01-08 4:08:06',message_text:"i'll recommend some bars",has_been_read:true},
+  // {id:5,recipient:7,sender:6,time:'1999-01-08 4:09:06',message_text:"can you recommend some restaurants?",has_been_read:true},
+  // {id:6,recipient:6,sender:1,time:'1999-01-08 4:10:06',message_text:"are you really close to the mountain?",has_been_read:true},
+  // {id:7,recipient:5,sender:6,time:'1999-01-08 4:11:06',message_text:"let's connect soon",has_been_read:true},
+  // {id:8,recipient:6,sender:5,time:'1999-01-08 4:12:06',message_text:"can I extend my stay?",has_been_read:false},
+  // {id:9,recipient:5,sender:6,time:'1999-01-08 4:13:06',message_text:"have you been in town before?",has_been_read:false},
+  // {id:10,recipient:1,sender:6,time:'1999-01-08 4:14:06',message_text:"see you soon!",has_been_read:false}
 ]
 
 const MessageCard = ({message, selectedUser, setSelectedUser, selectedRecipient, setSelectedRecipient, findOtherUser, otherUser}) => {
@@ -103,6 +103,8 @@ const MessageScreen = () => {
   const [selectedUser, setSelectedUser] = useState("");
   const [selectedRecipient, setSelectedRecipient] = useState("");
   const [otherUser, setOtherUser] = useState("")
+  const [messages2, setMessages2] = useState(messages)
+  const [newMessage, setNewMessage] = useState("")
 
   const findOtherUser = (sender, recipient) => {
     setSelectedUser(sender)
@@ -110,24 +112,59 @@ const MessageScreen = () => {
     setOtherUser(sender === 6 ? recipient : sender)
   }
 
-  // const [showDropdown, setShowDropdown] = useState("show")
-
   const renderItem = ({item}) => {
-    // console.log(item)
     return <MessageCard message={item} selectedUser={selectedUser} setSelectedUser={setSelectedUser} selectedRecipient = {selectedRecipient} setSelectedRecipient={setSelectedRecipient} findOtherUser={findOtherUser} otherUser={otherUser}/>
+  }
+
+  const createMessage = () => {
+
+    console.log('ghghghg')
+    let thing = messages2.slice()
+    thing.push(
+      {
+        id:10,
+        recipient:1,
+        sender:6,
+        time:'1999-01-08 4:14:06',
+        message_text:newMessage,
+        has_been_read:false
+      }
+    )
+    // messages2.push(
+    //   {
+    //     id:10,
+    //     recipient:1,
+    //     sender:6,
+    //     time:'1999-01-08 4:14:06',
+    //     message_text:newMessage,
+    //     has_been_read:false
+    //   }
+    // )
+    // setMessages2(messages2)
+    setMessages2(thing)
+    setNewMessage("")
+    console.log(newMessage)
+    Keyboard.dismiss()
   }
 
   return (
     <>
+ <Text>{newMessage}</Text>
     <FlatList
-      data={messages}
+      data={messages2}
       renderItem={renderItem}
-      keyExtractor={item => item.id}
+      keyExtractor={item => item.message_text}
+      extraData={messages2}
     />
     <View>
       <TextInput
-        value={'dfdfd jhg khkhj lkh fdfdfd'}
+        // these two lines screwed up setNewMesssage. be careful using them!
+        // multiline
+        // numberOfLines={4}
+        value={newMessage}
+        onChangeText={setNewMessage}
         style={styles.input}
+        onSubmitEditing = {()=>createMessage()}
         />
     </View>
     </>
