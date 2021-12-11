@@ -9,6 +9,11 @@ import {View, Text, TextInput, StyleSheet, SafeAreaView, SectionList, ScrollView
 // -special message for match? (like a confirm match thing?)
 // -clicking message expands it in-place
 
+
+// Next Steps:
+// - Expand message to display more text
+// - select message thread -> input text -> appear message
+
 const messages = [
   {
     id:1,
@@ -29,16 +34,20 @@ const messages = [
   {id:10,recipient:1,sender:6,time:'1999-01-08 4:14:06',message_text:"see you soon!",has_been_read:false}
 ]
 
-const MessageCard = ({message, selectedUser, setSelectedUser, selectedRecipient, setSelectedRecipient}) => {
+const MessageCard = ({message, selectedUser, setSelectedUser, selectedRecipient, setSelectedRecipient, findOtherUser, otherUser}) => {
 
   // <View style={[styles.card, message.sender === 6 && styles.this_user, (message.sender !==6 && message.sender === selectedUser) && styles.selectedUser]}
   // >
 
   return (
     <>
-    <TouchableOpacity onPress={()=>  {return (
-      setSelectedUser(message.sender),
-      setSelectedRecipient(message.recipient))}
+    <TouchableOpacity onPress={()=>  {
+      return (
+      findOtherUser(message.sender, message.recipient)
+      // setSelectedUser(message.sender),
+      // setSelectedRecipient(message.recipient)
+      )
+    }
       }>
       <View style={[
         styles.card,
@@ -49,6 +58,9 @@ const MessageCard = ({message, selectedUser, setSelectedUser, selectedRecipient,
         (selectedUser === 6 && message.recipient === selectedRecipient) && styles.selectedConvo,
       ]}
       >
+        {/* <Text>{selectedRecipient}</Text>
+        <Text>{selectedUser}</Text> */}
+        <Text>{otherUser}</Text>
         <Text>message_sender: {message.sender}</Text>
         <Text>messgae_recipient: {message.recipient}</Text>
         <Text>{message.time}</Text>
@@ -75,6 +87,14 @@ const styles = {
   },
   selectedConvo: {
     backgroundColor: '#96cbff'
+  },
+  input: {
+    height: 60,
+    lineHeight:20,
+    borderWidth: 2,
+    borderColor: '#e1861b',
+    padding: 10,
+    backgroundColor: "white",
   }
 };
 
@@ -82,20 +102,35 @@ const MessageScreen = () => {
 
   const [selectedUser, setSelectedUser] = useState("");
   const [selectedRecipient, setSelectedRecipient] = useState("");
+  const [otherUser, setOtherUser] = useState("")
+
+  const findOtherUser = (sender, recipient) => {
+    setSelectedUser(sender)
+    setSelectedRecipient(recipient)
+    setOtherUser(sender === 6 ? recipient : sender)
+  }
 
   // const [showDropdown, setShowDropdown] = useState("show")
 
   const renderItem = ({item}) => {
     // console.log(item)
-    return <MessageCard message={item} selectedUser={selectedUser} setSelectedUser={setSelectedUser} selectedRecipient = {selectedRecipient} setSelectedRecipient={setSelectedRecipient}/>
+    return <MessageCard message={item} selectedUser={selectedUser} setSelectedUser={setSelectedUser} selectedRecipient = {selectedRecipient} setSelectedRecipient={setSelectedRecipient} findOtherUser={findOtherUser} otherUser={otherUser}/>
   }
 
   return (
+    <>
     <FlatList
       data={messages}
       renderItem={renderItem}
       keyExtractor={item => item.id}
     />
+    <View>
+      <TextInput
+        value={'dfdfd jhg khkhj lkh fdfdfd'}
+        style={styles.input}
+        />
+    </View>
+    </>
   );
 };
 
