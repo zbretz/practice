@@ -37,10 +37,10 @@ export const AppNavigator = () => {
       <Tab.Navigator
         screenOptions={createScreenOptions}
       >
+        <Tab.Screen name="Likes" component={LikesScreen}/>
         <Tab.Screen name="Message" component={MessageScreen}/>
         <Tab.Screen name="Match" component={MatchScreen}/>
         <Tab.Screen name="Home" component={SnomeHome}/>
-        <Tab.Screen name="Likes" component={LikesScreen}/>
         {/* <Tab.Screen name="Towns" component={TownsScreen}/>
         <Tab.Screen name="Message" component={MessageScreen}/>
         <Tab.Screen name="Profile" component={ProfileScreen}/> */}

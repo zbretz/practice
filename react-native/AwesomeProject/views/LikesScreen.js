@@ -6,12 +6,14 @@ const LikesScreen = () => {
   const [flexDirection, setflexDirection] = useState("column");
 
   return (
+    <ScrollView>
     <Grid
-      values={["parkcity", "aspen", "crestedbutte", "alta"]}
+      values={["parkcity", "aspen", "crestedbutte", "alta", "vail", "telluride"]}
       selectedValue={flexDirection}
       setSelectedValue={setflexDirection}
     >
     </Grid>
+    </ScrollView>
 //     <>
 //     <ScrollView>
 //     <View style={{height:300, backgroundColor:'black', marginBottom:20}}>
@@ -39,14 +41,6 @@ const Grid = ({
 }) => (
   <View style={{ padding: 10, flex: 1 }}>
 
-  {/* Top Container */}
-  <View style={[styles.topContainer]}>
-  {children}
-    <View>
-      <Text style={styles.SnomeLogo}>Snome Logo</Text>
-    </View>
-  </View>
-
     <View style={styles.row}>
       {values.map((value) => (
         <TouchableOpacity
@@ -54,17 +48,20 @@ const Grid = ({
           onPress={() => setSelectedValue(value)}
           style={[
             styles.location,
-            selectedValue === value && styles.selected,
           ]}
         >
+          <>
           <Text
-            style={[
-              styles.buttonLabel,
-              selectedValue === value && styles.selectedLabel,
-            ]}
+            style={{height: '80%',}}
           >
             {value}
           </Text>
+          <View>
+            <Text style={{height: '20%', backgroundColor:'gray'}}>
+              description etc
+            </Text>
+          </View>
+          </>
         </TouchableOpacity>
       ))}
     </View>
@@ -73,63 +70,24 @@ const Grid = ({
 );
 
 const styles = StyleSheet.create({
-  SnomeLogo: {
-    padding:18,
-    backgroundColor: "powderblue",
-    alignSelf: 'flex-start',
-    marginLeft: 20,
-    marginTop: 20,
-    marginBottom: 60,
-  },
-  topContainer: {
-    // flex: 1,
-    marginTop: 8,
-    backgroundColor: "aliceblue",
-  },
+
   container: {
     flex: 1,
     marginTop: 8,
     backgroundColor: "aliceblue",
   },
-  box: {
-    width: 50,
-    height: 50,
-  },
   row: {
-    // flex:1,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-evenly",
   },
   location: {
-    // paddingHorizontal: 8,
-    // paddingVertical: 6,
-    // flex: 1,
     borderRadius: 4,
     backgroundColor: "oldlace",
-    // alignSelf: "flex-start",
-    // marginHorizontal: "1%",
     marginBottom: 16,
-    width: Dimensions.get('window').width * 0.4,
-    height: Dimensions.get('window').width * 0.4,
+    width: 150,//Dimensions.get('window').width * 0.4,
+    height: 150, //Dimensions.get('window').width * 0.2,
     textAlign: "center",
-  },
-  selected: {
-    backgroundColor: "coral",
-    borderWidth: 0,
-  },
-  buttonLabel: {
-    fontSize: 12,
-    fontWeight: "500",
-    color: "coral",
-  },
-  selectedLabel: {
-    color: "white",
-  },
-  label: {
-    textAlign: "center",
-    marginBottom: 10,
-    fontSize: 24,
   },
 });
 

@@ -64,7 +64,7 @@ const MessageCard = ({message, selectedUser, setSelectedUser, selectedRecipient,
           <Text>{selectedUser}</Text> */}
           <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{otherUser}</Text>
           <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{otherUser}message_sender: {message.sender}</Text>
-          <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{otherUser}messgae_recipient: {message.recipient}</Text>
+          <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{otherUser}messgae_recipient: {message.resscipient}</Text>
           <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{otherUser}{message.time}</Text>
           <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{otherUser}{message.message_text}</Text>
         </View>
