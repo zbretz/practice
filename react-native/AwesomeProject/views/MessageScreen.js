@@ -42,7 +42,7 @@ const MessageCard = ({message, selectedUser, setSelectedUser, selectedRecipient,
 
   return (
     <>
-    <TouchableOpacity onPress={()=>  {
+    <TouchableOpacity style={{flex: 1, flexDirection: 'row'}} onPress={()=>  {
       return (
       findOtherUser(message.sender, message.recipient)
       // setSelectedUser(message.sender),
@@ -56,16 +56,18 @@ const MessageCard = ({message, selectedUser, setSelectedUser, selectedRecipient,
         (message.sender !== 6 && message.sender === selectedUser) && styles.selectedUser,
         (message.sender === 6 && message.recipient === selectedUser) && styles.selectedConvo,
         (selectedUser === 6 && message.sender === selectedRecipient) && styles.selectedUser,
-        (selectedUser === 6 && message.recipient === selectedRecipient) && styles.selectedConvo,
+        (selectedUser === 6 && message.recipient === selectedRecipient) && styles.selectedConvo, {flex:1}
       ]}
       >
-        {/* <Text>{selectedRecipient}</Text>
-        <Text>{selectedUser}</Text> */}
-        <Text>{otherUser}</Text>
-        <Text>message_sender: {message.sender}</Text>
-        <Text>messgae_recipient: {message.recipient}</Text>
-        <Text>{message.time}</Text>
-        <Text>{message.message_text}</Text>
+        <View >
+          {/* <Text>{selectedRecipient}</Text>
+          <Text>{selectedUser}</Text> */}
+          <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{otherUser}</Text>
+          <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{otherUser}message_sender: {message.sender}</Text>
+          <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{otherUser}messgae_recipient: {message.recipient}</Text>
+          <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{otherUser}{message.time}</Text>
+          <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{otherUser}{message.message_text}</Text>
+        </View>
       </View>
     </TouchableOpacity>
     </>
@@ -77,18 +79,27 @@ const styles = {
   this_user: {
     borderColor: '#1e90ff',
     textAlign: 'right',
+    // alignSelf: 'flex-end',
+    // paddingLeft: 50,
+    // width: '100%',
+    flex:1
 
   },
   card: {
     margin:4,
     borderWidth: 2,
-    borderColor: '#ff4500'
+    borderColor: '#ff4500',
+    flex: 1
+    // width:'100%'
   },
   selectedUser: {
     backgroundColor: '#ffbaa1'
   },
   selectedConvo: {
     backgroundColor: '#96cbff'
+  },
+  selectedConvoText: {
+    textAlign: 'right'
   },
   input: {
     height: 60,
@@ -97,8 +108,7 @@ const styles = {
     borderColor: '#e1861b',
     padding: 10,
     backgroundColor: "white",
-    display:'hide'
-  }
+  },
 };
 
 const MessageScreen = () => {
@@ -116,7 +126,7 @@ const MessageScreen = () => {
   }
 
   const renderItem = ({item}) => {
-    return <MessageCard message={item} selectedUser={selectedUser} setSelectedUser={setSelectedUser} selectedRecipient = {selectedRecipient} setSelectedRecipient={setSelectedRecipient} findOtherUser={findOtherUser} otherUser={otherUser}/>
+    return <MessageCard style={{flex: 1, flexDirection: 'row-reverse',}} message={item} selectedUser={selectedUser} setSelectedUser={setSelectedUser} selectedRecipient = {selectedRecipient} setSelectedRecipient={setSelectedRecipient} findOtherUser={findOtherUser} otherUser={otherUser}/>
   }
 
   const createMessage = () => {
@@ -160,7 +170,7 @@ const MessageScreen = () => {
       keyExtractor={item => item.message_text}
       extraData={messages2}
     />
-    {otherUser &&
+    {otherUser !== "" &&
     <View>
       <TextInput
         // these two lines screwed up setNewMesssage. be careful using them!
