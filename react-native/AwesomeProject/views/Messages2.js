@@ -35,38 +35,24 @@ const messages = [
   {id:10,recipient:1,sender:6,time:'1999-01-08 4:14:06',message_text:"see you soon!",has_been_read:false}
 ]
 
-const MessageCard = ({message, selectedUser, setSelectedUser, selectedRecipient, setSelectedRecipient, findOtherUser, otherUser}) => {
+const MessageCard = ({message}) => {
 
-  // <View style={[styles.card, message.sender === 6 && styles.this_user, (message.sender !==6 && message.sender === selectedUser) && styles.selectedUser]}
-  // >
 
   return (
     <>
     <TouchableOpacity style={{flex: 1, flexDirection: 'row'}} onPress={()=>  {
       return (
-      findOtherUser(message.sender, message.recipient)
-      // setSelectedUser(message.sender),
-      // setSelectedRecipient(message.recipient)
+        null
       )
     }
       }>
-      <View style={[
-        styles.card,
-        message.sender === 6 && styles.this_user,
-        (message.sender !== 6 && message.sender === selectedUser) && styles.selectedUser,
-        (message.sender === 6 && message.recipient === selectedUser) && styles.selectedConvo,
-        (selectedUser === 6 && message.sender === selectedRecipient) && styles.selectedUser,
-        (selectedUser === 6 && message.recipient === selectedRecipient) && styles.selectedConvo, {flex:1}
-      ]}
+      <View style={[styles.card, message.sender === 6 && styles.selectedConvo]}
       >
         <View >
-          {/* <Text>{selectedRecipient}</Text>
-          <Text>{selectedUser}</Text> */}
-          <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{otherUser}</Text>
-          <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{otherUser}message_sender: {message.sender}</Text>
-          <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{otherUser}messgae_recipient: {message.resscipient}</Text>
-          <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{otherUser}{message.time}</Text>
-          <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{otherUser}{message.message_text}</Text>
+          <Text style= {[message.sender === 6 && styles.selectedConvoText]}>message_sender: {message.sender}</Text>
+          <Text style= {[message.sender === 6 && styles.selectedConvoText]}>messgae_recipient: {message.resscipient}</Text>
+          <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{message.time}</Text>
+          <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{message.message_text}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -88,7 +74,7 @@ const styles = {
   card: {
     margin:4,
     borderWidth: 2,
-    borderColor: '#ff4500',
+    // borderColor: '#ff4500',
     flex: 1
     // width:'100%'
   },
@@ -96,10 +82,12 @@ const styles = {
     backgroundColor: '#ffbaa1'
   },
   selectedConvo: {
-    backgroundColor: '#96cbff'
+    // backgroundColor: '#96cbff',
+    borderColor: '#96cbff',
+    borderWidth: 2
   },
   selectedConvoText: {
-    textAlign: 'right'
+    textAlign: 'right',
   },
   input: {
     height: 60,
@@ -113,76 +101,42 @@ const styles = {
 
 const MessageScreen = () => {
 
-  const [selectedUser, setSelectedUser] = useState("");
-  const [selectedRecipient, setSelectedRecipient] = useState("");
-  const [otherUser, setOtherUser] = useState("")
   const [messages2, setMessages2] = useState(messages)
-  const [newMessage, setNewMessage] = useState("")
+  const [messageQueue, setMessageQueue] = useState([])
 
-  const findOtherUser = (sender, recipient) => {
-    setSelectedUser(sender)
-    setSelectedRecipient(recipient)
-    setOtherUser(sender === 6 ? recipient : sender)
+  const sortMessagesByOtherUser = (messages) => {
+    const recentByOtherUser = {}
+    const message_queue = []
+    messages.reverse()
+    messages.forEach(msg => {
+      let other = msg.recipient === 6 ? msg.sender : msg.recipient
+      if (!recentByOtherUser.hasOwnProperty(other)){
+        recentByOtherUser[other] = msg
+        message_queue.push(msg)
+      }
+    })
+    // return message_queue
+    setMessageQueue(message_queue)
   }
+
+  useEffect(()=>{
+    sortMessagesByOtherUser(messages)
+  }, [])
 
   const renderItem = ({item}) => {
-    return <MessageCard style={{flex: 1, flexDirection: 'row-reverse',}} message={item} selectedUser={selectedUser} setSelectedUser={setSelectedUser} selectedRecipient = {selectedRecipient} setSelectedRecipient={setSelectedRecipient} findOtherUser={findOtherUser} otherUser={otherUser}/>
-  }
+    return <MessageCard style={{flex: 1, flexDirection: 'row-reverse',}} message={item}
 
-  const createMessage = () => {
-
-    console.log('ghghghg')
-    // let thing = messages2.slice()
-    messages2.unshift(
-      {
-        id:10,
-        recipient:otherUser,
-        sender:6,
-        time:'1999-01-08 4:14:06',
-        message_text:newMessage,
-        has_been_read:false
-      }
-    )
-    // messages2.push(
-    //   {
-    //     id:10,
-    //     recipient:1,
-    //     sender:6,
-    //     time:'1999-01-08 4:14:06',
-    //     message_text:newMessage,
-    //     has_been_read:false
-    //   }
-    // )
-    // setMessages2(messages2)
-    setMessages2(messages2)
-    setNewMessage("")
-    console.log(newMessage)
-    Keyboard.dismiss()
+    />
   }
 
   return (
     <>
-    <Text style={{height:40, borderWidth:2, borderColor:'gold'}}>{otherUser}</Text>
-    <Text>{newMessage}</Text>
     <FlatList
-      data={messages2}
+      data={messageQueue}
       renderItem={renderItem}
       keyExtractor={item => item.message_text}
-      extraData={messages2}
     />
-    {otherUser !== "" &&
-    <View>
-      <TextInput
-        // these two lines screwed up setNewMesssage. be careful using them!
-        // multiline
-        // numberOfLines={4}
-        value={newMessage}
-        onChangeText={setNewMessage}
-        style={styles.input}
-        onSubmitEditing = {()=>createMessage()}
-        />
-    </View>
-    }
+
     </>
   );
 };
