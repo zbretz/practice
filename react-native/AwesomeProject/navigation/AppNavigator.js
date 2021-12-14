@@ -8,6 +8,8 @@ import SnomeHome from '../views/SnomeHome';
 import MatchScreen from '../views/MatchScreen';
 import LikesScreen from '../views/LikesScreen';
 import MessageScreen from '../views/MessageScreen';
+import Messages2 from '../views/Messages2';
+
 // import ProfileScreen from '../screens/ProfileScreen';
 
 const TAB_ICON = {
@@ -37,6 +39,7 @@ export const AppNavigator = () => {
       <Tab.Navigator
         screenOptions={createScreenOptions}
       >
+        <Tab.Screen name="Messages2" component={Messages2}/>
         <Tab.Screen name="Likes" component={LikesScreen}/>
         <Tab.Screen name="Message" component={MessageScreen}/>
         <Tab.Screen name="Match" component={MatchScreen}/>
