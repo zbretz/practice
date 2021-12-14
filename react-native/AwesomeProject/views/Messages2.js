@@ -35,28 +35,29 @@ const messages = [
   {id:10,recipient:1,sender:6,time:'1999-01-08 4:14:06',message_text:"see you soon!",has_been_read:false}
 ]
 
-const MessageCard = ({message}) => {
+const MessageCard = ({message, setShowThread}) => {
 
 
   return (
     <>
-    <TouchableOpacity style={{flex: 1, flexDirection: 'row'}} onPress={()=>  {
-      return (
-        null
-      )
-    }
-      }>
+    {/* {!showThread && */}
+
+    <TouchableOpacity style={{flex: 1, flexDirection: 'row'}} onPress={()=> setShowThread(message.sender === 6 ? message.recipient : message.sender)}>
       <View style={[styles.card, message.sender === 6 && styles.selectedConvo]}
       >
         <View >
           <Text style= {[message.sender === 6 && styles.selectedConvoText]}>message_sender: {message.sender}</Text>
-          <Text style= {[message.sender === 6 && styles.selectedConvoText]}>messgae_recipient: {message.resscipient}</Text>
+          <Text style= {[message.sender === 6 && styles.selectedConvoText]}>messgae_recipient: {message.recipient}</Text>
           <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{message.time}</Text>
           <Text style= {[message.sender === 6 && styles.selectedConvoText]}>{message.message_text}</Text>
         </View>
       </View>
     </TouchableOpacity>
+    {/* } */}
     </>
+
+
+
   )
 }
 
@@ -103,6 +104,8 @@ const MessageScreen = () => {
 
   const [messages2, setMessages2] = useState(messages)
   const [messageQueue, setMessageQueue] = useState([])
+  const [showThread, setShowThread] = useState(false)
+  // const [otherUser, setOtherUser] = use
 
   const sortMessagesByOtherUser = (messages) => {
     const recentByOtherUser = {}
@@ -124,18 +127,28 @@ const MessageScreen = () => {
   }, [])
 
   const renderItem = ({item}) => {
-    return <MessageCard style={{flex: 1, flexDirection: 'row-reverse',}} message={item}
+    return <MessageCard style={{flex: 1, flexDirection: 'row-reverse',}} message={item} setShowThread = {setShowThread}
 
     />
   }
 
   return (
     <>
-    <FlatList
-      data={messageQueue}
-      renderItem={renderItem}
-      keyExtractor={item => item.message_text}
-    />
+    {!showThread &&
+      <FlatList
+        data={messageQueue}
+        renderItem={renderItem}
+        keyExtractor={item => item.message_text}
+      />
+    }
+
+    {showThread &&
+      <FlatList
+        data={messages2.filter(msg => msg.sender === showThread || msg.recipient === showThread)}
+        renderItem={renderItem}
+        keyExtractor={item => item.message_text}
+      />
+    }
 
     </>
   );
