@@ -98,6 +98,14 @@ const styles = {
     padding: 10,
     backgroundColor: "white",
   },
+  backButton: {
+    backgroundColor: "white",
+    padding: 6,
+    height: 50,
+    width: '100%',
+    color: 'red',
+    textAlign: 'center'
+  }
 };
 
 const MessageScreen = () => {
@@ -134,20 +142,28 @@ const MessageScreen = () => {
 
   return (
     <>
+
     {!showThread &&
+    <>
       <FlatList
         data={messageQueue}
         renderItem={renderItem}
         keyExtractor={item => item.message_text}
       />
+      </>
     }
 
     {showThread &&
+    <>
+      <TouchableOpacity  style={styles.backButton}>
+        <Text onPress={()=>setShowThread(false)}>Back to Msssages</Text>
+      </TouchableOpacity>
       <FlatList
         data={messages2.filter(msg => msg.sender === showThread || msg.recipient === showThread)}
         renderItem={renderItem}
         keyExtractor={item => item.message_text}
       />
+    </>
     }
 
     </>
