@@ -66,24 +66,18 @@ const styles = {
   this_user: {
     borderColor: '#1e90ff',
     textAlign: 'right',
-    // alignSelf: 'flex-end',
-    // paddingLeft: 50,
-    // width: '100%',
     flex:1
 
   },
   card: {
     margin:4,
     borderWidth: 2,
-    // borderColor: '#ff4500',
     flex: 1
-    // width:'100%'
   },
   selectedUser: {
     backgroundColor: '#ffbaa1'
   },
   selectedConvo: {
-    // backgroundColor: '#96cbff',
     borderColor: '#96cbff',
     borderWidth: 2
   },
@@ -98,12 +92,12 @@ const styles = {
     padding: 10,
     backgroundColor: "white",
   },
-  backButton: {
+  headerButton: {
     backgroundColor: "white",
     padding: 6,
     height: 50,
     width: '100%',
-    color: 'red',
+    // color: 'red',
     textAlign: 'center'
   }
 };
@@ -113,7 +107,6 @@ const MessageScreen = () => {
   const [messages2, setMessages2] = useState(messages)
   const [messageQueue, setMessageQueue] = useState([])
   const [showThread, setShowThread] = useState(false)
-  // const [otherUser, setOtherUser] = use
 
   const sortMessagesByOtherUser = (messages) => {
     const recentByOtherUser = {}
@@ -145,6 +138,7 @@ const MessageScreen = () => {
 
     {!showThread &&
     <>
+      <Text style={styles.headerButton}>Your Conversations</Text>
       <FlatList
         data={messageQueue}
         renderItem={renderItem}
@@ -155,8 +149,8 @@ const MessageScreen = () => {
 
     {showThread &&
     <>
-      <TouchableOpacity  style={styles.backButton}>
-        <Text onPress={()=>setShowThread(false)}>Back to Msssages</Text>
+      <TouchableOpacity  >
+        <Text style={styles.headerButton} onPress={()=>setShowThread(false)}>Back to Messages</Text>
       </TouchableOpacity>
       <FlatList
         data={messages2.filter(msg => msg.sender === showThread || msg.recipient === showThread)}
