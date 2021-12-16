@@ -1,6 +1,8 @@
 import MyContext from './MyContext';
 import React from 'react';
 
+console.log('test2')
+console.log(Date.now())
 
 // const USER_DATA = {
 

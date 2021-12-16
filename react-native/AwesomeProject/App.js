@@ -25,6 +25,9 @@ import UserProvider from './Context/UserProvider'
 
 export default function App() {
 
+  console.log('test1')
+  console.log(Date.now())
+
   // sessions handler
   // renders <CreateUser/> if no session is found
   // *remember to uncomment import to use the component*
