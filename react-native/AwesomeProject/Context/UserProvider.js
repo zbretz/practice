@@ -1,8 +1,20 @@
-import MyContext from './MyContext';
-import React from 'react';
+import UserContext from './UserContext';
+import React, { useState, useEffect, useContext } from "react";
 
 console.log('test2')
 console.log(Date.now())
+
+const appDataFetch = async () => {
+  try {
+    const location = await fetch('http://10.0.0.53:3000/location')
+    const location_json = await location.json();
+    console.log(json)
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+appDataFetch()
 
 // const USER_DATA = {
 
@@ -37,43 +49,36 @@ const messages = [
   {id:10,recipient:1,sender:6,time:'1999-01-08 4:14:06',message_text:"see you soon!",has_been_read:false}
 ]
 
-class UserProvider extends React.Component {
-    state = {
-        USER_DATA: {
-          user_id: 4,
-          match: {
-            user_id: 6,
-            snome_id: [5, 4]
-          },
-          snome_likes: {
-            snome_id: 3
-          },
-          messages: messages
-        }
-    };
+function UserProvider(props){
 
-    render() {
-        return (
-            <MyContext.Provider
-                value={//{
-                  {user_data: this.state.USER_DATA}
-
-                    // USER_DATA: this.state.USER_DATA,
-                    // user_id: 6,
-                    // match: {
-                    //     user_id: 6,
-                    //     snome_id: [5, 4]
-                    //   },
-                    //   snome_likes: {
-                    //     snome_id: 3
-                    //   },
-              //  }
-              }
-            >
-                {this.props.children}
-            </MyContext.Provider>
-        );
+  const [userData, setUserData] = useState(
+    {
+      user_id: 4,
+      match: {
+        user_id: 6,
+        snome_id: [5, 4]
+      },
+      snome_likes: {
+        snome_id: 3
+      },
+      messages: messages
     }
+  );
+
+    useEffect(() => {
+      console.log('test3')
+      console.log(Date.now())
+
+      //  getLocations();
+     }, []);
+
+        return (
+            <UserContext.Provider
+                value={{user_data: userData}}
+            >
+                {props.children}
+            </UserContext.Provider>
+        );
 }
 
 export default UserProvider

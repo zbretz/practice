@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import {View, Text, TextInput, StyleSheet, SafeAreaView, SectionList, ScrollView, ListView, FlatList, TouchableOpacity, Keyboard} from 'react-native';
-import MyContext from '../Context/MyContext';
+import UserContext from '../Context/UserContext';
 
 
 //Plan:
@@ -110,7 +110,7 @@ const styles = {
 
 const MessageScreen = () => {
 
-  const context = useContext(MyContext)
+  const context = useContext(UserContext)
   console.log(context.user_data.messages)
 
   const [messages, setMessages] = useState(context.user_data.messages)
@@ -144,7 +144,7 @@ const MessageScreen = () => {
 
   return (
 
-    <MyContext.Consumer>
+    <UserContext.Consumer>
     {context => (
 
       <>
@@ -176,7 +176,7 @@ const MessageScreen = () => {
       </>
 
     )}
-    </MyContext.Consumer>
+    </UserContext.Consumer>
 
   );
 };
