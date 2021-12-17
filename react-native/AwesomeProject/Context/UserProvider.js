@@ -4,30 +4,6 @@ import React, { useState, useEffect, useContext } from "react";
 console.log('test2')
 console.log(Date.now())
 
-const appDataFetch = async () => {
-  try {
-    const location = await fetch('http://10.0.0.53:3000/location')
-    const location_json = await location.json();
-    console.log(json)
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-appDataFetch()
-
-// const USER_DATA = {
-
-//   user_id: 4,
-//   match: {
-//     user_id: 6,
-//     snome_id: [5, 4]
-//   },
-//   snome_likes: { //the ones ive liked
-//     snome_id: 3
-//   },
-//   // has_liked_me?? would be cool to see. 'who has liked me?'
-// }
 
 const messages = [
   {
@@ -51,6 +27,19 @@ const messages = [
 
 function UserProvider(props){
 
+  const [location, setLocation] = useState()
+
+  const appDataFetch = async () => {
+    try {
+      const location = await fetch('http://10.0.0.53:3000/location')
+      const location_json = await location.json();
+      console.log(location_json)
+      setLocation(location_json)
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const [userData, setUserData] = useState(
     {
       user_id: 4,
@@ -68,13 +57,12 @@ function UserProvider(props){
     useEffect(() => {
       console.log('test3')
       console.log(Date.now())
-
-      //  getLocations();
+      appDataFetch()
      }, []);
 
         return (
             <UserContext.Provider
-                value={{user_data: userData}}
+                value={{user_data: userData, location_data: location}}
             >
                 {props.children}
             </UserContext.Provider>

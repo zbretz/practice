@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, FlatList, TextInput, SafeAreaView, ScrollView, Dimensions } from "react-native";
 import MapView, { Marker } from 'react-native-maps';
 import { useNavigation } from '@react-navigation/native';
+import UserContext from '../Context/UserContext';
 
 
 
@@ -71,35 +72,32 @@ const NewSearch = ({locationData}) => {
 }
 
 const SnomeHome = (props) => {
+
+  const context = useContext(UserContext);
+
   const [flexDirection, setflexDirection] = useState("column");
   const [toggleView, settoggleView] = useState("ShowList");
 
   const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(context.location_data);
+
+  console.log(data)
 
 
-
-
-  const getLocations = async () => {
-    try {
-     const response = await fetch('http://10.0.0.53:3000/location')
-     const json = await response.json();
-     setData(json);
-   } catch (error) {
-     console.error(error);
-   } finally {
-     setLoading(false);
-   }
- }
+  // const getLocations = async () => {
+  //   try {
+  //     const response = await fetch('http://10.0.0.53:3000/location')
+  //     const json = await response.json();
+  //     setData(json);
+  //   } catch (error) {
+  //     console.error(error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
 
  useEffect(() => {
-   getLocations();
  }, []);
-
- console.log(data)
- console.log(props.navigation)
-
-
 
 
 const filterNames = (location) => {
@@ -119,8 +117,7 @@ const filterNames = (location) => {
 
   return (
     <>
-
-    <Grid
+    {<Grid
     // updateQuery = {updateQuery}
     // query = {query}
 
@@ -136,7 +133,7 @@ const filterNames = (location) => {
       filterNames = {filterNames}
       locationData = {data}
     >
-    </Grid>
+    </Grid> }
   </>
   );
 };
