@@ -13,33 +13,46 @@
   <div style= 'padding: 30px; text-align: center;'> Personality 1 </div>
 
   <div style="display: flex;justify-content: center;margin: 20px">
-    <div style="flex: 1; display:flex; flex-direction:column; width: 600px; height:400px;background-color:gray;border:4px solid gray">
+    <div style="flex: 1; display:flex; flex-direction:column;background-color:gray;border:4px solid gray">
 
-      <div style="border:1px solid black; height:20%; width: 100%">
+      <div id='intro' class='stamp' style="border:1px solid black; width: 100%; flex: 1">
         Intro
       </div>
-      <div style="border:1px solid black; height:20%; width: 100%">
+      <div style="border:1px solid black; width: 100%; flex: 1">
         "Tell me about yourself"
       </div>
-      <div style="border:1px solid black; height:20%; width: 100%">
+      <div style="border:1px solid black; width: 100%; flex: 1">
         "Overcame Challenge"
       </div>
-      <div style="border:1px solid black; height:20%; width: 100%">
+      <div style="border:1px solid black; width: 100%; flex: 1">
         "Weaknesses"
       </div>
-      <div style="border:1px solid black; height:20%; width: 100%">
+      <div style="border:1px solid black; width: 100%; flex: 1">
       Candidate Spotlight 1</div>
-      <div style="border:1px solid black; height:20%; width: 100%">
+      <div style="border:1px solid black; width: 100%; flex: 1">
       Candidate Spotlight 2</div>
-      <div style="border:1px solid black; height:20%; width: 100%">
+      <div style="border:1px solid black; width: 100%; flex: 1">
       Our Spotlight 1 / Revealing Moment 1</div>
-      <div style="border:1px solid black; height:20%; width: 100%">
+      <div style="border:1px solid black; width: 100%; flex: 1">
       Our Spotlight 2 / Revealing Moment 2</div>
 
 
     </div>
-    <div style="flex: 3; width: 600px; height:400px;background-color:black;border:4px solid gray"></div>
+    <div style="flex: 3;background-color:black;border:4px solid gray">
+      <video id='video' controls style='height;width:100%'>
+          <source src='./demo_interview.mp4'>
+      </video>
+    </div>
   </div>
 
+  <script>
+    const video = document.getElementById('video');
+    const intro = document.getElementsByClassName('stamp')[0];
+    intro.addEventListener("click", function (event) {
+    event.preventDefault();
+    video.currentTime = 1000;
+    video.play();
+}, false);
+  </script>
 </body>
 </html>
