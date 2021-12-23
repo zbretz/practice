@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <style>
+      body{
+        margin: 0px;
+      }
+
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  border: 3px solid green;
+  padding-top: 80px;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+video{
+  border-radius: 60px;
+
+}
+
+.stamp{
+  border-bottom:1px solid rgb(10, 49, 244);
+  /* border-left:1px solid rgb(10, 49, 244); */
+  width: 100%; flex: 1; display: flex; justify-content: center;align-items: center;
+}
+
+
+    </style>
+  </head>
+<body >
+
+  <div id='main' style=  "background-color: #fbfcfd;">
+
+
+<div style='position:fixed; height: 80px; background-color: ;width:100%; box-shadow: rgb(0 0 0 / 4%) 0px 4px 4px;'></div>
+
+<!-- <div style= 'padding: 30px; text-align: center;'> Personality 1 </div> -->
+
+
+<!-- <div class="centered">
+  <video id='video' controls style=';width:100%'>
+    <source src='./demo_interview.mp4'>
+</video>
+</div> -->
+
+<div style= 'padding: 30px; text-align: center;'> Personality 1 </div>
+
+<div class='centered' style="display: flex;justify-content: center;margin: 20px; width: 800px">
+  <div style="flex: 1; display:flex; flex-direction:column;margin-right: 10px;">
+
+    <div id='intro' class='stamp' style="">
+      Intro
+    </div>
+    <div id='intro' class='stamp' style="">
+      "Tell me about yourself"
+    </div>
+    <div id='intro' class='stamp' style="">
+      "Overcame Challenge"
+    </div>
+    <div id='intro' class='stamp' style="">
+      "Weaknesses"
+    </div>
+    <div id='intro' class='stamp' style="">
+      Candidate Spotlight 1</div>
+      <div id='intro' class='stamp' style="">
+        Candidate Spotlight 2</div>
+        <div id='intro' class='stamp' style="">
+          Our Spotlight 1 / Revealing Moment 1</div>
+          <div id='intro' class='stamp' style="">
+            Our Spotlight 2 / Revealing Moment 2</div>
+
+
+  </div>
+  <div style="flex: 3;">
+    <video id='video' controls style='height;width:100%'>
+        <source src='./demo_interview.mp4'>
+    </video>
+  </div>
+</div>
+
+</div>
+
+
+<script>
+  const video = document.getElementById('video');
+  const intro = document.getElementsByClassName('stamp')[0];
+  intro.addEventListener("click", function (event) {
+  event.preventDefault();
+  video.currentTime = 23;
+  video.play();
+}, false);
+</script>
+
+
+</body>
+</html>
