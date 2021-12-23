@@ -14,10 +14,16 @@
         /* height: 200px; */
         border: 8px solid black;
       }
+
+      .box:hover{
+        z-index:99;
+
+      }
+
     </style>
   </head>
-<body >
-  <div style="height:60px; border-bottom: 1px solid gray;">
+  <body >
+    <div style="height:60px; border-bottom: 1px solid gray;">
 
   </div>
   <div class="flex-container">
@@ -36,11 +42,10 @@
 
   <div class="flex-container">
 
-    <div style="background-color: ; flex: 1; display: flex; flex-direction: column; align-items: center; border-right: 1px solid #a9a9a98c; box-shadow: 2px 0px #d3d3d352;
-    ">
+    <div style="background-color: ; flex: 1; display: flex; flex-direction: column; align-items: center; border-right: 1px solid #a9a9a98c; box-shadow: 2px 0px #d3d3d352;">
     </div>
 
-    <div style="background-color: ; flex: 2; display: flex; flex-direction: column; align-items: center;">
+    <div style="background-color: #f0f4f7; flex: 2; display: flex; flex-direction: column; align-items: center;">
       <div style="background-color: wheat; width: 80%; height: 140px;">
         <img src='./profile.png' style='width: 100%; height:100%;object-fit: cover;'/>
       </div>
@@ -58,20 +63,20 @@
 
       <div style="position:relative;height: 330px;">
 
-        <div class='box' style='position:absolute; top: 75px;
+        <div class='box' style='position:absolute; top: 0px;
         left: 75px;
         background-color: steelblue;
-        z-index:2; border:8px solid steelblue'
+        border:8px solid steelblue'
         ><p style="position: absolute;top:-18px; background-color: white;width: 100%;">Personality Screen 1</p>
         <video style="width:100%; margin-bottom: -5px;">
           <source src='./demo.mov'>
         </video>
         </div>
 
-        <div class='box' style='position:absolute; top: 125px;
+        <div class='box' style='position:absolute; top: 50px;
         left: 125px;
         background-color: skyblue;
-        z-index:2; border:8px solid skyblue '
+         border:8px solid skyblue '
         ><p style="position: absolute;top:-18px; background-color: white;width: 100%;">Personality Screen 2</p>
         <video controls style="width:100%; margin-bottom: -5px;">
           <source src='./demo.mov'>
@@ -85,7 +90,7 @@
         '>Personality Screen 3
         </div> -->
 
-        <hr style="position:relative;top:360px; width: 70%">
+        <hr style="position:relative;top:295px; width: 70%">
 
       </div>
 
@@ -93,30 +98,30 @@
 
       <div style="position:relative;">
 
-        <div class='box' style='position:absolute; top: 75px;
+        <div class='box' style='position:absolute; top: 0px;
         left: 75px;
         background-color: powderblue;
-        z-index:1; border:8px solid powderblue
+         border:8px solid powderblue
         '><p style="position: absolute;top:-18px; background-color: white;width: 100%;">Technical Screen 1</p>
         <video style="width:100%; margin-bottom: -5px;">
           <source src='./demo.mov'>
         </video>
         </div>
 
-        <div class='box' style='position:absolute; top: 125px;
+        <div class='box' style='position:absolute; top: 50px;
         left: 125px;
         background-color: skyblue;
-        z-index:2; border:8px solid skyblue'
+         border:8px solid skyblue'
         ><p style="position: absolute;top:-18px; background-color: white;width: 100%;">Technica1 Screen 1</p>
         <video style="width:100%; margin-bottom: -5px;">
           <source src='./demo.mov'>
         </video>
         </div>
 
-        <div class='box' style='position:absolute; top: 175px;
+        <div class='box' style='position:absolute; top: 100px;
         left: 175px;
         background-color: steelblue;
-        z-index:3; border:8px solid steelblue;
+         border:8px solid steelblue;
         '><p style="position: absolute;top:-18px; background-color: white;width: 100%;">Technica1 Screen 3</p>
         <video style="width:100%; margin-bottom: -5px;">
           <source src='./demo.mov'>
