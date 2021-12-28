@@ -1,7 +1,3 @@
-<!-- https://iambenkay.medium.com/how-to-build-your-custom-js-ide-in-the-browser-838a51c654bd
-https://javascript.plainenglish.io/lets-develop-an-online-code-editor-compiler-like-hackerrank-702881803eee -->
-<!-- https://medv.io/codejar/ -->
-
 <!doctype html>
 <html lang="en">
 
@@ -18,131 +14,254 @@ https://javascript.plainenglish.io/lets-develop-an-online-code-editor-compiler-l
     <title>JS IDE</title>
     <style>
 
+body {font-family: Arial;}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
     </style>
 </head>
 
 <body>
 
-    <div style="display:flex; align-items: flex-end;border:1px solid black">
 
-        <div style='flex:1'></div>
+<h2>Coding Challenges</h2>
 
-
-    <div style='flex:1;background-color: gray;height:700px'>
-
-    <!-- <div id='container' style='width:50%'> start container -->
-    <div >
-        <nav class="text-dark d-flex align-items-center pl-2 bg-warning" ><span>Editor (Use Ctrl-Enter to execute)</span><div class="btn btn-warning" action>EXECUTE</div></nav>
-        <div style="height:500px" id="editor"></div>
-    </div>
-    <div >
-        <nav class="text-light d-flex align-items-center pl-2 bg-dark" ><span>Dev Console (Use Ctrl-I to clear console)</span><div class="btn btn-dark" action>CLEAR</div></nav>
-        <pre style="height:200px" id="console"
-            class="border border-dark bg-light text-dark p-2">Welcome to the JS Console<br />&raquo;  </pre>
-    </div>
+<div class="tab">
+  <button class="tablinks active" onclick="openCity(event, 'Max Product')">Max Product</button>
+  <button class="tablinks" onclick="openCity(event, 'Reverse')">Reverse</button>
+  <button class="tablinks" onclick="openCity(event, '3')">Question 3</button>
 </div>
-    <!-- </div> end container -->
+
+
+  <div id="Max Product" class="tabcontent" style="display: block;">
+
+    <div style="display:flex; height: 500px;border:1px solid black">
+
+      <div style='flex:1'>
+        <p>Given an integer array, find a maximum product of a triplet in array.</p>
+
+        <p>Input:  [10, 3, 5, 6, 20]</p>
+       <p> Output: 1200</p>
+        <p>Multiplication of 10, 6 and 20</p>
+
+        <p>Input: [-10, -3, -5, -6, -20]</p>
+        <p> Output: -90</p>
+
+         <p>Input:  [1, -4, 3, -6, 7, 0]</p>
+         <p> Output: 168</p>
+
+      </div>
+        <div style='flex:2;background-color: gray;'>
+        <!-- <div id='container' style='width:50%'> start container -->
+          <div >
+              <nav class="text-dark d-flex align-items-center pl-2 bg-warning" ><span>Editor (Use Ctrl-Enter to execute)</span><div class="btn btn-warning" action>EXECUTE</div></nav>
+              <div style="height: 300px;" id="editor"></div>
+          </div>
+          <div >
+              <nav class="text-light d-flex align-items-center pl-2 bg-dark" ><span>Dev Console (Use Ctrl-I to clear console)</span><div class="btn btn-dark" action>CLEAR</div></nav>
+              <pre style="height:100px" id="console"
+                  class="border border-dark bg-light text-dark p-2">Welcome to the JS Console<br />&raquo;  </pre>
+          </div>
+        </div>
+        <!-- </div> end container -->
     </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    <script src="./static/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script>
+  </div>
 
-        // initialize the content of the text editor to some Javascript
-        $("#editor").text(`function echo(m) {\n\treturn m;\n}\nconsole.log(echo("Hello World"));`);
+  <div id="Reverse" class="tabcontent">
 
-        // initialize the editor environment using the ace library
-        var editor = ace.edit("editor");
-        editor.session.setMode("ace/mode/javascript"); // editor language
-        editor.setTheme("ace/theme/dawn"); // editor theme
-        editor.session.setTabSize(4);
-        editor.session.setUseWrapMode(true);
+    <div style="display:flex; height: 500px;border:1px solid black">
 
-        // Override default console functions for our custom Dev Console
-        (function () {
-            // store default console functionality before changing them
-            default_log = console.log;
-            default_clear = console.clear;
-            default_error = console.error;
-            default_warn = console.warn;
+      <div style='flex:1'>
 
-            console.log = function (...args) {
-                for (let arg of args) {
-                    if (typeof arg == 'object') {
-                        $("#console").append((JSON && JSON.stringify ? JSON.stringify(arg, undefined, 2) : arg) + ' ');
-                    } else {
-                        $("#console").append(arg + ' ');
-                    }
-                }
-                // Console prompt
-                $("#console").append('\n&raquo;  ');
+        <p>Given an array (or string), the task is to reverse the array/string.</p>
+        <p>Examples :</p>
 
-                // So console is always scrolled to the bottom
-                $("#console").get(0).scrollTop = $("#console").get(0).scrollHeight;
+        <p>Input  : arr[] = {1, 2, 3}</p>
+        <p>Output : arr[] = {3, 2, 1}</p>
 
-                // Allow the default console action to happen
-                default_log(...args)
+        <p>Input :  arr[] = {4, 5, 1, 2}</p>
+        <p>Output : arr[] = {2, 1, 5, 4}</p>
+
+      </div>
+        <div style='flex:2;background-color: gray;'>
+        <!-- <div id='container' style='width:50%'> start container -->
+          <div >
+              <nav class="text-dark d-flex align-items-center pl-2 bg-warning" ><span>Editor (Use Ctrl-Enter to execute)</span><div class="btn btn-warning" action>EXECUTE</div></nav>
+              <div style="height: 300px;" id="editor"></div>
+          </div>
+          <div >
+              <nav class="text-light d-flex align-items-center pl-2 bg-dark" ><span>Dev Console (Use Ctrl-I to clear console)</span><div class="btn btn-dark" action>CLEAR</div></nav>
+              <pre style="height:100px" id="console"
+                  class="border border-dark bg-light text-dark p-2">Welcome to the JS Console<br />&raquo;  </pre>
+          </div>
+        </div>
+        <!-- </div> end container -->
+    </div>
+
+  </div>
+
+  <div id="3" class="tabcontent">
+    <h3>Tokyo</h3>
+    <p>Tokyo is the capital of Japan.</p>
+  </div>
+
+
+
+
+<script>
+  function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+
+  </script>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+crossorigin="anonymous"></script>
+<script src="./static/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+
+// initialize the content of the text editor to some Javascript
+$("#editor").text(`function echo(m) {\n\treturn m;\n}\nconsole.log(echo("Hello World"));`);
+
+// initialize the editor environment using the ace library
+var editor = ace.edit("editor");
+editor.session.setMode("ace/mode/javascript"); // editor language
+editor.setTheme("ace/theme/dawn"); // editor theme
+editor.session.setTabSize(4);
+editor.session.setUseWrapMode(true);
+
+// Override default console functions for our custom Dev Console
+(function () {
+    // store default console functionality before changing them
+    default_log = console.log;
+    default_clear = console.clear;
+    default_error = console.error;
+    default_warn = console.warn;
+
+    console.log = function (...args) {
+        for (let arg of args) {
+            if (typeof arg == 'object') {
+                $("#console").append((JSON && JSON.stringify ? JSON.stringify(arg, undefined, 2) : arg) + ' ');
+            } else {
+                $("#console").append(arg + ' ');
             }
-            console.error = function (e) {
-
-                $("#console").append("Error: " + e);
-
-                // Console prompt
-                $("#console").append('\n&raquo;  ');
-
-                // So console is always scrolled to the bottom
-                $("#console").get(0).scrollTop = $("#console").get(0).scrollHeight;
-
-                // Allow the default console action to happen
-                default_error(e)
-            }
-            console.warn = function (w) {
-                $("#console").append("Warning: " + w);
-
-                // Console prompt
-                $("#console").append('\n&raquo;  ');
-
-                // So console is always scrolled to the bottom
-                $("#console").get(0).scrollTop = $("#console").get(0).scrollHeight;
-
-                // Allow the default console action to happen
-                default_warn(w)
-            }
-            console.clear = function () {
-                // Console prompt
-                $("#console").html("&raquo;  ");
-                // Allow the default console action to happen
-                default_clear();
-            }
-            clear = console.clear;
-        })();
-
-        // For our custom clear and execute shortcuts Ctrl-Enter and Ctrl-I
-        function kbd(e){
-            if (e.key === "i") console.clear();
-            if (e.key === "Enter") eval(editor.getValue());
         }
+        // Console prompt
+        $("#console").append('\n&raquo;  ');
 
-        window.addEventListener('keydown', function (e) {
-            if (e.key === "Control") window.addEventListener('keydown', kbd);
-        });
-        window.addEventListener('keyup', function (e) {
-            if(e.key === "Control") window.removeEventListener('keydown', kbd);
-        })
-        // For phones and devices without a control key
-        $("[action]").get(0).addEventListener('click', function (){ eval(editor.getValue()); });
-        $("[action]").get(1).addEventListener('click', function (){ console.clear(); });
-    </script>
+        // So console is always scrolled to the bottom
+        $("#console").get(0).scrollTop = $("#console").get(0).scrollHeight;
+
+        // Allow the default console action to happen
+        default_log(...args)
+    }
+    console.error = function (e) {
+
+        $("#console").append("Error: " + e);
+
+        // Console prompt
+        $("#console").append('\n&raquo;  ');
+
+        // So console is always scrolled to the bottom
+        $("#console").get(0).scrollTop = $("#console").get(0).scrollHeight;
+
+        // Allow the default console action to happen
+        default_error(e)
+    }
+    console.warn = function (w) {
+        $("#console").append("Warning: " + w);
+
+        // Console prompt
+        $("#console").append('\n&raquo;  ');
+
+        // So console is always scrolled to the bottom
+        $("#console").get(0).scrollTop = $("#console").get(0).scrollHeight;
+
+        // Allow the default console action to happen
+        default_warn(w)
+    }
+    console.clear = function () {
+        // Console prompt
+        $("#console").html("&raquo;  ");
+        // Allow the default console action to happen
+        default_clear();
+    }
+    clear = console.clear;
+})();
+
+// For our custom clear and execute shortcuts Ctrl-Enter and Ctrl-I
+function kbd(e){
+    if (e.key === "i") console.clear();
+    if (e.key === "Enter") eval(editor.getValue());
+}
+
+window.addEventListener('keydown', function (e) {
+    if (e.key === "Control") window.addEventListener('keydown', kbd);
+});
+window.addEventListener('keyup', function (e) {
+    if(e.key === "Control") window.removeEventListener('keydown', kbd);
+})
+// For phones and devices without a control key
+$("[action]").get(0).addEventListener('click', function (){ eval(editor.getValue()); });
+$("[action]").get(1).addEventListener('click', function (){ console.clear(); });
+</script>
+
+
 </body>
 
 </html>
