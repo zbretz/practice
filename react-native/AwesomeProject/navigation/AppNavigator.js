@@ -9,6 +9,7 @@ import MatchScreen from '../views/MatchScreen';
 import LikesScreen from '../views/LikesScreen';
 import MessageScreen from '../views/MessageScreen';
 import Messages2 from '../views/Messages2';
+import SnomeDescription from '../views/SnomeDescription';
 
 // import ProfileScreen from '../screens/ProfileScreen';
 
@@ -44,6 +45,7 @@ export const AppNavigator = () => {
         <Tab.Screen name="Message" component={MessageScreen}/>
         <Tab.Screen name="Match" component={MatchScreen}/>
         <Tab.Screen name="Home" component={SnomeHome}/>
+        <Tab.Screen name="Description" component={SnomeDescription}/>
         {/* <Tab.Screen name="Towns" component={TownsScreen}/>
         <Tab.Screen name="Message" component={MessageScreen}/>
         <Tab.Screen name="Profile" component={ProfileScreen}/> */}

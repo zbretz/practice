@@ -58,7 +58,7 @@ const NewSearch = ({locationData}) => {
 {showDropdown === 'show' &&
 
       <FlatList
-      style={{position:'absolute',top:40, width:'100%'}}
+        style={{position:'absolute',top:40, width:'100%'}}
         data={locationData.map(location => location.name)}
         renderItem={renderItem}
         keyExtractor={item => item}
@@ -96,8 +96,8 @@ const SnomeHome = (props) => {
   //   }
   // }
 
- useEffect(() => {
- }, []);
+//  useEffect(() => {
+//  }, []);
 
 
 const filterNames = (location) => {

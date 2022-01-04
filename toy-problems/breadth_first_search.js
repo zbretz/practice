@@ -35,7 +35,6 @@ function BFS(node){
       break
     }
     let curr_node = queue.shift()
-    // console.log(curr_node.value)
     BFS(curr_node)
   }
 }
