@@ -11,23 +11,60 @@
 // Input: numRows = 1
 // Output: [[1]]
 
-const numRows = (n) => {
+// i = 3
+// j = 1
 
-  let row1 = [1];
-  let row2 = [1,1];
-  let output = [row1, row2];
-
-  for (let i = 3; i < n; i++){
-    let newRow = new Array(i)
-    newRow[0] = 1
-    newRow[i-1] = 1
-
-    for (let j = 1; j < i-1; j++){
-      newRow[j] = output[i-2][j-1] + output[i-2][j]
+const pascals = (n) => {
+  let triangle = [[1], [1,1]];
+  for(let i = 1; i<n; i++){
+    let newRow = []
+    for(let j = 0; j<i; j++){
+      newRow.push(triangle[i][j]+triangle[i][j+1])
     }
-    output.push(newRow)
+    newRow.unshift(1)
+    newRow.push(1)
+    triangle.push(newRow)
   }
-  return output
+  return triangle
 }
 
-console.log(numRows(7))
+console.log(pascals(4))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const numRows = (n) => {
+
+//   let row1 = [1];
+//   let row2 = [1,1];
+//   let output = [row1, row2];
+
+//   for (let i = 3; i < n; i++){
+//     let newRow = new Array(i)
+//     newRow[0] = 1
+//     newRow[i-1] = 1
+
+//     for (let j = 1; j < i-1; j++){
+//       newRow[j] = output[i-2][j-1] + output[i-2][j]
+//     }
+//     output.push(newRow)
+//   }
+//   return output
+// }
+
+// console.log(numRows(7))
+
