@@ -11,3 +11,20 @@ const test_object = {
 
 test_object.print('test')
 test_object.print()
+
+
+const data_source = {
+  data: {
+    a:1,
+    b:2,
+    c:3
+  },
+  listeners: [],
+  addToData: function(datum){
+    this.data.push(datum)
+    listeners.forEach(func => func())
+  },
+  addChangeListener: function(func){
+    listeners.push(func)
+  }
+}
