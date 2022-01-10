@@ -1,3 +1,6 @@
+// https://medium.com/@ryanchenkie_40935/react-authentication-how-to-store-jwt-in-a-cookie-346519310e81
+// https://www.codementor.io/@manashkumarchakrobortty/authentication-and-authorization-in-node-js-19brdvhsyw
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
@@ -9,7 +12,7 @@ axios.interceptors.request.use(
     const allowedOrigins = [apiUrl];
     const token = localStorage.getItem('token');
     if (allowedOrigins.includes(origin)) {
-      config.headers.authorization = `Bearer ${token}`;
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
@@ -19,7 +22,7 @@ axios.interceptors.request.use(
 );
 function App() {
   const storedJwt = localStorage.getItem('token');
-  const [jwt, setJwt] = useState(storedJwt || 'dfdfdf');
+  const [jwt, setJwt] = useState(storedJwt || null);
   const [foods, setFoods] = useState([]);
   const [fetchError, setFetchError] = useState(null);
 
@@ -28,6 +31,12 @@ const getJwt = async () => {
     console.log(data)
     localStorage.setItem('token', data.token);
     setJwt(data.token);
+  };
+
+  const clearJWT = () => {
+    localStorage.removeItem('token');
+    console.log('ff')
+    setJwt(null);
   };
 
 const getFoods = async () => {
@@ -51,6 +60,11 @@ return (
           </pre>
         )}
       </section>
+
+      <section style={{ marginBottom: '10px' }}>
+        <button onClick={() => clearJWT()}>Clear token</button>
+      </section>
+
       <section>
         <button onClick={() => getFoods()}>
           Get Foods

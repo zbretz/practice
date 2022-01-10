@@ -11,17 +11,16 @@ const cors = require('cors');
 
 app.use(cors());
 
-
 app.get('/jwt', (request, response) => {
   // let token1 = request.header('Authorization');
-  const token2 = jsonwebtoken.sign('abc', '123');
-console.log(token2)
-  // response.header("auth-token", token2).json({token:token2})
+  const token = jsonwebtoken.sign('abc', '123');
+  console.log(token)
+  response.header("auth-token", token).json({token:token})
   // response.json({token:token2})
-  response.send({token:token2})
+  // response.send({token:token2})
 })
 
-// app.use(jwt({ secret: '123', algorithms: ['HS256'] }));
+app.use(jwt({ secret: '123', algorithms: ['HS256'] }));
 const foods = [
   { id: 1, description: 'burritos' },
   { id: 2, description: 'quesadillas' },
