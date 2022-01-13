@@ -1,0 +1,32 @@
+{
+  "name": "common",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Common-App/Common.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Common-App/Common/issues"
+  },
+  "homepage": "https://github.com/Common-App/Common#readme",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "express": "^4.17.2",
+    "firebase": "^9.6.2",
+    "node": "^17.3.0",
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "sequelize": "^6.13.0",
+    "webpack": "^5.66.0"
+  }
+}
