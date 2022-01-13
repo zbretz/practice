@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js",
+    "build": "webpack --config webpack.config.js",
+    "react-dev": "webpack --watch",
+    "start:dev": "webpack-dev-server --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,9 +21,14 @@
   },
   "homepage": "https://github.com/Common-App/Common#readme",
   "dependencies": {
+    "@babel/preset-env": "^7.16.8",
+    "@babel/preset-react": "^7.16.7",
     "babel": "^6.23.0",
+    "babel-loader": "^8.2.3",
     "express": "^4.17.2",
-    "firebase": "^9.6.2",
+    "firebase": "^9.6.3",
+    "firebase-auth": "^0.1.2",
+    "firebaseui": "^6.0.0",
     "node": "^17.3.0",
     "nodemon": "^2.0.15",
     "pg": "^8.7.1",
@@ -28,5 +36,8 @@
     "react-dom": "^17.0.2",
     "sequelize": "^6.13.0",
     "webpack": "^5.66.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.9.1"
   }
 }
