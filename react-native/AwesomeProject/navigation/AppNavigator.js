@@ -10,6 +10,7 @@ import LikesScreen from '../views/LikesScreen';
 import MessageScreen from '../views/MessageScreen';
 import Messages2 from '../views/Messages2';
 import SnomeDescription from '../views/SnomeDescription';
+import LoginScreen from '../views/LoginScreen';
 
 import UserContext from '../Context/UserContext';
 
@@ -54,6 +55,9 @@ export const AppNavigator = () => {
         <Tab.Screen name="Home" component={SnomeHome}/>
         </>
         }
+        <Tab.Screen name="LoginModal" options={{
+    showIcon: false
+, presentation: 'modal' }} component={LoginScreen}/>
         <Tab.Screen name="Description" component={SnomeDescription}/>
         {/* <Tab.Screen name="Towns" component={TownsScreen}/>
         <Tab.Screen name="Message" component={MessageScreen}/>

@@ -9,9 +9,18 @@ const LoginScreen = () => {
   const context = useContext(UserContext)
 
   return (
-    // <SafeAreaView>
+    <>
+    {/* <SafeAreaView> */}
+    <View style={{width: '100%', height:'100%'}}>
+    <Image
+    style={{width: '100%',height:'50%', margin:'auto'}}
+    source = {require("../img/illustration.svg")}
+    />
+    <Text>ddfd</Text>
+    {/* </SafeAreaView> */}
+    </View>
+    </>
 
-    // </SafeAreaView>
   );
 };
 

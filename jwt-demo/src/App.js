@@ -5,21 +5,21 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
 
-const apiUrl = 'http://localhost:3000';
-axios.interceptors.request.use(
-  config => {
-    const { origin } = new URL(config.url);
-    const allowedOrigins = [apiUrl];
-    const token = localStorage.getItem('token');
-    if (allowedOrigins.includes(origin)) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  error => {
-    return Promise.reject(error);
-  }
-);
+const apiUrl = 'http://localhost:3001';
+// axios.interceptors.request.use(
+//   config => {
+//     const { origin } = new URL(config.url);
+//     const allowedOrigins = [apiUrl];
+//     const token = localStorage.getItem('token');
+//     if (allowedOrigins.includes(origin)) {
+//       config.headers.Authorization = `Bearer ${token}`;
+//     }
+//     return config;
+//   },
+//   error => {
+//     return Promise.reject(error);
+//   }
+// );
 function App() {
   const storedJwt = localStorage.getItem('token');
   const [jwt, setJwt] = useState(storedJwt || null);
@@ -48,6 +48,20 @@ const getFoods = async () => {
       setFetchError(err.message);
     }
   };
+
+  const testPost = async () => {
+    // axios.post('http://localhost:3001/test',{firstName: 'Fred', lastName: 'Flintstone'})
+    // .then(res => console.log(res))
+    axios({
+      method: 'post',
+      url: 'http://localhost:3001/test',
+      data: {
+        firstName: 'Finn',
+        lastName: 'Williams'
+      }
+    }).then(res => console.log(res));
+  }
+
 return (
     <>
       {/* <p>{jwt}</p> */}
@@ -77,6 +91,12 @@ return (
         {fetchError && (
           <p style={{ color: 'red' }}>{fetchError}</p>
         )}
+      </section>
+
+      <section>
+        <button onClick={() => testPost()}>
+          Test Post
+        </button>
       </section>
     </>
   );

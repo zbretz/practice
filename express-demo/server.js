@@ -3,13 +3,17 @@
 
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 3001
 const db = require('./db');
 const jwt = require('express-jwt');
 const jsonwebtoken = require('jsonwebtoken');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 
 app.get('/jwt', (request, response) => {
   // let token1 = request.header('Authorization');
@@ -20,6 +24,12 @@ app.get('/jwt', (request, response) => {
   // response.send({token:token2})
 })
 
+app.post('/test',(req, res) => {
+  console.log(req.body)
+  res.send(req.body);
+});
+
+
 app.use(jwt({ secret: '123', algorithms: ['HS256'] }));
 const foods = [
   { id: 1, description: 'burritos' },
@@ -28,6 +38,10 @@ const foods = [
 ];
 
 app.get('/foods', (req, res) => {
+  console.log(req.user)
+  // console.log(jsonwebtoken.verify(,'123'))
+  console.log('JHVJHVJHV', req.headers.authorization)
+
   res.json(foods);
 });
 
