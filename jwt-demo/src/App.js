@@ -6,25 +6,30 @@ import axios from 'axios';
 import './App.css';
 
 const apiUrl = 'http://localhost:3001';
-// axios.interceptors.request.use(
-//   config => {
-//     const { origin } = new URL(config.url);
-//     const allowedOrigins = [apiUrl];
-//     const token = localStorage.getItem('token');
-//     if (allowedOrigins.includes(origin)) {
-//       config.headers.Authorization = `Bearer ${token}`;
-//     }
-//     return config;
-//   },
-//   error => {
-//     return Promise.reject(error);
-//   }
-// );
+axios.interceptors.request.use(
+  config => {
+    const { origin } = new URL(config.url);
+    const allowedOrigins = [apiUrl];
+    const token = localStorage.getItem('token');
+    if (allowedOrigins.includes(origin)) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
 function App() {
   const storedJwt = localStorage.getItem('token');
   const [jwt, setJwt] = useState(storedJwt || null);
   const [foods, setFoods] = useState([]);
   const [fetchError, setFetchError] = useState(null);
+  const [credentials, setCredentials] = useState({
+    name: '',
+    password: ''
+  });
+
 
 const getJwt = async () => {
     const { data } = await axios.get(`${apiUrl}/jwt`);
@@ -55,9 +60,11 @@ const getFoods = async () => {
       method: 'post',
       url: 'http://localhost:3001/test',
       data: {
-        firstName: 'Finn',
-        lastName: 'Williams'
-      }
+        credentials: credentials
+      },
+      // headers: {
+      //   'Content-Type': 'multipart/form-data'
+      // }
     }).then(res => console.log(res));
   }
 
@@ -94,9 +101,12 @@ return (
 
       <section>
       <form onSubmit={testPost}>
-        <label>
+      <label>
           Name:
-          <input type="text" value='test' onChange={() => {return null}} />
+          <input type="text" value={credentials.name} onChange={(e) => setCredentials({...credentials, name: e.target.value})}/>
+        </label>        <label>
+          Password:
+          <input type="password" value={credentials.password} onChange={(e) => setCredentials({...credentials, password: e.target.value})} />
         </label>
         <input type="submit" value="Submit" />
       </form>

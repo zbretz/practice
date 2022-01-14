@@ -24,6 +24,8 @@ app.get('/jwt', (request, response) => {
   // response.send({token:token2})
 })
 
+
+
 app.post('/test',(req, res) => {
   console.log(req.body)
   res.send(req.body);
