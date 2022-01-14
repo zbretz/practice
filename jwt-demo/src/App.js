@@ -49,9 +49,8 @@ const getFoods = async () => {
     }
   };
 
-  const testPost = async () => {
-    // axios.post('http://localhost:3001/test',{firstName: 'Fred', lastName: 'Flintstone'})
-    // .then(res => console.log(res))
+  const testPost = async (e) => {
+    e.preventDefault()
     axios({
       method: 'post',
       url: 'http://localhost:3001/test',
@@ -94,9 +93,16 @@ return (
       </section>
 
       <section>
-        <button onClick={() => testPost()}>
+      <form onSubmit={testPost}>
+        <label>
+          Name:
+          <input type="text" value='test' onChange={() => {return null}} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+        {/* <button onClick={() => testPost()}>
           Test Post
-        </button>
+        </button> */}
       </section>
     </>
   );
