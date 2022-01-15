@@ -21,20 +21,17 @@ app.get('/jwt', (request, response) => {
   const token = jsonwebtoken.sign('abc', '123');
   console.log(token)
   response.header("auth-token", token).json({token:token})
-  // response.json({token:token2})
-  // response.send({token:token2})
 })
 
 
 const salt = bcrypt.genSaltSync(10)
-const hashed = bcrypt.hashSync('123', salt);
+const pass = '123'
+const hashed = bcrypt.hashSync(pass, salt);
 
 const model = {'zb': {pass: hashed}}
 
-const authenticate = (name, pass) => {
-  // return bcrypt.compareSync(pass, model[name].pass, salt)
+const authenticated = (name, pass) => {
   return bcrypt.compareSync(pass, model[name].pass)
-
 }
 
 app.post('/test',(req, res) => {

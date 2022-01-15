@@ -20,7 +20,7 @@ axios.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-function App() {
+function Child() {
   const storedJwt = localStorage.getItem('token');
   const [jwt, setJwt] = useState(storedJwt || null);
   const [foods, setFoods] = useState([]);
@@ -117,4 +117,17 @@ return (
     </>
   );
 }
+
+const App = () => {
+  return(
+    <>
+    <div style = {{'height': '200px'}}>
+
+    </div>
+    <Child/>
+    </>
+  )
+}
+
+
 export default App;
