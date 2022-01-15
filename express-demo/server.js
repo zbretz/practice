@@ -9,6 +9,7 @@ const jwt = require('express-jwt');
 const jsonwebtoken = require('jsonwebtoken');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,9 +26,18 @@ app.get('/jwt', (request, response) => {
 })
 
 
+const salt = bcrypt.genSaltSync(10)
+const hashed = bcrypt.hashSync('123', salt);
+
+const model = {'zb': {pass: hashed}}
+
+const authenticate = (name, pass) => {
+  return bcrypt.compareSync(pass, model[name].pass, salt)
+}
 
 app.post('/test',(req, res) => {
   console.log(req.body)
+  console.log(authenticate(req.body.credentials.name, req.body.credentials.password))
   res.send(req.body);
 });
 
