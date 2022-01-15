@@ -32,7 +32,9 @@ const hashed = bcrypt.hashSync('123', salt);
 const model = {'zb': {pass: hashed}}
 
 const authenticate = (name, pass) => {
-  return bcrypt.compareSync(pass, model[name].pass, salt)
+  // return bcrypt.compareSync(pass, model[name].pass, salt)
+  return bcrypt.compareSync(pass, model[name].pass)
+
 }
 
 app.post('/test',(req, res) => {
