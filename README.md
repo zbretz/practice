@@ -1,9 +1,14 @@
 # Common
 
 To Run
+
+In 1 terminal:
 ```
-npm start
+$ npm install
+$ npm start
 ```
+
+In another termianl:
 ```
-npm run react-dev
+$ npm run react-dev
 ```
