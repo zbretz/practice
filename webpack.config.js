@@ -4,7 +4,8 @@ var DIST_DIR = path.join(__dirname, '/client/public');
 
 module.exports = {
   mode: 'development',
-  entry: `${SRC_DIR}/index.jsx`,
+  devtool: 'eval-source-map',
+  entry: `${SRC_DIR}/index.js`,
   output: {
     path: DIST_DIR,
     filename: 'bundle.js',
@@ -12,7 +13,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: [/\.jsx$/],
+        test: [/\.(js|jsx)$/],
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
