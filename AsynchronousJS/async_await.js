@@ -10,9 +10,11 @@
 
 async function testing (a){
   if(a) return 'this'
-  return new Error
+  throw new Error
 
 }
 
-let data = testing()
-data.then(msg => {console.log(msg)})
+let data = testing(a)
+data
+  .then(msg => {console.log('no error')})
+  .catch(msg => {console.log('error')})
