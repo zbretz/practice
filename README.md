@@ -8,7 +8,7 @@ $ npm install
 $ npm start
 ```
 
-In another termianl:
+In another terminal:
 ```
 $ npm run react-dev
 ```
