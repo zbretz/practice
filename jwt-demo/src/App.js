@@ -29,14 +29,15 @@ function Child() {
     name: '',
     password: ''
   });
+  const [logged_in, setLogged_in] = useState(false)
 
 
-const getJwt = async () => {
-    const { data } = await axios.get(`${apiUrl}/jwt`);
-    console.log(data)
-    localStorage.setItem('token', data.token);
-    setJwt(data.token);
-  };
+// const getJwt = async () => {
+//     const { data } = await axios.get(`${apiUrl}/jwt`);
+//     console.log(data)
+//     localStorage.setItem('token', data.token);
+//     setJwt(data.token);
+//   };
 
   const clearJWT = () => {
     localStorage.removeItem('token');
@@ -54,32 +55,43 @@ const getFoods = async () => {
     }
   };
 
-  const testPost = async (e) => {
+  const login = async (e) => {
     e.preventDefault()
     axios({
       method: 'post',
-      url: 'http://localhost:3001/test',
+      url: 'http://localhost:3001/login',
       data: {
         credentials: credentials
       },
       // headers: {
       //   'Content-Type': 'multipart/form-data'
       // }
-    }).then(res => console.log(res));
+    })
+    .then(res => {
+        console.log(res.data);
+        localStorage.setItem('token', res.data.token);
+        console.log(res.data.token)
+        setJwt(res.data.token);
+        setLogged_in(true)
+      })
+    .catch( err => {
+      console.log(err)
+    })
   }
 
 return (
     <>
-      {/* <p>{jwt}</p> */}
+      <p>jwt: {jwt}</p>
+      <p>{logged_in}</p>
 
-      <section style={{ marginBottom: '10px' }}>
+      {/* <section style={{ marginBottom: '10px' }}>
         <button onClick={() => getJwt()}>Get JWT</button>
         {jwt && (
           <pre>
             <code>{jwt}</code>
           </pre>
         )}
-      </section>
+      </section> */}
 
       <section style={{ marginBottom: '10px' }}>
         <button onClick={() => clearJWT()}>Clear token</button>
@@ -100,7 +112,7 @@ return (
       </section>
 
       <section>
-      <form onSubmit={testPost}>
+      <form onSubmit={login}>
       <label>
           Name:
           <input type="text" value={credentials.name} onChange={(e) => setCredentials({...credentials, name: e.target.value})}/>
@@ -108,11 +120,8 @@ return (
           Password:
           <input type="password" value={credentials.password} onChange={(e) => setCredentials({...credentials, password: e.target.value})} />
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Login" />
       </form>
-        {/* <button onClick={() => testPost()}>
-          Test Post
-        </button> */}
       </section>
     </>
   );

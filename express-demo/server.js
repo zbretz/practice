@@ -16,23 +16,28 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-app.get('/jwt', (request, response) => {
-  // let token1 = request.header('Authorization');
-  const token = jsonwebtoken.sign('abc', '123');
-  console.log(token)
-  response.header("auth-token", token).json({token:token})
-})
-
-
 const salt = bcrypt.genSaltSync(10)
 const pass = '123'
 const hashed = bcrypt.hashSync(pass, salt);
-
 const model = {'zb': {pass: hashed}}
 
-const authenticated = (name, pass) => {
+const authenticate = (name, pass) => {
   return bcrypt.compareSync(pass, model[name].pass)
 }
+
+app.post('/login', (req, res) => {
+
+  console.log(authenticate(req.body.credentials.name, req.body.credentials.password))
+  console.log(req.body.credentials)
+  const is_authenticated = authenticate(req.body.credentials.name, req.body.credentials.password)
+  if (is_authenticated) {
+    const token = jsonwebtoken.sign('abc', '123');
+    console.log(token)
+    res.header("auth-token", token).json({token:token})
+  } else {
+    throw new Error ("ererre")
+  }
+})
 
 app.post('/test',(req, res) => {
   console.log(req.body)
