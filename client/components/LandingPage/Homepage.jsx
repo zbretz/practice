@@ -5,9 +5,10 @@ const Homepage = () => {
 
  return (
    <div className='home'>
-     <h1>Common App</h1>
-     <button>asdf</button>
-     <button>asdf</button>
+     <h1>Apply</h1>
+     <div className='buttons'>
+      
+     </div>
    </div>
  )
 }

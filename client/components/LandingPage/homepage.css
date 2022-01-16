@@ -4,6 +4,8 @@
   width: 100vw;
   height: 100vh;
   border: 1px solid;
-  padding: 10%;
   text-align: center; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
