@@ -1,0 +1,9 @@
+/* CSS File for homepage */
+
+.home {
+  width: 100vw;
+  height: 100vh;
+  border: 1px solid;
+  padding: 10%;
+  text-align: center; 
+}
