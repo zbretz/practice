@@ -1,11 +1,13 @@
 /* CSS File for homepage */
 
 .home {
-  width: 100vw;
-  height: 100vh;
-  border: 1px solid;
+  width: 80vw;
+  height: 80vh;
   text-align: center; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: auto;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
 }
