@@ -17,6 +17,17 @@ function sumPromise(a,b){
 sumPromise(3,5)
   .then(log)
 
+ //also promise
+ function newPromise(a,b){
+   return new Promise((resolve, reject) => {
+     resolve(a+b)
+   })
+ }
+
+ newPromise(3,5)
+  .then(log)
+
+
 //with async
 async function sumAsync(a,b){
   return a+b
