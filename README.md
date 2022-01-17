@@ -1,14 +1,19 @@
-# Common
+# CommonApp
 
-To Run
+Description:
 
-In 1 terminal:
-```
-$ npm install
-$ npm start
-```
+## Instructions
 
-In another terminal:
-```
-$ npm run react-dev
-```
+-   Run `npm install` to install all necessary files.
+
+### Client
+
+-   Type `npm run react-dev` on the terminal to run the client side
+
+### Server
+
+-   Type `npm start` on the terminal to run the server side
+
+### Database
+
+-   Will leave instructions here for the database
