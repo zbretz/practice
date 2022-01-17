@@ -14,6 +14,6 @@ Description:
 
 -   Type `npm start` on the terminal to run the server side
 
-#### Database
+### Database
 
 -   Will leave instructions here for the database
