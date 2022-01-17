@@ -1,24 +1,25 @@
 'use strict';
-const { Model } = require('sequelize');
-const { remap } = require('../../utils/db-utils');
-const { roleSchema } = require('../schema/roleSchema');
 
+const { remap } = require('../../utils/db-utils');
+const { userSchema } = require('../schema/userSchema');
+
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-	class Role extends Model {
+	class User extends Model {
 		/**
 		 * Helper method for defining associations.
 		 * This method is not a part of Sequelize lifecycle.
 		 * The `models/index` file will call this method automatically.
 		 */
-		static associate({ User }) {
+		static associate({ Role }) {
 			// define association here
-			this.hasMany(User, { foreignKey: 'role_id' });
+			this.belongsTo(Role, { foreignKey: 'role_id' });
 		}
 	}
-	Role.init(remap(DataTypes, roleSchema), {
+	User.init(remap(DataTypes, userSchema), {
 		sequelize,
-		modelName: 'Role',
-		tableName: 'roles'
+		modelName: 'User',
+		tableName: 'users'
 	});
-	return Role;
+	return User;
 };
