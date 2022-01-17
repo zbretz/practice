@@ -21,8 +21,18 @@ app.use(express.static(__dirname + '/../client/public'));
 
 // routes and controllers
 const { starter } = require('./controllers/starter');
+const rolesRouter = require('./routes/rolesRoute');
+const usersRouter = require('./routes/usersRoute');
+const adminsRouter = require('./routes/adminsRoute');
+const recruitersRouter = require('./routes/recruitersRoute');
+const applicantsRouter = require('./routes/applicantsRoute');
 
 app.get('/starter', starter);
+app.use('/roles', rolesRouter);
+app.use('/users', usersRouter);
+app.use('/admins', adminsRouter);
+app.use('/recruiters', recruitersRouter);
+app.use('/applicants', applicantsRouter);
 
 // catch 404 and forward to error handler
 app.use((_req, _res, next) => {
