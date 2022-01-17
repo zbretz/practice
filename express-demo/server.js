@@ -27,9 +27,10 @@ const authenticate = (name, pass) => {
 
 app.post('/login', (req, res) => {
 
-  console.log(authenticate(req.body.credentials.name, req.body.credentials.password))
-  console.log(req.body.credentials)
-  const is_authenticated = authenticate(req.body.credentials.name, req.body.credentials.password)
+  console.log(req.body.name)
+  console.log(authenticate(req.body.name, req.body.password))
+  console.log(req.body)
+  const is_authenticated = authenticate(req.body.name, req.body.password)
   if (is_authenticated) {
     const token = jsonwebtoken.sign('abc', '123');
     console.log(token)
@@ -41,7 +42,7 @@ app.post('/login', (req, res) => {
 
 app.post('/test',(req, res) => {
   console.log(req.body)
-  console.log(authenticate(req.body.credentials.name, req.body.credentials.password))
+  console.log(authenticate(req.body.name, req.body.password))
   res.send(req.body);
 });
 

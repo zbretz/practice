@@ -59,10 +59,11 @@ const getFoods = async () => {
     e.preventDefault()
     axios({
       method: 'post',
-      url: 'http://localhost:3001/login',
-      data: {
-        credentials: credentials
-      },
+      url: `${apiUrl}/login`,
+      data:
+        // {credentials: credentials}
+        credentials
+      ,
       // headers: {
       //   'Content-Type': 'multipart/form-data'
       // }
