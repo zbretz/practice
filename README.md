@@ -23,6 +23,15 @@ Description:
     -   `npx sequelize db:create` to create the database
     -   `npx sequelize db:drop` to delete the database
 -   Database migration
+    -   `npm run migrate` to migrate all models into the database
+    -   `npm run migrate:undo` to undo last migration
+    -   `npm run migrate:undo:all` to undo all migration
+-   Database seeding
+    -   `npm run seed:all` to seed all
+    -   `npm run seed:undo` to undo last seeding
+    -   `npm run seed:undo:all` to undo all seeding
+
+<!-- -   Database migration
     -   `npx sequelize db:migrate` to migrate all models into the database
     -   `npx sequelize db:migrate:undo` to undo last migration
     -   `npx sequelize db:migrate:undo:all` to undo all migration
@@ -30,4 +39,4 @@ Description:
     -   `npx sequelize db:seed --name [name of seeder file]` to seed specific file
     -   `npx sequelize db:seed:all` to seed all
     -   `npx sequelize db:seed:undo` to undo last seeding
-    -   `npx sequelize db:seed:undo:all` to undo all seeding
+    -   `npx sequelize db:seed:undo:all` to undo all seeding -->
