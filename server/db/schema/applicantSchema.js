@@ -7,6 +7,7 @@ const applicantSchema = {
 	user_id: {
 		type: 'UUID',
 		allowNull: false,
+		unique: true,
 		references: {
 			model: 'users',
 			key: 'id',
