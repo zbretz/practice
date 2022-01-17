@@ -1,4 +1,4 @@
-const recruiterSchema = {
+const applicantSchema = {
 	id: {
 		type: 'INTEGER',
 		primaryKey: true,
@@ -13,26 +13,42 @@ const recruiterSchema = {
 			onDelete: 'CASCADE'
 		}
 	},
-	industry: {
+	experience: {
+		type: 'INTEGER',
+		defaultValue: 0
+	},
+	linkedIn: {
 		type: 'STRING',
 		defaultValue: ''
 	},
-	region: {
+	school: {
 		type: 'STRING',
 		defaultValue: ''
 	},
-	company_stage: {
+	desired_position: {
 		type: 'STRING',
 		defaultValue: ''
 	},
-	company_size: {
+	desired_industry: {
 		type: 'STRING',
 		defaultValue: ''
 	},
-	company_name: {
+	desired_company_size: {
+		type: 'STRING',
+		defaultValue: ''
+	},
+	desired_company_stage: {
+		type: 'STRING',
+		defaultValue: ''
+	},
+	desired_region: {
+		type: 'STRING',
+		defaultValue: ''
+	},
+	resume: {
 		type: 'STRING',
 		defaultValue: ''
 	}
 };
 
-module.exports = { recruiterSchema };
+module.exports = { applicantSchema };
