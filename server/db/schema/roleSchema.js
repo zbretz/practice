@@ -1,8 +1,8 @@
 const roleSchema = {
 	id: {
-		type: 'UUID',
+		type: 'INTEGER',
 		primaryKey: true,
-		defaultValue: 'UUIDV4'
+		autoIncrement: true
 	},
 	role: {
 		type: 'STRING',
@@ -10,4 +10,4 @@ const roleSchema = {
 	}
 };
 
-module.exports = roleSchema;
+module.exports = { roleSchema };

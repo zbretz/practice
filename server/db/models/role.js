@@ -1,7 +1,7 @@
 'use strict';
 const { Model } = require('sequelize');
 const { remap } = require('../../utils/db-utils');
-const roleSchema = require('../schema/role');
+const { roleSchema } = require('../schema/roleSchema');
 
 module.exports = (sequelize, DataTypes) => {
 	class Role extends Model {

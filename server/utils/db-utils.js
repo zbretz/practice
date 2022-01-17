@@ -1,3 +1,6 @@
+const { v4: uuid } = require('uuid');
+const Sequelize = require('sequelize');
+
 /*
 function: remap
 description: remapping the schema depending on if it's used by model or migrations
@@ -11,14 +14,35 @@ return:
     - will throw error if some of the conditions are not met
 */
 function remap(objectModel, inputData) {
-	let outputData = JSON.parse(JSON.stringify(inputData));
-	for (let property in outputData) {
-		outputData[property].type = objectModel[outputData[property].type];
-		outputData[property].defaultValue = objectModel[outputData[property].defaultValue];
+	try {
+		let outputData = JSON.parse(JSON.stringify(inputData));
+		for (let property in outputData) {
+			outputData[property].type = objectModel[outputData[property].type];
+		}
+		return outputData;
+	} catch (error) {
+		return new Error(error);
 	}
-	return outputData;
+}
+
+/*
+function: prependUUIDV4
+description: prepends id serial number using sequelize uuidv4
+parameters:
+    - bulkInput: seeding without id's. It should be an array datatype
+return:
+    - will return a version of the input with serial id's
+    - will throw error if some of the conditions are not met
+*/
+function prependUUIDV4(bulkInput) {
+	try {
+		return bulkInput.map((input) => ({ ...input, id: uuid() }));
+	} catch (error) {
+		return new Error(error);
+	}
 }
 
 module.exports = {
-	remap
+	remap,
+	prependUUIDV4
 };
