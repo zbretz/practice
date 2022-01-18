@@ -21,16 +21,20 @@ const pass = '123'
 const hashed = bcrypt.hashSync(pass, salt);
 const model = {'zb': {pass: hashed}}
 
-const authenticate = (name, pass) => {
-  return bcrypt.compareSync(pass, model[name].pass)
+const authenticate = (input_pass, saved_pass) => {
+  return bcrypt.compareSync(input_pass, saved_pass)
 }
 
 app.post('/login', (req, res) => {
 
   console.log(req.body.name)
-  console.log(authenticate(req.body.name, req.body.password))
-  console.log(req.body)
-  const is_authenticated = authenticate(req.body.name, req.body.password)
+  user = getUserByName(req.body.name) // receiving undefined if no user found
+  let is_authenticated = false
+  if (user) {
+    // console.log(authenticate(req.body.password, user.password))
+    is_authenticated = req.body.password === user.password
+    // is_authenticated = authenticate(req.body.password, user.password)
+  }
   if (is_authenticated) {
     const token = jsonwebtoken.sign('abc', '123');
     console.log(token)
