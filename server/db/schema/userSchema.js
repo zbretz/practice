@@ -5,11 +5,18 @@ const userSchema = {
 	},
 	email: {
 		type: 'STRING',
-		allowNull: false
+		allowNull: false,
+		validate: {
+			isEmail: true,
+			notEmpty: true
+		}
 	},
 	password: {
 		type: 'STRING',
-		allowNull: false
+		allowNull: false,
+		validate: {
+			notEmpty: true
+		}
 	},
 	role_id: {
 		type: 'INTEGER',

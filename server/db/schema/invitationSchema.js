@@ -23,7 +23,11 @@ const invitationSchema = {
 	},
 	issued_for: {
 		type: 'STRING',
-		allowNull: false
+		allowNull: false,
+		validate: {
+			isEmail: true,
+			notEmpty: true
+		}
 	}
 };
 
