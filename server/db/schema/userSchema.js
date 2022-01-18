@@ -26,6 +26,13 @@ const userSchema = {
 			key: 'id',
 			onDelete: 'CASCADE'
 		}
+	},
+	name: {
+		type: 'STRING',
+		allowNull: false,
+		validate: {
+			notEmpty: true
+		}
 	}
 };
 
