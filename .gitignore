@@ -1,8 +1,7 @@
 node_modules
 
-.DS_Store
-
-
 # environmental variables
 .env.local
 **/.env
+.DS_Store
+.DS_Store~5dcc0be72a88ec10bc639fcd92359e05a439256f
