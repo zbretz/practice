@@ -13,10 +13,6 @@ const adminSchema = {
 			key: 'id',
 			onDelete: 'CASCADE'
 		}
-	},
-	name: {
-		type: 'STRING',
-		allowNull: false
 	}
 };
 
