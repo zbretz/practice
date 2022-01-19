@@ -1,14 +1,35 @@
 const { Role } = require('../db/models/index');
+const { EXCLUDEDATES } = require('../utils/db-utils');
 const createError = require('http-errors');
 
-const getAllRoles = async (_req, res, next) => {
+const roleControllers = {};
+
+roleControllers.getAllRoles = async (_req, res, next) => {
 	try {
-		console.log(Role);
+		const roles = await Role.findAll({
+			attributes: EXCLUDEDATES
+		});
+		res.status(200).json(roles);
 	} catch (e) {
 		next(createError(500, e));
 	}
 };
 
-module.exports = {
-	getAllRoles
+roleControllers.getSingleRole = async (req, res, next) => {
+	const { id } = req.params;
+	try {
+		const role = await Role.findOne({
+			attributes: EXCLUDEDATES,
+			where: {
+				id
+			}
+		});
+		return role
+			? res.status(200).json(role)
+			: next(createError(404, 'Role id does not exist!'));
+	} catch (e) {
+		next(createError(404, e));
+	}
 };
+
+module.exports = roleControllers;
