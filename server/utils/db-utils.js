@@ -42,7 +42,10 @@ function prependUUIDV4(bulkInput) {
 	}
 }
 
+const EXCLUDEDATES = { exclude: ['createdAt', 'updatedAt'] };
+
 module.exports = {
 	remap,
-	prependUUIDV4
+	prependUUIDV4,
+	EXCLUDEDATES
 };
