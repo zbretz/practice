@@ -19,7 +19,8 @@ export const AuthProvider = ({ children }) => {
       .then((userCredential) => {
         // User is automatically signed in when they signup
         const user = userCredential.user;
-        console.log(`${JSON.stringify(user.email)} is signed up successfully on firebase! and their info is: ${JSON.stringify(user)}`)
+        console.log(`${JSON.stringify(user.email)} is signed up successfully on firebase!`)
+        // console.log( `Their info is: ${JSON.stringify(user)}`)
         // ...
       })
       .catch((error) => {
@@ -50,7 +51,8 @@ export const AuthProvider = ({ children }) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(`${JSON.stringify(user.email)} is signed in on firebase! and their info is: ${JSON.stringify(user)}`)
+        console.log(`${JSON.stringify(user.email)} is signed in on firebase!`)
+        // console.log( `Their info is: ${JSON.stringify(user)}`)
         // ...
       })
       .catch((error) => {
