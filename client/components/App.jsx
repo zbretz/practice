@@ -1,11 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useRef } from 'react';
+import { AuthProvider } from '../contexts/AuthContext'
+import AuthTesting from './AuthTesting.jsx'
 
 const App = () => {
   return (
-  <div>
-    <h1>CommonApp</h1>
-  </div>
+    <AuthProvider>
+      <h1>CommonApp</h1>
+      <AuthTesting />
+    </AuthProvider>
   )
 }
 
