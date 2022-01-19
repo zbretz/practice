@@ -6,3 +6,7 @@ node_modules
 .DS_Store
 .DS_Store~5dcc0be72a88ec10bc639fcd92359e05a439256f
 firebase.config.js
+
+# database test seeds
+server/db/seeders/*
+!server/db/seeders/*-role.js
