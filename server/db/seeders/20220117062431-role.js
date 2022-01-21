@@ -1,10 +1,10 @@
 'use strict';
-const { prependUUIDV4 } = require('../../utils/db-utils');
+const { prependUUIDV4, ROLES_ID } = require('../../utils/db-utils');
 
 const ROLES = [
-	{ id: 1, role: 'admin' },
-	{ id: 2, role: 'recruiter' },
-	{ id: 3, role: 'applicant' }
+	{ id: ROLES_ID.ADMIN, role: 'admin' },
+	{ id: ROLES_ID.RECRUITER, role: 'recruiter' },
+	{ id: ROLES_ID.APPLICANT, role: 'applicant' }
 ];
 
 module.exports = {

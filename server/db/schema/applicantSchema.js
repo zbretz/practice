@@ -10,9 +10,9 @@ const applicantSchema = {
 		unique: true,
 		references: {
 			model: 'users',
-			key: 'id',
-			onDelete: 'CASCADE'
-		}
+			key: 'id'
+		},
+		onDelete: 'CASCADE'
 	},
 	experience: {
 		type: 'INTEGER',

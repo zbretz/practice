@@ -44,8 +44,15 @@ function prependUUIDV4(bulkInput) {
 
 const EXCLUDEDATES = { exclude: ['createdAt', 'updatedAt'] };
 
+const ROLES_ID = {
+	ADMIN: 1,
+	RECRUITER: 2,
+	APPLICANT: 3
+};
+
 module.exports = {
 	remap,
 	prependUUIDV4,
-	EXCLUDEDATES
+	EXCLUDEDATES,
+	ROLES_ID
 };

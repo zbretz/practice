@@ -8,18 +8,18 @@ const invitationSchema = {
 		allowNull: false,
 		references: {
 			model: 'admins',
-			key: 'user_id',
-			onDelete: 'CASCADE'
-		}
+			key: 'user_id'
+		},
+		onDelete: 'CASCADE'
 	},
 	for_role: {
 		type: 'INTEGER',
 		allowNull: false,
 		references: {
 			model: 'roles',
-			key: 'id',
-			onDelete: 'CASCADE'
-		}
+			key: 'id'
+		},
+		onDelete: 'CASCADE'
 	},
 	issued_for: {
 		type: 'STRING',
