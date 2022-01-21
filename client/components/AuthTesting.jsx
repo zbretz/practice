@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Form, Button, Card, Container } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
+import { BrowserRouter, Switch, Route, Link, Redirect, NavLink } from 'react-router-dom'
 
 const AuthTesting = () => {
   const emailRef = useRef()
@@ -48,6 +49,7 @@ const AuthTesting = () => {
           </Card.Body>
         </Card>
       </>
+      <Link to="/profile">Profile</Link>
     </Container>
   )
 
