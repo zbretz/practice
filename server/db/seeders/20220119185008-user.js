@@ -1,21 +1,10 @@
 'use strict';
-const chance = require('chance').Chance();
 const { prependUUIDV4, ROLES_ID } = require('../../utils/db-utils');
-
-const USERS = Array(10)
-	.fill(null)
-	.map(() => {
-		return {
-			email: chance.email(),
-			password: chance.guid(),
-			role_id: Math.floor(Math.random() * 3) + 1,
-			name: chance.name()
-		};
-	});
+const { USERS } = require('./data/seed-data');
 
 module.exports = {
 	async up(queryInterface, Sequelize) {
-		/**
+		/*
 		 * Add seed commands here.
 		 *
 		 * Example:
@@ -25,9 +14,21 @@ module.exports = {
 		 * }], {});
 		 */
 		const usersToInsert = prependUUIDV4(USERS);
-		const applicants = usersToInsert.filter((user) => user.role_id === ROLES_ID.APPLICANT);
-		const recruiters = usersToInsert.filter((user) => user.role_id === ROLES_ID.RECRUITER);
-		const admins = usersToInsert.filter((user) => user.role_id === ROLES_ID.ADMIN);
+		const applicants = usersToInsert
+			.filter((user) => user.role_id === ROLES_ID.APPLICANT)
+			.map((user) => ({
+				user_id: user.id
+			}));
+		const recruiters = usersToInsert
+			.filter((user) => user.role_id === ROLES_ID.RECRUITER)
+			.map((user) => ({
+				user_id: user.id
+			}));
+		const admins = usersToInsert
+			.filter((user) => user.role_id === ROLES_ID.ADMIN)
+			.map((user) => ({
+				user_id: user.id
+			}));
 
 		await queryInterface.bulkInsert('users', usersToInsert, {});
 		await queryInterface.bulkInsert('applicants', applicants, {});
