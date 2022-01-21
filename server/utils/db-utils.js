@@ -50,9 +50,24 @@ const ROLES_ID = {
 	APPLICANT: 3
 };
 
+const FINDALLCONFIG = (model) => {
+	return {
+		attributes: {
+			exclude: [EXCLUDEDATES.exclude, 'id']
+		},
+		include: {
+			model,
+			attributes: ['name', 'email'],
+			required: true
+		},
+		raw: true
+	};
+};
+
 module.exports = {
 	remap,
 	prependUUIDV4,
 	EXCLUDEDATES,
-	ROLES_ID
+	ROLES_ID,
+	FINDALLCONFIG
 };
