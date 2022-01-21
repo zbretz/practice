@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
 	"name": "common",
 	"version": "1.0.0",
 	"description": "",
@@ -61,4 +62,49 @@
 		"sequelize-cli": "^6.4.1",
 		"webpack-cli": "^4.9.1"
 	}
+=======
+  "name": "common",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server/index.js",
+    "build": "webpack --config webpack.config.js",
+    "react-dev": "webpack --watch",
+    "start:dev": "webpack-dev-server --hot",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Common-App/Common.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Common-App/Common/issues"
+  },
+  "homepage": "https://github.com/Common-App/Common#readme",
+  "dependencies": {
+    "@babel/preset-env": "^7.16.8",
+    "@babel/preset-react": "^7.16.7",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.5.1",
+    "express": "^4.17.2",
+    "firebase": "^9.6.3",
+    "firebase-auth": "^0.1.2",
+    "firebaseui": "^6.0.0",
+    "node": "^17.3.0",
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "sequelize": "^6.13.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.66.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.9.1"
+  }
+>>>>>>> landingPage
 }
