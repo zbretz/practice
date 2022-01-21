@@ -1,6 +1,5 @@
 'use strict';
-const { prependUUIDV4, ROLES_ID } = require('../../utils/db-utils');
-const { USERS } = require('./data/seed-data');
+const { USERS, APPLICANTS, RECRUITERS, ADMINS } = require('./data/seed-data');
 
 module.exports = {
 	async up(queryInterface, Sequelize) {
@@ -13,27 +12,10 @@ module.exports = {
 		 *   isBetaMember: false
 		 * }], {});
 		 */
-		const usersToInsert = prependUUIDV4(USERS);
-		const applicants = usersToInsert
-			.filter((user) => user.role_id === ROLES_ID.APPLICANT)
-			.map((user) => ({
-				user_id: user.id
-			}));
-		const recruiters = usersToInsert
-			.filter((user) => user.role_id === ROLES_ID.RECRUITER)
-			.map((user) => ({
-				user_id: user.id
-			}));
-		const admins = usersToInsert
-			.filter((user) => user.role_id === ROLES_ID.ADMIN)
-			.map((user) => ({
-				user_id: user.id
-			}));
-
-		await queryInterface.bulkInsert('users', usersToInsert, {});
-		await queryInterface.bulkInsert('applicants', applicants, {});
-		await queryInterface.bulkInsert('recruiters', recruiters, {});
-		await queryInterface.bulkInsert('admins', admins, {});
+		await queryInterface.bulkInsert('users', USERS, {});
+		await queryInterface.bulkInsert('applicants', APPLICANTS, {});
+		await queryInterface.bulkInsert('recruiters', RECRUITERS, {});
+		await queryInterface.bulkInsert('admins', ADMINS, {});
 	},
 
 	async down(queryInterface, Sequelize) {

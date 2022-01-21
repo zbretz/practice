@@ -28,11 +28,11 @@ const applicantSchema = {
 	},
 	desired_position: {
 		type: 'STRING',
-		defaultValue: ''
+		defaultValue: 'Full-stack Developer'
 	},
 	desired_industry: {
 		type: 'STRING',
-		defaultValue: ''
+		defaultValue: 'Technology'
 	},
 	desired_company_size: {
 		type: 'STRING',

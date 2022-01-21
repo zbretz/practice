@@ -16,7 +16,7 @@ const recruiterSchema = {
 	},
 	industry: {
 		type: 'STRING',
-		defaultValue: ''
+		defaultValue: 'Technology'
 	},
 	region: {
 		type: 'STRING',
@@ -24,11 +24,11 @@ const recruiterSchema = {
 	},
 	company_stage: {
 		type: 'STRING',
-		defaultValue: ''
+		defaultValue: 'Start-up'
 	},
 	company_size: {
 		type: 'STRING',
-		defaultValue: ''
+		defaultValue: 'Medium'
 	},
 	company_name: {
 		type: 'STRING',
