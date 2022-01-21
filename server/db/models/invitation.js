@@ -13,8 +13,12 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate({ Role, Admin }) {
 			// define association here
-			this.belongsTo(Admin);
-			this.belongsTo(Role);
+			this.belongsTo(Admin, {
+				foreignKey: 'admin_id',
+				target: 'user_id',
+				onDelete: 'CASCADE'
+			});
+			this.belongsTo(Role, { foreignKey: 'for_role', onDelete: 'CASCADE' });
 		}
 	}
 	Invitation.init(remap(DataTypes, invitationSchema), {

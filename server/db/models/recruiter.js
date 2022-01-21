@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate({ User }) {
 			// define association here
-			this.belongsTo(User);
+			this.belongsTo(User, { foreignKey: 'user_id' });
 		}
 	}
 	Recruiter.init(remap(DataTypes, recruiterSchema), {

@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate({ Role, Admin, Recruiter, Applicant, Note }) {
 			// define association here
-			this.belongsTo(Role);
+			this.belongsTo(Role, { foreignKey: 'role_id' });
 			this.hasOne(Admin, { foreignKey: 'user_id', onDelete: 'CASCADE' });
 			this.hasOne(Recruiter, { foreignKey: 'user_id', onDelete: 'CASCADE' });
 			this.hasOne(Applicant, { foreignKey: 'user_id', onDelete: 'CASCADE' });
