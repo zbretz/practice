@@ -53,6 +53,4 @@ userControllers.getUsersByRole = async (req, res, next) => {
 	}
 };
 
-userControllers.getUserByRoleAndId = async (req, res, next) => {};
-
 module.exports = userControllers;
