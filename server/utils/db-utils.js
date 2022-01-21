@@ -50,7 +50,7 @@ const ROLES_ID = {
 	APPLICANT: 3
 };
 
-const FINDALLCONFIG = (model) => {
+const joinConfig = (model) => {
 	return {
 		attributes: {
 			exclude: [...EXCLUDEDATES, 'id']
@@ -69,5 +69,5 @@ module.exports = {
 	prependUUIDV4,
 	EXCLUDEDATES,
 	ROLES_ID,
-	FINDALLCONFIG
+	joinConfig
 };
