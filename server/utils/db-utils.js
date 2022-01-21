@@ -1,5 +1,5 @@
 const { v4: uuid } = require('uuid');
-const Sequelize = require('sequelize');
+const createError = require('http-errors');
 
 /*
 function: remap
@@ -64,10 +64,15 @@ const joinConfig = (model) => {
 	};
 };
 
+const notFoundError = (type) => {
+	return createError(404, `${type} not found!`);
+};
+
 module.exports = {
 	remap,
 	prependUUIDV4,
 	EXCLUDEDATES,
 	ROLES_ID,
-	joinConfig
+	joinConfig,
+	notFoundError
 };

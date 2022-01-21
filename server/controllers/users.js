@@ -1,5 +1,5 @@
 const { User } = require('../db/models/index');
-const { EXCLUDEDATES } = require('../utils/db-utils');
+const { EXCLUDEDATES, notFoundError } = require('../utils/db-utils');
 const createError = require('http-errors');
 
 const userControllers = {};
@@ -28,7 +28,7 @@ userControllers.getUserById = async (req, res, next) => {
 				id
 			}
 		});
-		return user ? res.status(200).json(user) : next(createError(404, 'User not found'));
+		return user ? res.status(200).json(user) : next(notFoundError('User'));
 	} catch (e) {
 		next(createError(500, e));
 	}
@@ -45,9 +45,7 @@ userControllers.getUsersByRole = async (req, res, next) => {
 				role_id
 			}
 		});
-		return users
-			? res.status(200).json(users)
-			: next(createError(404, 'Users not found with that role'));
+		return users ? res.status(200).json(users) : next(notFoundError('Users'));
 	} catch (e) {
 		next(createError(500, e));
 	}
