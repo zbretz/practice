@@ -7,7 +7,9 @@ const userControllers = {};
 userControllers.getAllUsers = async (req, res, next) => {
 	try {
 		const users = await User.findAll({
-			attributes: EXCLUDEDATES
+			attributes: {
+				exclude: EXCLUDEDATES
+			}
 		});
 		res.status(200).json(users);
 	} catch (e) {
@@ -19,7 +21,9 @@ userControllers.getUserById = async (req, res, next) => {
 	const { id } = req.params;
 	try {
 		const user = await User.findOne({
-			attributes: EXCLUDEDATES,
+			attributes: {
+				exclude: EXCLUDEDATES
+			},
 			where: {
 				id
 			}
@@ -34,7 +38,9 @@ userControllers.getUsersByRole = async (req, res, next) => {
 	const { role_id } = req.params;
 	try {
 		const users = await User.findAll({
-			attributes: EXCLUDEDATES,
+			attributes: {
+				exclude: EXCLUDEDATES
+			},
 			where: {
 				role_id
 			}

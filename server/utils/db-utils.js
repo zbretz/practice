@@ -42,7 +42,7 @@ function prependUUIDV4(bulkInput) {
 	}
 }
 
-const EXCLUDEDATES = { exclude: ['createdAt', 'updatedAt'] };
+const EXCLUDEDATES = ['createdAt', 'updatedAt'];
 
 const ROLES_ID = {
 	ADMIN: 1,
@@ -53,7 +53,7 @@ const ROLES_ID = {
 const FINDALLCONFIG = (model) => {
 	return {
 		attributes: {
-			exclude: [EXCLUDEDATES.exclude, 'id']
+			exclude: [...EXCLUDEDATES, 'id']
 		},
 		include: {
 			model,

@@ -4,7 +4,7 @@ const createError = require('http-errors');
 
 const applicantControllers = {};
 
-applicantControllers.mergeUsersAndApplicants = async (req, res, next) => {
+applicantControllers.mergeUsersAndApplicants = async (req, _res, next) => {
 	try {
 		console.log();
 		const applicants = await Applicant.findAll(FINDALLCONFIG(User));
