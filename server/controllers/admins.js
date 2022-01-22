@@ -13,4 +13,19 @@ adminControllers.getAllAdmins = async (req, res, next) => {
 	}
 };
 
+adminControllers.getAdminById = async (req, res, next) => {
+	try {
+		const { id } = req.params;
+		const admin = await Admin.findOne({
+			...joinConfig(User),
+			where: {
+				user_id: id
+			}
+		});
+		return admin ? res.status(200).json(admin) : next(notFoundError('Admin'));
+	} catch (e) {
+		next(createError(500, e));
+	}
+};
+
 module.exports = adminControllers;
