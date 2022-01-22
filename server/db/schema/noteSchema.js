@@ -9,18 +9,18 @@ const noteSchema = {
 		allowNull: false,
 		references: {
 			model: 'users',
-			key: 'id',
-			onDelete: 'CASCADE'
-		}
+			key: 'id'
+		},
+		onDelete: 'CASCADE'
 	},
 	notes_for: {
 		type: 'UUID',
 		allowNull: false,
 		references: {
 			model: 'applicants',
-			key: 'user_id',
-			onDelete: 'CASCADE'
-		}
+			key: 'user_id'
+		},
+		onDelete: 'CASCADE'
 	},
 	notes: {
 		type: 'STRING',

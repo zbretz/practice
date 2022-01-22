@@ -1,11 +1,5 @@
 'use strict';
-const { prependUUIDV4 } = require('../../utils/db-utils');
-
-const ROLES = [
-	{ id: 1, role: 'admin' },
-	{ id: 2, role: 'recruiter' },
-	{ id: 3, role: 'applicant' }
-];
+const { ROLES } = require('./data/seed-data');
 
 module.exports = {
 	async up(queryInterface, Sequelize) {

@@ -23,9 +23,9 @@ const userSchema = {
 		allowNull: false,
 		references: {
 			model: 'roles',
-			key: 'id',
-			onDelete: 'CASCADE'
-		}
+			key: 'id'
+		},
+		onDelete: 'CASCADE'
 	},
 	name: {
 		type: 'STRING',
