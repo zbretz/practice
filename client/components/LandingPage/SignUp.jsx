@@ -55,7 +55,6 @@ const SignUp = () => {
         <Link to="/login">  Log In</Link>
       </div>
 
-      <Link to="/createProfilePage"> Create Profile </Link>
     </Container>
   )
 
