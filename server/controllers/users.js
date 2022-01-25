@@ -1,6 +1,6 @@
 const { User } = require('../db/models/index');
-const { EXCLUDEDATES, notFoundError } = require('../utils/db-utils');
-const createError = require('http-errors');
+const { EXCLUDEDATES, notFoundError, systemError } = require('../utils/db-utils');
+const { v4: uuid } = require('uuid');
 
 const userControllers = {};
 
@@ -13,7 +13,7 @@ userControllers.getAllUsers = async (req, res, next) => {
 		});
 		res.status(200).json(users);
 	} catch (e) {
-		next(createError(500, e));
+		next(systemError(e));
 	}
 };
 
@@ -30,7 +30,7 @@ userControllers.getUserById = async (req, res, next) => {
 		});
 		return user ? res.status(200).json(user) : next(notFoundError('User'));
 	} catch (e) {
-		next(createError(500, e));
+		next(systemError(e));
 	}
 };
 
@@ -47,7 +47,14 @@ userControllers.getUsersByRole = async (req, res, next) => {
 		});
 		return users ? res.status(200).json(users) : next(notFoundError('Users'));
 	} catch (e) {
-		next(createError(500, e));
+		next(systemError(e));
+	}
+};
+
+userControllers.createUser = async (req, res, next) => {
+	try {
+	} catch (e) {
+		next(systemError(e));
 	}
 };
 

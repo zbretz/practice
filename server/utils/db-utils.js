@@ -68,11 +68,16 @@ const notFoundError = (type) => {
 	return createError(404, `${type} not found!`);
 };
 
+const systemError = (error) => {
+	return createError(500, error);
+};
+
 module.exports = {
 	remap,
 	prependUUIDV4,
 	EXCLUDEDATES,
 	ROLES_ID,
 	joinConfig,
-	notFoundError
+	notFoundError,
+	systemError
 };

@@ -1,6 +1,5 @@
 const { User, Applicant } = require('../db/models/index');
-const { EXCLUDEDATES, joinConfig, notFoundError } = require('../utils/db-utils');
-const createError = require('http-errors');
+const { joinConfig, notFoundError, systemError } = require('../utils/db-utils');
 
 const applicantControllers = {};
 
@@ -9,7 +8,7 @@ applicantControllers.getAllApplicants = async (req, res, next) => {
 		const applicants = await Applicant.findAll(joinConfig(User));
 		res.status(200).json(applicants);
 	} catch (e) {
-		next(createError(500, e));
+		next(systemError(e));
 	}
 };
 
@@ -24,7 +23,7 @@ applicantControllers.getApplicantById = async (req, res, next) => {
 		});
 		return applicant ? res.status(200).json(applicant) : next(notFoundError('Applicant'));
 	} catch (e) {
-		next(createError(500, e));
+		next(systemError(e));
 	}
 };
 
