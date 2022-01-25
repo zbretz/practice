@@ -52,10 +52,11 @@ userControllers.getUsersByRole = async (req, res, next) => {
 };
 
 userControllers.validatePost = (req, _res, next) => {
-	if (['POST', 'PUT', 'PATCH'].includes(req.method.toUpperCase())) {
-		if (req.headers['content-type'] !== 'application/json') {
-			next(badRequest('Please changed Content-Type to application/json'));
-		}
+	if (
+		['POST', 'PUT', 'PATCH'].includes(req.method.toUpperCase()) &&
+		req.headers['content-type'] !== 'application/json'
+	) {
+		next(badRequest('Please changed Content-Type to application/json'));
 	}
 	next();
 };
