@@ -22,7 +22,7 @@ const ApplicantInfoForm = () => {
             </Form.Group>
           </Form>
 
-          <Link to="/error" >
+          <Link to="/applicantPortal" >
           <Button type="submit" >Go To Portal</Button>
           </Link>
 
