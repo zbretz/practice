@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate({ User, Note }) {
 			// define association here
-			this.belongsTo(User, { foreignKey: 'user_id' });
-			this.hasOne(Note, { foreignKey: 'notes_for', target: 'user_id' });
+			this.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+			this.hasOne(Note, { foreignKey: 'notes_for', target: 'user_id', onDelete: 'CASCADE' });
 		}
 	}
 	Applicant.init(remap(DataTypes, applicantSchema), {

@@ -19,7 +19,8 @@ Description:
 -   Copy `.env-sample` and rename it to `.env`
 -   Save all of data config on `.env` file. This is what we'll use to connect to the database
 -   Initialize Database - This would create, migrate and seed the roles. This is, hopefully, everything needed to do the initial setup
-    -   `npm run db:init`
+    -   `npm run db:init` all setup from creation of database to migration to seeding of roles. Be aware that existing database will be dropped too
+    -   `npm run db:init:dev` all setup from creation of database to migration to seeding of roles and all dummy data. Be aware that existing database will be dropped too
 -   Creating and deleting database
     -   Make sure to have the `.env` file filled out before proceeding
     -   `npx sequelize db:create` to create the database

@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate({ User, Invitation }) {
 			// define association here
-			this.hasMany(User, { foreignKey: 'role_id' });
-			this.hasMany(Invitation, { foreignKey: 'for_role' });
+			this.hasMany(User, { foreignKey: 'role_id', onDelete: 'CASCADE' });
+			this.hasMany(Invitation, { foreignKey: 'for_role', onDelete: 'CASCADE' });
 		}
 	}
 	Role.init(remap(DataTypes, roleSchema), {
