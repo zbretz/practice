@@ -13,7 +13,7 @@ const SignUp = () => {
     e.preventDefault();
     signUp(emailRef.current.value, passwordRef.current.value)
     //  if (isSignedIn && currentUser) {
-      history.push('/chooseAccountType')
+    history.push('/chooseAccountType')
     // }
   }
 
@@ -43,9 +43,7 @@ const SignUp = () => {
               </Form.Group>
             </Form>
 
-            <Link to="/createProfilePage" >
-              <Button type="submit" onClick={handleSignUp}>Sign Up</Button>
-            </Link>
+            <Button type="submit" onClick={handleSignUp}>Sign Up</Button>
 
           </Card.Body>
         </Card>
