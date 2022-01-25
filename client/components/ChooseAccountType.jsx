@@ -7,9 +7,9 @@ const ChooseAccountType = () => {
     <div>
       <h1>Choose Account Type  </h1>
       <div>
-        {/* <Link to='/'> */}
+        <Link to='/applicantInfoForm'>
           <Button>Applicant</Button>
-        {/* </Link> */}
+        </Link>
          or
         {/* <Link to="/"> */}
           <Button>Recruiter</Button>
