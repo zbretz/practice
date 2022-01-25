@@ -4,7 +4,8 @@ const {
 	getUserById,
 	getUsersByRole,
 	createUser,
-	validatePost
+	validateRequest,
+	checkUserExistence
 } = require('../controllers/users');
 
 usersRouter.get('/', getAllUsers);
@@ -12,7 +13,7 @@ usersRouter.get('/:id', getUserById);
 
 usersRouter.get('/role/:role_id', getUsersByRole);
 
-usersRouter.use('/', validatePost);
-usersRouter.post('/', createUser);
+usersRouter.use('/', validateRequest);
+usersRouter.post('/', checkUserExistence, createUser);
 
 module.exports = usersRouter;
