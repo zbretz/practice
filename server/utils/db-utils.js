@@ -65,11 +65,15 @@ const joinConfig = (model) => {
 };
 
 const notFoundError = (type) => {
-	return createError(404, `${type} not found!`);
+	return type ? createError(404, `${type} not found!`) : createError(404);
 };
 
 const systemError = (error) => {
-	return createError(500, error);
+	return error ? createError(500, error) : createError(500);
+};
+
+const badRequest = (message) => {
+	return message ? createError(400, message) : createError(400);
 };
 
 module.exports = {
@@ -79,5 +83,6 @@ module.exports = {
 	ROLES_ID,
 	joinConfig,
 	notFoundError,
-	systemError
+	systemError,
+	badRequest
 };
