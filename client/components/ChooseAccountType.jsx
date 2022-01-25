@@ -11,9 +11,9 @@ const ChooseAccountType = () => {
           <Button>Applicant</Button>
         </Link>
          or
-        {/* <Link to="/"> */}
+        <Link to="/recruiterInfoForm">
           <Button>Recruiter</Button>
-        {/* </Link> */}
+        </Link>
       </div>
     </div>
   )
