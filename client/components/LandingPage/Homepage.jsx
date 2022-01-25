@@ -1,27 +1,24 @@
 import React from 'react';
 import { useState } from 'react';
-import Buttons from '../Buttons.jsx';
-import Login from './Login.jsx';
-
+import { Form, Button, Card, Container } from 'react-bootstrap'
+import { Switch, Route, Link, Redirect } from 'react-router-dom'
 import './homepage.css';
 
 const Homepage = () => {
-
-  const [login, setLogin] = useState(false);
-
-  const clickLogin = () => {
-    setLogin(true);
-  }
-
   return (
-  <div className='home'>
-    <h1 className='title'>Apply.io</h1>
-      {login ? <Login /> : <></>}
-      <div className='buttons'>
-        <Buttons text={'Log In'} clickFn={clickLogin}/>
-        <Buttons text={'Sign Up'} /> 
+      <div className='home'>
+
+        <h1 className='title'>Apply.io</h1>
+
+        <Link to='/signUp'>
+          <Button>Create an Account</Button>
+        </Link>
+
+        <Link to="/login">
+          <Button>Log into Existing Account</Button>
+        </Link>
+
       </div>
-  </div>
   )
 }
 
