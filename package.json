@@ -31,6 +31,7 @@
 	},
 	"homepage": "https://github.com/Common-App/Common#readme",
 	"dependencies": {
+		"@babel/core": "^7.16.12",
 		"@babel/preset-env": "^7.16.8",
 		"@babel/preset-react": "^7.16.7",
 		"babel": "^6.23.0",
