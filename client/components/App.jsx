@@ -4,12 +4,13 @@ import { Switch, Route, Link, NavLink } from 'react-router-dom'
 import { Form, Button, Card, Container } from 'react-bootstrap'
 
 import Homepage from './LandingPage/Homepage.jsx';
-import Login from './LandingPage/Login.jsx';
-import ApplicantInfoForm from './Applicant/ApplicantInfoForm.jsx'
 import SignUp from './LandingPage/SignUp.jsx'
 import ChooseAccountType from './ChooseAccountType.jsx'
-import RecruiterPortal from './Recruiter/RecruiterPortal.jsx'
+import Login from './LandingPage/Login.jsx';
 import ApplicantPortal from './Applicant/ApplicantPortal.jsx'
+import ApplicantInfoForm from './Applicant/ApplicantInfoForm.jsx'
+import RecruiterPortal from './Recruiter/RecruiterPortal.jsx'
+import RecruiterInfoForm from './Recruiter/RecruiterInfoForm.jsx'
 import AdminPortal from './Admin/AdminPortal.jsx'
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
 
         <Switch>
           <Route exact path="/recruiterPortal" component={RecruiterPortal} />
+          <Route exact path="/recruiterInfoForm" component={RecruiterInfoForm} />
           <Route exact path="/applicantPortal" component={ApplicantPortal} />
           <Route exact path="/adminPortal" component={AdminPortal} />
           <Route exact path="/applicantInfoForm" component={ApplicantInfoForm} />
