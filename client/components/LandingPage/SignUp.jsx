@@ -12,7 +12,8 @@ const SignUp = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
     signUp(emailRef.current.value, passwordRef.current.value)
-    //  if (isSignedIn && currentUser) {
+    // issue: requires 2 clicks
+    // if (isSignedIn && currentUser) {
     history.push('/chooseAccountType')
     // }
   }
