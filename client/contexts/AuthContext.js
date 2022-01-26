@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
   const [role, setRole] = useState('unknown')
-  const [isSignedIn, setIsSignedIn] = useState('false')
+  const [isSignedIn, setIsSignedIn] = useState(false)
 
   // Sign Up
   const signUp = (email, password) => {
@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
         // User is automatically signed in when they signup
         const user = userCredential.user;
         console.log(`${JSON.stringify(user.email)} is signed up successfully on firebase!`)
-        setIsSignedIn('true')
+        setIsSignedIn(true)
         // console.log( `Their info is: ${JSON.stringify(user)}`)
         // ...
       })
@@ -39,18 +39,30 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
 
     const userStatusChange = onAuthStateChanged(auth, user => {
-      setCurrentUser(user)
       setRole('applicant')
-      // setCurrentUser({
-      //   ...user,
-      //   role: role
-      // })
+      // const userInfo = {
+      //   role: 'applicant',
+      //   email: user.email,
+      //   uid: user.uid,
+      //   createdAt: user.stsTokenManager.createdAt,
+      //   lastLoginAt: user.stsTokenManager.lastLoginAt,
+      //   expirationTime: user.stsTokenManager.expirationTime,
+      //   apiKey: user.stsTokenManager.apiKey,
+      //   refreshToken: user.stsTokenManager.refreshToken,
+      //   accessToken: user.stsTokenManager.accessToken
+      // }
+
+      // setCurrentUser(userInfo)
+      setCurrentUser({
+        ...user,
+        role: "applicant"
+      })
       setLoading(false)
     })
 
     return userStatusChange
 
-  }, [setRole])
+  }, [])
 
 
   // Sign In
@@ -60,13 +72,9 @@ export const AuthProvider = ({ children }) => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(`${JSON.stringify(user.email)} is signed in on firebase!`)
-        setIsSignedIn('true')
+        setIsSignedIn(true)
         // console.log( `Their info is: ${JSON.stringify(user)}`)
         // ...
-      })
-      .then(() =>{
-        // get request here to find role??? or in component
-        // setRole('recruiter')
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -81,11 +89,11 @@ export const AuthProvider = ({ children }) => {
 
     signOut(auth).then(() => {
       console.log(`According to firebase, you are signed out!`)
-      // setCurrentUser(null)
-      // setRole("unknown")
+      setCurrentUser()
+      setRole("unknown")
       // setLoading(true)
-      // // Still to to account for when token expires
-      // setIsSignedIn('false')
+      // Still need to account for when token expires
+      setIsSignedIn(false)
     }).catch((error) => {
       console.log(`Error with user sign-out: ${error}`)
     });
