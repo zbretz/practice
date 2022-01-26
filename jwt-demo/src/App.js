@@ -4,6 +4,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
+import Recruiter_Candidate_View from './Recruiter_Candidate_View.jsx'
+
 
 const apiUrl = 'http://localhost:3001';
 axios.interceptors.request.use(
@@ -130,12 +132,14 @@ return (
 
 const App = () => {
   return(
-    <>
-    <div style = {{'height': '200px'}}>
+    // <>
+    // <div style = {{'height': '200px'}}>
 
-    </div>
-    <Child/>
-    </>
+    // </div>
+    // <Child/>
+    // </>
+
+    <Recruiter_Candidate_View/>
   )
 }
 
