@@ -12,12 +12,10 @@ const Login = () => {
   const handleSignIn = (e) => {
     e.preventDefault();
     signIn(emailRef.current.value, passwordRef.current.value)
-    console.log('user role is ', role)
     // issue: requires 2 clicks
     if (isSignedIn && currentUser) {
-      history.push(`/${role}Portal` || '/portal')
+      history.push(`/${role}Portal` || '/')
     }
-
   }
 
   const handleSignOut = (e) => {
