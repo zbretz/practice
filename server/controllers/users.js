@@ -87,12 +87,16 @@ userControllers.checkUserExistence = async (req, _res, next) => {
 };
 
 userControllers.createUser = async (req, res, next) => {
+	let createdUser;
 	try {
 		const id = uuid();
-		const createdUser = await User.create({ id, ...req.body });
+		createdUser = await User.create({ id, ...req.body });
 		await MODELS[req.body.role_id].create({ user_id: id });
 		return res.status(202).json(createdUser);
 	} catch (e) {
+		if (createdUser) {
+			await User.destroy({ where: { ...req.body } });
+		}
 		next(systemError(e));
 	}
 };
