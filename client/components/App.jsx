@@ -5,6 +5,8 @@ import { Form, Button, Card, Container } from 'react-bootstrap'
 
 import Homepage from './LandingPage/Homepage.jsx';
 import Recruiter_Candidate_View from './Recruiter_Candidate_View.jsx'
+import Recruiter_Landing from './Recruiter_Landing.jsx'
+
 
 const App = () => {
   return (
@@ -13,8 +15,8 @@ const App = () => {
     //   <AuthTesting />
     //   <Homepage />
     // </AuthProvider>
-    <Recruiter_Candidate_View />
-  )
+    // <Recruiter_Candidate_View />
+    <Recruiter_Landing />  )
 }
 
 export default App;
