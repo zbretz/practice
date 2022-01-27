@@ -17,10 +17,12 @@ const SignUp = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault();
+
+    // validPW();
     signUp(emailRef.current.value, passwordRef.current.value)
     // issue: requires 2 clicks
     // if (isSignedIn && currentUser) {
-    history.push('/chooseAccountType')
+    // history.push('/chooseAccountType')
     // }
   }
 
@@ -32,6 +34,23 @@ const SignUp = () => {
     passwordRef.current.value === verifyPassword.current.value ? setPWMatch(true) : setPWMatch(false);
   }
 
+  const validPW = () => {
+    // password should contain one upper case
+    // one symbol
+    // one number
+
+    let containsUpper = false;
+    let containsSymbol = false;
+    let containsNumber = false;
+
+    let password = passwordRef.current.value;
+    for (let i = 0; i < password.length; i++) {
+      if (password[i].isUpperCase()) {
+        console.log('hit');
+      }
+    }
+    console.log('not found');
+  }
 
   const handleSignOut = (e) => {
     e.preventDefault();
@@ -62,7 +81,6 @@ const SignUp = () => {
               </Form.Group>
               {pwMatch ? <></> : <Alert variant="danger">Incorrect Password Verification</Alert>}
             </Form>
-            {/* <Button onClick={() => verify()}>Verify</Button> */}
             <Button type="submit" onClick={handleSignUp}>Sign Up</Button>
 
           </Card.Body>
