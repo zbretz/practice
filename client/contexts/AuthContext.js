@@ -11,7 +11,6 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
-  const [role, setRole] = useState('unknown')
   const [isSignedIn, setIsSignedIn] = useState(false)
 
   // Sign Up
@@ -39,7 +38,6 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
 
     const userStatusChange = onAuthStateChanged(auth, user => {
-      setRole('applicant')
       // const userInfo = {
       //   role: 'applicant',
       //   email: user.email,
@@ -53,10 +51,7 @@ export const AuthProvider = ({ children }) => {
       // }
 
       // setCurrentUser(userInfo)
-      setCurrentUser({
-        ...user,
-        role: "applicant"
-      })
+      setCurrentUser(user)
       setLoading(false)
     })
 
@@ -89,8 +84,6 @@ export const AuthProvider = ({ children }) => {
 
     signOut(auth).then(() => {
       console.log(`According to firebase, you are signed out!`)
-      setCurrentUser()
-      setRole("unknown")
       // setLoading(true)
       // Still need to account for when token expires
       setIsSignedIn(false)
@@ -103,7 +96,6 @@ export const AuthProvider = ({ children }) => {
   // Make value object available to any child div of AuthProvider
   const value = {
     currentUser,
-    role,
     isSignedIn,
     signUp,
     userSignOut,
