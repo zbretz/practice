@@ -1,5 +1,5 @@
 const { v4: uuid } = require('uuid');
-const Sequelize = require('sequelize');
+const createError = require('http-errors');
 
 /*
 function: remap
@@ -42,7 +42,7 @@ function prependUUIDV4(bulkInput) {
 	}
 }
 
-const EXCLUDEDATES = { exclude: ['createdAt', 'updatedAt'] };
+const EXCLUDEDATES = ['createdAt', 'updatedAt'];
 
 const ROLES_ID = {
 	ADMIN: 1,
@@ -50,9 +50,29 @@ const ROLES_ID = {
 	APPLICANT: 3
 };
 
+const joinConfig = (model) => {
+	return {
+		attributes: {
+			exclude: [...EXCLUDEDATES, 'id']
+		},
+		include: {
+			model,
+			attributes: ['name', 'email'],
+			required: true
+		},
+		raw: true
+	};
+};
+
+const notFoundError = (type) => {
+	return createError(404, `${type} not found!`);
+};
+
 module.exports = {
 	remap,
 	prependUUIDV4,
 	EXCLUDEDATES,
-	ROLES_ID
+	ROLES_ID,
+	joinConfig,
+	notFoundError
 };
