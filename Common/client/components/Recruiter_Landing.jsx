@@ -5,23 +5,25 @@ import Table from 'react-bootstrap/Table'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
-import styles from './styles/recruiterCandidateView.module.css'
+import styles from './styles/recruiterLanding.module.css'
+
 
 const data = {
+  candidates:
   [
     {
       name:"Jose Solis",
       position: "Full Stack Engineer",
-      background: "Bootcamp Graduate"
+      background: "Bootcamp Graduate",
       review_blurb: "Strong Front End skills. Strong Implementation. Solid data structure aptitude.",
     },
     {
       name:"Zachary Bretz",
       position: "Full Stack Engineer",
-      background: "Bootcamp Graduate"
+      background: "Bootcamp Graduate",
       review_blurb: "Interested in team management. Underwhelming leetcode performance. Strong system design.",
     }
-
+  ]
 }
 
 const Recruiter_Landing = () => {
@@ -30,25 +32,20 @@ const Recruiter_Landing = () => {
     <>
     <Container style={{width:"80%"}}>
 
-    <Card>
-      <Card.Header as="h5">Featured</Card.Header>
-      <Card.Body>
-        <Card.Title>Special title treatment</Card.Title>
-        <Card.Text>
-          With supporting text below as a natural lead-in to additional content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card>    <Card>
-      <Card.Header as="h5">Featured</Card.Header>
-      <Card.Body>
-        <Card.Title>Special title treatment</Card.Title>
-        <Card.Text>
-          With supporting text below as a natural lead-in to additional content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card>
+      {data.candidates.map(candidate => {
+        return(
+          <Card className={styles.card}>
+            <Card.Header as="h5">{candidate.name}</Card.Header>
+            <Card.Body>
+              <Card.Title>{candidate.position} {candidate.background}</Card.Title>
+              <Card.Text>
+                {candidate.review_blurb}
+              </Card.Text>
+              <Button variant="primary">Go somewhere</Button>
+            </Card.Body>
+          </Card>
+        )
+      })}
 
     </Container>
     </>
