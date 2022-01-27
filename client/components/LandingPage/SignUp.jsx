@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { Form, Button, Card, Container } from 'react-bootstrap'
+import React, { useRef, useState } from 'react';
+import { Form, Button, Card, Container, Alert } from 'react-bootstrap'
 import { useAuth } from '../../contexts/AuthContext'
 import { BrowserRouter, Switch, Route, Link, Redirect, NavLink, useHistory } from 'react-router-dom'
 
@@ -7,6 +7,12 @@ const SignUp = () => {
   const history = useHistory()
   const emailRef = useRef()
   const passwordRef = useRef()
+
+  // to verify pw
+  const verifyPassword = useRef();
+
+  const [pwMatch, setPWMatch] = useState(true);
+
   const { signUp, isSignedIn, currentUser, userSignOut, signIn } = useAuth()
 
   const handleSignUp = (e) => {
@@ -16,6 +22,14 @@ const SignUp = () => {
     // if (isSignedIn && currentUser) {
     history.push('/chooseAccountType')
     // }
+  }
+
+  // function to verify that passwords match
+  const verify = () => {
+    // console.log(passwordRef.current.value);
+    // console.log(verifyPassword.current.value);
+
+    passwordRef.current.value === verifyPassword.current.value ? setPWMatch(true) : setPWMatch(false);
   }
 
 
@@ -42,8 +56,13 @@ const SignUp = () => {
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" ref={passwordRef} required />
               </Form.Group>
+              <Form.Group id="password">
+                <Form.Label>Verify Password</Form.Label>
+                <Form.Control type="password" ref={verifyPassword} required onChange={() => verify()}/>
+              </Form.Group>
+              {pwMatch ? <></> : <Alert variant="danger">Incorrect Password Verification</Alert>}
             </Form>
-
+            {/* <Button onClick={() => verify()}>Verify</Button> */}
             <Button type="submit" onClick={handleSignUp}>Sign Up</Button>
 
           </Card.Body>

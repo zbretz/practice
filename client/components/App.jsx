@@ -17,26 +17,25 @@ import AdminInfoForm from './Admin/AdminInfoForm.jsx'
 const App = () => {
 
   return (
-    <Homepage />
-    // <Container>
-    //   <NavLink to="/">Back to Homepage</NavLink>
-    //   <AuthProvider>
+    <Container>
+      <NavLink to="/">Back to Homepage</NavLink>
+      <AuthProvider>
 
-    //     <Switch>
-    //       <Route exact path="/applicantPortal" component={ApplicantPortal} />
-    //       <Route exact path="/applicantInfoForm" component={ApplicantInfoForm} />
-    //       <Route exact path="/recruiterPortal" component={RecruiterPortal} />
-    //       <Route exact path="/recruiterInfoForm" component={RecruiterInfoForm} />
-    //       <Route exact path="/adminPortal" component={AdminPortal} />
-    //       <Route exact path="/adminInfoForm" component={AdminInfoForm} />
-    //       <Route exact path="/login" component={Login} />
-    //       <Route exact path="/signUp" component={SignUp} />
-    //       <Route exact path="/chooseAccountType" component={ChooseAccountType} />
-    //       <Route exact path="/" component={Homepage} />
-    //     </Switch>
+        <Switch>
+          <Route exact path="/applicantPortal" component={ApplicantPortal} />
+          <Route exact path="/applicantInfoForm" component={ApplicantInfoForm} />
+          <Route exact path="/recruiterPortal" component={RecruiterPortal} />
+          <Route exact path="/recruiterInfoForm" component={RecruiterInfoForm} />
+          <Route exact path="/adminPortal" component={AdminPortal} />
+          <Route exact path="/adminInfoForm" component={AdminInfoForm} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signUp" component={SignUp} />
+          <Route exact path="/chooseAccountType" component={ChooseAccountType} />
+          <Route exact path="/" component={Homepage} />
+        </Switch>
 
-    //   </AuthProvider>
-    // </Container>
+      </AuthProvider>
+    </Container>
   )
 }
 
