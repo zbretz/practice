@@ -37,6 +37,13 @@ thing()
 // });
 
 
-// bcrypt.compare("Bp2r$^", "$2b$10$YemhtHnDMv5u.yM/iFooqebp3LmB0YGwWjsV3lZ8kXC1nLYzf4SsW", function(err, result) {
-//   console.log(result)
-// });
+bcrypt.compare("Bp2r$^", "$2b$10$YemhtHnDMv5u.yM/iFooqebp3LmB0YGwWjsV3lZ8kXC1nLYzf4SsW", function(err, result) {
+  console.log(result, 1)
+});
+
+bcrypt.compare("Bp2r$^", "$2b$10$IAz1NtzctD3kVnrr6HNHKuMuqawcp8sBVsiAgkFuf2kMa.Jb9VtEO", function(err, result) {
+  console.log(result, 2)
+
+});bcrypt.compare("Bp2r$^", "$2b$10$Z1uUPfA7i.dt/p39uhwelu4ekrUytcHKwJZ80mtyMABMuLw9szVpq", function(err, result) {
+  console.log(result, 3)
+});
