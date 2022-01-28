@@ -22,9 +22,9 @@ const Login = () => {
       setError("")
       // setLoading(true)
       await signIn(emailRef.current.value, passwordRef.current.value)
-      if ( currentUser && userInfo) {
+      // if ( currentUser && userInfo) {
           history.push(`/${userInfo.role}Portal`)
-      }
+      // }
     } catch {
       setError("Failed to login")
     }
