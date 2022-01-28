@@ -64,16 +64,6 @@ userControllers.getUsersByRole = async (req, res, next) => {
 	}
 };
 
-userControllers.validateRequest = (req, _res, next) => {
-	if (
-		['POST', 'PUT', 'PATCH'].includes(req.method.toUpperCase()) &&
-		req.headers['content-type'] !== 'application/json'
-	) {
-		next(badRequest('Please changed Content-Type to application/json'));
-	}
-	next();
-};
-
 userControllers.checkUserExistence = async (req, _res, next) => {
 	const user = await User.findOne({
 		where: {

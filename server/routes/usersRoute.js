@@ -4,9 +4,10 @@ const {
 	getUserById,
 	getUsersByRole,
 	createUser,
-	validateRequest,
 	checkUserExistence
 } = require('../controllers/users');
+
+const { validateRequest } = require('../controllers/general-validation');
 
 usersRouter.get('/', getAllUsers);
 usersRouter.get('/:id', getUserById);
