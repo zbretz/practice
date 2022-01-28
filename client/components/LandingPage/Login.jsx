@@ -1,21 +1,50 @@
 import React, { useRef, useState } from 'react';
-import { Form, Button, Card, Container } from 'react-bootstrap'
+import { Form, Button, Card, Container, Alert } from 'react-bootstrap'
 import { useAuth } from '../../contexts/AuthContext.js'
 import { Switch, Route, Link, Redirect, NavLink, useHistory } from 'react-router-dom'
+import axios from 'axios'
+import regeneratorRuntime from 'regenerator-runtime'
 
 const Login = () => {
   const history = useHistory()
   const emailRef = useRef()
   const passwordRef = useRef()
-  const { signUp, role, isSignedIn, currentUser, userSignOut, signIn } = useAuth()
+  const [error, setError] = useState("")
+  // const [loading, setLoading] = useState(false)
+  const { signUp, userInfo, isSignedIn, currentUser, userSignOut, signIn, currentUserInfo} = useAuth()
+  // const [userInfo, setUserInfo] = useState({ role: "", email: "" })
 
-  const handleSignIn = (e) => {
+
+    async function handleSignIn(e) {
     e.preventDefault();
-    signIn(emailRef.current.value, passwordRef.current.value)
-    // issue: requires 2 clicks
-    if (isSignedIn && currentUser) {
-      history.push(`/${role}Portal` || '/')
+
+    try {
+      setError("")
+      // setLoading(true)
+      await signIn(emailRef.current.value, passwordRef.current.value)
+      if ( currentUser && userInfo) {
+          history.push(`/${userInfo.role}Portal`)
+      }
+    } catch {
+      setError("Failed to login")
     }
+
+    // setLoading(false)
+
+    // // API Call
+    // axios({
+    //   method: 'get',
+    //   url: '/applicants/:1'
+    //   // email:currentUser.email,
+    //   // password: currentUser.uid,
+    // })
+    //   .then(function (response) {
+    //     setUserInfo(response.data)
+    //   })
+    //   .then(() => {
+        // issue: requires 2 clicks
+
+      // })
   }
 
   const handleSignOut = (e) => {
@@ -32,7 +61,8 @@ const Login = () => {
           <Card.Body>
             <h1>Log In</h1>
             {/* {JSON.stringify(currentUser)} */}
-            <Form>
+             {error && <Alert variant="danger">{error}</Alert>}
+            <Form onSubmit={handleSignIn}>
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>
                 <Form.Control type="email" ref={emailRef} required />
@@ -41,10 +71,9 @@ const Login = () => {
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" ref={passwordRef} required />
               </Form.Group>
+              {/* disabled={loading} */}
+              <Button type="submit" >Log In</Button>
             </Form>
-
-            <Button type="button" onClick={handleSignIn}>Log In</Button>
-
           </Card.Body>
         </Card>
       </>
