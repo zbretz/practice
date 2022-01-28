@@ -6,7 +6,9 @@ import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import styles from '../styles/recruiterLanding.module.css'
-import { Switch, Route, Link, NavLink, useHistory } from 'react-router-dom'
+import { Switch, Route, Link, NavLink, useHistory, useRouteMatch } from 'react-router-dom'
+
+import Recruiter_Candidate_View from './Recruiter_Candidate_View.jsx'
 
 
 
@@ -31,6 +33,8 @@ const data = {
 const Recruiter_Landing = () => {
 
   const history = useHistory()
+  let match = useRouteMatch();
+
 
   return (
     <>
@@ -45,14 +49,29 @@ const Recruiter_Landing = () => {
               <Card.Text>
                 {candidate.review_blurb}
               </Card.Text>
-              <Button onClick={()=> history.push('/')} variant="primary">Go somewhere</Button>
+              {/* <Link to="/c">Home</Link> */}
+              <Link to={`${match.url}/c`}>kjkjkj</Link>
+              {/* <Button onClick={()=> history.push(`/candidate-${candidate.id}`)} variant="primary">Go somewhere</Button> */}
+              <Button onClick={()=> history.push(`/recruiterPortal/c`)} variant="primary">Go somewhere</Button>
+
             </Card.Body>
           </Card>
         )
       })}
 
+
+
     </Container>
+
+    <Switch>
+      <Route path={`${match.path}/c`}>
+      <Button onClick={()=> history.push(`/recruiterPortal`)} variant="primary">Go somewhere</Button>
+        <Recruiter_Candidate_View/>
+      </Route>
+    </Switch>
+
     </>
+
 
   )
 }
