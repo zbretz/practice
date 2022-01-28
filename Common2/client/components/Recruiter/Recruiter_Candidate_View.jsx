@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs'
 import Table from 'react-bootstrap/Table'
@@ -97,7 +97,23 @@ const Recruiter_Candidate_View = () => {
   const { search } = useLocation()
   console.log(search) // "?filter=top&origin=im"
   const values = queryString.parse(search)
-  console.log(values.name)
+  let user_id = console.log(values.id)
+
+  React.useEffect(() => {
+
+    async function getUserData() {
+      // let response = await fetch(`https://api.github.com/users/${user}`, {
+      //   signal: abortController.signal
+      // });
+      // if (!abortController.signal.aborted) {
+      //   let data = await response.json();
+      //   setUserData(data);
+      // }
+    }
+
+    if (user_id) {
+      getGitHubUser();
+    }
 
   return (
     <>
