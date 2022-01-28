@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { User, Applicant, Recruiter, Admin } = require('../db/models/index');
 const {
 	EXCLUDEDATES,
@@ -46,6 +47,15 @@ userControllers.getUserById = async (req, res, next) => {
 	}
 };
 
+userControllers.checkUserExistence = async (req, _res, next) => {
+	const user = await User.findOne({
+		where: {
+			[Op.or]: [{ email: req.body.email }, { name: req.body.name }]
+		}
+	});
+	return user ? next(badRequest('User already exists!')) : next();
+};
+
 userControllers.getUsersByRole = async (req, res, next) => {
 	const { role_id } = req.params;
 	try {
@@ -64,11 +74,6 @@ userControllers.getUsersByRole = async (req, res, next) => {
 };
 
 userControllers.createUser = async (req, res, next) => {
-	if (req.userExists === undefined)
-		return next(systemError('Please include checkUserExistence middleware!'));
-
-	if (req.userExists) return next(badRequest('User already exists!'));
-
 	let createdUser;
 	try {
 		const id = uuid();

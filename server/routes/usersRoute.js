@@ -1,7 +1,13 @@
 const usersRouter = require('express').Router();
-const { getAllUsers, getUserById, getUsersByRole, createUser } = require('../controllers/users');
+const {
+	getAllUsers,
+	getUserById,
+	getUsersByRole,
+	createUser,
+	checkUserExistence
+} = require('../controllers/users');
 
-const { validateRequest, checkUserExistence } = require('../controllers/general-validation');
+const { validateRequest } = require('../controllers/general-validation');
 
 usersRouter.get('/', getAllUsers);
 usersRouter.get('/:id', getUserById);
