@@ -12,7 +12,6 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
-  // const [isSignedIn, setIsSignedIn] = useState(false)
   const [userInfo, setUserInfo] = useState()
   // const [currentUserInfo, setCurrentUserInfo] = useState()
 
@@ -38,33 +37,46 @@ export const AuthProvider = ({ children }) => {
   }
 
   // Sign In
-  const signIn = (email, password) => {
+  const signIn = async (email, password) => {
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(`${JSON.stringify(user.email)} is signed in on firebase!`)
-        // setIsSignedIn(true)
-        // console.log( `Their info is: ${JSON.stringify(user)}`)
-        // ...
-      })
-      .then(() => {
-        // API Call
-        return axios({
-          method: 'get',
-          url: '/applicants/:1'
-          // email:currentUser.email,
-          // password: currentUser.uid,
-        })
-      })
-      .then(function (response) {
-        setUserInfo(response.data)
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(`Error with user sign-in: ${errorCode} ${errorMessage}`)
-      });
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user
+      console.log(`${JSON.stringify(user.email)} is signed in on firebase!`)
+      const response = await axios.get('/applicants/:1');
+			setUserInfo(response.data);
+			return response.data;
+    } catch (error) {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			console.log(`Error with user sign-in: ${errorCode} ${errorMessage}`);
+		}
+
+    // signInWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     const user = userCredential.user;
+    //     console.log(`${JSON.stringify(user.email)} is signed in on firebase!`)
+    //     // console.log( `Their info is: ${JSON.stringify(user)}`)
+    //     // ...
+    //   })
+    //   .then(() => {
+    //     // API Call
+    //     return axios({
+    //       method: 'get',
+    //       url: '/applicants/:1'
+    //       // email:currentUser.email,
+    //       // password: currentUser.uid,
+    //     })
+    //   })
+    //   .then(function (response) {
+    //     setUserInfo(response.data)
+    //     return(response.data)
+    //   })
+    //   .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     console.log(`Error with user sign-in: ${errorCode} ${errorMessage}`)
+    //   });
 
   }
 
@@ -74,7 +86,6 @@ export const AuthProvider = ({ children }) => {
     signOut(auth).then(() => {
       console.log(`According to firebase, you are signed out!`)
       // Still need to account for when token expires
-      // setIsSignedIn(false)
     }).catch((error) => {
       console.log(`Error with user sign-out: ${error}`)
     });
@@ -88,7 +99,6 @@ export const AuthProvider = ({ children }) => {
       return () => {
         setCurrentUser()
         setLoading(true)
-
       }
 
     }, [])
@@ -103,7 +113,6 @@ export const AuthProvider = ({ children }) => {
     currentUser,
     userInfo,
     // currentUserInfo,
-    // isSignedIn,
     signUp,
     userSignOut,
     signIn
