@@ -4,6 +4,8 @@ import Tabs from 'react-bootstrap/Tabs'
 import Table from 'react-bootstrap/Table'
 import Container from 'react-bootstrap/Container'
 import styles from '../styles/recruiterCandidateView.module.css'
+import { BrowserRouter, Switch, Route, Link, Redirect, NavLink, useLocation } from 'react-router-dom'
+import queryString from 'query-string'
 
 
 
@@ -86,6 +88,17 @@ function ControlledTabs() {
 }
 
 const Recruiter_Candidate_View = () => {
+
+  // let [searchParams, setSearchParams] = useSearchParams();
+  // let user = searchParams.get("name");
+  // console.log(user)
+  // console.log(search)
+
+  const { search } = useLocation()
+  console.log(search) // "?filter=top&origin=im"
+  const values = queryString.parse(search)
+  console.log(values.name)
+
   return (
     <>
     <Container style={{width:"80%"}}

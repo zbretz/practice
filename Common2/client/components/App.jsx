@@ -25,9 +25,8 @@ const App = () => {
           <Route exact path="/applicantPortal" component={ApplicantPortal} />
           <Route exact path="/applicantInfoForm" component={ApplicantInfoForm} />
           <Route exact path="/recruiterPortal" component={RecruiterPortal} />
-          <Route exact path="/recruiterPortal/c" component={Recruiter_Candidate_View} />
+          <Route exact path="/recruiterPortal/candidate" component={Recruiter_Candidate_View} />
           <Route exact path="/recruiterInfoForm" component={RecruiterInfoForm} />
-          {/* <Route exact path="/recruiterInfoForm" component={RecruiterInfoForm} /> */}
           <Route exact path="/adminPortal" component={AdminPortal} />
           <Route exact path="/adminInfoForm" component={AdminInfoForm} />
           <Route exact path="/login" component={Login} />
