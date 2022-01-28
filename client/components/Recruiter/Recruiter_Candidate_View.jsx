@@ -3,7 +3,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs'
 import Table from 'react-bootstrap/Table'
 import Container from 'react-bootstrap/Container'
-import styles from './styles/recruiterCandidateView.module.css'
+import styles from '../styles/recruiterCandidateView.module.css'
 
 
 

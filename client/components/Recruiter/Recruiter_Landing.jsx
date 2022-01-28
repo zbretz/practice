@@ -34,6 +34,7 @@ const Recruiter_Landing = () => {
 
   const history = useHistory()
   let match = useRouteMatch();
+  console.log(match)
 
 
   return (
@@ -49,8 +50,8 @@ const Recruiter_Landing = () => {
               <Card.Text>
                 {candidate.review_blurb}
               </Card.Text>
-              {/* <Link to="/c">Home</Link> */}
-              <Link to={`${match.url}/c`}>kjkjkj</Link>
+              {/* <Link to="recruiterPortal/c">Home</Link> */}
+              <Link to={`${match.url}c`}>kjkjkj</Link>
               {/* <Button onClick={()=> history.push(`/candidate-${candidate.id}`)} variant="primary">Go somewhere</Button> */}
               <Button onClick={()=> history.push(`/recruiterPortal/c`)} variant="primary">Go somewhere</Button>
 
@@ -62,13 +63,13 @@ const Recruiter_Landing = () => {
 
 
     </Container>
-
+{/*
     <Switch>
       <Route path={`${match.path}/c`}>
       <Button onClick={()=> history.push(`/recruiterPortal`)} variant="primary">Go somewhere</Button>
         <Recruiter_Candidate_View/>
       </Route>
-    </Switch>
+    </Switch> */}
 
     </>
 
