@@ -20,9 +20,7 @@ validations.checkUserExistence = async (req, _res, next) => {
 			[Op.or]: [{ email: req.body.email }, { name: req.body.name }]
 		}
 	});
-	if (user) {
-		return next(badRequest('User already exists!'));
-	}
+	req.userExists = user ? true : false;
 	next();
 };
 

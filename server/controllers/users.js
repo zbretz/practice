@@ -64,6 +64,11 @@ userControllers.getUsersByRole = async (req, res, next) => {
 };
 
 userControllers.createUser = async (req, res, next) => {
+	if (req.userExists === undefined)
+		return next(systemError('Please include checkUserExistence middleware!'));
+
+	if (req.userExists) return next(badRequest('User already exists!'));
+
 	let createdUser;
 	try {
 		const id = uuid();
