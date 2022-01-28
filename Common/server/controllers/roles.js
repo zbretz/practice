@@ -7,7 +7,9 @@ const roleControllers = {};
 roleControllers.getAllRoles = async (_req, res, next) => {
 	try {
 		const roles = await Role.findAll({
-			attributes: EXCLUDEDATES
+			attributes: {
+				exclude: EXCLUDEDATES
+			}
 		});
 		res.status(200).json(roles);
 	} catch (e) {
@@ -19,7 +21,9 @@ roleControllers.getSingleRole = async (req, res, next) => {
 	const { id } = req.params;
 	try {
 		const role = await Role.findOne({
-			attributes: EXCLUDEDATES,
+			attributes: {
+				exclude: EXCLUDEDATES
+			},
 			where: {
 				id
 			}
