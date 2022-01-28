@@ -1,4 +1,3 @@
-const { Op } = require('sequelize');
 const { User, Applicant, Recruiter, Admin } = require('../db/models/index');
 const {
 	EXCLUDEDATES,
@@ -62,18 +61,6 @@ userControllers.getUsersByRole = async (req, res, next) => {
 	} catch (e) {
 		next(systemError(e));
 	}
-};
-
-userControllers.checkUserExistence = async (req, _res, next) => {
-	const user = await User.findOne({
-		where: {
-			[Op.or]: [{ email: req.body.email }, { name: req.body.name }]
-		}
-	});
-	if (user) {
-		return next(badRequest('User already exists!'));
-	}
-	next();
 };
 
 userControllers.createUser = async (req, res, next) => {
