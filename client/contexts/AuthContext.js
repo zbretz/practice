@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { auth } from '../src/firebase.js'
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import axios from 'axios'
 
 const AuthContext = React.createContext()
 
@@ -11,7 +12,9 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
-  const [isSignedIn, setIsSignedIn] = useState(false)
+  // const [isSignedIn, setIsSignedIn] = useState(false)
+  const [userInfo, setUserInfo] = useState()
+  // const [currentUserInfo, setCurrentUserInfo] = useState()
 
   // Sign Up
   const signUp = (email, password) => {
@@ -21,7 +24,7 @@ export const AuthProvider = ({ children }) => {
         // User is automatically signed in when they signup
         const user = userCredential.user;
         console.log(`${JSON.stringify(user.email)} is signed up successfully on firebase!`)
-        setIsSignedIn(true)
+
         // console.log( `Their info is: ${JSON.stringify(user)}`)
         // ...
       })
@@ -34,32 +37,6 @@ export const AuthProvider = ({ children }) => {
 
   }
 
-  // Current User
-  useEffect(() => {
-
-    const userStatusChange = onAuthStateChanged(auth, user => {
-      // const userInfo = {
-      //   role: 'applicant',
-      //   email: user.email,
-      //   uid: user.uid,
-      //   createdAt: user.stsTokenManager.createdAt,
-      //   lastLoginAt: user.stsTokenManager.lastLoginAt,
-      //   expirationTime: user.stsTokenManager.expirationTime,
-      //   apiKey: user.stsTokenManager.apiKey,
-      //   refreshToken: user.stsTokenManager.refreshToken,
-      //   accessToken: user.stsTokenManager.accessToken
-      // }
-
-      // setCurrentUser(userInfo)
-      setCurrentUser(user)
-      setLoading(false)
-    })
-
-    return userStatusChange
-
-  }, [])
-
-
   // Sign In
   const signIn = (email, password) => {
 
@@ -67,9 +44,21 @@ export const AuthProvider = ({ children }) => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(`${JSON.stringify(user.email)} is signed in on firebase!`)
-        setIsSignedIn(true)
+        // setIsSignedIn(true)
         // console.log( `Their info is: ${JSON.stringify(user)}`)
         // ...
+      })
+      .then(() => {
+        // API Call
+        return axios({
+          method: 'get',
+          url: '/applicants/:1'
+          // email:currentUser.email,
+          // password: currentUser.uid,
+        })
+      })
+      .then(function (response) {
+        setUserInfo(response.data)
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -84,19 +73,37 @@ export const AuthProvider = ({ children }) => {
 
     signOut(auth).then(() => {
       console.log(`According to firebase, you are signed out!`)
-      // setLoading(true)
       // Still need to account for when token expires
-      setIsSignedIn(false)
+      // setIsSignedIn(false)
     }).catch((error) => {
       console.log(`Error with user sign-out: ${error}`)
     });
 
   }
 
+    // Current User
+    useEffect(() => {
+      userStatusChange()
+
+      return () => {
+        setCurrentUser()
+        setLoading(true)
+
+      }
+
+    }, [])
+
+    const userStatusChange = onAuthStateChanged(auth, user => {
+      setCurrentUser(user)
+      setLoading(false)
+    })
+
   // Make value object available to any child div of AuthProvider
   const value = {
     currentUser,
-    isSignedIn,
+    userInfo,
+    // currentUserInfo,
+    // isSignedIn,
     signUp,
     userSignOut,
     signIn
@@ -104,7 +111,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      { !loading && children }
     </AuthContext.Provider>
   )
 }
