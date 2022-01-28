@@ -11,19 +11,19 @@ const Login = () => {
   const passwordRef = useRef()
   const [error, setError] = useState("")
   // const [loading, setLoading] = useState(false)
-  const { signUp, userInfo, isSignedIn, currentUser, userSignOut, signIn, currentUserInfo} = useAuth()
+  const { signUp, userInfo, currentUser, userSignOut, signIn, currentUserInfo } = useAuth()
   // const [userInfo, setUserInfo] = useState({ role: "", email: "" })
 
 
-    async function handleSignIn(e) {
+  async function handleSignIn(e) {
     e.preventDefault();
 
     try {
       setError("")
       // setLoading(true)
-      await signIn(emailRef.current.value, passwordRef.current.value)
+      const loginInfo = await signIn(emailRef.current.value, passwordRef.current.value)
       // if ( currentUser && userInfo) {
-          history.push(`/${userInfo.role}Portal`)
+      history.push(`/${loginInfo.role}Portal`)
       // }
     } catch {
       setError("Failed to login")
@@ -42,9 +42,9 @@ const Login = () => {
     //     setUserInfo(response.data)
     //   })
     //   .then(() => {
-        // issue: requires 2 clicks
+    // issue: requires 2 clicks
 
-      // })
+    // })
   }
 
   const handleSignOut = (e) => {
@@ -61,7 +61,7 @@ const Login = () => {
           <Card.Body>
             <h1>Log In</h1>
             {/* {JSON.stringify(currentUser)} */}
-             {error && <Alert variant="danger">{error}</Alert>}
+            {error && <Alert variant="danger">{error}</Alert>}
             <Form onSubmit={handleSignIn}>
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>
