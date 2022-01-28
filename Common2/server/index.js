@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 require('dotenv').config();
-const port = normalizePort(process.env.SERVER_PORT || 3001);
+const port = normalizePort(process.env.SERVER_PORT || 3000);
 
 app.use(express.static(__dirname + '/../client/public'));
 
