@@ -6,7 +6,7 @@ import { useAuth } from '../../contexts/AuthContext.js'
 const ApplicantPortal = () => {
   const history = useHistory()
   const { userSignOut, currentUser, userInfo} = useAuth()
-  const [currentUserInfo, setCurrentUserInfo] = useState()
+  // const [currentUserInfo, setCurrentUserInfo] = useState()
 
   const handleSignOut = (e) => {
     e.preventDefault();
@@ -14,11 +14,15 @@ const ApplicantPortal = () => {
     history.push('/')
   }
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    setCurrentUserInfo(userInfo)
+  //   setCurrentUserInfo(userInfo)
 
-  }, [])
+  //   return () => {
+  //     setCurrentUserInfo()
+  //   }
+
+  // }, [])
 
   return (
     <Container>
