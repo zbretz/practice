@@ -14,7 +14,7 @@ usersRouter.get('/:id', getUserById);
 
 usersRouter.get('/role/:role_id', getUsersByRole);
 
-usersRouter.use(validateRequest, checkUserExistence);
-usersRouter.post('/', createUser);
+usersRouter.use(validateRequest);
+usersRouter.post('/', checkUserExistence, createUser);
 
 module.exports = usersRouter;
