@@ -96,4 +96,14 @@ userControllers.deactivateUser = async (req, res, next) => {
 	}
 };
 
+userControllers.deleteUser = async (req, res, next) => {
+	try {
+		const { id } = req.params;
+		const deletedUser = await User.destroy({ where: { id } });
+		res.status(204).json(deletedUser);
+	} catch (e) {
+		next(systemError(e));
+	}
+};
+
 module.exports = userControllers;
