@@ -4,13 +4,15 @@ const {
 	getUserById,
 	getUsersByRole,
 	createUser,
-	checkUserExistence
+	checkUserExistence,
+	deactivateUser
 } = require('../controllers/users');
 
 const { validateRequest } = require('../controllers/general-validation');
 
 usersRouter.get('/', getAllUsers);
 usersRouter.get('/:id', getUserById);
+usersRouter.get('/:id/deactivate', deactivateUser);
 
 usersRouter.get('/role/:role_id', getUsersByRole);
 
