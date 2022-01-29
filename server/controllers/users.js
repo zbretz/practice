@@ -90,7 +90,7 @@ userControllers.deactivateUser = async (req, res, next) => {
 		const userUpdated = await User.update({ active: false }, { where: { id, active: true } });
 		return userUpdated[0]
 			? res.status(200).send('User successfully deactivated')
-			: next(badRequest('User has already been deactivated'));
+			: next(badRequest('Active user not found!'));
 	} catch (e) {
 		next(systemError(e));
 	}
@@ -99,8 +99,10 @@ userControllers.deactivateUser = async (req, res, next) => {
 userControllers.deleteUser = async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		const deletedUser = await User.destroy({ where: { id } });
-		res.status(204).json(deletedUser);
+		const userDeleted = await User.destroy({ where: { id } });
+		return userDeleted
+			? res.status(204).json('User deleted!')
+			: next(badRequest('User not found!'));
 	} catch (e) {
 		next(systemError(e));
 	}
