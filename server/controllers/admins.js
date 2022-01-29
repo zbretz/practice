@@ -1,13 +1,13 @@
 const { Admin, User } = require('../db/models/index');
 const { joinConfig } = require('../utils/db-utils');
-const { notFoundError, systemError } = require('../utils/utils');
+const { notFoundError, systemError, remapResponse, remapResponses } = require('../utils/utils');
 
 const adminControllers = {};
 
 adminControllers.getAllAdmins = async (req, res, next) => {
 	try {
 		const admins = await Admin.findAll(joinConfig(User));
-		res.status(200).json(admins);
+		res.status(200).json(remapResponses(admins));
 	} catch (e) {
 		next(systemError(e));
 	}
@@ -22,7 +22,7 @@ adminControllers.getAdminById = async (req, res, next) => {
 				user_id: id
 			}
 		});
-		return admin ? res.status(200).json(admin) : next(notFoundError('Admin'));
+		return admin ? res.status(200).json(remapResponse(admin)) : next(notFoundError('Admin'));
 	} catch (e) {
 		next(systemError(e));
 	}

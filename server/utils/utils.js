@@ -16,6 +16,23 @@ function normalizePort(val) {
 	return false;
 }
 
+const remapResponse = (responseObject) => {
+	const output = {};
+	for (let key in responseObject) {
+		const newKey = key.slice(key.indexOf('.') + 1);
+		if (newKey !== key) {
+			output[newKey] = responseObject[key];
+		} else {
+			output[key] = responseObject[key];
+		}
+	}
+	return output;
+};
+
+const remapResponses = (responseArray) => {
+	return responseArray.map((response) => remapResponse(response));
+};
+
 const notFoundError = (type) => {
 	return type ? createError(404, `${type} not found!`) : createError(404);
 };
@@ -30,6 +47,8 @@ const badRequest = (message) => {
 
 module.exports = {
 	normalizePort,
+	remapResponse,
+	remapResponses,
 	notFoundError,
 	systemError,
 	badRequest

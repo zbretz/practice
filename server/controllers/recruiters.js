@@ -1,13 +1,13 @@
 const { User, Recruiter } = require('../db/models/index');
 const { joinConfig } = require('../utils/db-utils');
-const { notFoundError, systemError } = require('../utils/utils');
+const { notFoundError, systemError, remapResponse, remapResponses } = require('../utils/utils');
 
 const recruiterControllers = {};
 
 recruiterControllers.getAllRecruiters = async (req, res, next) => {
 	try {
 		const recruiters = await Recruiter.findAll(joinConfig(User));
-		res.status(200).json(recruiters);
+		res.status(200).json(remapResponses(recruiters));
 	} catch (e) {
 		next(systemError(e));
 	}
@@ -22,7 +22,9 @@ recruiterControllers.getRecruiterById = async (req, res, next) => {
 				user_id: id
 			}
 		});
-		return recruiter ? res.status(200).json(recruiter) : next(notFoundError('Recruiter'));
+		return recruiter
+			? res.status(200).json(remapResponse(recruiter))
+			: next(notFoundError('Recruiter'));
 	} catch (e) {
 		next(systemError(e));
 	}
