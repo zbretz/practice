@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate({ User, Invitation }) {
 			// define association here
-			this.hasMany(User, { foreignKey: 'role_id', onDelete: 'CASCADE' });
+			this.hasMany(User, { foreignKey: 'role_id', target: 'role' });
 			this.hasMany(Invitation, { foreignKey: 'for_role', onDelete: 'CASCADE' });
 		}
 	}
