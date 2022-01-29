@@ -6,7 +6,8 @@ const roleSchema = {
 	},
 	role: {
 		type: 'STRING',
-		allowNull: false
+		allowNull: false,
+		unique: true
 	}
 };
 

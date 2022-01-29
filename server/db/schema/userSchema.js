@@ -19,13 +19,12 @@ const userSchema = {
 		}
 	},
 	role_id: {
-		type: 'INTEGER',
+		type: 'STRING',
 		allowNull: false,
 		references: {
 			model: 'roles',
-			key: 'id'
-		},
-		onDelete: 'CASCADE'
+			key: 'role'
+		}
 	},
 	name: {
 		type: 'STRING',
