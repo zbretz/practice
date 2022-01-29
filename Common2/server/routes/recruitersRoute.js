@@ -1,8 +1,8 @@
 const recruitersRouter = require('express').Router();
 const { getAllRecruiters, getRecruiterById } = require('../controllers/recruiters');
 
-recruitersRouter.get('/', getAllRecruiters);
-recruitersRouter.get('/:id', getRecruiterById);
+// recruitersRouter.get('/', getAllRecruiters);
+// recruitersRouter.get('/:id', getRecruiterById);
 
 recruitersRouter.get('/', (req, res) => {
   res.send(

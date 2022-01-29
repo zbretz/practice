@@ -16,13 +16,14 @@ const data = {
   candidates:
   [
     {
-      name:"Jose Solis",
       id: 1,
+      name:"Jose Solis",
       position: "Full Stack Engineer",
       background: "Bootcamp Graduate",
       review_blurb: "Strong Front End skills. Strong Implementation. Solid data structure aptitude.",
     },
     {
+      id: 2,
       name:"Zachary Bretz",
       position: "Full Stack Engineer",
       background: "Bootcamp Graduate",

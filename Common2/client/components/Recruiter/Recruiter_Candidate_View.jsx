@@ -6,27 +6,9 @@ import Container from 'react-bootstrap/Container'
 import styles from '../styles/recruiterCandidateView.module.css'
 import { BrowserRouter, Switch, Route, Link, Redirect, NavLink, useLocation } from 'react-router-dom'
 import queryString from 'query-string'
+import axios from 'axios';
 
-const data = {
-  tab: "React",
-  interviewer_name: "Zachary Bretz",
-  performance_summary: "As fast as thou shalt wane, so fast thou grow'st, In one of thine, from that which thou departest; And that fresh blood which youngly thou bestow'st, Thou mayst call thine when thou from youth convertest, Herein lives wisdom, beauty, and increase; Without this folly, age, and cold decay: If all were minded so, the times should cease And threescore year would make the world away. Let those whom nature hath not made for store, Harsh, featureless, and rude, barrenly perish:",
-  video_file_path: 'video.mp4',
-  evaluation: [
-    {
-    criterion: "Asked Qs when needed",
-    rating: 4
-    },{
-      criterion: "Met Requirements",
-      rating: 3
-    },{
-      criterion: "Understood prompt",
-      rating: 4
-    }
-  ]
-}
-
-function ControlledTabs() {
+function ControlledTabs({data}) {
   const [key, setKey] = useState('home');
 
   console.log(data.evaluation.length)
@@ -108,42 +90,54 @@ function ControlledTabs() {
 
 const Recruiter_Candidate_View = () => {
 
-  // let [searchParams, setSearchParams] = useSearchParams();
-  // let user = searchParams.get("name");
-  // console.log(user)
-  // console.log(search)
+  const data = {
+    tab: "React",
+    interviewer_name: "Zachary Bretz",
+    performance_summary: "As fast as thou shalt wane, so fast thou grow'st, In one of thine, from that which thou departest; And that fresh blood which youngly thou bestow'st, Thou mayst call thine when thou from youth convertest, Herein lives wisdom, beauty, and increase; Without this folly, age, and cold decay: If all were minded so, the times should cease And threescore year would make the world away. Let those whom nature hath not made for store, Harsh, featureless, and rude, barrenly perish:",
+    video_file_path: 'video.mp4',
+    evaluation: [
+      {
+      criterion: "Asked Qs when needed",
+      rating: 4
+      },{
+        criterion: "Met Requirements",
+        rating: 3
+      },{
+        criterion: "Understood prompt",
+        rating: 4
+      }
+    ]
+  }
 
   const { search } = useLocation()
-  console.log(search) // "?filter=top&origin=im"
+  console.log(search)
   const values = queryString.parse(search)
-  let user_id = console.log(values.id)
+  let user_id = values.id
 
   useEffect(() => {
 
-    async function getUserData() {
-      // let response = await fetch(`https://api.github.com/users/${user}`, {
-      //   signal: abortController.signal
-      // });
-      // if (!abortController.signal.aborted) {
-      //   let data = await response.json();
-      //   setUserData(data);
-      // }
+  function getUserData() {
+      axios.get(`http://localhost:3000/recruiters`).then(res => {
+        console.log(res)
+      }) //${user}`)
     }
 
     if (user_id) {
-      getGitHubUser();
+      getUserData();
     }
   })
+
   return (
     <>
     <Container style={{width:"80%"}}
 >
     {/* className={styles.body} */}
       <Container className={styles.candidateHeader}>
-        <h1>Firstname Lastname <small className={styles.jobTitle}> Full Stack Engineer</small></h1>
+        {user_id}
+        <h1>Firstname Lastndfdfame <small className={styles.jobTitle}> Full Stack Engineer</small></h1>
       </Container>
       <Container>
-        <ControlledTabs />
+        <ControlledTabs data = {data} />
       </Container>
     </Container>
     </>
