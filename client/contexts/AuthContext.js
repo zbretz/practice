@@ -12,7 +12,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
-  const [userInfo, setUserInfo] = useState()
+  const [userInfo, setUserInfo] = useState(null)
   // const [currentUserInfo, setCurrentUserInfo] = useState()
 
   // Sign Up
@@ -45,6 +45,11 @@ export const AuthProvider = ({ children }) => {
       console.log(`${JSON.stringify(user.email)} is signed in on firebase!`)
       const response = await axios.get('/applicants/:1');
 			setUserInfo(response.data);
+
+      localStorage.setItem('all_user_data', JSON.stringify(response.data))
+      localStorage.setItem('user name', response.data.name)
+      localStorage.setItem('user email', response.data.email)
+
 			return response.data;
     } catch (error) {
 			const errorCode = error.code;
@@ -112,6 +117,7 @@ export const AuthProvider = ({ children }) => {
   const value = {
     currentUser,
     userInfo,
+    setUserInfo,
     // currentUserInfo,
     signUp,
     userSignOut,

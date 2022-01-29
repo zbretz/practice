@@ -5,8 +5,26 @@ import { useAuth } from '../../contexts/AuthContext.js'
 
 const ApplicantPortal = () => {
   const history = useHistory()
-  const { userSignOut, currentUser, userInfo} = useAuth()
+  const { userSignOut, currentUser, userInfo, setUserInfo} = useAuth()
   // const [currentUserInfo, setCurrentUserInfo] = useState()
+
+  console.log('userinfo: ', userInfo)
+  console.log(localStorage)
+
+  useEffect(()=>{
+
+  if (!userInfo){
+    let user_name = localStorage.getItem('user name')
+    let user_email = localStorage.getItem('user email')
+    console.log('TEST HERE: ', user_name)
+    setUserInfo({
+      name: user_name,
+      email: user_email
+    })
+  // }
+
+  }, [])
+
 
   const handleSignOut = (e) => {
     e.preventDefault();
