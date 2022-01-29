@@ -1,5 +1,4 @@
 const { v4: uuid } = require('uuid');
-const createError = require('http-errors');
 
 /*
 function: remap
@@ -64,25 +63,10 @@ const joinConfig = (model) => {
 	};
 };
 
-const notFoundError = (type) => {
-	return type ? createError(404, `${type} not found!`) : createError(404);
-};
-
-const systemError = (error) => {
-	return error ? createError(500, error) : createError(500);
-};
-
-const badRequest = (message) => {
-	return message ? createError(400, message) : createError(400);
-};
-
 module.exports = {
 	remap,
 	prependUUIDV4,
 	EXCLUDEDATES,
 	ROLES_ID,
-	joinConfig,
-	notFoundError,
-	systemError,
-	badRequest
+	joinConfig
 };

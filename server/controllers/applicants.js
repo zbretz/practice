@@ -1,5 +1,6 @@
 const { User, Applicant } = require('../db/models/index');
-const { joinConfig, notFoundError, systemError } = require('../utils/db-utils');
+const { joinConfig } = require('../utils/db-utils');
+const { notFoundError, systemError } = require('../utils/utils');
 
 const applicantControllers = {};
 

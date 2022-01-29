@@ -1,12 +1,7 @@
 const { Op } = require('sequelize');
 const { User, Applicant, Recruiter, Admin } = require('../db/models/index');
-const {
-	EXCLUDEDATES,
-	ROLES_ID,
-	notFoundError,
-	systemError,
-	badRequest
-} = require('../utils/db-utils');
+const { EXCLUDEDATES, ROLES_ID } = require('../utils/db-utils');
+const { notFoundError, systemError, badRequest } = require('../utils/utils');
 const { v4: uuid } = require('uuid');
 
 const MODELS = {
