@@ -8,23 +8,16 @@ const ApplicantPortal = () => {
   const { userSignOut, currentUser, userInfo, setUserInfo} = useAuth()
   // const [currentUserInfo, setCurrentUserInfo] = useState()
 
-  console.log('userinfo: ', userInfo)
-  console.log(localStorage)
-
   useEffect(()=>{
-
-  if (!userInfo){
-    let user_name = localStorage.getItem('user name')
-    let user_email = localStorage.getItem('user email')
-    console.log('TEST HERE: ', user_name)
-    setUserInfo({
-      name: user_name,
-      email: user_email
-    })
-  // }
-
+    //if userInfo is lost (for instance on refresh), retrieve user data from local storage
+    if (!userInfo){
+      let user_data = JSON.parse(localStorage.getItem('user_data'))
+      setUserInfo({
+        name: user_data.name,
+        email: user_data.email
+      })
+    }
   }, [])
-
 
   const handleSignOut = (e) => {
     e.preventDefault();

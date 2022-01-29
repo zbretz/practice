@@ -46,9 +46,8 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.get('/applicants/:1');
 			setUserInfo(response.data);
 
-      localStorage.setItem('all_user_data', JSON.stringify(response.data))
-      localStorage.setItem('user name', response.data.name)
-      localStorage.setItem('user email', response.data.email)
+      //store user _data in memory for retrieval in event of app refresh
+      localStorage.setItem('user_data', JSON.stringify(response.data))
 
 			return response.data;
     } catch (error) {
