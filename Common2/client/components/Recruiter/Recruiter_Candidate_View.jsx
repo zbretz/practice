@@ -90,57 +90,64 @@ function ControlledTabs({data}) {
 
 const Recruiter_Candidate_View = () => {
 
-  const data = {
-    tab: "React",
-    interviewer_name: "Zachary Bretz",
-    performance_summary: "As fast as thou shalt wane, so fast thou grow'st, In one of thine, from that which thou departest; And that fresh blood which youngly thou bestow'st, Thou mayst call thine when thou from youth convertest, Herein lives wisdom, beauty, and increase; Without this folly, age, and cold decay: If all were minded so, the times should cease And threescore year would make the world away. Let those whom nature hath not made for store, Harsh, featureless, and rude, barrenly perish:",
-    video_file_path: 'video.mp4',
-    evaluation: [
-      {
-      criterion: "Asked Qs when needed",
-      rating: 4
-      },{
-        criterion: "Met Requirements",
-        rating: 3
-      },{
-        criterion: "Understood prompt",
-        rating: 4
-      }
-    ]
-  }
+  // const data = {
+  //   tab: "React",
+  //   interviewer_name: "Zachary Bretz",
+  //   performance_summary: "As fast as thou shalt wane, so fast thou grow'st, In one of thine, from that which thou departest; And that fresh blood which youngly thou bestow'st, Thou mayst call thine when thou from youth convertest, Herein lives wisdom, beauty, and increase; Without this folly, age, and cold decay: If all were minded so, the times should cease And threescore year would make the world away. Let those whom nature hath not made for store, Harsh, featureless, and rude, barrenly perish:",
+  //   video_file_path: 'video.mp4',
+  //   evaluation: [
+  //     {
+  //     criterion: "Asked Qs when needed",
+  //     rating: 4
+  //     },{
+  //       criterion: "Met Requirements",
+  //       rating: 3
+  //     },{
+  //       criterion: "Understood prompt",
+  //       rating: 4
+  //     }
+  //   ]
+  // }
 
   const { search } = useLocation()
   console.log(search)
   const values = queryString.parse(search)
   let user_id = values.id
+  const [data, setData] = useState()
 
   useEffect(() => {
 
   function getUserData() {
-      axios.get(`http://localhost:3000/recruiters`).then(res => {
-        console.log(res)
-      }) //${user}`)
+      axios.get(`http://localhost:3000/recruiters/byId?id=${user_id}`).then(res => {
+        setData(res.data)
+        console.log(res.data)
+      })
     }
 
     if (user_id) {
       getUserData();
     }
-  })
+  }, [])
 
   return (
-    <>
+
+
+
     <Container style={{width:"80%"}}
 >
-    {/* className={styles.body} */}
+  {data &&
+    <>
       <Container className={styles.candidateHeader}>
         {user_id}
-        <h1>Firstname Lastndfdfame <small className={styles.jobTitle}> Full Stack Engineer</small></h1>
+        <h1>Firstname Lastname <small className={styles.jobTitle}> Full Stack Engineer</small></h1>
       </Container>
       <Container>
         <ControlledTabs data = {data} />
       </Container>
+
+</>}
     </Container>
-    </>
+
 
   )
 }

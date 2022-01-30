@@ -4,7 +4,40 @@ const { getAllRecruiters, getRecruiterById } = require('../controllers/recruiter
 // recruitersRouter.get('/', getAllRecruiters);
 // recruitersRouter.get('/:id', getRecruiterById);
 
-recruitersRouter.get('/', (req, res) => {
+recruitersRouter.get('/all', (req, res) => {
+
+  const data = {
+    candidates:
+    [
+      {
+        id: 1,
+        name:"Jose Solis",
+        position: "Full Stack Engineer",
+        background: "Bootcamp Graduate",
+        review_blurb: "Strong Front End skills. Strong Implementation. Solid data structure aptitude.",
+      },
+      {
+        id: 2,
+        name:"Zachary Bretz",
+        position: "Full Stack Engineer",
+        background: "Bootcamp Graduate",
+        review_blurb: "Interested in team management. Underwhelming leetcode performance. Strong system design.",
+      }
+    ]
+  }
+
+  res.send(data)
+});
+
+recruitersRouter.get('/byId', (req, res) => {
+
+  console.log(req.query)
+
+  // const fake_user_table = {
+  //   user: 'Zachary Bretz',
+  //   user_id: '2',
+  // }
+
   res.send(
     {
       tab: "React",
