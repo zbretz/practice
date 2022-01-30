@@ -9,7 +9,7 @@ import queryString from 'query-string'
 import axios from 'axios';
 
 function ControlledTabs({data}) {
-  const [key, setKey] = useState('home');
+  const [key, setKey] = useState('Profile');
 
   console.log('zako!: ', data)
 
