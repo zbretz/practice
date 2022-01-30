@@ -189,7 +189,7 @@ recruitersRouter.get('/byId', (req, res) => {
 
   const fake_user_table = {
     1: {
-      user_name: 'Jose',
+      user_name: 'Jose Solis',
       interview_phases: {
         Candidate_Profile: candidate_profile_jose,
         Screen: phone_screen_jose,
@@ -210,7 +210,7 @@ recruitersRouter.get('/byId', (req, res) => {
 
   // for test tabs
   res.send(
-    fake_user_table[req.query.id].interview_phases
+    fake_user_table[req.query.id]//.interview_phases
   )
 
   // res.send(
