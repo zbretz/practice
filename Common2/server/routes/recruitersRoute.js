@@ -10,5 +10,4 @@ recruitersRouter.get('/byId', (req, res) => {
   res.send(fake_user_table[req.query.id])
 });
 
-
 module.exports = recruitersRouter;

@@ -45,7 +45,7 @@ const Recruiter_Landing = () => {
   useEffect(() => {
 
   function getApplicants() {
-      axios.get(`http://localhost:3000/recruiters/all`).then(res => {
+      axios.get(`http://localhost:3000/applicants`).then(res => {
         console.log(res.data)
         setData(res.data)
         setIsLoading(false)
