@@ -63,6 +63,7 @@ function ControlledTabs({data}) {
                 {
                 [4,3,2,1].map(num=> {
                   if(num === thing.rating){
+
                     return <td><span style={{backgroundColor:"black", borderRadius:"50%", height:"30px", width:"30px", display:"block", margin:'auto'}}></span></td>
                   } else {
                     return <td></td>
