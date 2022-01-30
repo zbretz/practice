@@ -11,28 +11,6 @@ import axios from 'axios'
 
 import Recruiter_Candidate_View from './Recruiter_Candidate_View.jsx'
 
-
-
-// const data = {
-//   candidates:
-//   [
-//     {
-//       id: 1,
-//       name:"Jose Solis",
-//       position: "Full Stack Engineer",
-//       background: "Bootcamp Graduate",
-//       review_blurb: "Strong Front End skills. Strong Implementation. Solid data structure aptitude.",
-//     },
-//     {
-//       id: 2,
-//       name:"Zachary Bretz",
-//       position: "Full Stack Engineer",
-//       background: "Bootcamp Graduate",
-//       review_blurb: "Interested in team management. Underwhelming leetcode performance. Strong system design.",
-//     }
-//   ]
-// }
-
 const Recruiter_Landing = () => {
 
   const history = useHistory()
@@ -77,7 +55,8 @@ const Recruiter_Landing = () => {
                 {/* <Link to="recruiterPortal/c">Home</Link> */}
                 {/* <Link to={`${match.url}c`}></Link> */}
                 {/* <Button onClick={()=> history.push(`/candidate-${candidate.id}`)} variant="primary">Go somewhere</Button> */}
-                <Button onClick={()=> history.push(`/recruiterPortal/candidate?id=${candidate.id}`)} variant="primary">Go somewhere</Button>
+                {/* <Button onClick={()=> history.push(`/recruiterPortal/candidate?id=${candidate.id}`)} variant="primary">Go somewhere</Button> */}
+                <Button onClick={()=> history.push(`/recruiterPortal/candidate/${candidate.id}`)} variant="primary">Go somewhere</Button>
 
               </Card.Body>
             </Card>

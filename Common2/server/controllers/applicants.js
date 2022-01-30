@@ -18,18 +18,22 @@ applicantControllers.getAllApplicants = async (req, res, next) => {
 };
 
 applicantControllers.getApplicantById = async (req, res, next) => {
-	try {
-		const { id } = req.params;
-		const applicant = await Applicant.findOne({
-			...joinConfig(User),
-			where: {
-				user_id: id
-			}
-		});
-		return applicant ? res.status(200).json(applicant) : next(notFoundError('Applicant'));
-	} catch (e) {
-		next(createError(500, e));
-	}
+	console.log('dfdfdf', req.params.id)
+	res.send(fake_user_table[req.params.id])
+  // res.send(fake_user_table[req.query.id])
+
+	// try {
+	// 	const { id } = req.params;
+	// 	const applicant = await Applicant.findOne({
+	// 		...joinConfig(User),
+	// 		where: {
+	// 			user_id: id
+	// 		}
+	// 	});
+	// 	return applicant ? res.status(200).json(applicant) : next(notFoundError('Applicant'));
+	// } catch (e) {
+	// 	next(createError(500, e));
+	// }
 };
 
 module.exports = applicantControllers;
