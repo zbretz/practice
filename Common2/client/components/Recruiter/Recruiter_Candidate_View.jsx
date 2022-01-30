@@ -11,28 +11,33 @@ import axios from 'axios';
 function ControlledTabs({data}) {
   const [key, setKey] = useState('home');
 
-  console.log(data.evaluation.length)
+  console.log('zako!: ', data)
 
   return (
+
+    <>
+    {/* test tabs */}
     <Tabs
       id="controlled-tab-example"
       activeKey={key}
       onSelect={(k) => setKey(k)}
       className="mb-3"
     >
-      <Tab eventKey="home" title="Candidate Profile">
-        <div>As fast as thou shalt wane, so fast thou grow'st, In one of thine, from that which thou departest; And that fresh blood which youngly thou bestow'st, Thou mayst call thine when thou from youth convertest, Herein lives wisdom, beauty, and increase; Without this folly, age, and cold decay: If all were minded so, the times should cease And threescore year would make the world away. Let those whom nature hath not made for store, Harsh, featureless, and rude, barrenly perish:</div>
-      </Tab>
-      <Tab eventKey="react" title={data.tab}>
+
+      {Object.entries(data).map(phase=>{
+console.log(phase[1])
+return(
+
+      <Tab eventKey={phase[1].tab} title={phase[1].tab}>
       <h2>Frontend Interview (React)</h2>
 
       {/* <Container> */}
-        <h5 style={{marginTop: "30px"}}  >Interviewer: {data.interviewer_name}</h5>
+        <h5 style={{marginTop: "30px"}}  >Interviewer: {phase[1].interviewer_name}</h5>
       {/* </Container> */}
 
       <div>
         <h5  style={{marginTop: "30px"}}>Performance Summary</h5>
-        <div>{data.performance_summary}</div>
+        <div>{phase[1].performance_summary}</div>
       </div>
 
       {/* <img src="./screenshot.png"/>
@@ -43,49 +48,17 @@ function ControlledTabs({data}) {
       <h5 style={{marginTop: "30px"}} >Evaluation: </h5>
 
 
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Excellent</th>
-            <th>Very Good</th>
-            <th>Good</th>
-            <th>Fair</th>
-          </tr>
-        </thead>
-        <tbody>
-            {/* <td>{Asked Qs when needed}</td> */}
-            {data.evaluation.map(thing => {
-              return(
-                <tr>
-
-                <td>{thing.criterion}</td>
-                {
-                [4,3,2,1].map(num=> {
-                  if(num === thing.rating){
-
-                    return <td><span style={{backgroundColor:"black", borderRadius:"50%", height:"30px", width:"30px", display:"block", margin:'auto'}}></span></td>
-                  } else {
-                    return <td></td>
-                  }
-                })
-              }
-                </tr>
-
-              )
-            })}
-
-        </tbody>
-      </Table>
-
       </Tab>
-        <Tab eventKey="leetcode" title="Leetcode">
-        <div>As fast as thou shalt wane, so fast thou grow'st, In one of thine, from that which thou departest; And that fresh blood which youngly thou bestow'st, Thou mayst call thine when thou from youth convertest, Herein lives wisdom, beauty, and increase; Without this folly, age, and cold decay: If all were minded so, the times should cease And threescore year would make the world away. Let those whom nature hath not made for store, Harsh, featureless, and rude, barrenly perish:</div>      </Tab>
-        <Tab eventKey="behavioral" title="Behavioral">
-        <div>As fast as thou shalt wane, so fast thou grow'st, In one of thine, from that which thou departest; And that fresh blood which youngly thou bestow'st, Thou mayst call thine when thou from youth convertest, Herein lives wisdom, beauty, and increase; Without this folly, age, and cold decay: If all were minded so, the times should cease And threescore year would make the world away. Let those whom nature hath not made for store, Harsh, featureless, and rude, barrenly perish:</div>      </Tab>
-        <Tab eventKey="system" title="System Design">
-        <div>As fast as thou shalt wane, so fast thou grow'st, In one of thine, from that which thou departest; And that fresh blood which youngly thou bestow'st, Thou mayst call thine when thou from youth convertest, Herein lives wisdom, beauty, and increase; Without this folly, age, and cold decay: If all were minded so, the times should cease And threescore year would make the world away. Let those whom nature hath not made for store, Harsh, featureless, and rude, barrenly perish:</div>      </Tab>
+
+)
+      })}
+
+
     </Tabs>
+    {/* end test tabs */}
+
+
+    </>
   );
 }
 

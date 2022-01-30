@@ -6,8 +6,8 @@ const { getAllRecruiters, getRecruiterById } = require('../controllers/recruiter
 
 let react_tab_jose = {
   tab: "React",
-  interviewer_name: "Zachary Bretzzzz",
-  performance_summary: "As fast as thou shalt wane, so fast thou grow'st, In one of thine, from that which thou departest; And that fresh blood which youngly thou bestow'st, Thou mayst call thine when thou from youth convertest, Herein lives wisdom, beauty, and increase; Without this folly, age, and cold decay: If all were minded so, the times should cease And threescore year would make the world away. Let those whom nature hath not made for store, Harsh, featureless, and rude, barrenly perish:",
+  interviewer_name: "Zachary Bretz",
+  performance_summary: "JOSE REACT PERF SUMMARY JOSE LEETCODE PERF SUMMARYAs fast as thou shalt wane, so fast thou grow'st, In one of thine, from that which thou departest; And that fresh blood which youngly thou bestow'st, Thou mayst call thine when thou from youth convertest, Herein lives wisdom, beauty, and increase; Without this folly, age, and cold decay: If all were minded so, the times should cease And threescore year would make the world away. Let those whom nature hath not made for store, Harsh, featureless, and rude, barrenly perish:",
   video_file_path: 'video.mp4',
   evaluation: [
     {
@@ -24,9 +24,9 @@ let react_tab_jose = {
 }
 
 let leetcode_tab_jose = {
-  tab: "knjksjndkjndfs",
+  tab: "Leetcode",
   interviewer_name: "Zachary Bretz",
-  performance_summary: "klmeflmeflm",
+  performance_summary: "JOSE LEETCODE PERF SUMMARY",
   video_file_path: 'video.mp4',
   evaluation: [
     {
@@ -45,7 +45,7 @@ let leetcode_tab_jose = {
 let react_tab_zach = {
   tab: "ReactZACH",
   interviewer_name: "Zachary BretzZACH",
-  performance_summary: "As fast as thou shalt wane, so fast thou grow'st, In one of thine, from that which thou departest; And that fresh blood which youngly thou bestow'st, Thou mayst call thine when thou from youth convertest, Herein lives wisdom, beauty, and increase; Without this folly, age, and cold decay: If all were minded so, the times should cease And threescore year would make the world away. Let those whom nature hath not made for store, Harsh, featureless, and rude, barrenly perish:",
+  performance_summary: "Azach react perf summary",
   video_file_path: 'video.mp4',
   evaluation: [
     {
@@ -64,7 +64,7 @@ let react_tab_zach = {
 let leetcode_tab_zach = {
   tab: "LeetcodeZACH",
   interviewer_name: "Zachary BretzZACH",
-  performance_summary: "klmeflmeflm",
+  performance_summary: "zach leetcode performance summary",
   video_file_path: 'video.mp4',
   evaluation: [
     {
@@ -126,9 +126,14 @@ recruitersRouter.get('/byId', (req, res) => {
     },
   }
 
+  // for test tabs
   res.send(
-    fake_user_table[req.query.id].interview_phases.React
+    fake_user_table[req.query.id].interview_phases
   )
+
+  // res.send(
+  //   fake_user_table[req.query.id].interview_phases.React
+  // )
 });
 
 
