@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user
       console.log(`${JSON.stringify(user.email)} is signed in on firebase!`)
-      const response = await axios.get('/applicants/:1');
+      const response = await axios.get('/applicants/1');
 			setUserInfo(response.data);
 
       //store user _data in memory for retrieval in event of app refresh
