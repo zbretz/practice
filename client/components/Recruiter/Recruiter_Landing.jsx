@@ -56,7 +56,7 @@ const Recruiter_Landing = () => {
                 {/* <Link to={`${match.url}c`}></Link> */}
                 {/* <Button onClick={()=> history.push(`/candidate-${candidate.id}`)} variant="primary">Go somewhere</Button> */}
                 {/* <Button onClick={()=> history.push(`/recruiterPortal/candidate?id=${candidate.id}`)} variant="primary">Go somewhere</Button> */}
-                <Button onClick={()=> history.push(`/recruiterPortal/candidate/${candidate.id}`)} variant="primary">Go somewhere</Button>
+                <Button onClick={()=> history.push(`/recruiterPortal/candidate/${candidate.id}`)} variant="primary">Visit Profile</Button>
 
               </Card.Body>
             </Card>
