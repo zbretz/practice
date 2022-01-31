@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
   // Sign In
   const signIn = async (email, password, user_type) => {
 
-    let id;
+    let url;
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -49,12 +49,18 @@ export const AuthProvider = ({ children }) => {
       console.log(user_type)
 
       if (user_type == 'applicant'){
-       id = '1'
+      //  id = '1'
+      url = '/applicants/1'
+
       } else if (user_type == 'recruiter'){
-        id='2'
+        // id='2'
+        url = '/recruiters/1'
       }
 
-      const response = await axios.get(`/applicants/${id}`);
+      console.log(url)
+
+      // const response = await axios.get(`/applicants/${id}`);
+      const response = await axios.get(`${url}`);
 
 			setUserInfo(response.data);
 
