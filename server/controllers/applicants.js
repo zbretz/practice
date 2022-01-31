@@ -16,6 +16,7 @@ applicantControllers.getAllApplicants = async (req, res, next) => {
 applicantControllers.getApplicantById = async (req, res, next) => {
 	try {
 		const { id } = req.params;
+		console.log(id)
 		// const applicant = await Applicant.findOne({
 		// 	...joinConfig(User),
 		// 	where: {
@@ -52,10 +53,10 @@ applicantControllers.getApplicantById = async (req, res, next) => {
 				desired_company_stage: "Start Up",
 				desired_region: "Remote",
 				resume: "/myresume/fakeperson",
-				role: "applicant",
+				role: "recruiter",
 				email: "test5@test.com",
 				password: "yeqpuUbjdsTMYEfD3OcjwEL7AAk1",
-				name: "Bob Saget"
+				name: "Robert Saget"
 			}
 		}
 

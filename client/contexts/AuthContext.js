@@ -37,13 +37,25 @@ export const AuthProvider = ({ children }) => {
   }
 
   // Sign In
-  const signIn = async (email, password) => {
+  const signIn = async (email, password, user_type) => {
+
+    let id;
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user
       console.log(`${JSON.stringify(user.email)} is signed in on firebase!`)
-      const response = await axios.get('/applicants/1');
+
+      console.log(user_type)
+
+      if (user_type == 'applicant'){
+       id = '1'
+      } else if (user_type == 'recruiter'){
+        id='2'
+      }
+
+      const response = await axios.get(`/applicants/${id}`);
+
 			setUserInfo(response.data);
 
       //store user _data in memory for retrieval in event of app refresh

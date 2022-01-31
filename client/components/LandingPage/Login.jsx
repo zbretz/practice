@@ -4,6 +4,9 @@ import { useAuth } from '../../contexts/AuthContext.js'
 import { Switch, Route, Link, Redirect, NavLink, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import regeneratorRuntime from 'regenerator-runtime'
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs'
+
 
 const Login = () => {
   const history = useHistory()
@@ -14,14 +17,15 @@ const Login = () => {
   const { signUp, userInfo, currentUser, userSignOut, signIn, currentUserInfo } = useAuth()
   // const [userInfo, setUserInfo] = useState({ role: "", email: "" })
 
+  const [key, setKey] = useState('applicant');
 
-  async function handleSignIn(e) {
+
+  async function handleSignIn(e, user_type) {
     e.preventDefault();
-
     try {
       setError("")
       // setLoading(true)
-      const loginInfo = await signIn(emailRef.current.value, passwordRef.current.value)
+      const loginInfo = await signIn(emailRef.current.value, passwordRef.current.value, user_type)
       // if ( currentUser && userInfo) {
       history.push(`/${loginInfo.role}Portal`)
       // }
@@ -51,18 +55,27 @@ const Login = () => {
     e.preventDefault();
     userSignOut()
   }
-
   return (
     <Container>
       <Button type="submit" onClick={handleSignOut}>Sign Out</Button>
 
       <>
+
+      <Tabs
+      id="controlled-tab-example"
+      activeKey={key}
+      onSelect={(k) => setKey(k)}
+      className="mb-3"
+    >
+
+      <Tab eventKey={'applicant'} title="Applicant Login">
+
+
         <Card>
           <Card.Body>
-            <h1>Log In</h1>
+            <h1>Applicant Log In</h1>
             {/* {JSON.stringify(currentUser)} */}
-            {error && <Alert variant="danger">{error}</Alert>}
-            <Form onSubmit={handleSignIn}>
+            <Form>
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>
                 <Form.Control type="email" ref={emailRef} required />
@@ -71,11 +84,36 @@ const Login = () => {
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" ref={passwordRef} required />
               </Form.Group>
-              {/* disabled={loading} */}
-              <Button type="submit" >Log In</Button>
             </Form>
+
+            <Button type="button" onClick={(e)=>handleSignIn(e, 'applicant')}>Log In</Button>
+
           </Card.Body>
         </Card>
+
+      </Tab>
+      <Tab eventKey={"recruiter"} title="Recruiter Login">
+          <Card>
+            <Card.Body>
+              <h1>Recruiter Log In</h1>
+              {/* {JSON.stringify(currentUser)} */}
+              <Form>
+                <Form.Group id="email">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control type="email" ref={emailRef} required />
+                </Form.Group>
+                <Form.Group id="password">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control type="password" ref={passwordRef} required />
+                </Form.Group>
+              </Form>
+
+              <Button type="button" onClick={(e)=>handleSignIn(e, 'recruiter')}>Log In</Button>
+
+            </Card.Body>
+          </Card>
+        </Tab>
+      </Tabs>
       </>
       <div>
         Need to make an Account?
