@@ -44,7 +44,7 @@ const Recruiter_Landing = () => {
 
         <Container style={{width:"80%"}}>
 
-        {data.map(candidate => {
+        {Object.values(data).map(candidate => {
           return(
             <Card className={styles.card}>
               <Card.Header as="h5">{candidate.name}</Card.Header>
