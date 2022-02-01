@@ -86,6 +86,7 @@ const ApplicantPortal = () => {
           </Tab>
         </Tabs> 
       : 
+      // Returning an empty component if the applicantdata has not yet been fetched from db
       <></>
       }
     </Container>
