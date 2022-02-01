@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Switch, Route, Link, NavLink, useHistory } from 'react-router-dom'
 import { Button, Container, Tab, Tabs } from 'react-bootstrap'
 import { useAuth } from '../../contexts/AuthContext.js'
-import PortalTabs from './PortalTabs.jsx';
+import ApplicantInformation from './ApplicantInformation.jsx';
 
 const ApplicantPortal = () => {
 
@@ -27,11 +27,21 @@ const ApplicantPortal = () => {
         onSelect={(k) => setKey(k)}
         className='mb-3'
       >
-        <PortalTabs eventKey={'home'} title={'Candidate Profile'} />
-        <PortalTabs eventKey={'react'} title={'React'} />
-        <PortalTabs eventKey={'leetcode'} title={'LeetCode'} />
-        <PortalTabs eventKey={'behavioral'} title={'Behavioral'} />
-        <PortalTabs eventKey={'system'} title={'System'} />
+        <Tab eventKey={'home'} title={'Candidate Profile'}>
+          <ApplicantInformation />
+        </Tab>
+        <Tab eventKey={'react'} title={'React'}>
+          <ApplicantInformation />
+        </Tab>
+        <Tab eventKey={'leetcode'} title={'LeetCode'}>
+          <ApplicantInformation />  
+        </Tab>
+        <Tab eventKey={'behavioral'} title={'Behavioral'}>
+          <ApplicantInformation /> 
+        </Tab>
+        <Tab eventKey={'system'} title={'System'}>
+          <ApplicantInformation />
+        </Tab>
       </Tabs>
     </Container>
   )
