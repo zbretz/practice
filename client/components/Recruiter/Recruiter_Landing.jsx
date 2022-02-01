@@ -25,6 +25,7 @@ const Recruiter_Landing = () => {
   function getApplicants() {
       axios.get(`http://localhost:3000/applicants`).then(res => {
         console.log(res.data)
+        console.log(res.data.candidates)
         setData(res.data)
         setIsLoading(false)
         console.log(res.data)
@@ -43,7 +44,7 @@ const Recruiter_Landing = () => {
 
         <Container style={{width:"80%"}}>
 
-        {data.candidates.map(candidate => {
+        {data.map(candidate => {
           return(
             <Card className={styles.card}>
               <Card.Header as="h5">{candidate.name}</Card.Header>

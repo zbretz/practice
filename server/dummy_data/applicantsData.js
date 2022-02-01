@@ -177,8 +177,47 @@ const fake_user_table = {
 }
 
 
-const candidates = {
-  candidates:
+// lenora
+const applicants = {
+  1:{
+    id: 1,
+    user_id: "007",
+    experience: "1 year",
+    linkedIn: "fakeperson@linkedin.com",
+    school: "Hack Reactor",
+    desired_position: "Full-stack Developer",
+    desired_industry:"Tech",
+    desired_company_size: "Small",
+    desired_company_stage: "Start Up",
+    desired_region: "Remote",
+    resume: "/myresume/fakeperson",
+    role: "applicant",
+    email: "test5@test.com",
+    password: "yeqpuUbjdsTMYEfD3OcjwEL7AAk1",
+    name: "Bob Saget"
+  },
+  2:{
+    id: 2,
+    user_id: "007",
+    experience: "1 year",
+    linkedIn: "fakeperson@linkedin.com",
+    school: "Hack Reactor",
+    desired_position: "Full-stack Developer",
+    desired_industry:"Tech",
+    desired_company_size: "Small",
+    desired_company_stage: "Start Up",
+    desired_region: "Remote",
+    resume: "/myresume/fakeperson",
+    role: "recruiter",
+    email: "test5@test.com",
+    password: "yeqpuUbjdsTMYEfD3OcjwEL7AAk1",
+    name: "Robert Saget"
+  }
+}
+
+// zach
+const candidates = //{
+  // candidates:
   [
     {
       id: 1,
@@ -195,6 +234,8 @@ const candidates = {
       review_blurb: "Interested in team management. Underwhelming leetcode performance. Strong system design.",
     }
   ]
-}
+// }
+
+
 
 module.exports = {fake_user_table, candidates}

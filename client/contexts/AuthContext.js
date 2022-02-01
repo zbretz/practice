@@ -49,11 +49,8 @@ export const AuthProvider = ({ children }) => {
       console.log(user_type)
 
       if (user_type == 'applicant'){
-      //  id = '1'
-      url = '/applicants/1'
-
+        url = '/applicants/1'
       } else if (user_type == 'recruiter'){
-        // id='2'
         url = '/recruiters/1'
       }
 
