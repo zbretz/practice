@@ -7,7 +7,7 @@ const applicantControllers = {};
 
 applicantControllers.getAllApplicants = async (req, res, next) => {
 
-	res.send(candidates)
+	res.send(applicants)
 
 	// try {
 	// 	const applicants = await Applicant.findAll(joinConfig(User));
