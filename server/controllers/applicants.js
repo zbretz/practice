@@ -18,7 +18,8 @@ applicantControllers.getAllApplicants = async (req, res, next) => {
 };
 
 applicantControllers.getApplicantByIdZach = async (req, res, next) => {
-	res.send(fake_user_table_zach[req.params.id])
+	// res.send(fake_user_table[req.params.id])
+	res.send(applicants[req.params.id])
 };
 
 applicantControllers.getApplicantById = async (req, res, next) => {

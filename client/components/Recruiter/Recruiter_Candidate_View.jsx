@@ -130,7 +130,7 @@ const Recruiter_Candidate_View = () => {
   {data &&
     <>
       <Container className={styles.candidateHeader}>
-        <h1>{data.user_name} <small className={styles.jobTitle}> Full Stack Engineer</small></h1>
+        <h1>{data.name} <small className={styles.jobTitle}> Full Stack Engineer</small></h1>
       </Container>
       <Container>
         <ControlledTabs data = {data.interview_phases} />
