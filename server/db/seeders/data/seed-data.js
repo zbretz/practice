@@ -9,7 +9,7 @@ const USERS = Array(100)
 			id: uuid(),
 			email: chance.email(),
 			password: chance.guid(),
-			role_id: Math.floor(Math.random() * 3) + 1,
+			role_id: Object.values(ROLES_ID)[Math.floor(Math.random() * 3)],
 			name: chance.name()
 		};
 	});
@@ -32,9 +32,9 @@ const RECRUITERS = USERS.filter((user) => user.role_id === ROLES_ID.RECRUITER).m
 }));
 
 const ROLES = [
-	{ id: ROLES_ID.ADMIN, role: 'admin' },
-	{ id: ROLES_ID.RECRUITER, role: 'recruiter' },
-	{ id: ROLES_ID.APPLICANT, role: 'applicant' }
+	{ role: ROLES_ID.ADMIN },
+	{ role: ROLES_ID.RECRUITER },
+	{ role: ROLES_ID.APPLICANT }
 ];
 
 module.exports = {
