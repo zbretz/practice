@@ -109,10 +109,11 @@ const Recruiter_Candidate_View = () => {
   useEffect(() => {
 
   function getUserData() {
-      axios.get(`http://localhost:3000/applicants/zach/${user_id}`)
+      axios.get(`http://localhost:3000/applicants/${user_id}`)
       .then(res => {
         setData(res.data)
         console.log(res.data)
+        console.log('woohoo')
       })
     }
 
