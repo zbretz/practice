@@ -16,6 +16,7 @@ import AdminInfoForm from './Admin/AdminInfoForm.jsx'
 import Recruiter_Candidate_View from './Recruiter/Recruiter_Candidate_View.jsx'
 
 const App = () => {
+
   return (
     <Container>
       <NavLink to="/">Back to Homepage</NavLink>
