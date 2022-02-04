@@ -32,6 +32,14 @@ const userSchema = {
 		validate: {
 			notEmpty: true
 		}
+	},
+	active: {
+		type: 'BOOLEAN',
+		allowNull: false,
+		defaultValue: true,
+		validate: {
+			isBoolean: (val) => typeof val === 'boolean'
+		}
 	}
 };
 

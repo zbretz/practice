@@ -48,7 +48,8 @@ userControllers.checkUserExistence = async (req, _res, next) => {
 			[Op.or]: [{ email: req.body.email }, { name: req.body.name }]
 		}
 	});
-	return user ? next(badRequest('User already exists!')) : next();
+	const additional = user?.active ? '' : ' but deactivated';
+	return user ? next(badRequest(`User already exists${additional}!`)) : next();
 };
 
 userControllers.getUsersByRole = async (req, res, next) => {
@@ -79,6 +80,30 @@ userControllers.createUser = async (req, res, next) => {
 		if (createdUser) {
 			await User.destroy({ where: { ...req.body } });
 		}
+		next(systemError(e));
+	}
+};
+
+userControllers.deactivateUser = async (req, res, next) => {
+	try {
+		const { id } = req.params;
+		const userUpdated = await User.update({ active: false }, { where: { id, active: true } });
+		return userUpdated[0]
+			? res.status(200).send('User successfully deactivated')
+			: next(badRequest('Active user not found!'));
+	} catch (e) {
+		next(systemError(e));
+	}
+};
+
+userControllers.deleteUser = async (req, res, next) => {
+	try {
+		const { id } = req.params;
+		const userDeleted = await User.destroy({ where: { id } });
+		return userDeleted
+			? res.status(204).json('User deleted!')
+			: next(badRequest('User not found!'));
+	} catch (e) {
 		next(systemError(e));
 	}
 };

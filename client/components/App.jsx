@@ -15,6 +15,7 @@ import AdminPortal from './Admin/AdminPortal.jsx'
 import AdminInfoForm from './Admin/AdminInfoForm.jsx'
 
 const App = () => {
+
   return (
     <Container>
       <NavLink to="/">Back to Homepage</NavLink>
