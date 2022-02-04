@@ -13,6 +13,7 @@ import RecruiterPortal from './Recruiter/RecruiterPortal.jsx'
 import RecruiterInfoForm from './Recruiter/RecruiterInfoForm.jsx'
 import AdminPortal from './Admin/AdminPortal.jsx'
 import AdminInfoForm from './Admin/AdminInfoForm.jsx'
+import Recruiter_Candidate_View from './Recruiter/Recruiter_Candidate_View.jsx'
 
 const App = () => {
 
@@ -25,6 +26,7 @@ const App = () => {
           <Route exact path="/applicantPortal" component={ApplicantPortal} />
           <Route exact path="/applicantInfoForm" component={ApplicantInfoForm} />
           <Route exact path="/recruiterPortal" component={RecruiterPortal} />
+          <Route exact path="/recruiterPortal/candidate/:id" component={Recruiter_Candidate_View} />
           <Route exact path="/recruiterInfoForm" component={RecruiterInfoForm} />
           <Route exact path="/adminPortal" component={AdminPortal} />
           <Route exact path="/adminInfoForm" component={AdminInfoForm} />

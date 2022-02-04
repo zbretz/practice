@@ -29,13 +29,35 @@ const ApplicantPortal = () => {
   }
 
   const history = useHistory()
-  const { userSignOut} = useAuth()
+  const { userSignOut, currentUser, userInfo, setUserInfo} = useAuth()
+  // const [currentUserInfo, setCurrentUserInfo] = useState()
+
+  useEffect(()=>{
+    //if userInfo is lost (for instance on refresh), retrieve user data from local storage
+    if (!userInfo){
+      let user_data = JSON.parse(localStorage.getItem('user_data'))
+      setUserInfo({
+        name: user_data.name,
+        email: user_data.email
+      })
+    }
+  }, [])
 
   const handleSignOut = (e) => {
     e.preventDefault();
     userSignOut()
     history.push('/')
   }
+
+  // useEffect(() => {
+
+  //   setCurrentUserInfo(userInfo)
+
+  //   return () => {
+  //     setCurrentUserInfo()
+  //   }
+
+  // }, [])
 
   return (
     <Container>
