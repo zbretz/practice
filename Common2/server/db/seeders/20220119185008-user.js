@@ -22,6 +22,24 @@ module.exports = {
 		// await queryInterface.upsert('recruiters', {firebase_id: "GgaRWJL6UAQ6I75YHxltByzmshh2"}, {where: {
 		// {email:"winibhan@vehof.ne"}}
 		// )
+		await queryInterface.bulkInsert('users',
+			[{
+				id: '0246c9b0-07c1-46b1-98fd-2fba1b164d71',
+				email: 'poophead@test.com',
+				password: 'easypass',
+				role_id: 'applicant',
+				name: 'poop head'
+			}],  {});
+
+	await queryInterface.bulkInsert('applicants',
+		[{
+			user_id: '0246c9b0-07c1-46b1-98fd-2fba1b164d71',
+			experience: 1,
+			linkedIn: `linkedin.com/in/poophead`,
+			school: `$Clown University`
+		}],  {});
+
+
 	},
 
 	async down(queryInterface, Sequelize) {
