@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Button, Card, Container } from 'react-bootstrap'
-import { BrowserRouter, Switch, Route, Link, Redirect, NavLink, useLocation } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Link, Redirect, NavLink } from 'react-router-dom'
 
 const RecruiterInfoForm = () => {
 

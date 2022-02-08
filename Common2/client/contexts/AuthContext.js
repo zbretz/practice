@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { auth } from '../src/firebase.js'
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import axios from 'axios'
 
 const AuthContext = React.createContext()
 
@@ -11,8 +12,8 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
-  const [role, setRole] = useState('unknown')
-  const [isSignedIn, setIsSignedIn] = useState(false)
+  const [userInfo, setUserInfo] = useState(null)
+  // const [currentUserInfo, setCurrentUserInfo] = useState()
 
   // Sign Up
   const signUp = (email, password) => {
@@ -22,7 +23,7 @@ export const AuthProvider = ({ children }) => {
         // User is automatically signed in when they signup
         const user = userCredential.user;
         console.log(`${JSON.stringify(user.email)} is signed up successfully on firebase!`)
-        setIsSignedIn(true)
+
         // console.log( `Their info is: ${JSON.stringify(user)}`)
         // ...
       })
@@ -35,52 +36,71 @@ export const AuthProvider = ({ children }) => {
 
   }
 
-  // Current User
-  useEffect(() => {
-
-    const userStatusChange = onAuthStateChanged(auth, user => {
-      setRole('applicant')
-      // const userInfo = {
-      //   role: 'applicant',
-      //   email: user.email,
-      //   uid: user.uid,
-      //   createdAt: user.stsTokenManager.createdAt,
-      //   lastLoginAt: user.stsTokenManager.lastLoginAt,
-      //   expirationTime: user.stsTokenManager.expirationTime,
-      //   apiKey: user.stsTokenManager.apiKey,
-      //   refreshToken: user.stsTokenManager.refreshToken,
-      //   accessToken: user.stsTokenManager.accessToken
-      // }
-
-      // setCurrentUser(userInfo)
-      setCurrentUser({
-        ...user,
-        role: "applicant"
-      })
-      setLoading(false)
-    })
-
-    return userStatusChange
-
-  }, [])
-
-
   // Sign In
-  const signIn = (email, password) => {
+  const signIn = async (email, password, user_type) => {
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(`${JSON.stringify(user.email)} is signed in on firebase!`)
-        setIsSignedIn(true)
-        // console.log( `Their info is: ${JSON.stringify(user)}`)
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(`Error with user sign-in: ${errorCode} ${errorMessage}`)
-      });
+    let url;
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user
+      console.log(`${JSON.stringify(user.email)} is signed in on firebase!`)
+
+
+      console.log('USER TYPE FROM LOGIN: ', user_type)
+      console.log('USER INFO FROM FIREBASE', userCredential)
+
+      if (user_type == 'applicant'){
+        url = '/applicants/1'
+      } else if (user_type == 'recruiter'){
+        let user_id_firebase = user.uid
+        url = `/recruiters/${user_id_firebase}`
+        console.log(url)
+      }
+
+      console.log(url)
+
+      // const response = await axios.get(`/applicants/${id}`);
+      const response = await axios.get(`${url}`);
+
+			setUserInfo(response.data);
+      console.log('user info: ', response.data)
+
+      //store user _data in memory for retrieval in event of app refresh
+      localStorage.setItem('stored_user_data', JSON.stringify(response.data))
+
+			return response.data;
+    } catch (error) {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			console.log(`Error with user sign-in: ${errorCode} ${errorMessage}`);
+		}
+
+    // signInWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     const user = userCredential.user;
+    //     console.log(`${JSON.stringify(user.email)} is signed in on firebase!`)
+    //     // console.log( `Their info is: ${JSON.stringify(user)}`)
+    //     // ...
+    //   })
+    //   .then(() => {
+    //     // API Call
+    //     return axios({
+    //       method: 'get',
+    //       url: '/applicants/:1'
+    //       // email:currentUser.email,
+    //       // password: currentUser.uid,
+    //     })
+    //   })
+    //   .then(function (response) {
+    //     setUserInfo(response.data)
+    //     return(response.data)
+    //   })
+    //   .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     console.log(`Error with user sign-in: ${errorCode} ${errorMessage}`)
+    //   });
 
   }
 
@@ -89,22 +109,35 @@ export const AuthProvider = ({ children }) => {
 
     signOut(auth).then(() => {
       console.log(`According to firebase, you are signed out!`)
-      setCurrentUser()
-      setRole("unknown")
-      // setLoading(true)
       // Still need to account for when token expires
-      setIsSignedIn(false)
     }).catch((error) => {
       console.log(`Error with user sign-out: ${error}`)
     });
 
   }
 
+    // Current User
+    useEffect(() => {
+      userStatusChange()
+
+      return () => {
+        setCurrentUser()
+        setLoading(true)
+      }
+
+    }, [])
+
+    const userStatusChange = onAuthStateChanged(auth, user => {
+      setCurrentUser(user)
+      setLoading(false)
+    })
+
   // Make value object available to any child div of AuthProvider
   const value = {
     currentUser,
-    role,
-    isSignedIn,
+    userInfo,
+    setUserInfo,
+    // currentUserInfo,
     signUp,
     userSignOut,
     signIn
@@ -112,7 +145,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      { !loading && children }
     </AuthContext.Provider>
   )
 }

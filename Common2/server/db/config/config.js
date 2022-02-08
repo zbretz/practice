@@ -6,11 +6,11 @@ require('dotenv').config();
 
 module.exports = {
 	development: {
-		username: process.env.DB_UNAME,
-		password: process.env.DB_PASSWORD,
-		database: process.env.DB_NAME,
-		host: process.env.DB_HOST,
-		port: process.env.DB_PORT,
+		username: 'zach',//process.env.DB_UNAME,
+		password: 'postgres',//process.env.DB_PASSWORD,
+		database: 'test',//process.env.DB_NAME,
+		host: 'localhost',//process.env.DB_HOST,
+		port: 5432,//process.env.DB_PORT,
 		dialect: DIALECT,
 		dialectOptions: {
 			bigNumberStrings: true

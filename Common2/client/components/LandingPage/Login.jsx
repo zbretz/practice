@@ -20,15 +20,14 @@ const Login = () => {
   const [key, setKey] = useState('applicant');
 
 
-  async function handleSignIn(e) {
+  async function handleSignIn(e, user_type) {
     e.preventDefault();
-
     try {
       setError("")
       // setLoading(true)
-      const loginInfo = await signIn(emailRef.current.value, passwordRef.current.value)
+      const loginInfo = await signIn(emailRef.current.value, passwordRef.current.value, user_type)
       // if ( currentUser && userInfo) {
-      history.push(`/${loginInfo.role}Portal`)
+      history.push(`/${loginInfo.role_id}Portal`)
       // }
     } catch {
       setError("Failed to login")
@@ -87,7 +86,7 @@ const Login = () => {
               </Form.Group>
             </Form>
 
-            <Button type="button" onClick={handleSignIn}>Log In</Button>
+            <Button type="button" onClick={(e)=>handleSignIn(e, 'applicant')}>Log In</Button>
 
           </Card.Body>
         </Card>
@@ -109,7 +108,7 @@ const Login = () => {
                 </Form.Group>
               </Form>
 
-              <Button type="button" onClick={handleSignIn}>Log In</Button>
+              <Button type="button" onClick={(e)=>handleSignIn(e, 'recruiter')}>Log In</Button>
 
             </Card.Body>
           </Card>

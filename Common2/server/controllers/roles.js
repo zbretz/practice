@@ -1,6 +1,5 @@
 const { Role } = require('../db/models/index');
-const { EXCLUDEDATES } = require('../utils/db-utils');
-const createError = require('http-errors');
+const { EXCLUDEDATES, systemError } = require('../utils/db-utils');
 
 const roleControllers = {};
 
@@ -13,7 +12,7 @@ roleControllers.getAllRoles = async (_req, res, next) => {
 		});
 		res.status(200).json(roles);
 	} catch (e) {
-		next(createError(500, e));
+		next(systemError(e));
 	}
 };
 
@@ -32,7 +31,7 @@ roleControllers.getSingleRole = async (req, res, next) => {
 			? res.status(200).json(role)
 			: next(createError(404, 'Role id does not exist!'));
 	} catch (e) {
-		next(createError(404, e));
+		next(systemError(e));
 	}
 };
 

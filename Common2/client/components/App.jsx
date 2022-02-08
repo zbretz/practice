@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { AuthProvider } from '../contexts/AuthContext'
 import { Switch, Route, Link, NavLink } from 'react-router-dom'
-import { Form, Button, Card, Container, Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import { Form, Button, Card, Container } from 'react-bootstrap'
 
 import Homepage from './LandingPage/Homepage.jsx';
 import SignUp from './LandingPage/SignUp.jsx'
@@ -16,20 +16,11 @@ import AdminInfoForm from './Admin/AdminInfoForm.jsx'
 import Recruiter_Candidate_View from './Recruiter/Recruiter_Candidate_View.jsx'
 
 const App = () => {
-  return (
-    <Container fluid>
-        <Navbar bg="primary" variant="dark">
-    <Container>
-    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-    <Nav className="me-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#features">Features</Nav.Link>
-      <Nav.Link href="#pricing">Pricing</Nav.Link>
-    </Nav>
-    </Container>
-  </Navbar>
 
-    <AuthProvider>
+  return (
+    <Container>
+      <NavLink to="/">Back to Homepage</NavLink>
+      <AuthProvider>
 
         <Switch>
           <Route exact path="/applicantPortal" component={ApplicantPortal} />

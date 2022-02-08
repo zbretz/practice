@@ -14,6 +14,10 @@ const recruiterSchema = {
 		},
 		onDelete: 'CASCADE'
 	},
+	firebase_id: {
+		type:'STRING',
+		defaultValue: 'gobbledygook'
+	},
 	industry: {
 		type: 'STRING',
 		defaultValue: 'Technology'

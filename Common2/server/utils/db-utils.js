@@ -1,5 +1,4 @@
 const { v4: uuid } = require('uuid');
-const createError = require('http-errors');
 
 /*
 function: remap
@@ -45,9 +44,9 @@ function prependUUIDV4(bulkInput) {
 const EXCLUDEDATES = ['createdAt', 'updatedAt'];
 
 const ROLES_ID = {
-	ADMIN: 1,
-	RECRUITER: 2,
-	APPLICANT: 3
+	ADMIN: 'admin',
+	RECRUITER: 'recruiter',
+	APPLICANT: 'applicant'
 };
 
 const joinConfig = (model) => {
@@ -57,15 +56,11 @@ const joinConfig = (model) => {
 		},
 		include: {
 			model,
-			attributes: ['name', 'email'],
+			attributes: ['name', 'email', 'role_id'],
 			required: true
 		},
 		raw: true
 	};
-};
-
-const notFoundError = (type) => {
-	return createError(404, `${type} not found!`);
 };
 
 module.exports = {
@@ -73,6 +68,5 @@ module.exports = {
 	prependUUIDV4,
 	EXCLUDEDATES,
 	ROLES_ID,
-	joinConfig,
-	notFoundError
+	joinConfig
 };

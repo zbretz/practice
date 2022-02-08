@@ -25,6 +25,7 @@ const Recruiter_Landing = () => {
   function getApplicants() {
       axios.get(`http://localhost:3000/applicants`).then(res => {
         console.log(res.data)
+        console.log(res.data.candidates)
         setData(res.data)
         setIsLoading(false)
         console.log(res.data)
@@ -43,7 +44,7 @@ const Recruiter_Landing = () => {
 
         <Container style={{width:"80%"}}>
 
-        {data.candidates.map(candidate => {
+        {Object.values(data).map(candidate => {
           return(
             <Card className={styles.card}>
               <Card.Header as="h5">{candidate.name}</Card.Header>
@@ -56,7 +57,7 @@ const Recruiter_Landing = () => {
                 {/* <Link to={`${match.url}c`}></Link> */}
                 {/* <Button onClick={()=> history.push(`/candidate-${candidate.id}`)} variant="primary">Go somewhere</Button> */}
                 {/* <Button onClick={()=> history.push(`/recruiterPortal/candidate?id=${candidate.id}`)} variant="primary">Go somewhere</Button> */}
-                <Button onClick={()=> history.push(`/recruiterPortal/candidate/${candidate.id}`)} variant="primary">Go somewhere</Button>
+                <Button onClick={()=> history.push(`/recruiterPortal/candidate/${candidate.id}`)} variant="primary">Visit Profile</Button>
 
               </Card.Body>
             </Card>

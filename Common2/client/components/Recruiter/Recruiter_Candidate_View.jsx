@@ -11,7 +11,7 @@ import axios from 'axios';
 function ControlledTabs({data}) {
   const [key, setKey] = useState('Profile');
 
-  console.log('zako!: ', data)
+  console.log('data: ', data)
 
   return (
 
@@ -110,10 +110,10 @@ const Recruiter_Candidate_View = () => {
 
   function getUserData() {
       axios.get(`http://localhost:3000/applicants/${user_id}`)
-      // axios.get(`http://localhost:3000/recruiters/byId?id=${user_id}`)
       .then(res => {
         setData(res.data)
         console.log(res.data)
+        console.log('woohoo')
       })
     }
 
@@ -131,7 +131,7 @@ const Recruiter_Candidate_View = () => {
   {data &&
     <>
       <Container className={styles.candidateHeader}>
-        <h1>{data.user_name} <small className={styles.jobTitle}> Full Stack Engineer</small></h1>
+        <h1>{data.name} <small className={styles.jobTitle}> Full Stack Engineer</small></h1>
       </Container>
       <Container>
         <ControlledTabs data = {data.interview_phases} />

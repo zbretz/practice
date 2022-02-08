@@ -1,5 +1,8 @@
 'use strict';
 const { USERS, APPLICANTS, RECRUITERS, ADMINS } = require('./data/seed-data');
+const {Recruiter} = require('../models/recruiter')
+
+console.log('xxx', Recruiter)
 
 module.exports = {
 	async up(queryInterface, Sequelize) {
@@ -16,6 +19,9 @@ module.exports = {
 		await queryInterface.bulkInsert('applicants', APPLICANTS, {});
 		await queryInterface.bulkInsert('recruiters', RECRUITERS, {});
 		await queryInterface.bulkInsert('admins', ADMINS, {});
+		// await queryInterface.upsert('recruiters', {firebase_id: "GgaRWJL6UAQ6I75YHxltByzmshh2"}, {where: {
+		// {email:"winibhan@vehof.ne"}}
+		// )
 	},
 
 	async down(queryInterface, Sequelize) {

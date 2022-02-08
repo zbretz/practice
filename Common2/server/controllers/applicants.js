@@ -1,39 +1,43 @@
 const { User, Applicant } = require('../db/models/index');
-const { EXCLUDEDATES, joinConfig, notFoundError } = require('../utils/db-utils');
-const createError = require('http-errors');
-const {fake_user_table, candidates} = require('../dummy_data/applicantsData')
+const { joinConfig } = require('../utils/db-utils');
+const { notFoundError, systemError, remapResponse, remapResponses } = require('../utils/utils');
+const {fake_user_table, applicants} = require('../dummy_data/applicantsData')
 
 const applicantControllers = {};
 
 applicantControllers.getAllApplicants = async (req, res, next) => {
 
-	res.send(candidates)
-
-	// try {
-	// 	const applicants = await Applicant.findAll(joinConfig(User));
-	// 	res.status(200).json(applicants);
-	// } catch (e) {
-	// 	next(createError(500, e));
-	// }
+	try {
+		// const applicants = await Applicant.findAll(joinConfig(User));
+		res.send(applicants)
+		// res.status(200).json(remapResponses(applicants));
+	} catch (e) {
+		next(systemError(e));
+	}
 };
 
 applicantControllers.getApplicantById = async (req, res, next) => {
-	console.log('dfdfdf', req.params.id)
-	res.send(fake_user_table[req.params.id])
-  // res.send(fake_user_table[req.query.id])
+	try {
+		const { id } = req.params;
+		console.log(id)
 
-	// try {
-	// 	const { id } = req.params;
-	// 	const applicant = await Applicant.findOne({
-	// 		...joinConfig(User),
-	// 		where: {
-	// 			user_id: id
-	// 		}
-	// 	});
-	// 	return applicant ? res.status(200).json(applicant) : next(notFoundError('Applicant'));
-	// } catch (e) {
-	// 	next(createError(500, e));
-	// }
+		const applicant = applicants[id]
+
+		return applicant ? res.status(200).json(applicant) : next(notFoundError('Applicant'));
+
+		// const applicant = await Applicant.findOne({
+		// 	...joinConfig(User),
+		// 	where: {
+		// 		user_id: id
+		// 	}
+		// });
+		// return applicant
+		// 	? res.status(200).json(remapResponse(applicant))
+		// 	: next(notFoundError('Applicant'));
+
+	} catch (e) {
+		next(systemError(e));
+	}
 };
 
 module.exports = applicantControllers;

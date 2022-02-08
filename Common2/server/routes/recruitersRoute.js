@@ -1,7 +1,7 @@
 const recruitersRouter = require('express').Router();
-const { getAllRecruiters, getRecruiterById } = require('../controllers/recruiters');
-const {fake_user_table, candidates} = require('../dummy_data/applicantsData')
+const { getAllRecruiters, getRecruiterById, update } = require('../controllers/recruiters');
 
+recruitersRouter.get('/update', update)
 recruitersRouter.get('/', getAllRecruiters);
 recruitersRouter.get('/:id', getRecruiterById);
 
