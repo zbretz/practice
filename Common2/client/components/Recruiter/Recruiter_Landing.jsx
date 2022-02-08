@@ -49,7 +49,10 @@ const Recruiter_Landing = () => {
             <Card className={styles.card}>
               <Card.Header as="h5">{candidate.name}</Card.Header>
               <Card.Body>
-                <Card.Title>{candidate.position} {candidate.background}</Card.Title>
+                <Card.Title>{candidate.desired_position}</Card.Title>
+                <Card.Text>
+                  {candidate.background}{candidate.school ? `: ${candidate.school}` : null}
+                </Card.Text>
                 <Card.Text>
                   {candidate.review_blurb}
                 </Card.Text>

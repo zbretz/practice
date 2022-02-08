@@ -22,9 +22,17 @@ const applicantSchema = {
 		type: 'STRING',
 		defaultValue: ''
 	},
+	background: {
+		type: 'STRING',
+		defaultValue: 'Bootcamp Graduate'
+	},
 	school: {
 		type: 'STRING',
-		defaultValue: ''
+		defaultValue: 'Flatiron School'
+	},
+	review_blurb: {
+		type: 'STRING',
+		defaultValue: 'Strong Front End skills. Strong Implementation. Solid data structure aptitude.',
 	},
 	desired_position: {
 		type: 'STRING',
