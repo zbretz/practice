@@ -10,8 +10,10 @@ import Tabs from 'react-bootstrap/Tabs'
 
 const Login = () => {
   const history = useHistory()
-  const emailRef = useRef()
-  const passwordRef = useRef()
+  const emailRefRecruiter = useRef()
+  const passwordRefRecruiter = useRef()
+  const emailRefApplicant = useRef()
+  const passwordRefApplicant = useRef()
   const [error, setError] = useState("")
   // const [loading, setLoading] = useState(false)
   const { signUp, userInfo, currentUser, userSignOut, signIn, currentUserInfo } = useAuth()
@@ -25,10 +27,17 @@ const Login = () => {
     try {
       setError("")
       // setLoading(true)
-      const loginInfo = await signIn(emailRef.current.value, passwordRef.current.value, user_type)
-      // if ( currentUser && userInfo) {
-      history.push(`/${loginInfo.role}Portal`)
-      // }
+      if (user_type === 'applicant') {
+        console.log("applicant log in: ", emailRefApplicant.current.value, passwordRefApplicant.current.value, user_type)
+        const loginInfoApplicant = await signIn(emailRefApplicant.current.value, passwordRefApplicant.current.value, user_type)
+        history.push(`/${loginInfoApplicant.role}Portal`)
+      } else if (user_type === 'recruiter') {
+        console.log("recruiter log in: ", emailRefRecruiter.current.value, passwordRefRecruiter.current.value, user_type)
+        const loginInfoRecruiter = await signIn(emailRefRecruiter.current.value, passwordRefRecruiter.current.value, user_type)
+        history.push(`/${loginInfoRecruiter.role}Portal`)
+      } else {
+        console.log("user type not applicant or recruiter")
+      }
     } catch {
       setError("Failed to login")
     }
@@ -75,18 +84,19 @@ const Login = () => {
           <Card.Body>
             <h1>Applicant Log In</h1>
             {/* {JSON.stringify(currentUser)} */}
-            <Form>
+            <Form onSubmit={(e)=>handleSignIn(e, 'applicant')}>
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="email" ref={emailRef} required />
+                <Form.Control type="email" ref={emailRefApplicant} required />
               </Form.Group>
               <Form.Group id="password">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" ref={passwordRef} required />
+                <Form.Control type="password" ref={passwordRefApplicant} required />
               </Form.Group>
+               <Button type="submit">Log In</Button>
             </Form>
 
-            <Button type="button" onClick={(e)=>handleSignIn(e, 'applicant')}>Log In</Button>
+
 
           </Card.Body>
         </Card>
@@ -97,18 +107,17 @@ const Login = () => {
             <Card.Body>
               <h1>Recruiter Log In</h1>
               {/* {JSON.stringify(currentUser)} */}
-              <Form>
+              <Form onSubmit={(e)=>handleSignIn(e, 'recruiter')}>
                 <Form.Group id="email">
                   <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" ref={emailRef} required />
+                  <Form.Control type="email" ref={emailRefRecruiter} required />
                 </Form.Group>
                 <Form.Group id="password">
                   <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" ref={passwordRef} required />
+                  <Form.Control type="password" ref={passwordRefRecruiter} required />
                 </Form.Group>
+                <Button type="submit">Log In</Button>
               </Form>
-
-              <Button type="button" onClick={(e)=>handleSignIn(e, 'recruiter')}>Log In</Button>
 
             </Card.Body>
           </Card>
