@@ -46,7 +46,7 @@ const Recruiter_Landing = () => {
 
         {Object.values(data).map(candidate => {
           return(
-            <Card className={styles.card}>
+            <Card key={candidate.id} className={styles.card}>
               <Card.Header as="h5">{candidate.name}</Card.Header>
               <Card.Body>
                 <Card.Title>{candidate.position} {candidate.background}</Card.Title>
