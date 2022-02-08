@@ -16,19 +16,20 @@ const SignUp = () => {
 
   const { signUp, isSignedIn, currentUser, userSignOut, signIn } = useAuth()
 
-  const handleSignUp = (e) => {
+  async function handleSignUp(e) {
     e.preventDefault();
-
-    checkValidPW() ? (
-      signUp(emailRef.current.value, passwordRef.current.value),
-      setValidPw(true)
-    ) : 
-      setValidPw(false)
-    
-    // issue: requires 2 clicks
-    // if (isSignedIn && currentUser) {
-    // history.push('/chooseAccountType')
-    // }
+    checkValidPW() ? setValidPw(true) : setValidPw(false)
+    // NEED to check if email is unique or already used in Firebase and add it to conditional statement before sign up
+    if (pwMatch && validPw) {
+      try {
+        console.log("in sign up try")
+        await signUp(emailRef.current.value, passwordRef.current.value),
+          setValidPw(true),
+          history.push('/chooseAccountType')
+      } catch {
+        console.log("Failed to create an account")
+      }
+    }
   }
 
   // function to verify that passwords match
@@ -52,7 +53,7 @@ const SignUp = () => {
       // check to see if it contains uppercase
       if (/^[A-Z]*$/.test(password[i])) {
         containsUpper = true;
-      } 
+      }
 
       // check to see if it contains special character
       if (special_chars.test(password[i])) {
@@ -65,7 +66,7 @@ const SignUp = () => {
         containsNumber = true;
       }
     }
-    
+
     if ((containsUpper && containsSymbol) && containsNumber) {
       return true;
     } else {
@@ -77,7 +78,6 @@ const SignUp = () => {
   const handleSignOut = (e) => {
     e.preventDefault();
     userSignOut()
-    // console.log('You signed out.');
   }
 
   return (
@@ -88,7 +88,7 @@ const SignUp = () => {
           <Card.Body>
             <h1>Sign Up</h1>
             {/* {JSON.stringify(currentUser)} */}
-            <Form>
+            <Form onSubmit={handleSignUp}>
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>
                 <Form.Control type="email" ref={emailRef} required />
@@ -100,18 +100,18 @@ const SignUp = () => {
               {validPw ? <Alert variant="secondary">Your password must contain an uppercase letter, a special character, and a number</Alert> : <Alert variant="danger">Invalid Password type</Alert>}
               <Form.Group id="password">
                 <Form.Label>Verify Password</Form.Label>
-                <Form.Control type="password" ref={verifyPassword} required onChange={() => verify()}/>
+                <Form.Control type="password" ref={verifyPassword} required onChange={() => verify()} />
               </Form.Group>
               {pwMatch ? <></> : <Alert variant="danger">Password doesn't match</Alert>}
+              <Button type="submit" >Sign Up</Button>
             </Form>
-            <Button type="submit" onClick={handleSignUp}>Sign Up</Button>
-
           </Card.Body>
         </Card>
       </>
+
       <div>
         Already Have an Account?
-        <Link to="/login">  Log In</Link>
+        <Link to="/login"> Log In </Link>
       </div>
 
     </Container>
