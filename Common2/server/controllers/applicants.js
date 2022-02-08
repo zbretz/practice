@@ -8,9 +8,9 @@ const applicantControllers = {};
 applicantControllers.getAllApplicants = async (req, res, next) => {
 
 	try {
-		// const applicants = await Applicant.findAll(joinConfig(User));
-		res.send(applicants)
-		// res.status(200).json(remapResponses(applicants));
+		const applicants = await Applicant.findAll(joinConfig(User));
+		// res.send(applicants)
+		res.status(200).json(remapResponses(applicants));
 	} catch (e) {
 		next(systemError(e));
 	}
