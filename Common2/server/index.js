@@ -26,6 +26,8 @@ const usersRouter = require('./routes/usersRoute');
 const adminsRouter = require('./routes/adminsRoute');
 const recruitersRouter = require('./routes/recruitersRoute');
 const applicantsRouter = require('./routes/applicantsRoute');
+const interviewsRouter = require('./routes/interviewsRoute');
+
 
 app.get('/starter', starter);
 app.use('/roles', rolesRouter);
@@ -33,6 +35,7 @@ app.use('/users', usersRouter);
 app.use('/admins', adminsRouter);
 app.use('/recruiters', recruitersRouter);
 app.use('/applicants', applicantsRouter);
+app.use('/interviews', interviewsRouter);
 
 // catch 404 and forward to error handler
 app.use((_req, _res, next) => {

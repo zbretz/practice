@@ -2,8 +2,6 @@
 const { USERS, APPLICANTS, RECRUITERS, ADMINS } = require('./data/seed-data');
 const {Recruiter} = require('../models/recruiter')
 
-console.log('xxx', Recruiter)
-
 module.exports = {
 	async up(queryInterface, Sequelize) {
 		/*

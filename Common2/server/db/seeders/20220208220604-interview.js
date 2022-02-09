@@ -3,35 +3,29 @@ const {Interview} = require('../models/interview')
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
 
-
-    //  await queryInterface.bulkInsert('interviews',
-    //  [{
-    //   id: {
-    //     type: 'INTEGER',
-    //     primaryKey: true,
-    //     autoIncrement: true
-    //   },
-    //   interviewee: {
-    //     type: 'UUID',
-    //     allowNull: false,
-    //     references: {
-    //       model: 'applicants',
-    //       key: 'user_id'
-    //     },
-    //     onDelete: 'CASCADE'
-    //   },
-    //  }]
-    //  , {});
+     await queryInterface.bulkInsert('interviews',
+     [{
+      // id: 1,
+      interviewee: '0246c9b0-07c1-46b1-98fd-2fba1b164d71',
+     },
+     {
+      // id: 1,
+      interviewee: '0246c9b0-07c1-46b1-98fd-2fba1b164d71',
+     },
+     {
+      // id: 1,
+      interviewee: '0246c9b0-07c1-46b1-98fd-2fba1b164d71',
+     },
+     {
+      // id: 1,
+      interviewee: '0246c9b0-07c1-46b1-98fd-2fba1b164d71',
+     },
+     {
+      // id: 1,
+      interviewee: '0246c9b0-07c1-46b1-98fd-2fba1b164d71',
+     }]
+     , {});
 
   },
 
