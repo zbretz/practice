@@ -9,6 +9,7 @@ import styles from '../styles/recruiterLanding.module.css'
 import { Switch, Route, Link, NavLink, useHistory, useRouteMatch } from 'react-router-dom'
 import axios from 'axios'
 
+import { useRecruiterData } from '../../contexts/RecruiterContext.js'
 import Recruiter_Candidate_View from './Recruiter_Candidate_View.jsx'
 
 const Recruiter_Landing = () => {
@@ -24,6 +25,9 @@ const Recruiter_Landing = () => {
 
   function getApplicants() {
       axios.get(`http://localhost:3000/applicants`).then(res => {
+
+        // const { currentApplicantData, setCurrentApplicantData } = useRecruiterData()
+
         console.log(res.data)
         console.log(res.data.candidates)
         setData(res.data)
