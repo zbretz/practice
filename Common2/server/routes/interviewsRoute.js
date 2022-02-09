@@ -23,15 +23,44 @@ interviewsRouter.get('/', async (req, res)=>{
     res.status(200).json(interviews);
   } catch (e) {
     res.send(e)
-    // next(systemError(e));
   }
-
   // res.send('thing')
-
-
 
 });
 
-// interviewsRouter.get('/:id', getApplicantById);
+
+interviewsRouter.get('/:id', async (req, res)=>{
+
+  const { id } = req.params;
+  console.log(id)
+
+  try {
+    const interviews = await Interview.findAll({
+      where: {
+        interviewee: id
+      }
+    })
+    res.status(200).json(interviews);
+  } catch (e) {
+    res.send(e)
+  }
+
+  // try {
+  //   const interviews = await Applicant.findAll({
+  //     where: {user_id: "0246c9b0-07c1-46b1-98fd-2fba1b164d71"},
+  //     include: [{
+  //       model: Interview,
+  //       where: {interviewee: "0246c9b0-07c1-46b1-98fd-2fba1b164d71"}
+  //     }]
+  //   });
+  //   res.status(200).json(interviews);
+  // } catch (e) {
+  //   res.send(e)
+  // }
+
+  // res.send('thing')
+
+});
+
 
 module.exports = interviewsRouter;
