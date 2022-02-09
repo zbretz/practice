@@ -24,12 +24,12 @@ console.log('update')
 
 	Recruiter.update(
 			{firebase_id: "GgaRWJL6UAQ6I75YHxltByzmshh2"},
-			{where: {"user_id":"cb6a50a2-e00c-46b8-9aac-bd7787190d37"}}
+			{where: {"user_id":"4593ea1c-3d35-4811-9026-e0db1a2903b0"}}
 		).then(result => (
 
 			Recruiter.update(
 				{firebase_id: "gMekPSi4QSUl2BDCHqFRZzqQJBn2"},
-				{where: {"user_id":"f65611a4-5783-4c0c-a7c1-f7f700ff208e"}}
+				{where: {"user_id":"5d92db4d-4b4f-496d-9065-7aa78695de2d"}}
 			).then(result2 => console.log('success'))
 			// .catch(e => console.log(e))
 

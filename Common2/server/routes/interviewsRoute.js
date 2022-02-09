@@ -74,9 +74,9 @@ interviewsRouter.get('/1/:id', async (req, res)=>{
         interviewee: id
       },
       include: [{
-        model: User,
-        // where: {id: id},
-        required: false
+        model: Applicant,
+        where: {user_id: id},
+        // required: false
         // where: {interviewee: "0246c9b0-07c1-46b1-98fd-2fba1b164d71"}
       }]
     })

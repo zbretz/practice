@@ -21,19 +21,19 @@ applicantControllers.getApplicantById = async (req, res, next) => {
 		const { id } = req.params;
 		console.log(id)
 
-		const applicant = applicants[id]
+		// const applicant = applicants[id]
 
-		return applicant ? res.status(200).json(applicant) : next(notFoundError('Applicant'));
+		// return applicant ? res.status(200).json(applicant) : next(notFoundError('Applicant'));
 
-		// const applicant = await Applicant.findOne({
-		// 	...joinConfig(User),
-		// 	where: {
-		// 		user_id: id
-		// 	}
-		// });
-		// return applicant
-		// 	? res.status(200).json(remapResponse(applicant))
-		// 	: next(notFoundError('Applicant'));
+		const applicant = await Applicant.findOne({
+			...joinConfig(User),
+			where: {
+				user_id: id
+			}
+		});
+		return applicant
+			? res.status(200).json(remapResponse(applicant))
+			: next(notFoundError('Applicant'));
 
 	} catch (e) {
 		next(systemError(e));

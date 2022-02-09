@@ -24,20 +24,22 @@ function ControlledTabs({data}) {
       className="mb-3"
     >
 
-      {Object.entries(data).map(phase=>{
+      {data.map(phase=>{
 console.log(phase[1])
+console.log(phase)
+
 return(
 
-      <Tab eventKey={phase[1].tab} title={phase[1].tab}>
+      <Tab eventKey={phase.phase} title={phase.phase}>
       <h2>Frontend Interview (React)</h2>
 
       {/* <Container> */}
-        <h5 style={{marginTop: "30px"}}  >Interviewer: {phase[1].interviewer_name}</h5>
+        <h5 style={{marginTop: "30px"}}  >Interviewer: {phase.interviewer}</h5>
       {/* </Container> */}
 
       <div>
         <h5  style={{marginTop: "30px"}}>Performance Summary</h5>
-        <div>{phase[1].performance_summary}</div>
+        <div>{phase.performance_summary}</div>
       </div>
 
       {/* <img src="./screenshot.png"/>
@@ -47,39 +49,6 @@ return(
 
       <h5 style={{marginTop: "30px"}} >Evaluation: </h5>
 
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Excellent</th>
-            <th>Very Good</th>
-            <th>Good</th>
-            <th>Fair</th>
-          </tr>
-        </thead>
-        <tbody>
-            {/* <td>{Asked Qs when needed}</td> */}
-            {phase[1].evaluation.map(thing => {
-              return(
-                <tr>
-
-                <td>{thing.criterion}</td>
-                {
-                [4,3,2,1].map(num=> {
-                  if(num === thing.rating){
-                    return <td><span style={{backgroundColor:"black", borderRadius:"50%", height:"30px", width:"30px", display:"block", margin:'auto'}}></span></td>
-                  } else {
-                    return <td></td>
-                  }
-                })
-              }
-                </tr>
-
-              )
-            })}
-
-        </tbody>
-      </Table>
 
       </Tab>
 
@@ -104,14 +73,22 @@ const Recruiter_Candidate_View = () => {
   let { id } = useParams();
   let user_id = id
   console.log(user_id)
-  const [data, setData] = useState()
+  const [applicantData, setApplicantData] = useState()
+  const [interviewData, setInterviewData] = useState()
 
   useEffect(() => {
 
   function getUserData() {
       axios.get(`http://localhost:3000/applicants/${user_id}`)
       .then(res => {
-        setData(res.data)
+        setApplicantData(res.data)
+        console.log(res.data)
+        console.log('woohoo')
+      })
+
+      axios.get(`http://localhost:3000/interviews/${user_id}`)
+      .then(res => {
+        setInterviewData(res.data)
         console.log(res.data)
         console.log('woohoo')
       })
@@ -128,13 +105,13 @@ const Recruiter_Candidate_View = () => {
 
     <Container style={{width:"80%"}}
 >
-  {data &&
+  {applicantData && interviewData &&
     <>
       <Container className={styles.candidateHeader}>
-        <h1>{data.name} <small className={styles.jobTitle}> Full Stack Engineer</small></h1>
+        <h1>{applicantData.name} <small className={styles.jobTitle}> Full Stack Engineer</small></h1>
       </Container>
       <Container>
-        <ControlledTabs data = {data.interview_phases} />
+        <ControlledTabs data = {interviewData} />
       </Container>
 
 </>}

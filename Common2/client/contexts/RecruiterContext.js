@@ -6,7 +6,7 @@ export const useRecruiterData = () => {
   return useContext(RecruiterContext)
 }
 
-export const RectuiterDataProvider = ({ children }) => {
+export const RecruiterDataProvider = ({ children }) => {
   const [currentApplicantData, setCurrentApplicantData] = useState()
   // const [loading, setLoading] = useState(true)
 

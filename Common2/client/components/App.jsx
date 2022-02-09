@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { AuthProvider } from '../contexts/AuthContext'
-import { RecruiterContext } from '../contexts/RecruiterContext'
+import { RecruiterDataProvider } from '../contexts/RecruiterContext'
 
 import { Switch, Route, Link, NavLink } from 'react-router-dom'
 import { Form, Button, Card, Container } from 'react-bootstrap'
@@ -23,7 +23,7 @@ const App = () => {
     <Container>
       <NavLink to="/">Back to Homepage</NavLink>
       <AuthProvider>
-        <RecruiterContext>
+        <RecruiterDataProvider>
         <Switch>
           <Route exact path="/applicantPortal" component={ApplicantPortal} />
           <Route exact path="/applicantInfoForm" component={ApplicantInfoForm} />
@@ -37,7 +37,7 @@ const App = () => {
           <Route exact path="/chooseAccountType" component={ChooseAccountType} />
           <Route exact path="/" component={Homepage} />
         </Switch>
-        </RecruiterContext>
+        </RecruiterDataProvider>
 
       </AuthProvider>
     </Container>
