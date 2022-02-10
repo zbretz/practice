@@ -1,4 +1,4 @@
-const interviewSchema = {
+const evaluationSchema = {
 	id: {
 		type: 'INTEGER',
 		primaryKey: true,
@@ -15,7 +15,7 @@ const interviewSchema = {
 	},
 	criterion: {
 		type: 'STRING',
-		defaultValue: 'system design'
+		defaultValue: 'Candidate communicated clearly'
 	},
 	rating: {
 		type: 'INTEGER',
@@ -23,4 +23,4 @@ const interviewSchema = {
 	},
 };
 
-module.exports = { interviewSchema };
+module.exports = { evaluationSchema };

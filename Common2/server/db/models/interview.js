@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 		 * This method is not a part of Sequelize lifecycle.
 		 * The `models/index` file will call this method automatically.
 		 */
-     static associate({ User, Applicant }) {
+     static associate({ User, Applicant, Evaluation }) {
 			// define association here
 			// this.belongsTo(User, { foreignKey: 'user_id' });
 			this.belongsTo(Applicant, {
@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
 				target: 'user_id',
 				onDelete: 'CASCADE'
 			});
+			this.hasMany(Evaluation)
 		}
 	}
 	Interview.init(remap(DataTypes, interviewSchema), {
