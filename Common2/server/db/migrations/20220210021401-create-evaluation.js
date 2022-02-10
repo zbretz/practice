@@ -5,11 +5,11 @@ const { evaluationSchema } = require('../schema/evaluationSchema');
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Evaluations', {
-      ...remap(Sequelize, evauationSchema)
-    }
-  }),
+    await queryInterface.createTable('evaluations', {
+      ...remap(Sequelize, evaluationSchema)
+    })
+  },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Evaluations');
+    await queryInterface.dropTable('evaluations');
   }
 };
