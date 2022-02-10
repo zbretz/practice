@@ -19,7 +19,10 @@ module.exports = (sequelize, DataTypes) => {
 				target: 'user_id',
 				onDelete: 'CASCADE'
 			});
-			this.hasMany(Evaluation)
+			this.hasMany(Evaluation,
+				{
+					foreignKey: 'interview'
+				})
 		}
 	}
 	Interview.init(remap(DataTypes, interviewSchema), {

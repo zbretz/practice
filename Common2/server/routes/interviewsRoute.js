@@ -1,7 +1,7 @@
 const interviewsRouter = require('express').Router();
 
 // const { Op } = require('sequelize');
-const { User, Applicant, Recruiter, Admin, Interview } = require('../db/models/index');
+const { User, Applicant, Recruiter, Admin, Interview, Evaluation } = require('../db/models/index');
 // const { EXCLUDEDATES, ROLES_ID } = require('../utils/db-utils');
 // const { notFoundError, systemError, badRequest } = require('../utils/utils');
 // const { v4: uuid } = require('uuid');
@@ -85,22 +85,29 @@ interviewsRouter.get('/1/:id', async (req, res)=>{
     res.send(e)
   }
 
-  // try {
-  //   const interviews = await Applicant.findAll({
-  //     where: {user_id: "0246c9b0-07c1-46b1-98fd-2fba1b164d71"},
-  //     include: [{
-  //       model: Interview,
-  //       where: {interviewee: "0246c9b0-07c1-46b1-98fd-2fba1b164d71"}
-  //     }]
-  //   });
-  //   res.status(200).json(interviews);
-  // } catch (e) {
-  //   res.send(e)
-  // }
-
-  // res.send('thing')
-
 });
 
+
+interviewsRouter.get('/evaluations/:id', async (req, res)=>{
+
+  const { id } = req.params;
+  console.log(id)
+
+  try {
+    const evaluations = await Evaluation.findAll({
+      where: {
+        interview: id
+      },
+      // include: [{
+      //   model: Applicant,
+      //   where: {user_id: id},
+      // }]
+    })
+    res.status(200).json(evaluations);
+  } catch (e) {
+    res.send(e)
+  }
+
+});
 
 module.exports = interviewsRouter;
