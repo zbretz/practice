@@ -1,19 +1,16 @@
 'use strict';
 
+const evals = Array(24)
+	.fill(null)
+	.map((curr, i) => {
+      if (i%2===0)return {interview: 1};
+    return {interview: 2}
+	});
+
 module.exports = {
   async up (queryInterface, Sequelize) {
 
-    await queryInterface.bulkInsert('evaluations',
-    [{
-     interview: 1,
-    },
-    {
-     interview: 1,
-    },
-    {
-     interview: 2,
-    }]
-    , {});
+    await queryInterface.bulkInsert('evaluations', evals, {});
 
   },
 

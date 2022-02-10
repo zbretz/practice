@@ -12,11 +12,13 @@ module.exports = (sequelize, DataTypes) => {
 		 * The `models/index` file will call this method automatically.
 		 */
      static associate({ Interview }) {
-			// this.belongsTo(Interview, {
-			// 	// foreignKey: 'id',
-			// 	// target: 'id',
-			// 	onDelete: 'CASCADE'
-			// });
+			// this.belongsTo(Interview)
+
+			this.belongsTo(Interview, {
+				foreignKey: 'id',
+				// target: 'id',
+				onDelete: 'CASCADE'
+			});
 		}
 	}
 	Evaluation.init(remap(DataTypes, evaluationSchema), {

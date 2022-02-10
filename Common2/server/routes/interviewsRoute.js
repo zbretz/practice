@@ -110,4 +110,28 @@ interviewsRouter.get('/evaluations/:id', async (req, res)=>{
 
 });
 
+
+
+interviewsRouter.get('/evaluations1/:id', async (req, res)=>{
+
+  const { id } = req.params;
+  console.log(id)
+
+  try {
+    const evaluations = await Evaluation.findAll({
+      // where: {
+      //   interview: id
+      // },
+      include: [{
+        model: Interview,
+        // where: {id: 1},
+      }]
+    })
+    res.status(200).json(evaluations);
+  } catch (e) {
+    res.send(e)
+  }
+
+});
+
 module.exports = interviewsRouter;
