@@ -11,7 +11,10 @@ const evals = Array(120)
 	.fill(null)
 	.map((curr, i) => {
     i = i%10 + 1
-    return {interview: i}
+    return {
+      interview: i,
+      rating: Math.floor(1+ Math.random() * 4)
+    }
 	});
 
 module.exports = {
