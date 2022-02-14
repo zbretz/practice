@@ -92,7 +92,14 @@ const Recruiter_Candidate_View = () => {
         console.log(res.data)
         console.log('woohoo')
       })
-    }
+
+    axios.get(`http://localhost:3000/interviews/evaluations1/${user_id}`)
+    .then(res => {
+      setInterviewData(res.data)
+      console.log('interviews with evaluations')
+      console.log(res.data)
+    })
+  }
 
     if (user_id) {
       getUserData();

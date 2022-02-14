@@ -112,10 +112,10 @@ interviewsRouter.get('/evaluations/:id', async (req, res)=>{
 
 
 
-interviewsRouter.get('/evaluations1/:id', async (req, res)=>{
+interviewsRouter.get('/evaluations1/:user_id', async (req, res)=>{
 
-  const { id } = req.params;
-  console.log(id)
+  const { user_id } = req.params;
+  console.log(user_id)
 
   try {
     const evaluations = await Interview.findAll({
@@ -123,7 +123,8 @@ interviewsRouter.get('/evaluations1/:id', async (req, res)=>{
       //   id: id
       // },
       where: {
-        interviewee: '0246c9b0-07c1-46b1-98fd-2fba1b164d71'
+        // interviewee: '0246c9b0-07c1-46b1-98fd-2fba1b164d71'
+        interviewee: user_id
       },
       include: [{
         model: Evaluation,
