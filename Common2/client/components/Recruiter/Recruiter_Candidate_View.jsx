@@ -50,6 +50,41 @@ return(
       <h5 style={{marginTop: "30px"}} >Evaluation: </h5>
 
 
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Excellent</th>
+            <th>Very Good</th>
+            <th>Good</th>
+            <th>Fair</th>
+          </tr>
+        </thead>
+        <tbody>
+            {/* <td>{Asked Qs when needed}</td> */}
+            {phase.Evaluations.map(thing => {
+              return(
+                <tr>
+
+                <td>{thing.criterion}</td>
+                {
+                [4,3,2,1].map(num=> {
+                  if(num === thing.rating){
+                    return <td><span style={{backgroundColor:"black", borderRadius:"50%", height:"30px", width:"30px", display:"block", margin:'auto'}}></span></td>
+                  } else {
+                    return <td></td>
+                  }
+                })
+              }
+                </tr>
+
+              )
+            })}
+
+        </tbody>
+      </Table>
+
+
       </Tab>
 
 )
@@ -86,12 +121,12 @@ const Recruiter_Candidate_View = () => {
         console.log('woohoo')
       })
 
-      axios.get(`http://localhost:3000/interviews/${user_id}`)
-      .then(res => {
-        setInterviewData(res.data)
-        console.log(res.data)
-        console.log('woohoo')
-      })
+      // axios.get(`http://localhost:3000/interviews/${user_id}`)
+      // .then(res => {
+      //   setInterviewData(res.data)
+      //   console.log(res.data)
+      //   console.log('woohoo')
+      // })
 
     axios.get(`http://localhost:3000/interviews/evaluations1/${user_id}`)
     .then(res => {
