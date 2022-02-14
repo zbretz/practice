@@ -38,6 +38,22 @@ module.exports = {
 		}],  {});
 
 
+		await queryInterface.bulkInsert('users',
+		[{
+			id: '0246c9b0-07c1-46b1-98fd-2fba1b164d72',
+			email: 'poopheadrecruiter@test.com',
+			password: 'easypass',
+			role_id: 'recruiter',
+			name: 'recruiter head'
+		}],  {})
+
+		await queryInterface.bulkInsert('recruiters',
+		[{
+			user_id: '0246c9b0-07c1-46b1-98fd-2fba1b164d72',
+			firebase_id: "GgaRWJL6UAQ6I75YHxltByzmshh2",
+		}],  {});
+
+
 	},
 
 	async down(queryInterface, Sequelize) {
