@@ -119,8 +119,11 @@ interviewsRouter.get('/evaluations1/:id', async (req, res)=>{
 
   try {
     const evaluations = await Interview.findAll({
+      // where: {
+      //   id: id
+      // },
       where: {
-        id: id
+        interviewee: '0246c9b0-07c1-46b1-98fd-2fba1b164d71'
       },
       include: [{
         model: Evaluation,
