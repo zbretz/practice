@@ -129,7 +129,7 @@ interviewsRouter.get('/evaluations1/:id', async (req, res)=>{
         // where: {id: 1},
       }]
     })
-    res.status(200).json(evaluations.slice(0,2));
+    res.status(200).json(evaluations.slice(0,1)[0]);
   } catch (e) {
     res.send(e)
   }

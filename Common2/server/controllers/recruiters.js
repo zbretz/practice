@@ -24,12 +24,12 @@ console.log('update')
 
 	Recruiter.update(
 			{firebase_id: "GgaRWJL6UAQ6I75YHxltByzmshh2"},
-			{where: {"user_id":"dc40de61-3f3b-4cc0-acec-7cc2da1b11b9"}}
+			{where: {"id":"1"}}
 		).then(result => (
 
 			Recruiter.update(
 				{firebase_id: "gMekPSi4QSUl2BDCHqFRZzqQJBn2"},
-				{where: {"user_id":"00382e28-0a98-473c-bf55-71f97fc92a10"}}
+				{where: {"id":"2"}}
 			).then(result2 => console.log('success'))
 			// .catch(e => console.log(e))
 
