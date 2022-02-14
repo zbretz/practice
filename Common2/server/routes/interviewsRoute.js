@@ -119,17 +119,18 @@ interviewsRouter.get('/evaluations1/:id', async (req, res)=>{
 
   try {
     const evaluations = await Interview.findAll({
-      // where: {
-      //   interview: id
-      // },
+      where: {
+        id: id
+      },
       include: [{
         model: Evaluation,
-        right:true
-        // required: true
-        // where: {id: 1},
+        right:true,
+        // required: true,
+        // where: {id: id},
       }]
     })
-    res.status(200).json(evaluations.slice(0,1)[0]);
+    // res.status(200).json(evaluations.slice(0,1)[0]);
+    res.status(200).json(evaluations);
   } catch (e) {
     res.send(e)
   }
