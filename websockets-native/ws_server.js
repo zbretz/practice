@@ -1,3 +1,4 @@
+// following this tutorial: https://blog.logrocket.com/how-to-implement-websockets-in-react-native/
 const express = require("express");
 const app = express();
 const http = require("http");

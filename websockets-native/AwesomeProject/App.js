@@ -8,7 +8,7 @@ export default function App() {
   const [disableButton, setDisableButton] = React.useState(true);
   const [inputFieldEmpty, setInputFieldEmpty] = React.useState(true);
   const [serverMessages, setServerMessages] = React.useState([]);
-  var ws = React.useRef(new WebSocket('ws://w567l.sse.codesandbox.io/')).current;
+  var ws = React.useRef(new WebSocket('ws://localhost:8080')).current;
 
 
   React.useEffect(() => {
