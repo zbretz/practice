@@ -10,13 +10,18 @@ export default function App() {
   const [serverMessages, setServerMessages] = React.useState([]);
   var ws = React.useRef(new WebSocket('ws://10.0.0.53:8080')).current;
 
+  const user_id = 2
+
 
   React.useEffect(() => {
     const serverMessagesList = [];
     ws.onopen = () => {
       setServerState('Connected to the server')
       setDisableButton(false);
-      ws.send('open')
+      // ws.send(user_id)
+      // ws.send(JSON.stringify({connected: false, id: user_id}))
+      ws.send(JSON.stringify({source: 'client', id: user_id}))
+
     };
     ws.onclose = (e) => {
       setServerState('Disconnected. Check internet or server.')
