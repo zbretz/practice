@@ -8,7 +8,7 @@ export default function App() {
   const [disableButton, setDisableButton] = React.useState(true);
   const [inputFieldEmpty, setInputFieldEmpty] = React.useState(true);
   const [serverMessages, setServerMessages] = React.useState([]);
-  var ws = React.useRef(new WebSocket('ws://localhost:8080')).current;
+  var ws = React.useRef(new WebSocket('ws://10.0.0.53:8080')).current;
 
 
   React.useEffect(() => {
@@ -16,6 +16,7 @@ export default function App() {
     ws.onopen = () => {
       setServerState('Connected to the server')
       setDisableButton(false);
+      ws.send('open')
     };
     ws.onclose = (e) => {
       setServerState('Disconnected. Check internet or server.')
@@ -30,7 +31,7 @@ export default function App() {
     };
   }, [])
   const submitMessage = () => {
-    ws.send(messageText);
+    ws.send(messageText + '3' + '1');
     setMessageText('')
     setInputFieldEmpty(true)
   }
@@ -41,7 +42,8 @@ export default function App() {
         backgroundColor: '#eeceff',
         padding: 5
       }}>
-       <Text>{serverState}</Text>
+       <Text>{serverState}
+       !</Text>
      </View>
      <View style={{
         backgroundColor: '#ffeece',
