@@ -6,7 +6,7 @@ const WebSocket = require("ws");
 const server = http.createServer(app);
 const bodyParser = require('body-parser');
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 const wss = new WebSocket.Server({ server });
 
@@ -14,11 +14,11 @@ const wss = new WebSocket.Server({ server });
 const CLIENTS={};
 
 app.post("/:id", (req, res) => {
-  console.log('Got body:', req.body);
+  console.log('Got body:', req.body.msg_txt);
   if (req.params.id){
     if (CLIENTS[req.params.id]){
       //pass along ws message
-      CLIENTS[req.params.id].send('booyah!')
+      CLIENTS[req.params.id].send(req.body.msg_txt)
       //response to app server
       res.send('client exists!')
     } else {
