@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, TextInput, Button, ScrollView } from 'react-native';
-
+const axios = require('axios');
 
 export default function App() {
   const [serverState, setServerState] = React.useState('Loading...');
@@ -10,7 +10,8 @@ export default function App() {
   const [serverMessages, setServerMessages] = React.useState([]);
   var ws = React.useRef(new WebSocket('ws://10.0.0.53:8080')).current;
 
-  const user_id = 2
+  const user_id = 1
+  const recipient_id = 6
 
 
   React.useEffect(() => {
@@ -40,6 +41,26 @@ export default function App() {
     setMessageText('')
     setInputFieldEmpty(true)
   }
+
+  const submitViaServer = () => {
+    axios.post(
+      'http://10.0.0.53:3000/messages/',
+      {sender_id:user_id, recipient_id:recipient_id, message_text:messageText}
+    )
+    .then((new_message)=>{
+      console.log(new_message)
+      // serverMessagesList.push(e.data.message_text);
+      // setServerMessages([...serverMessagesList])
+      }
+    )
+    .catch(error => {
+      console.error(error);
+      console.log('Snome not able to be added to snome_message ', error)
+    })
+    setMessageText('')
+    setInputFieldEmpty(true)
+  }
+
   return (
    <View style={styles.container}>
      <View style={{
@@ -84,6 +105,11 @@ export default function App() {
        <Button
          onPress={submitMessage}
          title={'Submit'}
+         disabled={disableButton || inputFieldEmpty}
+        />
+        <Button
+         onPress={submitViaServer}
+         title={'Submit via app server'}
          disabled={disableButton || inputFieldEmpty}
         />
      </View>
