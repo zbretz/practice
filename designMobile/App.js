@@ -7,6 +7,7 @@ import { Video, AVPlaybackStatus } from 'expo-av';
 import { Dimensions } from "react-native";
 import { Rating, AirbnbRating } from 'react-native-ratings';// https://openbase.com/js/react-native-ratings
 import ListScreen from './ListScreen';
+import DescriptionScreen from './DescriptionScreen';
 
 
 var width = Dimensions.get('window').width; //full width
@@ -18,7 +19,8 @@ export default function App() {
 
   return (
     <ApplicationProvider {...eva} theme={eva.light}>
-      <ListScreen />
+      {/* <ListScreen/> */}
+      <DescriptionScreen/>
     </ApplicationProvider>
   )
 }
