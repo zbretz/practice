@@ -20,41 +20,19 @@ export const CustomCalendar = () => {
   const boundingCalendarState = useCalendarState();
 
   return (
-    <Layout style={styles.container} level='1'>
+    // <Layout style={styles.container} level='1'>
 
       <View style={styles.calendarContainer}>
 
 
-        <Calendar
+        <Calendar style={{width: '100%'}}
           min={yesterday}
           max={tomorrow}
           {...minMaxCalendarState}
         />
       </View>
 
-      {/* <View style={styles.calendarContainer}>
-        <Text style={styles.text} category='h6'>
-          Filter
-        </Text>
-
-        <Calendar
-          filter={filter}
-          {...filterCalendarState}
-        />
-      </View>
-
-      <View style={styles.calendarContainer}>
-        <Text style={styles.text} category='h6'>
-          Bounding Month
-        </Text>
-
-        <Calendar
-          boundingMonth={false}
-          {...boundingCalendarState}
-        />
-      </View> */}
-
-    </Layout>
+    // </Layout>
   );
 };
 
@@ -64,6 +42,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   calendarContainer: {
+    marginTop: 16,
     margin: 2,
   },
   text: {

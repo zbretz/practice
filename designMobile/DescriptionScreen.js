@@ -6,6 +6,7 @@ import { Video } from 'expo-av';
 import { Dimensions } from "react-native";
 import { Rating, AirbnbRating } from 'react-native-ratings';// https://openbase.com/js/react-native-ratings
 import { CustomCalendar } from './CustomCalendar';
+import { CustomModal } from './CustomModal';
 
 var width = Dimensions.get('window').width; //full width
 
@@ -62,6 +63,10 @@ export default function DescriptionScreen() {
         </View>
       </View>
 
+
+      <CustomModal/>
+
+
       <View style={{ marginTop: 16 }}>
         <Text style={styles.text} category='h6'>
           About Me
@@ -84,6 +89,7 @@ export default function DescriptionScreen() {
       </View>
       {/* </View> */}
 
+
     </ScrollView>
   )
 }
@@ -91,9 +97,6 @@ export default function DescriptionScreen() {
 const styles = StyleSheet.create({
   card: {
     margin: 10,
-    // width: '80%',
-    // margin: 'auto'
-
   },
   container: {
     flex: 1,
