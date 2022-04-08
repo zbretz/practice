@@ -5,6 +5,8 @@ import { StyleSheet, View, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import { Video, AVPlaybackStatus } from 'expo-av';
 import { Dimensions } from "react-native";
+import { Rating, AirbnbRating } from 'react-native-ratings';// https://openbase.com/js/react-native-ratings
+
 
 var width = Dimensions.get('window').width; //full width
 
@@ -13,12 +15,17 @@ var card_count = 5
 
 export default function App() {
 
+
+  function ratingCompleted(rating) {
+    console.log("Rating is: " + rating)
+  }
+
   const video = React.useRef(null);
   const [status, setStatus] = React.useState({});
 
   return (
     <ApplicationProvider {...eva} theme={eva.light}>
-      <ScrollView >
+      <ScrollView style={{marginTop:50}}>
 
         {[...Array(2)].map((e, i) => {
           return (
@@ -37,9 +44,33 @@ export default function App() {
                 isMuted
                 onPlaybackStatusUpdate={status => setStatus(() => status)}
               />
+              <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
+                <Text style={{ marginTop: 6 }}>
+                  Cleaner Name
+                </Text>
+                <View>
+                  <Rating
+                    type='heart'
+                    ratingCount={5}
+                    imageSize={30}
+                    startingValue={4.5}
+                    readonly={true}
+                    // showRating
+                    onFinishRating={ratingCompleted}
+                  />
+                  <Text style={{ marginTop: 6, color: '#838383', textAlign:'right'}}>
+                    11 House Cleanings
+                  </Text>
+                </View>
+              </View>
             </Card>
           )
         })}
+
+
+
+
+
 
       </ScrollView>
     </ApplicationProvider>
