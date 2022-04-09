@@ -1,11 +1,13 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Card, Modal, Text } from '@ui-kitten/components';
+import { TimesList } from './TimesList';
  
 export const CustomModal = ({modalVisible, setModalVisible}) => {
 
 
   return (
+      
     <View style={styles.container}>
 {/* 
       <Button onPress={() => setModalVisible(true)}>
@@ -17,10 +19,8 @@ export const CustomModal = ({modalVisible, setModalVisible}) => {
         backdropStyle={styles.backdrop}
         onBackdropPress={() => setModalVisible(false)}>
         <Card disabled={true}>
-          <Text>Welcome to UI Kitten 😻</Text>
-          <Button onPress={() => setModalVisible(false)}>
-            DISMISS
-          </Button>
+        <TimesList setModalVisible={setModalVisible}/>
+
         </Card>
       </Modal>
 
@@ -30,6 +30,7 @@ export const CustomModal = ({modalVisible, setModalVisible}) => {
 
 const styles = StyleSheet.create({
   container: {
+    //   width: '100%',
     // minHeight: 192,
   },
   backdrop: {
