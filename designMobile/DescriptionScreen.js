@@ -40,7 +40,7 @@ export default function DescriptionScreen() {
           isLooping
           shouldPlay
           isMuted
-          onPlaybackStatusUpdate={status => setStatus(() => status)}
+          // onPlaybackStatusUpdate={status => setStatus(() => status)}
         />
       </View>
       <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
