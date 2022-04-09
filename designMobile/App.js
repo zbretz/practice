@@ -9,6 +9,7 @@ import { Rating, AirbnbRating } from 'react-native-ratings';// https://openbase.
 import ListScreen from './ListScreen';
 import DescriptionScreen from './DescriptionScreen';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import AccountScreen from './AccountScreen';
 const { this_user } = require('./assets/dummy/data.js')
 
 //Icons info found here: https://stackoverflow.com/questions/61540905/react-native-uikitten-icons-typeerror-undefined-is-not-an-object-evaluating
@@ -21,8 +22,9 @@ export default function App() {
     <>
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={eva.light}>
+        <AccountScreen/>
         {/* <ListScreen/> */}
-        <DescriptionScreen this_user={this_user}/>
+        {/* <DescriptionScreen this_user={this_user}/> */}
       </ApplicationProvider>
     </>
 
