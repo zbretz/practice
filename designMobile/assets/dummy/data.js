@@ -64,12 +64,13 @@ export const clients = {
 }
 
 // represents logged-in user on device
+// "this_user" assumes the user is client and not housecleaner
 export const this_user = {
     id: 1,
     name: "kate",
     address: "743 Evergreen Terrace",
     special_instructions: "Please separate recycles from garbage",
-    upcoming_reservation: null,//id?,
+    upcoming_reservation: true,//id?,
     past_reservations: []
 }
 

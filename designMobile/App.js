@@ -15,8 +15,6 @@ const { this_user } = require('./assets/dummy/data.js')
 
 var width = Dimensions.get('window').width; //full width
 
-console.log(this_user)
-
 export default function App() {
 
   return (
@@ -24,7 +22,7 @@ export default function App() {
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={eva.light}>
         {/* <ListScreen/> */}
-        <DescriptionScreen />
+        <DescriptionScreen this_user={this_user}/>
       </ApplicationProvider>
     </>
 

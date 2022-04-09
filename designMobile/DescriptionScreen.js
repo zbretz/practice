@@ -10,7 +10,9 @@ import { CustomModal } from './CustomModal';
 
 var width = Dimensions.get('window').width; //full width
 
-export default function DescriptionScreen() {
+export default function DescriptionScreen({ this_user }) {
+
+  console.log(this_user)
 
   const [modalVisible, setModalVisible] = useState(false);
   const video = React.useRef(null);
@@ -26,7 +28,7 @@ export default function DescriptionScreen() {
 
     <ScrollView style={{ marginTop: 50, padding: '10%' }}>
 
-      <CustomModal modalVisible={modalVisible} setModalVisible={setModalVisible} date={date}/>
+      <CustomModal modalVisible={modalVisible} setModalVisible={setModalVisible} date={date} />
 
       {/* <View style={styles.card}> */}
       <View style={{}}>
@@ -79,10 +81,28 @@ export default function DescriptionScreen() {
       </View>
 
       <View style={{ marginTop: 16 }}>
-        <Text style={styles.text} category='h6'>
-          Book with me!
-        </Text>
-        <CustomCalendar date={date} setDate={setDate} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+        {
+
+          !this_user.upcoming_reservation ?
+
+            <>
+              <Text style={styles.text} category='h6'>
+                Book with me!
+              </Text>
+              <CustomCalendar date={date} setDate={setDate} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            </>
+
+            :
+
+            <>
+
+              <Card style={styles.card} status='success'>
+                <Text>View My Upcoming Resvervation</Text>
+              </Card>
+
+            </>
+
+        }
       </View>
       {/* </View> */}
 
