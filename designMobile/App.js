@@ -9,13 +9,13 @@ import { Rating, AirbnbRating } from 'react-native-ratings';// https://openbase.
 import ListScreen from './ListScreen';
 import DescriptionScreen from './DescriptionScreen';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
+const { this_user } = require('./assets/dummy/data.js')
 
 //Icons info found here: https://stackoverflow.com/questions/61540905/react-native-uikitten-icons-typeerror-undefined-is-not-an-object-evaluating
 
 var width = Dimensions.get('window').width; //full width
 
-var card_count = 5
-
+console.log(this_user)
 
 export default function App() {
 

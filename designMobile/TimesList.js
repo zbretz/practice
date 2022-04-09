@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, } from 'react-native';
 import { Divider, List, ListItem, Button, Icon, Text } from '@ui-kitten/components';
 import moment from 'moment';
-const { appointments } = require ('./assets/dummy/data.js')
+const { appointments } = require('./assets/dummy/data.js')
 
 
 const data = new Array(8).fill({
@@ -12,19 +12,26 @@ const data = new Array(8).fill({
 
 
 
-export const TimesList = ({date, setModalVisible }) => {
+export const TimesList = ({ date, setModalVisible }) => {
 
     let moment_date = moment(date).format('dddd MMM Do')
     console.log(moment_date)
 
 
-    
+    const renderItemAccessory = (props) => {
+        return (
+            <Button size='tiny' disabled={!props.is_available}>
+                SELECT</Button>
+        )
+    };
+
     const renderItem = ({ item }) => (
         <ListItem
-            // title={`${item.title} ${index + 1}`}
-            // description={`${item.description} ${index + 1}`}
-            title={`${item.time}`}
-            description={`${item.is_available}`}
+
+            title={item.time}
+            // description={`${item.is_available}`}
+            accessoryRight={() => renderItemAccessory({ is_available: item.is_available })}
+
         />
     );
 
