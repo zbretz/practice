@@ -1,10 +1,18 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, Card, Modal, Text } from '@ui-kitten/components';
+import { Button, Card, Modal, Text, Icon } from '@ui-kitten/components';
 import { TimesList } from './TimesList';
  
 export const CustomModal = ({modalVisible, setModalVisible}) => {
 
+
+    const StarIcon = (props) => (
+        <Icon
+            style={styles.icon}
+            fill='#8F9BB3'
+            name='close-outline'
+        />
+    );
 
   return (
       
@@ -13,6 +21,14 @@ export const CustomModal = ({modalVisible, setModalVisible}) => {
       <Button onPress={() => setModalVisible(true)}>
         TOGGLE MODAL
       </Button> */}
+
+<Button
+                    appearance='ghost'
+                    // appearance='outline'
+                    style={{ margin: 2, width: 60 ,  flexDirection: 'row', justifyContent:'flex-end'}}
+                    onPress={() => setModalVisible(false)}
+                    accessoryRight={StarIcon}>
+                </Button>
 
       <Modal
         visible={modalVisible}
