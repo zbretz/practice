@@ -2,24 +2,23 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Card, Modal, Text } from '@ui-kitten/components';
  
-export const CustomModal = () => {
+export const CustomModal = ({modalVisible, setModalVisible}) => {
 
-  const [visible, setVisible] = React.useState(false);
 
   return (
     <View style={styles.container}>
 
-      <Button onPress={() => setVisible(true)}>
+      <Button onPress={() => setModalVisible(true)}>
         TOGGLE MODAL
       </Button>
 
       <Modal
-        visible={visible}
+        visible={modalVisible}
         backdropStyle={styles.backdrop}
-        onBackdropPress={() => setVisible(false)}>
+        onBackdropPress={() => setModalVisible(false)}>
         <Card disabled={true}>
           <Text>Welcome to UI Kitten 😻</Text>
-          <Button onPress={() => setVisible(false)}>
+          <Button onPress={() => setModalVisible(false)}>
             DISMISS
           </Button>
         </Card>

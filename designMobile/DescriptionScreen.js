@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Card, Text } from '@ui-kitten/components';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
@@ -12,13 +12,13 @@ var width = Dimensions.get('window').width; //full width
 
 export default function DescriptionScreen() {
 
+  const [modalVisible, setModalVisible] = useState(false);
+  const video = React.useRef(null);
+  const [status, setStatus] = useState({});
 
   function ratingCompleted(rating) {
     console.log("Rating is: " + rating)
   }
-
-  const video = React.useRef(null);
-  const [status, setStatus] = React.useState({});
 
   return (
     <ScrollView style={{ marginTop: 50, padding: '10%' }}>
@@ -64,7 +64,7 @@ export default function DescriptionScreen() {
       </View>
 
 
-      <CustomModal/>
+      <CustomModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>
 
 
       <View style={{ marginTop: 16 }}>
@@ -85,7 +85,7 @@ export default function DescriptionScreen() {
         <Text style={styles.text} category='h6'>
           Book with me!
         </Text>
-        <CustomCalendar />
+        <CustomCalendar modalVisible={modalVisible} setModalVisible={setModalVisible}/>
       </View>
       {/* </View> */}
 
