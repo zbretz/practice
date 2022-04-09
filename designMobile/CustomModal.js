@@ -7,10 +7,10 @@ export const CustomModal = ({modalVisible, setModalVisible}) => {
 
   return (
     <View style={styles.container}>
-
+{/* 
       <Button onPress={() => setModalVisible(true)}>
         TOGGLE MODAL
-      </Button>
+      </Button> */}
 
       <Modal
         visible={modalVisible}
@@ -30,7 +30,7 @@ export const CustomModal = ({modalVisible, setModalVisible}) => {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 192,
+    // minHeight: 192,
   },
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
