@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Divider, List, ListItem, Button, Icon } from '@ui-kitten/components';
+import { StyleSheet, View, } from 'react-native';
+import { Divider, List, ListItem, Button, Icon, Text } from '@ui-kitten/components';
 
 const data = new Array(8).fill({
     title: 'Item',
@@ -26,18 +26,27 @@ export const TimesList = ({ setModalVisible }) => {
 
     return (
         <>
-            <View >
+            <View>
                 {/* <View style={{ margin: 2, flexDirection: 'row', alignItems:'flex-end'}}/> */}
 
-                <Button
-                    appearance='ghost'
-                    // appearance='outline'
-                    style={{ margin: 2, flexDirection: 'row', justifyContent:'flex-end'}}
-                    onPress={() => setModalVisible(false)}
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Text category='h4' style={{}}>Date: </Text>
+                    <Button
+                        appearance='ghost'
+                        // appearance='outline'
+                        style={{ margin: 2, flexDirection: 'row', justifyContent: 'flex-end' }}
+                        onPress={() => setModalVisible(false)}
                     // accessoryRight={StarIcon}
                     >
-                        <StarIcon/>
-                </Button>
+                        <StarIcon />
+                    </Button>
+                </View>
+
+                <Text category='h6' style={{}}>
+                    Select at Time:
+                </Text>
+
+
                 {/* </View> */}
                 <List
                     style={styles.container}

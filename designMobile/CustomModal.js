@@ -17,18 +17,6 @@ export const CustomModal = ({modalVisible, setModalVisible}) => {
   return (
       
     <View style={styles.container}>
-{/* 
-      <Button onPress={() => setModalVisible(true)}>
-        TOGGLE MODAL
-      </Button> */}
-
-<Button
-                    appearance='ghost'
-                    // appearance='outline'
-                    style={{ margin: 2, width: 60 ,  flexDirection: 'row', justifyContent:'flex-end'}}
-                    onPress={() => setModalVisible(false)}
-                    accessoryRight={StarIcon}>
-                </Button>
 
       <Modal
         visible={modalVisible}
