@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, } from 'react-native';
 import { Divider, List, ListItem, Button, Icon, Text } from '@ui-kitten/components';
 import moment from 'moment';
+const { appointments } = require ('./assets/dummy/data.js')
 
 
 const data = new Array(8).fill({
@@ -15,12 +16,15 @@ export const TimesList = ({date, setModalVisible }) => {
 
     let moment_date = moment(date).format('dddd MMM Do')
     console.log(moment_date)
-    // console.log(moment(date).format('dddd MMM Do'))
+
+
     
-    const renderItem = ({ item, index }) => (
+    const renderItem = ({ item }) => (
         <ListItem
-            title={`${item.title} ${index + 1}`}
-            description={`${item.description} ${index + 1}`}
+            // title={`${item.title} ${index + 1}`}
+            // description={`${item.description} ${index + 1}`}
+            title={`${item.time}`}
+            description={`${item.is_available}`}
         />
     );
 
@@ -59,7 +63,7 @@ export const TimesList = ({date, setModalVisible }) => {
                 {/* </View> */}
                 <List
                     style={styles.container}
-                    data={data}
+                    data={appointments[1]}
                     ItemSeparatorComponent={Divider}
                     renderItem={renderItem}
                 />

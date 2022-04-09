@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Calendar, Layout, Text } from '@ui-kitten/components';
-import moment from 'moment';
+// import moment from 'moment';
 
 const filter = (date) => date.getDay() !== 0 && date.getDay() !== 6;
 
