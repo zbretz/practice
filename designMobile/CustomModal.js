@@ -2,17 +2,8 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Card, Modal, Text, Icon } from '@ui-kitten/components';
 import { TimesList } from './TimesList';
- 
-export const CustomModal = ({modalVisible, setModalVisible}) => {
 
-
-    const StarIcon = (props) => (
-        <Icon
-            style={styles.icon}
-            fill='#8F9BB3'
-            name='close-outline'
-        />
-    );
+export const CustomModal = ({date, modalVisible, setModalVisible}) => {
 
   return (
       
@@ -23,7 +14,7 @@ export const CustomModal = ({modalVisible, setModalVisible}) => {
         backdropStyle={styles.backdrop}
         onBackdropPress={() => setModalVisible(false)}>
         <Card disabled={true}>
-        <TimesList setModalVisible={setModalVisible}/>
+        <TimesList date={date} setModalVisible={setModalVisible}/>
 
         </Card>
       </Modal>

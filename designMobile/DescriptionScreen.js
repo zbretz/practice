@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Card, Text } from '@ui-kitten/components';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
@@ -16,16 +16,17 @@ export default function DescriptionScreen() {
   const video = React.useRef(null);
   const [status, setStatus] = useState({});
 
+  const [date, setDate] = useState(new Date);
+
   function ratingCompleted(rating) {
     console.log("Rating is: " + rating)
   }
 
   return (
+
     <ScrollView style={{ marginTop: 50, padding: '10%' }}>
-      {/* 
-      <Text style={{ marginBottom: 6, fontSize: '30vw', textAlign:'center' }}>
-        Cleaner Name
-      </Text> */}
+
+      <CustomModal modalVisible={modalVisible} setModalVisible={setModalVisible} date={date}/>
 
       {/* <View style={styles.card}> */}
       <View style={{}}>
@@ -40,7 +41,7 @@ export default function DescriptionScreen() {
           isLooping
           shouldPlay
           isMuted
-          // onPlaybackStatusUpdate={status => setStatus(() => status)}
+        // onPlaybackStatusUpdate={status => setStatus(() => status)}
         />
       </View>
       <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
@@ -63,10 +64,6 @@ export default function DescriptionScreen() {
         </View>
       </View>
 
-
-      <CustomModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>
-
-
       <View style={{ marginTop: 16 }}>
         <Text style={styles.text} category='h6'>
           About Me
@@ -85,7 +82,7 @@ export default function DescriptionScreen() {
         <Text style={styles.text} category='h6'>
           Book with me!
         </Text>
-        <CustomCalendar modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+        <CustomCalendar date={date} setDate={setDate} modalVisible={modalVisible} setModalVisible={setModalVisible} />
       </View>
       {/* </View> */}
 

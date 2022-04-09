@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Calendar, Layout, Text } from '@ui-kitten/components';
+import moment from 'moment';
 
 const filter = (date) => date.getDay() !== 0 && date.getDay() !== 6;
 
@@ -8,9 +9,7 @@ const now = new Date();
 const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 10);
 const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 10);
 
-export const CustomCalendar = ({ setModalVisible }) => {
-
-    const [date, setDate] = React.useState(new Date);
+export const CustomCalendar = ({date, setDate, setModalVisible }) => {
 
     return (
         // <Layout style={styles.container} level='1'>
@@ -23,7 +22,7 @@ export const CustomCalendar = ({ setModalVisible }) => {
                 max={tomorrow}
                 onSelect={date => {
                     console.log(date)
-                    setDate(date) 
+                    setDate(date)
                     setModalVisible(true)
                 }
                 }
