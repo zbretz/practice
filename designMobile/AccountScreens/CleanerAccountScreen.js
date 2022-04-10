@@ -5,8 +5,8 @@ import Constants from 'expo-constants';
 import { Video } from 'expo-av';
 import { Dimensions } from "react-native";
 import { Rating, AirbnbRating } from 'react-native-ratings';// https://openbase.com/js/react-native-ratings
-import { CustomCalendar } from './CustomCalendar';
-import { CustomModal } from './CustomModal';
+import { CustomCalendar } from '../CustomCalendar';
+import { BookingModal } from '../Modals/BookingModal';
 import moment from 'moment';
 
 var width = Dimensions.get('window').width; //full width
@@ -97,7 +97,7 @@ export default function DescriptionScreen({ this_cleaner }) {
 
       <Text style={{ textAlign: 'center', margin: 10 }} category='h2'>My Account</Text>
 
-      <CustomModal modalVisible={modalVisible} setModalVisible={setModalVisible} date={date} />
+      <BookingModal modalVisible={modalVisible} setModalVisible={setModalVisible} date={date} />
 
       {/* <View style={styles.card}> */}
       <View style={{}}>
@@ -115,16 +115,8 @@ export default function DescriptionScreen({ this_cleaner }) {
         // onPlaybackStatusUpdate={status => setStatus(() => status)}
         />
       </View>
-      {/* 
-      <Card status='basic'>
-        <View style={[{ flexDirection: 'row', justifyContent: "space-between" }]}>
-          <Text style={{ color: 'rgb(180, 181, 184)' }}>Pending:</Text>
-          <Text>Date</Text>
-        </View>
-      </Card> */}
-
+   
       <Card style={{ marginTop: 10 }} header={Header2} >
-
 
         <List
           style={styles.container}
@@ -133,7 +125,6 @@ export default function DescriptionScreen({ this_cleaner }) {
           data={this_cleaner.reservations.filter(res => res.status !== 'completed')}
           renderItem={renderItem}
         />
-
 
         {/* <ScrollView style={{ height: 200 }}>
         <Card accessoryRight={renderItemAccessory} style={styles.card} status='basic'>

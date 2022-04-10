@@ -6,10 +6,11 @@ import { Video } from 'expo-av';
 import { Dimensions } from "react-native";
 import { Rating, AirbnbRating } from 'react-native-ratings';// https://openbase.com/js/react-native-ratings
 import { CustomCalendar } from './CustomCalendar';
-import { CustomModal } from './CustomModal';
+import { BookingModal } from './Modals/BookingModal';
 
 var width = Dimensions.get('window').width; //full width
 
+// TOGGLE VIEWING THE CALENDAR/BOOKING SYSTEM BY MODIFYING THE 'THIS_CLIENT' OBJECT IN DATA.JS
 export default function DescriptionScreen({ this_client }) {
 
   console.log(this_client)
@@ -28,7 +29,7 @@ export default function DescriptionScreen({ this_client }) {
 
     <ScrollView style={{ marginTop: 50, padding: '10%' }}>
 
-      <CustomModal modalVisible={modalVisible} setModalVisible={setModalVisible} date={date} />
+      <BookingModal modalVisible={modalVisible} setModalVisible={setModalVisible} date={date} />
 
       {/* <View style={styles.card}> */}
       <View style={{}}>
@@ -83,6 +84,7 @@ export default function DescriptionScreen({ this_client }) {
       <View style={{ marginTop: 16 }}>
         {
 
+          // TOGGLE VIEWING THE CALENDAR/BOOKING SYSTEM BY MODIFYING THE 'THIS_CLIENT' OBJECT IN DATA.JS
           !this_client.upcoming_reservation ?
 
             <>

@@ -9,8 +9,8 @@ import { Rating, AirbnbRating } from 'react-native-ratings';// https://openbase.
 import ListScreen from './ListScreen';
 import DescriptionScreen from './DescriptionScreen';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import ClientAccountScreen from './ClientAccountScreen';
-import CleanerAccountScreen from './CleanerAccountScreen';
+import ClientAccountScreen from './AccountScreens/ClientAccountScreen';
+import CleanerAccountScreen from './AccountScreens/CleanerAccountScreen';
 const { this_client } = require('./assets/dummy/data.js')
 const { this_cleaner } = require('./assets/dummy/data.js')
 
@@ -25,9 +25,9 @@ export default function App() {
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={eva.light}>
         {/* <ClientAccountScreen this_client={this_client}/> */}
-        <CleanerAccountScreen this_cleaner={this_cleaner}/>
+        {/* <CleanerAccountScreen this_cleaner={this_cleaner}/> */}
         {/* <ListScreen/> */}
-        {/* <DescriptionScreen this_client={this_client}/> */}
+        <DescriptionScreen this_client={this_client}/>
       </ApplicationProvider>
     </>
 

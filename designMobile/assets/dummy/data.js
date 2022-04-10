@@ -70,7 +70,7 @@ export const this_client = {
     name: "Kato Potato",
     address: "743 Evergreen Terrace",
     special_instructions: "Please separate recycles from garbage",
-    upcoming_reservation: true,//id?,
+    upcoming_reservation: false,//id?,
     past_reservations: []
 }
 

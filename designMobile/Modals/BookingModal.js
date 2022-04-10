@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Card, Modal, Text, Icon } from '@ui-kitten/components';
-import { TimesList } from './TimesList';
+import { TimesList } from '../TimesList';
 
-export const CustomModal = ({date, modalVisible, setModalVisible}) => {
+export const BookingModal = ({date, modalVisible, setModalVisible}) => {
 
   return (
       
