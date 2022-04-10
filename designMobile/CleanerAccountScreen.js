@@ -7,6 +7,7 @@ import { Dimensions } from "react-native";
 import { Rating, AirbnbRating } from 'react-native-ratings';// https://openbase.com/js/react-native-ratings
 import { CustomCalendar } from './CustomCalendar';
 import { CustomModal } from './CustomModal';
+import moment from 'moment';
 
 var width = Dimensions.get('window').width; //full width
 
@@ -16,11 +17,7 @@ export default function DescriptionScreen({ this_cleaner }) {
     <Button size='tiny'>FOLLOW</Button>
   );
 
-  const data = new Array(8).fill({
-    title: 'Item',
-  });
-
-  console.log(this_cleaner)
+  console.log('THIS CLEANER: ', this_cleaner)
 
   const [modalVisible, setModalVisible] = useState(false);
   const video = React.useRef(null);
@@ -30,11 +27,11 @@ export default function DescriptionScreen({ this_cleaner }) {
 
   const Header0 = (props) => (
     <View {...props} style={{ padding: 12, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Text category='h6'>My Information</Text>
-        <Button size='tiny'>edit</Button>
+      <Text category='h6'>My Information</Text>
+      <Button size='tiny'>edit</Button>
 
     </View>
-);
+  );
 
   const Header2 = (props) => (
     <View {...props} style={{ padding: 12, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -50,18 +47,42 @@ export default function DescriptionScreen({ this_cleaner }) {
     </View>
   );
 
-  const renderItem = (info) => (
-    <Card
-      style={styles.item}
-      status='basic'
-     >
-       <View style={{paddingVertical:0, flexDirection: 'row', justifyContent: "space-between" }}>
-       <Text style={{paddingVertical:0}} >Date</Text>
-       <Button style={{paddingVertical:0}} size='tiny'>VIEW</Button>
-       </View>
-       
-    </Card>
-  );
+  const renderItem = ({ item, index }) => {
+    const status_options = {
+      // completed: 'success',
+      confirmed: 'warning',
+      pending: 'basic'
+    }
+    let status = status_options[item.status]
+    console.log(status)
+
+    let date = moment(item.date).format('dddd MMM Do')
+
+    return (
+      <Card
+        style={styles.item}
+        status={status}
+      >
+        <View style={{ paddingVertical: 0, flexDirection: 'row', justifyContent: "space-between" }}>
+          <Text style={{ paddingVertical: 0 }}>{date}</Text>
+          {/* <Text style={{ paddingVertical: 0 }}>{String(item.date)}</Text> */}
+
+{ item.status === 'pending' ?
+
+          <Button status='basic' style={{ paddingVertical: 0 }} size='tiny'>CONFIRM</Button>
+
+          :
+
+          <Button style={{ paddingVertical: 0 }} size='tiny'>VIEW</Button>
+
+}
+        
+        </View>
+
+      </Card>
+      // null
+    )
+  };
 
   return (
 
@@ -88,7 +109,7 @@ export default function DescriptionScreen({ this_cleaner }) {
         // onPlaybackStatusUpdate={status => setStatus(() => status)}
         />
       </View>
-{/* 
+      {/* 
       <Card status='basic'>
         <View style={[{ flexDirection: 'row', justifyContent: "space-between" }]}>
           <Text style={{ color: 'rgb(180, 181, 184)' }}>Pending:</Text>
@@ -100,11 +121,14 @@ export default function DescriptionScreen({ this_cleaner }) {
 
 
         <List
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}
-      data={data}
-      renderItem={renderItem}
-    />
+          style={styles.container}
+          contentContainerStyle={styles.contentContainer}
+          // data={data}
+          data={this_cleaner.reservations.filter(res => res.status !== 'completed')}
+          renderItem={renderItem}
+        />
+
+
         {/* <ScrollView style={{ height: 200 }}>
         <Card accessoryRight={renderItemAccessory} style={styles.card} status='basic'>
             <Text>Date</Text>
@@ -126,15 +150,15 @@ export default function DescriptionScreen({ this_cleaner }) {
 
       <Card style={{ marginTop: 10 }} header={Header0} >
 
-<Text style={{ marginTop: 6 }}>
-    {this_cleaner.name}
-</Text>
-<Text style={{ marginTop: 6 }}>
-    {this_cleaner.about_me}
-</Text>
+        <Text style={{ marginTop: 6 }}>
+          {this_cleaner.name}
+        </Text>
+        <Text style={{ marginTop: 6 }}>
+          {this_cleaner.about_me}
+        </Text>
 
 
-</Card>
+      </Card>
 
 
       {/* </View> */}
@@ -145,7 +169,7 @@ export default function DescriptionScreen({ this_cleaner }) {
 }
 
 const styles = StyleSheet.create({
-    item: {
+  item: {
     marginVertical: 2,
   },
   contentContainer: {

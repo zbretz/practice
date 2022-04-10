@@ -4,14 +4,6 @@ import { Divider, List, ListItem, Button, Icon, Text } from '@ui-kitten/componen
 import moment from 'moment';
 const { appointments } = require('./assets/dummy/data.js')
 
-
-const data = new Array(8).fill({
-    title: 'Item',
-    description: 'Description for Item',
-});
-
-
-
 export const TimesList = ({ date, setModalVisible }) => {
 
     let moment_date = moment(date).format('dddd MMM Do')

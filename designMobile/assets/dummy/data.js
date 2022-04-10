@@ -84,34 +84,49 @@ export const this_client = {
 export const this_cleaner_reservations = [
     //sorted by pending/confirmed then date (recent first)
     {
-        id: 1,
+        reservation_id: 1,
         date: new Date(2022, 4, 28),//date obj,
         status: 'pending',
         client: 2, //client id (but for dev purposes, the client object)
         //review (if completed)
     },
     {
-        id: 1,
+        reservation_id: 2,
         date: new Date(2022, 4, 23),//date obj,
         status: 'confirmed',
         client: 1, //client id (but for dev purposes, the client object)
         //review (if completed)
     },
     {
-        id: 1,
+        reservation_id: 2,
+        date: new Date(2022, 4, 23),//date obj,
+        status: 'confirmed',
+        client: 1, //client id (but for dev purposes, the client object)
+        //review (if completed)
+    },
+    {
+        reservation_id: 2,
+        date: new Date(2022, 4, 23),//date obj,
+        status: 'confirmed',
+        client: 1, //client id (but for dev purposes, the client object)
+        //review (if completed)
+    },
+    {
+        reservation_id: 3,
         date: new Date(2022, 3, 24),//date obj,
         status: 'completed',
         client: 3, //client id (but for dev purposes, the client object)
         //review (if completed)
-    },    {
-        id: 1,
+    },
+    {
+        reservation_id: 4,
         date: new Date(2022, 3, 22),//date obj,
         status: 'completed',
         client: 2, //client id (but for dev purposes, the client object)
         //review (if completed)
     },
     {
-        id: 1,
+        reservation_id: 5,
         date: new Date(2022, 3, 22),//date obj,
         status: 'completed',
         client: 1, //client id (but for dev purposes, the client object)
