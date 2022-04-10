@@ -25,9 +25,9 @@ export default function App() {
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={eva.light}>
         {/* <ClientAccountScreen this_client={this_client}/> */}
-        {/* <CleanerAccountScreen this_cleaner={this_cleaner}/> */}
+        <CleanerAccountScreen this_cleaner={this_cleaner}/>
         {/* <ListScreen/> */}
-        <DescriptionScreen this_client={this_client}/>
+        {/* <DescriptionScreen this_client={this_client}/> */}
       </ApplicationProvider>
     </>
 

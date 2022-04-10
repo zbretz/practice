@@ -6,12 +6,12 @@ import { Video } from 'expo-av';
 import { Dimensions } from "react-native";
 import { Rating, AirbnbRating } from 'react-native-ratings';// https://openbase.com/js/react-native-ratings
 import { CustomCalendar } from '../CustomCalendar';
-import { BookingModal } from '../Modals/BookingModal';
+import { ReservationInfoModal } from '../Modals/ReservationInfoModal';
 import moment from 'moment';
 
 var width = Dimensions.get('window').width; //full width
 
-export default function DescriptionScreen({ this_cleaner }) {
+export default function CleanerAccountScreen({ this_cleaner }) {
 
   const renderItemAccessory = (props) => (
     <Button size='tiny'>FOLLOW</Button>
@@ -22,6 +22,7 @@ export default function DescriptionScreen({ this_cleaner }) {
   const [modalVisible, setModalVisible] = useState(false);
   const video = React.useRef(null);
   const [status, setStatus] = useState({});
+  const [reservation, setReservation] = useState()
 
   const [date, setDate] = useState(new Date);
 
@@ -75,11 +76,11 @@ export default function DescriptionScreen({ this_cleaner }) {
 
           {item.status === 'pending' ?
 
-            <Button status='basic' style={{ paddingVertical: 0 }} size='tiny'>CONFIRM</Button>
+            <Button status='basic' onPress={()=>{ console.log(reservation);setModalVisible(true); setReservation(item)}}  style={{ paddingVertical: 0 }} size='tiny'>CONFIRM</Button>
 
             :
 
-            <Button style={{ paddingVertical: 0 }} size='tiny'>VIEW</Button>
+            <Button onPress={()=>{ console.log(reservation);setModalVisible(true); setReservation(item)}} style={{ paddingVertical: 0 }} size='tiny'>VIEW</Button>
 
           }
 
@@ -97,7 +98,7 @@ export default function DescriptionScreen({ this_cleaner }) {
 
       <Text style={{ textAlign: 'center', margin: 10 }} category='h2'>My Account</Text>
 
-      <BookingModal modalVisible={modalVisible} setModalVisible={setModalVisible} date={date} />
+      <ReservationInfoModal modalVisible={modalVisible} setModalVisible={setModalVisible} date={date} reservation={reservation} />
 
       {/* <View style={styles.card}> */}
       <View style={{}}>
