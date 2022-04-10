@@ -67,7 +67,7 @@ export const clients = {
 // "this_user" assumes the user is client and not housecleaner
 export const this_user = {
     id: 1,
-    name: "kate",
+    name: "Kato Potato",
     address: "743 Evergreen Terrace",
     special_instructions: "Please separate recycles from garbage",
     upcoming_reservation: true,//id?,

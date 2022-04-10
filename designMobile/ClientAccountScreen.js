@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Text } from '@ui-kitten/components';
+import { Card, Text, Button } from '@ui-kitten/components';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import { Video } from 'expo-av';
@@ -9,12 +9,37 @@ import { Rating, AirbnbRating } from 'react-native-ratings';// https://openbase.
 
 var width = Dimensions.get('window').width; //full width
 
-export default function AccountScreen() {
+export default function ClientAccountScreen({this_user}) {
 
     const video = React.useRef(null);
     const [status, setStatus] = React.useState({});
 
     const image = 'https://snome.s3.us-east-2.amazonaws.com/th.jpeg';
+
+    const Header0 = (props) => (
+        <View {...props} style={{ padding: 12, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Text category='h6'>My Information</Text>
+            <Button size='tiny'>edit</Button>
+
+        </View>
+    );
+
+    const Header1 = (props) => (
+        <View {...props} style={{ padding: 12, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Text category='h6'>Notes and Instructions</Text>
+            <Button size='tiny'>edit</Button>
+
+        </View>
+    );
+
+    const Header2 = (props) => (
+        <View {...props} style={{ padding: 12, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Text category='h6'>My Upcoming Reservation</Text>
+            <Button size='tiny'>edit</Button>
+
+        </View>
+    );
+
 
     return (
         <ScrollView style={{ marginTop: 50, padding: 10 }}>
@@ -23,31 +48,38 @@ export default function AccountScreen() {
 
             <Image source={{ uri: image }} style={styles.image} />
 
-
-            <Card style={{ marginTop: 10 }}>
-
-                <Text style={{ marginTop: 6, marginLeft: 0 }}>
-                    My Name
-                </Text>
+            <Card style={{ marginTop: 10 }} header={Header0} >
 
                 <Text style={{ marginTop: 6 }}>
-                    My Address
+                    {this_user.name}
                 </Text>
-
-            </Card>
-            <Card style={{ marginTop: 10 }}>
-
                 <Text style={{ marginTop: 6 }}>
-                    Notes and Instructions
+                    {this_user.address}
                 </Text>
 
 
             </Card>
-            <Card style={{ marginTop: 10 }}>
+
+            <Card style={{ marginTop: 10 }} header={Header1} >
+
+                <Text style={{ marginTop: 6 }}>
+                    Please do this.
+                </Text>
+                <Text style={{ marginTop: 6 }}>
+                    Please do this.
+                </Text>
+                <Text style={{ marginTop: 6 }}>
+                    Please do this.
+                </Text>
+
+            </Card>
+
+            <Card style={{ marginTop: 10 }} header={Header2} >
 
                 <Text style={{ marginTop: 6 }}>
                     My Upcoming Resvervation
                 </Text>
+
 
 
             </Card>
