@@ -39,6 +39,12 @@ export default function DescriptionScreen({ this_cleaner }) {
     </View>
   );
 
+  const Header3 = (props) => (
+    <View {...props} style={{ padding: 12, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+      <Text style={{ width: '100%', textAlign: 'center' }} category='h6'>My Completed Reservations</Text>
+    </View>
+  );
+
   const renderItemHeader = (headerProps, info) => (
     <View {...headerProps}>
       <Text category='h6'>
@@ -49,7 +55,7 @@ export default function DescriptionScreen({ this_cleaner }) {
 
   const renderItem = ({ item, index }) => {
     const status_options = {
-      // completed: 'success',
+      completed: 'success',
       confirmed: 'warning',
       pending: 'basic'
     }
@@ -67,16 +73,16 @@ export default function DescriptionScreen({ this_cleaner }) {
           <Text style={{ paddingVertical: 0 }}>{date}</Text>
           {/* <Text style={{ paddingVertical: 0 }}>{String(item.date)}</Text> */}
 
-{ item.status === 'pending' ?
+          {item.status === 'pending' ?
 
-          <Button status='basic' style={{ paddingVertical: 0 }} size='tiny'>CONFIRM</Button>
+            <Button status='basic' style={{ paddingVertical: 0 }} size='tiny'>CONFIRM</Button>
 
-          :
+            :
 
-          <Button style={{ paddingVertical: 0 }} size='tiny'>VIEW</Button>
+            <Button style={{ paddingVertical: 0 }} size='tiny'>VIEW</Button>
 
-}
-        
+          }
+
         </View>
 
       </Card>
@@ -144,6 +150,16 @@ export default function DescriptionScreen({ this_cleaner }) {
           </Card>
         </ScrollView> */}
 
+      </Card>
+
+      <Card style={{ marginTop: 10 }} header={Header3} >
+        <List
+          style={[styles.container, {height:75}]}
+          contentContainerStyle={styles.contentContainer}
+          // data={data}
+          data={this_cleaner.reservations.filter(res => res.status === 'completed')}
+          renderItem={renderItem}
+        />
       </Card>
 
 
