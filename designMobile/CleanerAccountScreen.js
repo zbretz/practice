@@ -57,7 +57,7 @@ export default function DescriptionScreen({ this_cleaner }) {
      >
        <View style={{paddingVertical:0, flexDirection: 'row', justifyContent: "space-between" }}>
        <Text style={{paddingVertical:0}} >Date</Text>
-       <Button style={{paddingVertical:0}} size='tiny'>FOLLOW</Button>
+       <Button style={{paddingVertical:0}} size='tiny'>VIEW</Button>
        </View>
        
     </Card>

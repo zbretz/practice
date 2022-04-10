@@ -74,17 +74,58 @@ export const this_client = {
     past_reservations: []
 }
 
-export const this_cleaner = cleaners[0]
 
 // {
-
 //     id: 1,
-//     name: "Kato Potato",
-//     address: "743 Evergreen Terrace",
-//     special_instructions: "Please separate recycles from garbage",
-//     upcoming_reservation: true,//id?,
-//     past_reservations: []
+//     name: "Mohamed",
+//     about_me: "I'm a housecleaner"
 // }
+
+export const this_cleaner_reservations = [
+    //sorted by pending/confirmed then date (recent first)
+    {
+        id: 1,
+        date: new Date(2022, 4, 28),//date obj,
+        status: 'pending',
+        client: 2, //client id (but for dev purposes, the client object)
+        //review (if completed)
+    },
+    {
+        id: 1,
+        date: new Date(2022, 4, 23),//date obj,
+        status: 'confirmed',
+        client: 1, //client id (but for dev purposes, the client object)
+        //review (if completed)
+    },
+    {
+        id: 1,
+        date: new Date(2022, 3, 24),//date obj,
+        status: 'completed',
+        client: 3, //client id (but for dev purposes, the client object)
+        //review (if completed)
+    },    {
+        id: 1,
+        date: new Date(2022, 3, 22),//date obj,
+        status: 'completed',
+        client: 2, //client id (but for dev purposes, the client object)
+        //review (if completed)
+    },
+    {
+        id: 1,
+        date: new Date(2022, 3, 22),//date obj,
+        status: 'completed',
+        client: 1, //client id (but for dev purposes, the client object)
+        //review (if completed)
+    }
+
+]
+
+const add_reservations = (cleaner) => {
+    cleaner.reservations = this_cleaner_reservations
+    return cleaner
+}
+
+export const this_cleaner = add_reservations(cleaners[0])
 
 
 appointments[1].map(timeslot => console.log(`${timeslot.time}: ${timeslot.is_available}`))
