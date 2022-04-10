@@ -9,7 +9,7 @@ import { Rating, AirbnbRating } from 'react-native-ratings';// https://openbase.
 
 var width = Dimensions.get('window').width; //full width
 
-export default function ClientAccountScreen({this_user}) {
+export default function ClientAccountScreen({this_client}) {
 
     const video = React.useRef(null);
     const [status, setStatus] = React.useState({});
@@ -51,10 +51,10 @@ export default function ClientAccountScreen({this_user}) {
             <Card style={{ marginTop: 10 }} header={Header0} >
 
                 <Text style={{ marginTop: 6 }}>
-                    {this_user.name}
+                    {this_client.name}
                 </Text>
                 <Text style={{ marginTop: 6 }}>
-                    {this_user.address}
+                    {this_client.address}
                 </Text>
 
 
@@ -77,10 +77,8 @@ export default function ClientAccountScreen({this_user}) {
             <Card style={{ marginTop: 10 }} header={Header2} >
 
                 <Text style={{ marginTop: 6 }}>
-                    My Upcoming Resvervation
+                    My Upcoming Reservation
                 </Text>
-
-
 
             </Card>
 

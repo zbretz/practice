@@ -2,17 +2,17 @@
 export const cleaners = [
     {
         id: 1,
-        name: "zach",
+        name: "Zach",
         about_me: "I'm a housecleaner"
     },
     {
         id: 1,
-        name: "amy",
+        name: "Amy",
         about_me: "I'm a housecleaner"
     },
     {
         id: 1,
-        name: "mohamed",
+        name: "Mohamed",
         about_me: "I'm a housecleaner"
     },
 ]
@@ -64,8 +64,8 @@ export const clients = {
 }
 
 // represents logged-in user on device
-// "this_user" assumes the user is client and not housecleaner
-export const this_user = {
+// "this_client" assumes the user is client and not housecleaner
+export const this_client = {
     id: 1,
     name: "Kato Potato",
     address: "743 Evergreen Terrace",
@@ -73,6 +73,18 @@ export const this_user = {
     upcoming_reservation: true,//id?,
     past_reservations: []
 }
+
+export const this_cleaner = cleaners[0]
+
+// {
+
+//     id: 1,
+//     name: "Kato Potato",
+//     address: "743 Evergreen Terrace",
+//     special_instructions: "Please separate recycles from garbage",
+//     upcoming_reservation: true,//id?,
+//     past_reservations: []
+// }
 
 
 appointments[1].map(timeslot => console.log(`${timeslot.time}: ${timeslot.is_available}`))

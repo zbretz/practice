@@ -10,7 +10,7 @@ import { CustomModal } from './CustomModal';
 
 var width = Dimensions.get('window').width; //full width
 
-export default function DescriptionScreen({ this_user }) {
+export default function DescriptionScreen({ this_cleaner }) {
 
   const renderItemAccessory = (props) => (
     <Button size='tiny'>FOLLOW</Button>
@@ -20,13 +20,21 @@ export default function DescriptionScreen({ this_user }) {
     title: 'Item',
   });
 
-  console.log(this_user)
+  console.log(this_cleaner)
 
   const [modalVisible, setModalVisible] = useState(false);
   const video = React.useRef(null);
   const [status, setStatus] = useState({});
 
   const [date, setDate] = useState(new Date);
+
+  const Header0 = (props) => (
+    <View {...props} style={{ padding: 12, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Text category='h6'>My Information</Text>
+        <Button size='tiny'>edit</Button>
+
+    </View>
+);
 
   const Header2 = (props) => (
     <View {...props} style={{ padding: 12, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -115,19 +123,18 @@ export default function DescriptionScreen({ this_user }) {
       </Card>
 
 
-      <View style={{ marginTop: 16 }}>
-        <Text style={styles.text} category='h6'>
-          About Me
-        </Text>
-        {/* <View style={{ flexDirection: 'row', justifyContent: "space-between" }}> */}
-        <Text style={{ marginTop: 6 }}>
-          All about me and my story, how I clean and all that. All about me and my story, how I clean and all that.  All about me and my story, how I clean and all that.  All about me and my story, how I clean and all that.
-        </Text>
-        <Text style={{ marginTop: 16 }}>
-          All about me and my story, how I clean and all that.  All about me and my story, how I clean and all that.
-        </Text>
 
-      </View>
+      <Card style={{ marginTop: 10 }} header={Header0} >
+
+<Text style={{ marginTop: 6 }}>
+    {this_cleaner.name}
+</Text>
+<Text style={{ marginTop: 6 }}>
+    {this_cleaner.about_me}
+</Text>
+
+
+</Card>
 
 
       {/* </View> */}
@@ -144,15 +151,18 @@ const styles = StyleSheet.create({
   contentContainer: {
     // paddingHorizontal: 8,
     paddingVertical: 4,
+    paddingHorizontal: 0
   },
   card: {
     margin: 10,
+    // marginHorizontal: 0
   },
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
     padding: 4,
-    height: 200
+    height: 200,
+    // paddingHorizontal: 0
   },
   paragraph: {
     margin: 24,

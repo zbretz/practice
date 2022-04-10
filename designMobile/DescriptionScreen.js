@@ -10,9 +10,9 @@ import { CustomModal } from './CustomModal';
 
 var width = Dimensions.get('window').width; //full width
 
-export default function DescriptionScreen({ this_user }) {
+export default function DescriptionScreen({ this_client }) {
 
-  console.log(this_user)
+  console.log(this_client)
 
   const [modalVisible, setModalVisible] = useState(false);
   const video = React.useRef(null);
@@ -83,7 +83,7 @@ export default function DescriptionScreen({ this_user }) {
       <View style={{ marginTop: 16 }}>
         {
 
-          !this_user.upcoming_reservation ?
+          !this_client.upcoming_reservation ?
 
             <>
               <Text style={styles.text} category='h6'>

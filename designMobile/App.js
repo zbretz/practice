@@ -11,7 +11,8 @@ import DescriptionScreen from './DescriptionScreen';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import ClientAccountScreen from './ClientAccountScreen';
 import CleanerAccountScreen from './CleanerAccountScreen';
-const { this_user } = require('./assets/dummy/data.js')
+const { this_client } = require('./assets/dummy/data.js')
+const { this_cleaner } = require('./assets/dummy/data.js')
 
 //Icons info found here: https://stackoverflow.com/questions/61540905/react-native-uikitten-icons-typeerror-undefined-is-not-an-object-evaluating
 
@@ -23,10 +24,10 @@ export default function App() {
     <>
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={eva.light}>
-        {/* <ClientAccountScreen this_user={this_user}/> */}
-        <CleanerAccountScreen this_user={this_user}/>
+        {/* <ClientAccountScreen this_client={this_client}/> */}
+        <CleanerAccountScreen this_cleaner={this_cleaner}/>
         {/* <ListScreen/> */}
-        {/* <DescriptionScreen this_user={this_user}/> */}
+        {/* <DescriptionScreen this_client={this_client}/> */}
       </ApplicationProvider>
     </>
 
