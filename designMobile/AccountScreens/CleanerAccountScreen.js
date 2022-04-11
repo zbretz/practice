@@ -76,11 +76,11 @@ export default function CleanerAccountScreen({ this_cleaner }) {
 
           {item.status === 'pending' ?
 
-            <Button status='basic' onPress={()=>{ console.log(reservation);setModalVisible(true); setReservation(item)}}  style={{ paddingVertical: 0 }} size='tiny'>PENDING</Button>
+            <Button status='basic' onPress={() => { console.log(reservation); setModalVisible(true); setReservation(item) }} style={{ paddingVertical: 0 }} size='tiny'>PENDING</Button>
 
             :
 
-            <Button onPress={()=>{ console.log(reservation);setModalVisible(true); setReservation(item)}} style={{ paddingVertical: 0 }} size='tiny'>VIEW</Button>
+            <Button onPress={() => { console.log(reservation); setModalVisible(true); setReservation(item) }} style={{ paddingVertical: 0 }} size='tiny'>VIEW</Button>
 
           }
 
@@ -98,8 +98,10 @@ export default function CleanerAccountScreen({ this_cleaner }) {
 
       <Text style={{ textAlign: 'center', margin: 10 }} category='h2'>My Account</Text>
 
-      <ReservationInfoModal modalVisible={modalVisible} setModalVisible={setModalVisible} date={date} reservation={reservation} />
-
+      {reservation &&
+        <ReservationInfoModal modalVisible={modalVisible} setModalVisible={setModalVisible} date={date} reservation={reservation} />
+      }
+      
       {/* <View style={styles.card}> */}
       <View style={{}}>
         <Video
@@ -116,7 +118,7 @@ export default function CleanerAccountScreen({ this_cleaner }) {
         // onPlaybackStatusUpdate={status => setStatus(() => status)}
         />
       </View>
-   
+
       <Card style={{ marginTop: 10 }} header={Header2} >
 
         <List
@@ -146,7 +148,7 @@ export default function CleanerAccountScreen({ this_cleaner }) {
 
       <Card style={{ marginTop: 10 }} header={Header3} >
         <List
-          style={[styles.container, {height:75}]}
+          style={[styles.container, { height: 75 }]}
           contentContainerStyle={styles.contentContainer}
           // data={data}
           data={this_cleaner.reservations.filter(res => res.status === 'completed')}
