@@ -17,7 +17,7 @@ export const cleaners = [
     },
 ]
 export const appointments = {
-// keys are user ids
+    // keys are user ids
     1: [
         {
             time: '10:00AM',
@@ -36,31 +36,31 @@ export const appointments = {
 }
 
 export const clients = {
-// keys are user ids
-    1: [
-        {
-            id: 1,
-            name: "kate",
-            address: "743 Evergreen Terrace",
-            special_instructions: "Please separate recycles from garbage",
-            upcoming_reservation: null,//id,
-            past_reservations: []
-        },  {
-            id: 2,
-            name: "wendy",
-            address: "743 Evergreen Terrace",
-            special_instructions: "Please separate recycles from garbage",
-            upcoming_reservation: null,//id,
-            past_reservations: []
-        },  {
-            id: 1,
-            name: "kathleen",
-            address: "743 Evergreen Terrace",
-            special_instructions: "Please separate recycles from garbage",
-            upcoming_reservation: null,//id,
-            past_reservations: []
-        }
-    ]
+    // keys are user ids
+    1: {
+        id: 1,
+        name: "kate",
+        address: "743 Evergreen Terrace",
+        special_instructions: "Please separate recycles from garbage",
+        upcoming_reservation: null,//id,
+        past_reservations: []
+    },
+    2: {
+        id: 2,
+        name: "wendy",
+        address: "743 Evergreen Terrace",
+        special_instructions: "Please separate recycles from garbage",
+        upcoming_reservation: null,//id,
+        past_reservations: []
+    },
+    3: {
+        id: 1,
+        name: "kathleen",
+        address: "743 Evergreen Terrace",
+        special_instructions: "Please separate recycles from garbage",
+        upcoming_reservation: null,//id,
+        past_reservations: []
+    }
 }
 
 // represents logged-in user on device
@@ -87,53 +87,62 @@ export const this_cleaner_reservations = [
         reservation_id: 1,
         date: new Date(2022, 4, 28),//date obj,
         status: 'pending',
-        client: 2, //client id (but for dev purposes, the client object)
-        //review (if completed)
+        client: {
+            name: clients[2].name,
+            address: clients[2].address,
+            special_instructions: clients[2].special_instructions
+        }
     },
     {
         reservation_id: 2,
         date: new Date(2022, 4, 23),//date obj,
         status: 'confirmed',
-        client: 1, //client id (but for dev purposes, the client object)
-        //review (if completed)
+        client: {
+            name: clients[3].name,
+            address: clients[3].address,
+            special_instructions: clients[3].special_instructions
+
+        }
     },
-    {
-        reservation_id: 2,
-        date: new Date(2022, 4, 23),//date obj,
-        status: 'confirmed',
-        client: 1, //client id (but for dev purposes, the client object)
-        //review (if completed)
-    },
-    {
-        reservation_id: 2,
-        date: new Date(2022, 4, 23),//date obj,
-        status: 'confirmed',
-        client: 1, //client id (but for dev purposes, the client object)
-        //review (if completed)
-    },
-    {
-        reservation_id: 3,
-        date: new Date(2022, 3, 24),//date obj,
-        status: 'completed',
-        client: 3, //client id (but for dev purposes, the client object)
-        //review (if completed)
-    },
-    {
-        reservation_id: 4,
-        date: new Date(2022, 3, 22),//date obj,
-        status: 'completed',
-        client: 2, //client id (but for dev purposes, the client object)
-        //review (if completed)
-    },
-    {
-        reservation_id: 5,
-        date: new Date(2022, 3, 22),//date obj,
-        status: 'completed',
-        client: 1, //client id (but for dev purposes, the client object)
-        //review (if completed)
-    }
 
 ]
+//     {
+//         reservation_id: 2,
+//         date: new Date(2022, 4, 23),//date obj,
+//         status: 'confirmed',
+//         client: 1, //client id (but for dev purposes, the client object)
+//         //review (if completed)
+//     },
+//     {
+//         reservation_id: 2,
+//         date: new Date(2022, 4, 23),//date obj,
+//         status: 'confirmed',
+//         client: 1, //client id (but for dev purposes, the client object)
+//         //review (if completed)
+//     },
+//     {
+//         reservation_id: 3,
+//         date: new Date(2022, 3, 24),//date obj,
+//         status: 'completed',
+//         client: 3, //client id (but for dev purposes, the client object)
+//         //review (if completed)
+//     },
+//     {
+//         reservation_id: 4,
+//         date: new Date(2022, 3, 22),//date obj,
+//         status: 'completed',
+//         client: 2, //client id (but for dev purposes, the client object)
+//         //review (if completed)
+//     },
+//     {
+//         reservation_id: 5,
+//         date: new Date(2022, 3, 22),//date obj,
+//         status: 'completed',
+//         client: 1, //client id (but for dev purposes, the client object)
+//         //review (if completed)
+//     }
+
+// ]
 
 const add_reservations = (cleaner) => {
     cleaner.reservations = this_cleaner_reservations
