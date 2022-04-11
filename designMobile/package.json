@@ -12,6 +12,8 @@
   "dependencies": {
     "@eva-design/eva": "^2.1.1",
     "@expo/webpack-config": "^0.16.19",
+    "@react-navigation/material-top-tabs": "^6.2.1",
+    "@react-navigation/native": "^6.0.10",
     "@ui-kitten/components": "^5.1.2",
     "@ui-kitten/eva-icons": "^5.1.2",
     "expo": "~44.0.0",

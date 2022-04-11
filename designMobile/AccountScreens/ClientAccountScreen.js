@@ -42,7 +42,7 @@ export default function ClientAccountScreen({this_client}) {
 
 
     return (
-        <ScrollView style={{ marginTop: 50, padding: 10 }}>
+        <ScrollView style={{ marginTop: 8, padding: 10 }}>
 
             <Text style={{ textAlign: 'center', margin: 10 }} category='h2'>My Account</Text>
 

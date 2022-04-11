@@ -20,7 +20,10 @@ export default function ListScreen() {
   const [status, setStatus] = React.useState({});
 
   return (
-      <ScrollView style={{marginTop:50}}>
+      <ScrollView style={{marginTop:8}}>
+
+        <Text style={{width:'100%', textAlign:'center'}} category={'h1'}>All Cleaners</Text>
+        {/* <Text style={{width:'100%', textAlign:'center'}} category={'s1'}>Click to view one of Park City's best house cleaners</Text> */}
 
         {[...Array(2)].map((e, i) => {
           return (
