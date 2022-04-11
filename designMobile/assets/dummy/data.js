@@ -104,29 +104,19 @@ export const this_cleaner_reservations = [
 
         }
     },
+    {
+        reservation_id: 3,
+        date: new Date(2022, 4, 23),//date obj,
+        status: 'completed',
+        client: {
+            name: clients[1].name,
+            address: clients[1].address,
+            special_instructions: clients[3].special_instructions
 
+        }
+    }
 ]
-//     {
-//         reservation_id: 2,
-//         date: new Date(2022, 4, 23),//date obj,
-//         status: 'confirmed',
-//         client: 1, //client id (but for dev purposes, the client object)
-//         //review (if completed)
-//     },
-//     {
-//         reservation_id: 2,
-//         date: new Date(2022, 4, 23),//date obj,
-//         status: 'confirmed',
-//         client: 1, //client id (but for dev purposes, the client object)
-//         //review (if completed)
-//     },
-//     {
-//         reservation_id: 3,
-//         date: new Date(2022, 3, 24),//date obj,
-//         status: 'completed',
-//         client: 3, //client id (but for dev purposes, the client object)
-//         //review (if completed)
-//     },
+
 //     {
 //         reservation_id: 4,
 //         date: new Date(2022, 3, 22),//date obj,

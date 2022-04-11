@@ -76,7 +76,7 @@ export default function CleanerAccountScreen({ this_cleaner }) {
 
           {item.status === 'pending' ?
 
-            <Button status='basic' onPress={()=>{ console.log(reservation);setModalVisible(true); setReservation(item)}}  style={{ paddingVertical: 0 }} size='tiny'>CONFIRM</Button>
+            <Button status='basic' onPress={()=>{ console.log(reservation);setModalVisible(true); setReservation(item)}}  style={{ paddingVertical: 0 }} size='tiny'>PENDING</Button>
 
             :
 
