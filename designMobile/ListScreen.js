@@ -6,11 +6,14 @@ import { Video } from 'expo-av';
 import { Dimensions } from "react-native";
 import { Rating, AirbnbRating } from 'react-native-ratings';// https://openbase.com/js/react-native-ratings
 
+const { cleaners } = require('./assets/dummy/data.js')
+
 
 var width = Dimensions.get('window').width; //full width
 
-export default function ListScreen() {
+export default function ListScreen({ navigation }) {
 
+  
 
   function ratingCompleted(rating) {
     console.log("Rating is: " + rating)
@@ -25,14 +28,15 @@ export default function ListScreen() {
         <Text style={{width:'100%', textAlign:'center'}} category={'h1'}>All Cleaners</Text>
         {/* <Text style={{width:'100%', textAlign:'center'}} category={'s1'}>Click to view one of Park City's best house cleaners</Text> */}
 
-        {[...Array(2)].map((e, i) => {
+        {cleaners.map((cleaner, i) => {
           return (
-            <Card key={i} style={styles.card}>
+            // <Card onPress={()=>navigation.navigate('Description', {cleaner_id: })} key={i} style={styles.card}>
+            <Card key={i} style={styles.card}>              
               <Video
                 ref={video}
                 style={styles.video}
                 source={{
-                  uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+                  uri: cleaner.video_uri,
                 }}
                 useNativeControls
                 resizeMode="contain"
@@ -43,20 +47,20 @@ export default function ListScreen() {
               />
               <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
                 <Text style={{ marginTop: 6 }}>
-                  Cleaner Name
+                  {cleaner.name}
                 </Text>
                 <View>
                   <Rating
                     type='heart'
                     ratingCount={5}
                     imageSize={30}
-                    startingValue={4.5}
+                    startingValue={cleaner.avg_rating}
                     readonly={true}
                     // showRating
                     onFinishRating={ratingCompleted}
                   />
                   <Text style={{ marginTop: 6, color: '#838383', textAlign:'right'}}>
-                    11 House Cleanings
+                    {cleaner.num_of_cleanings} House Cleanings
                   </Text>
                 </View>
               </View>

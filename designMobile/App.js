@@ -56,9 +56,11 @@ const TabNavigator = () => (
   <Navigator style={{ marginTop: 50 }}
     tabBar={props => <TopTabBar {...props} />}>
     <Screen name='Cleaners' component={ListScreen} />
-    <Screen name='Account' children={()=><ClientAccountScreen this_client={this_client}/>} />
-    {/* <Screen name='Account' children={()=><CleanerAccountScreen this_cleaner={this_cleaner}/>} /> */}
+    {/* <Screen name='Account' children={(props)=><ClientAccountScreen {...props} this_client={this_client}/>} /> */}
+    <Screen name='Account' children={(props)=><CleanerAccountScreen {...props} this_cleaner={this_cleaner}/>} />
     <Screen name='Products' component={ProductsScreen} />
+    <Screen name='Description' children={(props)=><DescriptionScreen {...props} this_client={this_client}/>}/>
+
     {/* first, maybe rename reservation -> boooking */}
     {/* second, maybe the upciming reservation (booking) should get its own screen */}
     {/* <Screen name='Booking' component={ReservationScreen} /> */}

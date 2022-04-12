@@ -2,18 +2,27 @@
 export const cleaners = [
     {
         id: 1,
-        name: "Zach",
-        about_me: "I'm a housecleaner"
+        name: "Zach Lastname",
+        about_me: "I'm a housecleaner",
+        num_of_cleanings: 11,
+        avg_rating: 4.2,
+        video_uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'
     },
     {
         id: 1,
-        name: "Amy",
-        about_me: "I'm a housecleaner"
+        name: "Amy Lastname",
+        about_me: "I'm a housecleaner",
+        num_of_cleanings: 11,
+        avg_rating: 4.4,
+        video_uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'
     },
     {
         id: 1,
-        name: "Mohamed",
-        about_me: "I'm a housecleaner"
+        name: "Mohamed Lastname",
+        about_me: "I'm a housecleaner",
+        num_of_cleanings: 11,
+        avg_rating: 4.7,
+        video_uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'
     },
 ]
 export const appointments = {
