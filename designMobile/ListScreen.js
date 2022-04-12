@@ -13,7 +13,7 @@ var width = Dimensions.get('window').width; //full width
 
 export default function ListScreen({ navigation }) {
 
-  
+
 
   function ratingCompleted(rating) {
     console.log("Rating is: " + rating)
@@ -23,52 +23,51 @@ export default function ListScreen({ navigation }) {
   const [status, setStatus] = React.useState({});
 
   return (
-      <ScrollView style={{marginTop:8}}>
+    <ScrollView style={{ marginTop: 8 }}>
 
-        <Text style={{width:'100%', textAlign:'center'}} category={'h1'}>All Cleaners</Text>
-        {/* <Text style={{width:'100%', textAlign:'center'}} category={'s1'}>Click to view one of Park City's best house cleaners</Text> */}
+      <Text style={{ width: '100%', textAlign: 'center' }} category={'h1'}>All Cleaners</Text>
+      {/* <Text style={{width:'100%', textAlign:'center'}} category={'s1'}>Click to view one of Park City's best house cleaners</Text> */}
 
-        {cleaners.map((cleaner, i) => {
-          return (
-            // <Card onPress={()=>navigation.navigate('Description', {cleaner_id: })} key={i} style={styles.card}>
-            <Card key={i} style={styles.card}>              
-              <Video
-                ref={video}
-                style={styles.video}
-                source={{
-                  uri: cleaner.video_uri,
-                }}
-                useNativeControls
-                resizeMode="contain"
-                isLooping
-                shouldPlay
-                isMuted
-                onPlaybackStatusUpdate={status => setStatus(() => status)}
-              />
-              <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
-                <Text style={{ marginTop: 6 }}>
-                  {cleaner.name}
+      {Object.values(cleaners).map((cleaner, i) => {
+        return (
+          <Card onPress={() => navigation.navigate('Description', { cleaner_id: cleaner.id })} key={i} style={styles.card}>
+            <Video
+              ref={video}
+              style={styles.video}
+              source={{
+                uri: cleaner.video_uri,
+              }}
+              useNativeControls
+              resizeMode="contain"
+              isLooping
+              shouldPlay
+              isMuted
+              onPlaybackStatusUpdate={status => setStatus(() => status)}
+            />
+            <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
+              <Text style={{ marginTop: 6 }}>
+                {cleaner.name}
+              </Text>
+              <View>
+                <Rating
+                  type='heart'
+                  ratingCount={5}
+                  imageSize={30}
+                  startingValue={cleaner.avg_rating}
+                  readonly={true}
+                  // showRating
+                  onFinishRating={ratingCompleted}
+                />
+                <Text style={{ marginTop: 6, color: '#838383', textAlign: 'right' }}>
+                  {cleaner.num_of_cleanings} House Cleanings
                 </Text>
-                <View>
-                  <Rating
-                    type='heart'
-                    ratingCount={5}
-                    imageSize={30}
-                    startingValue={cleaner.avg_rating}
-                    readonly={true}
-                    // showRating
-                    onFinishRating={ratingCompleted}
-                  />
-                  <Text style={{ marginTop: 6, color: '#838383', textAlign:'right'}}>
-                    {cleaner.num_of_cleanings} House Cleanings
-                  </Text>
-                </View>
               </View>
-            </Card>
-          )
-        })}
+            </View>
+          </Card>
+        )
+      })}
 
-      </ScrollView>
+    </ScrollView>
   )
 }
 

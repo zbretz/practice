@@ -1,30 +1,31 @@
 
-export const cleaners = [
-    {
+export const cleaners = {
+   1: {
         id: 1,
         name: "Zach Lastname",
-        about_me: "I'm a housecleaner",
+        about_me: ["All about me and my story, how I clean and all that. All about me and my story, how I clean and all that.  All about me and my story, how I clean and all that.  All about me and my story, how I clean and all that.", "All about me and my story, how I clean and all that.  All about me and my story, how I clean and all that."],
         num_of_cleanings: 11,
         avg_rating: 4.2,
         video_uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'
     },
-    {
-        id: 1,
+  2:  {
+        id: 2,
         name: "Amy Lastname",
-        about_me: "I'm a housecleaner",
+        about_me: ["All about me and my story, how I clean and all that. All about me and my story, how I clean and all that.  All about me and my story, how I clean and all that.  All about me and my story, how I clean and all that.", "All about me and my story, how I clean and all that.  All about me and my story, how I clean and all that."],
         num_of_cleanings: 11,
-        avg_rating: 4.4,
-        video_uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'
+            avg_rating: 4.4,
+            video_uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'
     },
-    {
-        id: 1,
+  3:  {
+        id: 3,
         name: "Mohamed Lastname",
-        about_me: "I'm a housecleaner",
+        about_me: ["All about me and my story, how I clean and all that. All about me and my story, how I clean and all that.  All about me and my story, how I clean and all that.  All about me and my story, how I clean and all that.", "All about me and my story, how I clean and all that.  All about me and my story, how I clean and all that."],
         num_of_cleanings: 11,
         avg_rating: 4.7,
         video_uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'
     },
-]
+}
+
 export const appointments = {
     // keys are user ids
     1: [
@@ -148,7 +149,7 @@ const add_reservations = (cleaner) => {
     return cleaner
 }
 
-export const this_cleaner = add_reservations(cleaners[0])
+export const this_cleaner = add_reservations(cleaners[1])
 
 
 appointments[1].map(timeslot => console.log(`${timeslot.time}: ${timeslot.is_available}`))
