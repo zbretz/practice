@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Card, Text, IconRegistry, Layout, Tab, TabBar } from '@ui-kitten/components';
 import { StyleSheet, View, ScrollView } from 'react-native';
@@ -15,6 +15,8 @@ import CleanerAccountScreen from './AccountScreens/CleanerAccountScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import AuthStack from './AuthStack';
+
+import {UserContext, UserProvider} from './UserContext';
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 
@@ -71,9 +73,11 @@ const TabNavigator = () => (
 );
 
 const AuthSwitch = () => {
+
+  let user = useContext(UserContext)
   return (
     <>
-      {true ? <TabNavigator /> : <AuthStack />}
+      {user.is_logged_in ? <TabNavigator /> : <AuthStack />}
     </>
   )
 }
@@ -85,7 +89,9 @@ export default function App() {
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={eva.light}>
         <NavigationContainer>
-          <AuthSwitch />
+          <UserProvider>
+            <AuthSwitch />
+          </UserProvider>
         </NavigationContainer>
         {/* <ClientAccountScreen this_client={this_client}/> */}
         {/* <CleanerAccountScreen this_cleaner={this_cleaner}/> */}
