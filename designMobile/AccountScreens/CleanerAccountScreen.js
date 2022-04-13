@@ -93,7 +93,7 @@ export default function CleanerAccountScreen({ this_cleaner }) {
 
   return (
 
-    <ScrollView style={{ marginTop: 50, padding: '10%' }}>
+    <ScrollView style={{ padding: '10%' }}>
 
 
       <Text style={{ textAlign: 'center', margin: 10 }} category='h2'>My Account</Text>

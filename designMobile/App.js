@@ -14,6 +14,7 @@ import CleanerAccountScreen from './AccountScreens/CleanerAccountScreen';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import AuthStack from './AuthStack';
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 
@@ -78,7 +79,7 @@ export default function App() {
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={eva.light}>
         <NavigationContainer>
-          <TabNavigator />
+         {true ? <TabNavigator /> : <AuthStack/> }
         </NavigationContainer>
         {/* <ClientAccountScreen this_client={this_client}/> */}
         {/* <CleanerAccountScreen this_cleaner={this_cleaner}/> */}

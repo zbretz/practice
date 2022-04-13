@@ -36,7 +36,7 @@ export default function DescriptionScreen({ this_client, route }) {
   return (
 
 
-    <ScrollView style={{ marginTop: 50, padding: '10%' }}>
+    <ScrollView style={{  padding: '10%' }}>
       <>
 
         {cleaner &&
