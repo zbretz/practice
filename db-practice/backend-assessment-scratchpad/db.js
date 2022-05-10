@@ -12,7 +12,7 @@ const pool = new Pool({
 //   pool.end()
 // })
 
-const create_table = () => {
+const create_tables = () => {
     pool.query(
         `CREATE TABLE patient(
             ID int NOT NULL,
@@ -25,6 +25,20 @@ const create_table = () => {
         .catch(e => {
             console.error(e)
         })
+
+    pool.query(
+        `CREATE TABLE appointment(
+            ID int NOT NULL,
+            patient int NOT NULL,
+            PRIMARY KEY (ID),
+            FOREIGN KEY(patient) REFERENCES patient(ID)
+        )`)
+        .then(res => {
+            console.log(res);
+        })
+        .catch(e => {
+            console.error(e)
+        })
 }
 
-create_table()
+create_tables()
