@@ -15,7 +15,7 @@ const create_tables = async () => {
             street VARCHAR(128) NOT NULL,
             city VARCHAR(64) NOT NULL,
             state VARCHAR(32) NOT NULL,
-            ZIP VARCHAR(32) NOT NULL,
+            zip_code VARCHAR(32) NOT NULL,
             PRIMARY KEY (ID)
         )`)
     //     .then(res => {
