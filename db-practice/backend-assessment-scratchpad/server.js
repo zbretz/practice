@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/patient', (req, res, next) => {
-    db.query('INSERT INTO patient (id, name) VALUES ($1, $2)', [1, 'first last'], (err, result) => {
+    db.query('INSERT INTO patient (name) VALUES ($1)', ['first last'], (err, result) => {
       if (err) {
         return next(err)
       }

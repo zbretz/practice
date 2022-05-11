@@ -15,7 +15,7 @@ const pool = new Pool({
 const create_tables = () => {
     pool.query(
         `CREATE TABLE patient(
-            ID int NOT NULL,
+            ID SERIAL,
             name varchar(64) NOT NULL,
             PRIMARY KEY (ID)
         )`)
@@ -26,19 +26,19 @@ const create_tables = () => {
             console.error(e)
         })
 
-    pool.query(
-        `CREATE TABLE appointment(
-            ID int NOT NULL,
-            patient int NOT NULL,
-            PRIMARY KEY (ID),
-            FOREIGN KEY(patient) REFERENCES patient(ID)
-        )`)
-        .then(res => {
-            console.log(res);
-        })
-        .catch(e => {
-            console.error(e)
-        })
+    // pool.query(
+    //     `CREATE TABLE appointment(
+    //         ID int SERIAL,
+    //         patient int NOT NULL,
+    //         PRIMARY KEY (ID),
+    //         FOREIGN KEY(patient) REFERENCES patient(ID)
+    //     )`)
+    //     .then(res => {
+    //         console.log(res);
+    //     })
+    //     .catch(e => {
+    //         console.error(e)
+    //     })
 }
 
 create_tables()
