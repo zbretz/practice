@@ -17,7 +17,51 @@ app.get('/', (req, res) => {
 
 // creates patient
 app.post('/patient', (req, res, next) => {
-    db.query('INSERT INTO patient (name) VALUES ($1)', ['first last'], (err, result) => {
+
+    const { name, address_id, note } = req.body
+
+    db.query('INSERT INTO patient (name, address_id, note) VALUES ($1, $2, $3)', [name, address_id, note], (err, result) => {
+        if (err) {
+            return next(err)
+        }
+        res.send(result)
+    })
+})
+
+// creates doctor
+app.post('/doctor', (req, res, next) => {
+
+    const { name, address_id, phone_number, specialty } = req.body
+
+    db.query('INSERT INTO doctor (name, address_id, phone_number, specialty) VALUES ($1, $2, $3, $4)', [name, address_id, phone_number, specialty], (err, result) => {
+        if (err) {
+            return next(err)
+        }
+        res.send(result)
+    })
+})
+
+// creates facility
+app.post('/facility', (req, res, next) => {
+
+    const { address_id, open_at, close_at } = req.body
+
+    db.query('INSERT INTO facility (address_id, open_at, close_at) VALUES ($1, $2, $3)', [address_id, open_at, close_at], (err, result) => {
+        if (err) {
+            return next(err)
+        }
+        res.send(result)
+    })
+})
+
+// creates facility_doctor_schedule (to get doctor's appts)
+app.post('/facility_doctor_schedule', (req, res, next) => {
+
+    const { doctor_id, facility_id, date } = req.body
+
+    console.log(req.body)
+
+    db.query('INSERT INTO facility_doctor_schedule (doctor_id, facility_id, date) VALUES ($1, $2, $3)', [Number(doctor_id), Number(facility_id), date], (err, result) => {
         if (err) {
             return next(err)
         }
@@ -38,7 +82,7 @@ app.post('/address', (req, res, next) => {
     })
 })
 
-//find all patient
+//find all patients
 app.get('/patient/', (req, res, next) => {
     db.query('SELECT * FROM patient', null, (err, result) => {
         if (err) {
@@ -58,6 +102,34 @@ app.get('/patient/:id', (req, res, next) => {
     })
 })
 
+//fetches doctor schedule (by doctor id)
+app.get('/doctor_hours/:id', (req, res, next) => {
+    db.query(`
+        SELECT facility.open_at, facility.close_at, facility_doctor_schedule.date
+        FROM facility_doctor_schedule
+        INNER JOIN facility
+        ON facility.id=facility_doctor_schedule.facility_id
+        WHERE facility_doctor_schedule.doctor_id = $1 
+        `, [req.params.id], (err, result) => {
+        if (err) {
+            return next(err)
+        }
+        res.send(result)
+    })
+})
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
+
+
+// SELECT facility.open_at, facility.close_at, facility_doctor_schedule.date
+// FROM facility_doctor_schedule
+// INNER JOIN facility
+// ON facility.id=facility_doctor_schedule.id
+// WHERE doctor_id = 1 
+
+// SELECT facility.open_at, facility.close_at, facility_doctor_schedule.date
+// FROM facility_doctor_schedule, facility
+// WHERE facility.id = facility_doctor_schedule.facility_id
+// AND facility_doctor_schedule.doctor_id = 1 
