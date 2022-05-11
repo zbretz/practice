@@ -54,7 +54,7 @@ app.post('/facility', (req, res, next) => {
     })
 })
 
-// creates facility_doctor_schedule (to get doctor's appts)
+// adds a doctor working day (via facility_doctor_schedule)
 app.post('/facility_doctor_schedule', (req, res, next) => {
 
     const { doctor_id, facility_id, date } = req.body
@@ -134,7 +134,21 @@ app.post('/book_appointment/', (req, res, next) => {
     })
 })
 
+// adjust a doctor's availability (via unavailability table)
+app.post('/create_unavailability/', (req, res, next) => {
 
+    const { doctor_id, date, time } = req.body
+
+    db.query(`
+        INSERT into doctor_unavailability (doctor_id, date, time)
+        values( $1, $2, $3)
+        `, [ doctor_id, date, time], (err, result) => {
+        if (err) {
+            return next(err)
+        }
+        res.send(result)
+    })
+})
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
