@@ -118,6 +118,24 @@ app.get('/doctor_hours/:id', (req, res, next) => {
     })
 })
 
+//creates an appointment
+app.post('/book_appointment/', (req, res, next) => {
+
+    const { patient_id, doctor_id, facility_id, date, time } = req.body
+
+    db.query(`
+        INSERT into APPOINTMENT (patient_id, doctor_id, facility_id, date, time)
+        values( $1, $2, $3, $4, $5)
+        `, [patient_id, doctor_id, facility_id, date, time], (err, result) => {
+        if (err) {
+            return next(err)
+        }
+        res.send(result)
+    })
+})
+
+
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
