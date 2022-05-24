@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>deploytesting.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>buildNumber</key>
+			<string>1</string>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>FE07CA0764FF9177B608F7978E3839CE0CB7FDE4</string>
+				<key>dateExpires</key>
+				<string>3/27/23</string>
+				<key>type</key>
+				<string>iOS Distribution</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>KG5V92235A.org.reactjs.native.example.deploytesting</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>KG5V92235A</string>
+				<key>get-task-allow</key>
+				<false/>
+			</dict>
+			<key>name</key>
+			<string>deploytesting.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>f21ca0ad-35dd-4419-87fa-40bac24ae6b0</string>
+				<key>dateExpires</key>
+				<string>5/24/23</string>
+				<key>name</key>
+				<string>iOS Team Ad Hoc Provisioning Profile: org.reactjs.native.example.deploytesting</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>KG5V92235A</string>
+				<key>name</key>
+				<string>Zachary Bretz</string>
+			</dict>
+			<key>versionNumber</key>
+			<string>1.0</string>
+		</dict>
+	</array>
+</dict>
+</plist>
