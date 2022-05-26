@@ -9,3 +9,19 @@ let is_this_a_promise = returns_promise('a')
 // seems like this is correct 
 is_this_a_promise.then(res => console.log('a' === res))
 
+
+// another toy exercise.
+// 'does await return resolution of promise' ...poorly phrased
+const test_promise = () => {
+    return new Promise((resolve, reject) => {
+        resolve('yes')
+    })
+}
+
+const container = async () => {
+    let result = await test_promise()
+    console.log(result === 'yes')
+    //sweet
+}
+
+container()
