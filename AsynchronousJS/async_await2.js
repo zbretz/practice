@@ -14,8 +14,8 @@ is_this_a_promise.then(res => console.log('a' === res))
 // 'does await return resolution of promise' ...poorly phrased
 const test_promise = () => {
     return new Promise((resolve, reject) => {
-        // resolve('yes')
-        reject('no')
+        resolve('yes')
+        // reject('no')
     })
 }
 
@@ -29,4 +29,15 @@ const container = async () => {
     }
 }
 
+const container2 = async () => {
+    test_promise()
+        .then(result => {
+            console.log(result === 'yes')
+        })
+        .catch(err => {
+            console.log('catch block')
+        })
+}
+
 container()
+container2()
