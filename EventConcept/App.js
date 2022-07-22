@@ -1,17 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native';
 import { Video } from 'expo-av';
+import { useState } from 'react';
 
 var width = Dimensions.get('window').width; //full width
 
 
 export default function App() {
+
+  const [scrollPosition, setScrollPosition] = useState(0)
+
+  const handleScroll = function(event) {
+    console.log(event.nativeEvent.contentOffset.y);
+    setScrollPosition(event.nativeEvent.contentOffset.y)
+   }
+
   return (
     <>
       <View style={{ display:'flex', alignItems:'center',justifyContent:'center', marginTop:50, height: 100}}>
         <Text style={{height:50}}>Events this Week</Text>
       </View>
-      <ScrollView stickyHeaderIndices={[0]} contentContainerStyle={styles.container}>
+      <ScrollView onScroll={handleScroll} stickyHeaderIndices={[0]} contentContainerStyle={styles.container}>
       <View style={{ display:'flex', height:70, alignItems:'center',justifyContent:'center', backgroundColor:'rgba(0,0,0,0)'}}>
         <Text style={{color: 'white',marginTop:25, fontSize:30}}>Today</Text>
       </View>
@@ -20,6 +29,9 @@ export default function App() {
         <Video shouldPlay isLooping style={{ height: 700, width: '100%'}} resizeMode="cover" source={require('./assets/event12.mp4')}></Video>
         <StatusBar style="auto" />
       </ScrollView>
+      <View style={{ display:'flex', height:70, alignItems:'center',justifyContent:'center', backgroundColor:'rgba(0,0,0,0)'}}>
+        <Text style={{fontSize:30}}>{scrollPosition < 1500 ? 'Event 1' : 'Event 2'}</Text>
+      </View>
     </>
   );
   
