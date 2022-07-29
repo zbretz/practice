@@ -34,6 +34,23 @@ app.use('/admins', adminsRouter);
 app.use('/recruiters', recruitersRouter);
 app.use('/applicants', applicantsRouter);
 
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
+
+app.use("/sms",  (req, res) => {
+
+	client.messages
+	.create({
+	   body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+	   from: '+15017122661',
+	   to: '+15558675310'
+	 })
+	.then(message => console.log(message.sid));
+
+});
+
+
 // catch 404 and forward to error handler
 app.use((_req, _res, next) => {
 	next(createError(404, 'Resource not found!'));
@@ -46,6 +63,8 @@ app.use(function (err, req, res, _next) {
 	// render the error page
 	res.status(err.status || 500).send(err.message);
 });
+
+
 
 app.listen(port, () => {
 	console.log(`CommonApp listening at http://localhost:${port}`);
