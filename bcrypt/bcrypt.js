@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const myPlaintextPassword = 's0/\/\P4$$w0rD';
 const someOtherPlaintextPassword = 'not_bacon';
-const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+// const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 
 bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
@@ -47,3 +47,5 @@ bcrypt.compare("Bp2r$^", "$2b$10$IAz1NtzctD3kVnrr6HNHKuMuqawcp8sBVsiAgkFuf2kMa.J
 });bcrypt.compare("Bp2r$^", "$2b$10$Z1uUPfA7i.dt/p39uhwelu4ekrUytcHKwJZ80mtyMABMuLw9szVpq", function(err, result) {
   console.log(result, 3)
 });
+
+console.log('plain: ', bcrypt.hashSync('plain', 10));

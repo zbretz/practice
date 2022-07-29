@@ -27,10 +27,16 @@ export default function App() {
         <Video shouldPlay isLooping style={{ height: 700, width:'100%'}}  resizeMode="cover" source={require('./assets/event10.mp4')}></Video>
         <Video shouldPlay isLooping style={{ height: 700, width: '100%'}} resizeMode="cover" source={require('./assets/event11.mp4')}></Video>
         <Video shouldPlay isLooping style={{ height: 700, width: '100%'}} resizeMode="cover" source={require('./assets/event12.mp4')}></Video>
+
+        <Video shouldPlay isLooping style={{ height: 700, width: '100%'}} resizeMode="cover" source={require('./assets/event20.mp4')}></Video>
+        <Video shouldPlay isLooping style={{ height: 700, width: '100%'}} resizeMode="cover" source={require('./assets/event30.mp4')}></Video>
+
         <StatusBar style="auto" />
       </ScrollView>
       <View style={{ display:'flex', height:70, alignItems:'center',justifyContent:'center', backgroundColor:'rgba(0,0,0,0)'}}>
-        <Text style={{fontSize:30}}>{scrollPosition < 1500 ? 'Event 1' : 'Event 2'}</Text>
+        <Text style={{fontSize:30}}>{scrollPosition < 1500 ? 'Savor the Summit' : scrollPosition < 2246 ? 'Next Course' : 'Bark in the Park'}</Text>
+        <Text style={{fontSize:30}}>{}</Text>
+
       </View>
     </>
   );
